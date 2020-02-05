@@ -1,40 +1,35 @@
-{% if cart.items != blank %}
-
-<form method="post" action="/cart">
-  <ul class="unstyled">
-    {% for item in cart.items %}
-    <li>
-      <a href="{{ item.product.url }}">
-        <img src="{{ item.product.image | product_image_url size:"thumb" }}">
-      </a>
-      <h2>
-        <a href="{{ item.product.url }}">
-          {{ item.product.name }}
-          {% unless item.product.has_default_option %}
-            <em>{{ item.option.name }}</em>
-          {% endunless %}
-        </a>
-      </h2>
-      <p>
-        {{ item | item_quantity_input }}
-        {{ item.price | money_with_sign }}
-        <a href="#" class="remove">&times;</a>
-      </p>
-    </li>
-    {% endfor %}
-  </ul>
-
-  <p>
-    <strong>Subtotal</strong>
-    <span>{{ cart.subtotal | money_with_sign }}</span>
-  </p>
-  <button type="submit" name="checkout" title="Checkout">Checkout</button>
-</form>
-
-{% else %}
-
-<div>
-  <p><strong>Your cart is empty!</strong> Sounds like a good time to <a href="/">start shopping &rarr;</a></p>
+<div class="page-heading">
+  <h1 class="page-title">{{ page.name }}</h1>
 </div>
+{% if cart.items != blank %}
+  <form class="cart-form" method="post" action="/cart">
+    {% for item in cart.items %}
+      <img src="{{ item.product.image | constrain: 300, 300 }}">
 
+      <a href="{{ item.product.url }}">
+        {{ item.product.name }}
+      </a>
+
+      {% unless item.product.has_default_option %}
+        {{ item.option.name }}
+      {% endunless %}
+
+      <label for="item_{{item.id}}_qty">Quantity</label>
+      {{ item | item_quantity_input, nil, 'option-quantity' }}
+
+      {{ item.unit_price | money: theme.money_format }}
+
+      <button title="Remove item: {{ item.product.name | escape }}" class="cart-item-remove" aria-label="Remove item: {{ item.product.name | escape }}">
+    {% endfor %}
+
+    Subtotal: {{ cart.subtotal | money: theme.money_format }}
+
+    Total: {{ cart.total | money: theme.money_format }}
+
+    <a href="/products">Continue shopping</a>
+
+    <button type="submit" name="checkout" class="button checkout-btn">Checkout</button>
+  </form>
+{% else %}
+  <div>Your cart is empty! Sounds like a good time to start shopping.</div>
 {% endif %}
