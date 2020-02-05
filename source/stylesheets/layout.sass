@@ -2,3 +2,122 @@
 
 *
   box-sizing: border-box
+
+html, body
+  height: 100%
+  margin: 0
+  padding: 0
+
+body
+  background: $background-color
+  color: $primary-text-color
+  font-family: $primary-font
+  font-size: 16px
+  font-weight: normal
+  line-height: 1.5em
+  position: relative
+
+header
+  border-bottom: $large-border
+
+.outer-wrapper
+  +flexbox
+  +flex-direction(column)
+  min-height: 100%
+  margin: 0 auto
+  width: 100%
+
+  &.fixed-width
+    max-width: 1040px
+    padding: 0 $base-padding * 2
+
+.header-wrapper
+  +flexbox
+  +align-items(center)
+  padding: 20px 0
+
+.header-home-link
+  color: $primary-text-color
+  display: block
+  font-size: 64px
+  line-height: 1em
+  text-decoration: none
+  text-transform: uppercase
+
+.store-logo
+  display: block
+
+.header-cart
+  margin-left: auto
+
+.content-wrapper
+  +flexbox
+  +flex(1)
+
+  &.right-sidebar
+
+    .sidebar
+      order: 2
+
+    .main
+      order: 1
+      padding-left: 0
+      padding-right: $base-padding * 4
+
+_:-ms-fullscreen, :root .content-wrapper
+  +flex(1 0 auto)
+
+.sidebar
+  +flex(0 0 260px)
+  order: 1
+
+.main
+  +flex(1)
+  order: 2
+  padding-left: $base-padding * 4
+
+footer
+  +flexbox
+  +flex-direction(row)
+  flex-shrink: 0
+
+.search-form
+  +flexbox
+  border-bottom: $large-border
+
+  .search-input
+    appearance: none
+    -webkit-appearance: none
+    background: none
+    border: none
+    text-transform: uppercase
+
+  .search-button
+    appearance: none
+    -webkit-appearance: none
+    background: none
+    border: none
+    margin-left: auto
+
+.sidebar-nav-links
+  list-style: none
+  margin: 0
+  padding: 0
+  text-transform: uppercase
+
+  li
+    border-bottom: $small-border
+
+    a
+      color: $primary-text-color
+      display: block
+      padding: $base-padding / 2 0
+      text-decoration: none
+
+h1
+  font-size: 2em
+  line-height: 1.25em
+  text-transform: uppercase
+
+.page-heading
+  border-bottom: $medium-border

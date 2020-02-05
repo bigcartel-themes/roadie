@@ -1,6 +1,6 @@
 {
   "name": "Roadie",
-  "version": "0.0.1",
+  "version": "0.0.01",
   "images": [
     {
       "variable": "logo",
@@ -13,57 +13,71 @@
       "description": "Adds a repeating background image"
     }
   ],
-  "image_sets": [
-    {
-      "variable": "slideshow_images",
-      "label": "Slideshow",
-      "description": "This is a slideshow"
-    },
-    {
-      "variable": "lookbook_images",
-      "label": "Lookbook",
-      "description": "This is a lookbook"
-    }
-  ],
   "fonts": [
     {
-      "variable": "header_font",
-      "label": "Header Font",
-      "default": "Inconsolata"
-    },
-    {
-      "variable": "text_font",
-      "label": "Text Font",
-      "default": "Helvetica"
+      "variable": "primary_font",
+      "label": "Primary Font",
+      "default": "Poppins"
     }
   ],
   "colors": [
     {
       "variable": "background_color",
       "label": "Background",
-      "default": "#FAFAFA"
+      "default": "#FFFFFF"
     },
     {
-      "variable": "text_color",
+      "variable": "primary_text_color",
       "label": "Text Color",
-      "default": "#222222"
+      "default": "#000000"
+    },
+    {
+      "variable": "border_color",
+      "label": "Border Color",
+      "default": "#000000"
     }
   ],
   "options": [
     {
-      "variable": "show_search",
-      "label": "Show search",
-      "type": "boolean",
-      "default": false,
-      "description": "Shows a search field"
+      "variable": "layout_style",
+      "label": "Layout style",
+      "type": "select",
+      "options": [
+        ["Full width", "full_width"],
+        ["Fixed width", "fixed_width"]
+      ],
+      "default": "fixed_width",
+      "description": "Sets the width of the content area of your store"
     },
     {
-      "variable": "product_image_size",
-      "label": "Product image size",
+      "variable": "sidebar_position",
+      "label": "Sidebar position",
       "type": "select",
-      "options": [["Small", "thumb"], ["Medium", "medium"], ["Large", "large"], ["Huge", ""]],
-      "default": "large",
-      "description": "The size of your product images"
+      "options": [
+        ["Left", "left"],
+        ["Right", "right"]
+      ],
+      "default": "left",
+      "description": "Sets the position of the sidebar"
+    },
+    {
+      "variable": "border_style",
+      "label": "Border style",
+      "type": "select",
+      "options": [
+        ["Thick", "thick"],
+        ["Thin", "thin"]
+      ],
+      "default": "thick",
+      "description": "Sets the thickness of the borders"
+    },
+    {
+      "variable": "featured_products",
+      "label": "Featured products",
+      "type": "select",
+      "options": "0..100",
+      "default": 12,
+      "description": "The number of products featured on the Home page"
     },
     {
       "variable": "products_per_page",
@@ -74,10 +88,75 @@
       "description": "The number of products shown per page"
     },
     {
-      "variable": "twitter_username",
-      "label": "Twitter username",
+      "variable": "show_similar_products",
+      "label": "Show related products",
+      "type": "boolean",
+      "default": true,
+      "description": "Displays related products on the Product page"
+    },
+    {
+      "variable": "show_search",
+      "label": "Show search",
+      "type": "boolean",
+      "default": true,
+      "description": "Displays a search field in the footer"
+    },
+    {
+      "variable": "show_inventory_bars",
+      "label": "Show inventory bars",
+      "type": "boolean",
+      "default": false,
+      "description": "Shows a product's inventory amounts (when using inventory tracking)",
+      "requires": "inventory"
+    },
+    {
+      "variable": "show_sold_out_product_options",
+      "label": "Show sold out product options",
+      "type": "boolean",
+      "default": true,
+      "description": "Shows sold out product options in the Product page dropdowns",
+      "requires": "inventory"
+    },
+    {
+      "variable": "money_format",
+      "label": "Price display",
+      "type": "select",
+      "options": [
+        ["Currency sign", "sign"],
+        ["Currency code with sign", "sign_and_code"]
+      ],
+      "default": "sign",
+      "description": "Sets the display of prices in your shop"
+    },
+    {
+      "variable": "twitter_url",
+      "label": "Twitter URL",
       "type": "text",
-      "description": "Ex: @bigcartel"
+      "description": "Ex: http://twitter.com/bigcartel"
+    },
+    {
+      "variable": "facebook_url",
+      "label": "Facebook URL",
+      "type": "text",
+      "description": "Ex: http://facebook.com/bigcartel"
+    },
+    {
+      "variable": "tumblr_url",
+      "label": "Tumblr URL",
+      "type": "text",
+      "description": "Ex: http://bigcartel.tumblr.com"
+    },
+    {
+      "variable": "instagram_url",
+      "label": "Instagram URL",
+      "type": "text",
+      "description": "Ex: http://instagram.com/bigcartel"
+    },
+    {
+      "variable": "pinterest_url",
+      "label": "Pinterest URL",
+      "type": "text",
+      "description": "Ex: http://pinterest.com/bigcartel"
     }
   ]
 }

@@ -1,32 +1,25 @@
 @import 'flexbox'
 
-@mixin all-transitions
-  +transition(.2s linear)
+$background-color: #{"{{ theme.background_color }}"}
 
-@mixin transition($transition...)
-  -webkit-transition: #{$transition}
-  transition: #{$transition}
+$primary-text-color: #{"{{ theme.primary_text_color }}"}
 
-@mixin transform($str...)
-  -webkit-transform: $str
-  transform: $str
+$border-color: #{"{{ theme.border_color }}"}
 
-@mixin transform-origin($str...)
-  -webkit-transform-origin: $str
-  transform-origin: $str
+$primary-font: #{"{{ theme.primary_font | font_family }}"}
 
-@mixin appearance($str...)
-  -webkit-appearance: none
-  -moz-appearance: none
-  appearance: none
+$base-padding: 8px
+$luna-font-base-px: 16px
+$border-radius: 4px
 
-@mixin keyframes($animation...)
-  @-webkit-keyframes #{$animation}
-    @content
+$break-extra-large: 1500px
+$break-large: 1200px
+$break-medium: 1023px
+$break-small: 767px
+$break-extra-small: 640px
 
-  @keyframes #{$animation}
-    @content
+$border-style: #{"{{ theme.border_style }}"}
 
-@mixin animation($str...)
-  -webkit-animation: $str
-  animation: $str
+$large-border: 8px solid $border-color
+$medium-border: 4px solid $border-color
+$small-border: 2px solid $border-color

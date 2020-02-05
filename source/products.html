@@ -17,12 +17,14 @@
         {% endcase %}
         <a class="product-list-item" href="{{ product.url }}" title="View {{ product.name | escape }}">
           <div class="product-list-item-container">
-            <img alt="" class="fade-in product-list-image" src="{{ product.image | product_image_url | constrain: 1000, 1000 }}">
+            <img alt="" class="fade-in product-list-image" src="{{ product.image | product_image_url | constrain: 1000 }}">
           </div>
         </a>
       {% endfor %}
     </div>
-    {{ paginate | default_pagination }}
+    {% if paginate.pages > 1 %}
+      {{ paginate | default_pagination }}
+    {% endif %}
   {% else %}
     <div class="empty-products centered-message">No products found.</div>
   {% endif %}
