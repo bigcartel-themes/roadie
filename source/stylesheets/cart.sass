@@ -1,1 +1,41 @@
 @import 'variables'
+
+.cart-items
+  border-bottom: $small-border
+  list-style: none
+  margin: 0
+  padding: 0
+  width: 100%
+
+.cart-item
+  +flexbox
+  +align-items(center)
+  border-bottom: $small-border
+  padding: $base-padding * 2 0
+
+  &:last-child
+    border-bottom: none
+
+.cart-item-image
+  height: 112px
+  object-fit: cover
+  width: 112px
+
+  img
+    height: 100%
+    width: 100%
+
+.cart-footer
+  text-align: right
+
+.cart-sub-footer
+  +flexbox
+  +align-items(center)
+  border-bottom: $medium-border
+  margin-bottom: $base-padding * 2
+
+  .cart-subtotal
+    margin-left: auto
+
+.checkout-button
+  display: inline-block
