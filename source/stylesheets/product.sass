@@ -1,5 +1,8 @@
 @import 'variables'
 
+.product-heading
+  border-bottom: $medium-border
+
 .page-subheading
   +flexbox
   border-bottom: $small-border
@@ -8,6 +11,7 @@
   padding: $base-padding 0
   margin-bottom: $base-padding * 2
 
+
 .page-subheading-status
   margin-left: auto
 
@@ -15,10 +19,12 @@
   +flexbox
   +flex-direction(row)
 
+  @media screen and (max-width: $break-small)
+    +flex-direction(column)
+
 .product-images
-  +flex(1 0 auto)
+  +flex(1 1 auto)
   order: 1
-  width: 55%
 
   img
     display: block
@@ -26,29 +32,111 @@
     width: 100%
 
 .product-details
-  +flex(1 0 auto)
+  +flex(0 0 328px)
   order: 2
-  padding-left: $base-padding * 4
-  width: 45%
+  padding-left: $base-padding * 2
+
+  @media screen and (max-width: $break-small)
+    padding-left: 0
 
 .product-options-container
   margin-bottom: $base-padding * 2
 
-.product-option-select
+.product-option-select-container
   border-bottom: $small-border
+  height: 58px
+  padding: $base-padding * 2 0
   position: relative
+
+  &.focused
+    padding: $base-padding / 2 0
+
+    select
+      padding-top: 18px
+      margin-top: -22px
 
   select
     -webkit-appearance: none
     border: none
     background: none
+    color: $primary-text-color
     display: block
+    font-size: 20px
+    font-weight: bold
+
 
   svg
+    fill: $primary-text-color
     position: absolute
     right: 0
     top: 50%
     transform: translateY(-50%)
+
+.product-form-quantity-button
+  +flexbox
+  +flex-direction(row)
+
+.product-form-quantity
+  +flexbox
+  +align-items(center)
+  +justify-content(center)
+  +flex-direction(column)
+  +flex-shrink(0)
+  background: $button-background-color
+  color: $button-text-color
+  height: 64px
+  width: 64px
+
+  .product-quantity-label
+    font-weight: 400
+
+  .product-quantity
+    +appearance(none)
+    background: none
+    border: none
+    color: $button-text-color
+    font-family: $primary-font
+    font-size: 16px
+    font-weight: bold
+    padding-left: $base-padding * 1.5
+    text-align: center
+    width: 100%
+
+.add-to-cart-button
+  +flex-basis(100%)
+  +flexbox
+  +flex-direction(column)
+  font-weight: bold
+  margin-left: $base-padding
+  padding: $base-padding * 2
+  position: relative
+  height: 64px
+
+  .button-add-price
+    opacity: 0
+    visiblity: hidden
+
+    &.visible
+      opacity: 1
+      visibility: visible
+
+  .button-add-icon
+    +transform(translateY(-50%))
+    position: absolute
+    right: $base-padding * 2
+    top: 50%
+
+    svg
+      fill: $button-text-color
+
+.reset-selection-button-container
+  text-align: right
+
+  button.reset-selection-button
+    display: none
+
+.product-description *
+  text-transform: none
 
 .right-sidebar .product-images
   order: 2
@@ -56,4 +144,31 @@
 .right-sidebar .product-details
   order: 1
   padding-left: 0
-  padding-right: $base-padding * 4
+  padding-right: $base-padding * 2
+
+.product-option-label
+  display: none
+  z-index: 100
+
+.focused label.product-option-label
+  display: block
+  left: 15px
+  top: 17px
+  z-index: 1
+
+.inventory-bars
+  list-style: none
+  margin: 0
+  padding: 0
+
+.inventory-bar
+  margin-bottom: $base-padding * 2
+
+
+.inventory-option-bar
+  border: $small-border
+  height: 10px
+
+.inventory-option-percentage
+  background: $primary-text-color
+  height: 100%
