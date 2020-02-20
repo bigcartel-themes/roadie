@@ -1,1 +1,254 @@
 @import 'variables'
+
+.product-sort
+  +flexbox
+  margin-left: auto
+  white-space: nowrap
+
+  .product-sort-caption
+    border-right: 1px solid $primary-text-color
+    padding-right: $base-padding
+    margin-right: $base-padding
+
+  .product-sort-options
+    position: relative
+
+  .product-sort-options-select
+    +appearance(none)
+    background: none
+    border: none
+    position: relative
+    width: 100%
+    z-index: 3
+
+  svg
+    +transform(translateY(-50%))
+    position: absolute
+    right: #{"{{ theme.grid_gutters }}"}
+    top: 50%
+    z-index: 2
+
+.product-list-container
+  overflow: hidden
+  position: relative
+
+.product-list
+  +flexbox
+  +flex-wrap(wrap)
+  +justify-content(flex-start)
+  margin: 0 -#{"{{ theme.grid_gutters }}"}
+  margin-top: #{"{{ theme.grid_gutters }}"}
+
+  @media screen and (max-width: $break-medium)
+    width: auto
+
+.product-list-item
+  +flex-basis(33.33%)
+  color: $primary-text-color
+  display: block
+  font-size: 0
+  padding: #{"{{ theme.grid_gutters }}"}
+  padding-bottom: #{"{{ theme.grid_gutters }}"}
+  position: relative
+  text-decoration: none
+  vertical-align: middle
+
+  &.product-image-small
+    +flex-basis(25%)
+    width: 25%
+
+  &.product-image-medium
+    +flex-basis(33.33%)
+    width: 33.33%
+
+  &.product-image-large
+    +flex-basis(25%)
+    width: 25%
+
+  @media only screen and (min-width: $break-medium) and (hover: hover), (-moz-touch-enabled: 0)
+
+    &.show-quickview
+      &:hover, &:active, &:focus
+        .product-list-quickview-container
+          opacity: 1
+          visibility: visible
+
+    &.rollover
+      margin-bottom: 0px
+
+      .product-list-item-info
+        +flexbox
+        +align-items(center)
+        background: $primary-text-color
+        height: calc(100% - #{"{{ theme.grid_gutters }}"} * 2)
+        height: auto
+        left: #{"{{ theme.grid_gutters }}"}
+        padding: $base-padding * 2
+        position: absolute
+        top: #{"{{ theme.grid_gutters }}"}
+        width: calc(100% - #{"{{ theme.grid_gutters }}"} * 2)
+        opacity: 0
+
+        *
+          color: $background-color
+
+      &:hover, &:active, &:focus
+        .product-list-item-info
+          opacity: 1
+
+        img
+          +all-transitions
+          opacity: .8
+
+  @media screen and (max-width: $break-large)
+    +flex-basis(50%)
+
+  @media screen and (max-width: $break-small)
+    +flex-basis(50%)
+
+  @media screen and (max-width: $break-extra-small)
+    +flex-basis(100%)
+
+.product-list-item-container
+  position: relative
+  width: 100%
+
+.product-list-image-container
+  font-size: 0
+  margin: 0
+  overflow: hidden
+  padding-bottom: 100%
+  width: 100%
+
+  .default &
+    padding-bottom: 0
+
+.product-list-quickview-container
+  +flexbox
+  cursor: pointer
+  height: 100%
+  left: 0
+  opacity: 0
+  position: absolute
+  top: 0
+  width: 100%
+  visibility: hidden
+
+  .product-list-quickview-container-background
+    background-color: $button-background-color
+    height: 100%
+    left: 0
+    opacity: .7
+    position: absolute
+    top: 0
+    width: 100%
+
+  .open-quickview
+    +flexbox
+    border-top: 1px solid $button-text-color
+    margin-top: auto
+    padding-left: $base-padding * 2
+    padding-right: $base-padding * 2
+    position: relative
+    width: 100%
+
+    .open-quickview-icon
+      fill: $button-text-color
+      margin-left: auto
+
+.product-list-image
+  display: block
+
+  .default &
+    width: 100%
+
+  .crop-to-square &
+    height: 100%
+    object-fit: cover
+    position: absolute
+    width: 100%
+
+  .fit-to-square &
+    +transform(translate3d(-50%,-50%,0))
+    cursor: pointer
+    left: 50%
+    position: absolute
+    top: 50%
+    max-width: 100%
+    height: 100%
+    width: 100%
+
+    &.image-tall
+      height: 100%
+      width: auto
+
+    &.image-wide
+      height: auto
+      width: 100%
+
+    &.image-square
+      height: 100%
+      width: 100%
+
+.product-list-item-info
+  padding: $base-padding 0
+
+.product-list-item-info-headers
+  +fluid-type(16px, 18px)
+  +flexbox
+  +justify-content(flex-start)
+  +flex-direction(column)
+  font-weight: bold
+  line-height: 1.25em
+  padding: 0
+  position: relative
+  text-align: $product-detail-alignment
+  width: 100%
+  z-index: 1
+
+.product-list-item-name
+  position: relative
+  overflow-wrap: break-word
+
+  @media screen and (max-width: $break-medium)
+    padding-right: 0
+
+.product-list-item-price
+  font-size: .9em
+  font-weight: normal
+  margin-top: $base-padding / 2
+
+.product-list-item-status
+
+  &.circle
+    +flexbox
+    +align-items(center)
+    +justify-content(center)
+    background: $button-background-color
+    border-radius: 50%
+    color: $button-text-color
+    font-size: 13px
+    line-height: 1.25em
+    height: 70px
+    right: $base-padding
+    padding: $base-padding
+    position: absolute
+    text-align: center
+    top: $base-padding
+    width: 70px
+
+  &.bar
+    background: $button-background-color
+    bottom: $base-padding * 2
+    color: $button-text-color
+    font-size: 13px
+    line-height: 1.25em
+    position: absolute
+    right: 0
+    padding: $base-padding
+
+  &.inline
+    color: $primary-text-color
+    display: inline-block
+
+
