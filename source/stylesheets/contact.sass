@@ -1,1 +1,59 @@
 @import 'variables'
+
+
+.contact-form
+  max-width: 100%
+    width: 100%
+
+  .form-group
+    display: block
+    margin: $base-padding * 2 auto
+    position: relative
+    width: 100%
+
+    input, textarea
+      border: $medium-border
+      width: 100%
+      padding-top: 28px
+
+    textarea
+      height: 160px
+      padding-top: $base-padding
+
+    &.contact-captcha
+      margin-bottom: 40px
+
+    .form-label
+      +all-transitions
+      background-color: transparent
+      color: $primary-text-color
+      cursor: text
+      font-size: 16px
+      left: 12px
+      position: absolute
+      top: 16px
+      opacity: .6
+
+    &.contact-send
+      margin-top: $base-padding
+
+  .focused .form-label
+    transform: translateY(-55%)
+    font-size: 10px
+    opacity: 1
+
+  #captcha_image
+    border: $medium-border
+    height: 55px
+    position: absolute
+    right: 0
+    top: 0
+
+  .captcha-instructions
+    margin-top: 10px
+    font-size: 12px
+
+  .send-message-button
+    display: block
+    line-height: $base-padding
+    width: 290px

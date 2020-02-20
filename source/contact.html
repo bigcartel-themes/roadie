@@ -1,26 +1,36 @@
 <div class="page-heading">
   <h1 class="page-title">{{ page.name }}</h1>
 </div>
+
 {% if contact.sent %}
-  Your message has been sent and we'll get back to you soon!
+  Your message has been sent and we'll get back to you soon.
+  <a href="/products" class="button">Continue Shopping</a>
 {% else %}
   <form method="post" action="/contact" class="contact-form">
-      <label for="name">Name</label>
+    <div class="form-group contact-form-group">
+      <label class="form-label contact-form-label contact-name" for="name">Name</label>
       {{ contact | contact_input: 'name' }}
-
-      <label for="email">Email</label>
+    </div>
+    <div class="form-group contact-form-group">
+      <label class="form-label contact-form-label contact-email" for="email">Email</label>
       {{ contact | contact_input: 'email' }}
-
-      <label for="subject">Subject</label>
+    </div>
+    <div class="form-group contact-form-group">
+      <label class="form-label contact-form-label contact-subject" for="subject">Subject</label>
       {{ contact | contact_input: 'subject' }}
-
-      <label for="message">Message</label>
+    </div>
+    <div class="form-group contact-form-group">
+      <label class="form-label contact-form-label contact-message" for="message">Message</label>
       {{ contact | contact_input: 'message' }}
-
-      <label for="captcha">Spam check</label>
+    </div>
+    <div class="form-group contact-form-group">
+      <label class="form-label contact-form-label contact-captcha" for="captcha">Spam check</label>
       {{ contact | contact_input: 'captcha' }} {{ contact.captcha }}
-      Enter the characters from the image
+      <div class="captcha-instructions">Enter the characters from the image</div>
+    </div>
 
-      <button type="submit" name="submit" tabindex="6">Send message</button>
+    <div class="contact-form-group contact-send">
+      <button class="button send-message-button" type="submit" name="submit" title="Send Message" tabindex="6">Send Message</button>
+    </div>
   </form>
 {% endif %}
