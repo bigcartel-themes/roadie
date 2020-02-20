@@ -10,20 +10,67 @@
 .cart-item
   +flexbox
   +align-items(center)
+  +flex-wrap(wrap)
   border-bottom: $small-border
   padding: $base-padding * 2 0
 
   &:last-child
     border-bottom: none
 
+.cart-item-remove
+  +appearance(none)
+  background: none
+  border: none
+  margin-right: $base-padding
+
 .cart-item-image
+  +flex-shrink(0)
   height: 112px
   object-fit: cover
   width: 112px
 
   img
+    display: block
     height: 100%
     width: 100%
+
+.cart-item-details
+  color: $primary-text-color
+  margin-left: $base-padding * 2
+  padding-right: $base-padding * 2
+  text-decoration: none
+
+.cart-item-details-name
+  font-size: 20px
+  font-weight: 600
+
+.cart-item-details-option
+  font-size: 16px
+  line-height: 1.5em
+  margin-top: $base-padding
+
+.cart-item-details-unit-price
+  font-size: 20px
+
+.cart-item-quantity-holder
+  margin-left: $base-padding * 4
+  margin-right: $base-padding * 4
+
+  .option-quantity
+    +appearance(none)
+    background: none
+    border: none
+    border-bottom: $medium-border
+    font-family: $primary-font
+    font-size: 24px
+    font-weight: 600
+    text-align: center
+    width: $base-padding * 4
+
+.cart-item-details-price
+  font-size: 20px
+  font-weight: 600
+  margin-left: auto
 
 .cart-footer
   text-align: right
@@ -33,9 +80,19 @@
   +align-items(center)
   border-bottom: $medium-border
   margin-bottom: $base-padding * 2
+  padding: $base-padding * 2 0
+
+  .no-gutters &
+    padding-left: $base-padding *2
+    padding-right: $base-padding *2
 
   .cart-subtotal
+    font-size: 24px
     margin-left: auto
+
+.continue-shopping-link
+  font-size: 16px
+  text-decoration: none
 
 .checkout-button
   display: inline-block
