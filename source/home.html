@@ -1,24 +1,64 @@
+{% if theme.promo_image != blank %}
+  <section class="home-promo-image">
+    <div class="promo-container">
+      <img class="promo-image" alt="Promo image" src="{{ theme.promo_image.url | constrain: 1800 }}">
+    </div>
+  </section>
+{% endif %}
+
 <h1 class="visually-hidden">Featured Products</h1>
+
 {% if theme.featured_items > 0 %}
   {% get products from products.all limit:theme.featured_items order:theme.featured_order %}
     {% if products != blank %}
-      <div class="product-list">
-        {% for product in products %}
-          {% assign product_status = '' %}
-          {% case product.status %}
-            {% when 'active' %}
-              {% if product.on_sale %}{% assign product_status = 'On sale' %}{% endif %}
-            {% when 'sold-out' %}
-              {% assign product_status = 'Sold out' %}
-            {% when 'coming-soon' %}
-              {% assign product_status = 'Coming soon' %}
-          {% endcase %}
-          <a class="product-list-item" href="{{ product.url }}" title="View {{ product.name | escape }}">
-            <div class="product-list-item-container">
-              <img alt="" class="fade-in product-list-image" src="{{ product.image | product_image_url | constrain: 1000, 1000 }}">
-            </div>
-          </a>
-        {% endfor %}
+      <div class="product-list-container">
+        <div class="product-list {{ theme.product_list_layout }}">
+          {% for product in products %}
+            {% assign product_status = '' %}
+            {% case product.status %}
+              {% when 'active' %}
+                {% if product.on_sale %}{% assign product_status = 'On sale' %}{% endif %}
+              {% when 'sold-out' %}
+                {% assign product_status = 'Sold out' %}
+              {% when 'coming-soon' %}
+                {% assign product_status = 'Coming soon' %}
+            {% endcase %}
+            {% capture image_class %}
+              {% if product.image.height > product.image.width %}
+                image-tall
+              {% elsif product.image.height < product.image.width %}
+                image-wide
+              {% else %}
+                image-square
+              {% endif %}
+            {% endcapture %}
+            <a class="product-list-item product-image-{{ theme.product_grid_image_size }} {{ theme.show_overlay }} {{ theme.grid_image_style }} {% if theme.show_quickview %}show-quickview{% endif %}" href="{{ product.url }}" title="View {{ product.name | escape }}">
+              <div class="product-list-item-container">
+                <figure class="product-list-image-container">
+                  <img alt="" class="fade-in product-list-image {{ image_class }}" src="{{ product.image | product_image_url | constrain: 1000 }}">
+                  {% if product_status != blank and theme.product_badge_style != 'inline' %}<div class="product-list-item-status {{ theme.product_badge_style }}">{{ product_status }}</div>{% endif %}
+                  {% if theme.show_quickview %}
+                    <div class="product-list-quickview-container">
+                      <div class="product-list-quickview-container-background"></div>
+                      <button class="open-quickview" data-permalink="{{ product.permalink }}" data-has-default="{{ product.has_default_option }}">
+                        <span class="open-quickview-text">Quick View</span>
+                        <svg aria-hidden="true" class="open-quickview-icon" width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><path d="M2 5.00001907V2.00003099h2.99998808v-2H0v4.99998808h2zm11.9999785 0V.00003099H8.99997854v2h2.99999996v2.99998808h2zm0 8.99997853V9.00000954h-2v2.99999996H8.99997854v1.9999881h4.99999996zm-8.99999042 0v-1.9999881H2V9.00000954H0v4.99998806h4.99998808z" fill-rule="nonzero"/></svg>
+                      </button>
+                    </div>
+                  {% endif %}
+                </figure>
+              </div>
+              <div class="product-list-item-info">
+                <div class="product-list-item-background"></div>
+                <div class="product-list-item-info-headers">
+                  <div class="product-list-item-name">{{ product.name }}</div>
+                  <div class="product-list-item-price">{{ product.default_price | money: theme.money_format }}</div>
+                  {% if product_status != blank and theme.product_badge_style == 'inline' %}<div class="product-list-item-status {{ theme.product_badge_style }}">{{ product_status }}</div>{% endif %}
+                </div>
+              </div>
+            </a>
+          {% endfor %}
+        </div>
       </div>
     {% else %}
       <div class="empty-products centered-message">No products found.</div>
