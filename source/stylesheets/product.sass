@@ -7,12 +7,14 @@
   +flexbox
   border-bottom: $small-border
   font-size: 24px
+  font-weight: bold
   line-height: 1.25em
   padding: $base-padding 0
   margin-bottom: $base-padding * 2
 
-
 .page-subheading-status
+  font-size: 14px
+  font-weight: bold
   margin-left: auto
 
 .product-page-columns
@@ -63,7 +65,7 @@
     display: block
     font-size: 20px
     font-weight: bold
-
+    width: 100%
 
   svg
     fill: $primary-text-color
@@ -106,19 +108,24 @@
   +flex-basis(100%)
   +flexbox
   +flex-direction(column)
+  +justify-content(center)
+  font-size: 18px
   font-weight: bold
   margin-left: $base-padding
   padding: $base-padding * 2
   position: relative
   height: 64px
 
+  .button-add-text
+
   .button-add-price
-    opacity: 0
-    visiblity: hidden
+    font-size: 16px
+    font-weight: normal
+    margin-bottom: $base-padding / 2
+    display: none
 
     &.visible
-      opacity: 1
-      visibility: visible
+      display: block
 
   .button-add-icon
     +transform(translateY(-50%))
@@ -135,8 +142,18 @@
   button.reset-selection-button
     display: none
 
-.product-description *
-  text-transform: none
+.product-description
+  *
+    text-transform: none
+
+  a
+    text-decoration: underline
+
+  ol, ul
+    padding-left: 1em
+
+  img, iframe
+    max-width: 100%
 
 .right-sidebar .product-images
   order: 2
@@ -156,18 +173,50 @@
   top: 17px
   z-index: 1
 
+.description-inventory-tabs
+  +flexbox
+  +align-items(center)
+  +justify-content(space-around)
+  border-top: $medium-border
+  border-bottom: $small-border
+  font-size: 14px
+  margin-top: $base-padding * 2
+
+  .description-inventory-tab
+    +appearance(none)
+    +flex-basis(50%)
+    background: none
+    color: $primary-text-color
+    height: auto
+    padding: $base-padding * 2 $base-padding * 2
+    text-align: center
+
+    &.active-tab
+      font-weight: bold
+      text-decoration: underline
+
+    &:first-of-type
+      border-right: $small-border
+
+.product-inventory
+  display: none
+  padding-top: $base-padding * 2
+
 .inventory-bars
   list-style: none
   margin: 0
   padding: 0
 
 .inventory-bar
+  font-weight: bold
   margin-bottom: $base-padding * 2
 
-
 .inventory-option-bar
-  border: $small-border
-  height: 10px
+  border-top: $small-border
+  height: 6px
+
+.inventory-option-available
+  font-weight: normal
 
 .inventory-option-percentage
   background: $primary-text-color

@@ -6,9 +6,10 @@
   white-space: nowrap
 
   .product-sort-caption
-    border-right: 1px solid $primary-text-color
-    padding-right: $base-padding
-    margin-right: $base-padding
+    border-right: $small-border
+    font-weight: bold
+    padding-right: $base-padding * 2
+    margin-right: $base-padding * 2
 
   .product-sort-options
     position: relative
@@ -17,6 +18,8 @@
     +appearance(none)
     background: none
     border: none
+    color: $primary-text-color
+    font-weight: bold
     position: relative
     width: 100%
     z-index: 3
@@ -57,13 +60,26 @@
     +flex-basis(25%)
     width: 25%
 
+    .full-width &
+      +flex-basis(33.33%)
+      width: 33.33%
+
+
   &.product-image-medium
     +flex-basis(33.33%)
     width: 33.33%
 
+    .full-width &
+      +flex-basis(25%)
+      width: 25%
+
   &.product-image-large
-    +flex-basis(25%)
-    width: 25%
+    +flex-basis(50%)
+    width: 50%
+
+    .full-width &
+      +flex-basis(33.33%)
+      width: 33.33%
 
   @media only screen and (min-width: $break-medium) and (hover: hover), (-moz-touch-enabled: 0)
 
@@ -81,7 +97,7 @@
         +align-items(center)
         background: $primary-text-color
         height: calc(100% - #{"{{ theme.grid_gutters }}"} * 2)
-        height: auto
+
         left: #{"{{ theme.grid_gutters }}"}
         padding: $base-padding * 2
         position: absolute
@@ -151,6 +167,7 @@
     padding-right: $base-padding * 2
     position: relative
     width: 100%
+    z-index: 5
 
     .open-quickview-icon
       fill: $button-text-color
@@ -239,7 +256,7 @@
 
   &.bar
     background: $button-background-color
-    bottom: $base-padding * 2
+    bottom: 0
     color: $button-text-color
     font-size: 13px
     line-height: 1.25em
@@ -250,5 +267,7 @@
   &.inline
     color: $primary-text-color
     display: inline-block
+    font-size: 13px
+    font-weight: bold
 
 

@@ -82,8 +82,9 @@
             </div>
 
             <button class="button add-to-cart-button" name="submit" type="submit" title="Add to Cart" data-adding-text="Adding..." data-added-text="Added!" data-add-title="Add to Cart" data-sold-title="Sold out"{% if product.has_default_option %}{% else %}disabled="disabled"{% endif %}>
-              <span class="button-add-text">Add to Cart</span>
               <span class="button-add-price {% if product.has_default_option %} visible{% endif %}">{{ product.default_price | money: theme.money_format }}</span>
+              <span class="button-add-text">Add to Cart</span>
+
               <span class="button-add-icon"><svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M9 0v7h7v2H9v7H7V8.999L0 9V7l7-.001V0z" fill-rule="evenodd"/></svg></span>
             </button>
           </div>
@@ -101,20 +102,33 @@
       </form>
     {% endif %}
 
+    {% if product.description != blank and theme.show_inventory_bars %}
+      <div class="description-inventory-tabs">
+        <button class="description-inventory-tab active-tab" data-tab="product-description">Description</button>
+        <button class="description-inventory-tab" data-tab="product-inventory">Inventory</button>
+      </div>
+    {% endif %}
     {% if product.description != blank %}
-      <div class="product-description">
+      <div class="product-detail-tab-section product-description">
         {{ product.description | paragraphs }}
       </div>
     {% endif %}
 
     {% if theme.show_inventory_bars %}
-      <div class="product-inventory">
+      <div class="product-detail-tab-section product-inventory">
         <ul class="inventory-bars">
           {% for option in product.options %}
             <li class="inventory-bar">
               {% unless product.has_default_option %}
                 <div class="inventory-option-name">{{ option.name }}</div>
               {% endunless %}
+              <div class="inventory-option-available">
+                {% if option.sold_out %}
+                  Sold out
+                {% else %}
+                  {{ option.quantity }} available
+                {% endif %}
+              </div>
               <div class="inventory-option-bar">
                 <div class="inventory-option-percentage" style="width:{{ option.inventory }}%;"></div>
               </div>
