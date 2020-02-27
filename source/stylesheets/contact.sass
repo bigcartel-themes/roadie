@@ -1,24 +1,27 @@
 @import 'variables'
 
-
 .contact-form
   max-width: 100%
-    width: 100%
+  width: 100%
 
-  .form-group
+  .contact-form-group
+    border: $small-border
     display: block
     margin: $base-padding * 2 auto
     position: relative
     width: 100%
 
     input, textarea
-      border: $medium-border
+      border: $small-border
+      border-color: transparent
+      display: block
+      height: 56px
+      padding: $base-padding
       width: 100%
-      padding-top: 28px
 
-    textarea
-      height: 160px
-      padding-top: $base-padding
+      &:active, &:focus
+        border-color: $border-color
+        outline: none
 
     &.contact-captcha
       margin-bottom: 40px
@@ -28,32 +31,35 @@
       background-color: transparent
       color: $primary-text-color
       cursor: text
-      font-size: 16px
-      left: 12px
+      font-size: 20px
+      font-weight: bold
+      left: $base-padding
       position: absolute
-      top: 16px
+      top: $base-padding * 2
       opacity: .6
 
     &.contact-send
       margin-top: $base-padding
 
   .focused .form-label
+    font-size: 12px
+    left: $base-padding + 2
     transform: translateY(-55%)
-    font-size: 10px
     opacity: 1
 
+  .focused input, .focused textarea
+    padding-top: $base-padding * 3
+
   #captcha_image
-    border: $medium-border
-    height: 55px
+    border-left: $small-border
+    height: 56px
     position: absolute
     right: 0
     top: 0
 
   .captcha-instructions
-    margin-top: 10px
-    font-size: 12px
+    margin-top: $base-padding
 
   .send-message-button
     display: block
     line-height: $base-padding
-    width: 290px

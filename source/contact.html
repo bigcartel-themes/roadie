@@ -1,10 +1,16 @@
 <div class="page-heading">
   <h1 class="page-title">{{ page.name }}</h1>
 </div>
-
+{% if errors != blank %}
+  <ul class="errors {{ page.permalink }}-errors">
+    {% for error in errors %}
+      <li>{{ error }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
 {% if contact.sent %}
   Your message has been sent and we'll get back to you soon.
-  <a href="/products" class="button">Continue Shopping</a>
+  <a href="/products" class="button">Continue shopping</a>
 {% else %}
   <form method="post" action="/contact" class="contact-form">
     <div class="form-group contact-form-group">
@@ -19,15 +25,15 @@
       <label class="form-label contact-form-label contact-subject" for="subject">Subject</label>
       {{ contact | contact_input: 'subject' }}
     </div>
-    <div class="form-group contact-form-group">
+    <div class="form-group contact-form-group contact-textarea-group">
       <label class="form-label contact-form-label contact-message" for="message">Message</label>
       {{ contact | contact_input: 'message' }}
     </div>
     <div class="form-group contact-form-group">
       <label class="form-label contact-form-label contact-captcha" for="captcha">Spam check</label>
       {{ contact | contact_input: 'captcha' }} {{ contact.captcha }}
-      <div class="captcha-instructions">Enter the characters from the image</div>
     </div>
+    <div class="captcha-instructions">Enter the characters from the image</div>
 
     <div class="contact-form-group contact-send">
       <button class="button send-message-button" type="submit" name="submit" title="Send Message" tabindex="6">Send Message</button>
