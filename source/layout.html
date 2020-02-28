@@ -33,7 +33,7 @@
   </head>
 
   <body id="{{ page.permalink }}_page" class="{{ body_class }} {{ page.category }} {% if theme.show_layout_gutters %}show-gutters{% else %}no-gutters{% endif %}">
-    <div class="background-image-overlay"></div>
+    {% if theme.images.background_image != blank %}<div class="background-image-overlay"></div>{% endif %}
     {% if theme.announcement_message_text != blank %}
       <aside role="complementary" aria-label="Announcement message" class="announcement-message">
         <div class="announcement-wrapper">

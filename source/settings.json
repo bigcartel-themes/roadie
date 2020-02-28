@@ -1,6 +1,6 @@
 {
   "name": "Roadie",
-  "version": "0.0.02",
+  "version": "0.0.041",
   "images": [
     {
       "variable": "logo",
@@ -11,12 +11,18 @@
       "variable": "background_image",
       "label": "Background Image",
       "description": "Adds a repeating background image"
+    },
+    {
+      "variable": "promo_image",
+      "label": "Promo Image",
+      "description": "Adds an image to the Home page",
+      "default": "promo.png"
     }
   ],
   "fonts": [
     {
       "variable": "primary_font",
-      "label": "Primary Font",
+      "label": "Font",
       "default": "Poppins"
     }
   ],
@@ -35,9 +41,96 @@
       "variable": "border_color",
       "label": "Border Color",
       "default": "#000000"
+    },
+    {
+      "variable": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "variable": "button_background_color",
+      "label": "Button Background Color",
+      "default": "#000000"
+    },
+    {
+      "variable": "button_hover_background_color",
+      "label": "Button Hover Background Color",
+      "default": "#ABABAB"
+    },
+    {
+      "variable": "button_hover_text_color",
+      "label": "Button Hover Text Color",
+      "default": "#000000"
+    },
+    {
+      "variable": "announcement_background_color",
+      "label": "Announcement Message Background",
+      "default": "#000000"
+    },
+    {
+      "variable": "announcement_text_color",
+      "label": "Announcement Message Text",
+      "default": "#FFFFFF"
+    },
+    {
+      "variable": "background_overlay_color",
+      "label": "Background overlay color",
+      "default": "#FFFFFF"
+    },
+    {
+      "variable": "error_text_color",
+      "label": "Error Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "variable": "error_background_color",
+      "label": "Error Background Color",
+      "default": "#991f26"
     }
   ],
   "options": [
+    {
+      "variable": "announcement_message_text",
+      "label": "Announcement text",
+      "type": "text",
+      "description": "Displays an announcement message on the top of every page",
+      "default": "Welcome to my super cool shop. Use discount DISCOUNT for 10% off!"
+    },
+    {
+      "variable": "theme_layout",
+      "label": "Theme layout",
+      "type": "select",
+      "options": [
+        ["Nav above header", "above_header"],
+        ["Nav below header", "below_header"],
+        ["Sidebar with header", "sidebar_header"],
+        ["Sidebar without header", "sidebar_no_header"]
+      ],
+      "default": "above_header",
+      "description": "Sets the overall theme layout on desktops and large screens"
+    },
+    {
+      "variable": "sidebar_position",
+      "label": "Sidebar position",
+      "type": "select",
+      "options": [
+        ["Left", "left"],
+        ["Right", "right"]
+      ],
+      "default": "left",
+      "description": "Sets the position the sidebar when enabled"
+    },
+    {
+      "variable": "header_position",
+      "label": "Header position",
+      "type": "select",
+      "options": [
+        ["Left", "left"],
+        ["Center", "center"]
+      ],
+      "default": "center",
+      "description": "Sets the position of your logo or store name"
+    },
     {
       "variable": "layout_style",
       "label": "Layout style",
@@ -50,15 +143,76 @@
       "description": "Sets the width of the content area of your store"
     },
     {
-      "variable": "sidebar_position",
-      "label": "Sidebar position",
+      "variable": "show_layout_gutters",
+      "label": "Show layout gutters",
+      "type": "boolean",
+      "default": false,
+      "description": "Show layout gutters"
+    },
+    {
+      "variable": "show_sidebar_toggle",
+      "label": "Always show sidebar toggle on desktop",
+      "type": "boolean",
+      "default": true,
+      "description": "Allows the sidebar to be hidden via the hamburger menu"
+    },
+    {
+      "variable": "product_list_layout",
+      "label": "Product List Layout",
       "type": "select",
       "options": [
-        ["Left", "left"],
-        ["Right", "right"]
+          ["Masonry", "masonry"],
+          ["Rows", "rows"]
       ],
-      "default": "left",
-      "description": "Sets the position of the sidebar"
+      "default": "rows",
+      "description": "The arrangement of your products on the Home and Products pages"
+    },
+    {
+      "variable": "product_badge_style",
+      "label": "Product Badge Style",
+      "type": "select",
+      "options": [
+          ["Circle", "circle"],
+          ["Bar", "bar"],
+          ["Inline", "inline"]
+      ],
+      "default": "inline",
+      "description": "The display of your product status on the Home and Products pages"
+    },
+    {
+      "variable": "product_detail_alignment",
+      "label": "Product detail alignment",
+      "type": "select",
+      "options": [
+          ["Left", "left"],
+          ["Center", "center"]
+      ],
+      "default": "center",
+      "description": "Alignment for product details under thumbnail images"
+    },
+    {
+      "variable": "grid_gutters",
+      "label": "Product grid spacing",
+      "type": "select",
+      "options": [
+        ["Large", "16px"],
+        ["Small", "8px"],
+        ["None", "0px"]
+      ],
+      "default": "8px",
+      "description": "Sets the spacing between each product thumbnail"
+    },
+    {
+      "variable": "grid_image_style",
+      "label": "Product grid image style",
+      "type": "select",
+      "options": [
+        ["Default", "default"],
+        ["Fit to square", "fit-to-square"],
+        ["Crop to square", "crop-to-square"]
+      ],
+      "default": "crop-to-square",
+      "description": "Sets the display of thumbnail images"
     },
     {
       "variable": "border_style",
@@ -69,10 +223,57 @@
         ["Thin", "thin"]
       ],
       "default": "thick",
-      "description": "Sets the thickness of the borders"
+      "description": "Sets the size of theme borders"
     },
     {
-      "variable": "featured_products",
+      "variable": "show_overlay",
+      "label": "Product list info",
+      "type": "select",
+      "options": [
+        ["On rollover", "rollover"],
+        ["Under image", "under_image"]
+      ],
+      "default": "under_image",
+      "description": "Shows a product's name & price on hover, or under the image"
+    },
+    {
+      "variable": "product_grid_image_size",
+      "label": "Product grid image size",
+      "type": "select",
+      "options": [
+        ["Small", "small"],
+        ["Medium", "medium"],
+        ["Large", "large"]
+      ],
+      "default": "medium",
+      "description": "Sets the size of product image thumbnails"
+    },
+    {
+      "variable": "mobile_product_grid_style",
+      "label": "Mobile product grid style",
+      "type": "select",
+      "options": [
+        ["Stacked", "horizontal"],
+        ["1 thumbnail across", "medium"],
+        ["2 thumbnails across", "small"]
+      ],
+      "default": "horizontal",
+      "description": "Sets the mobile thumbnail display"
+    },
+    {
+      "variable": "product_image_zooming",
+      "label": "Product image zooming",
+      "type": "select",
+      "options": [
+        ["Magnify on hover", "magnify-on-hover"],
+        ["Click to zoom", "click-to-zoom"],
+        ["Magnify + Click to zoom", "magnify-on-hover click-to-zoom"]
+      ],
+      "default": "magnify-on-hover click-to-zoom",
+      "description": "Sets the mobile thumbnail display"
+    },
+    {
+      "variable": "featured_items",
       "label": "Featured products",
       "type": "select",
       "options": "0..100",
@@ -80,19 +281,28 @@
       "description": "The number of products featured on the Home page"
     },
     {
+      "variable": "featured_order",
+      "label": "Featured products order",
+      "type": "select",
+      "options": "product_orders",
+      "default": "position",
+      "description": "The order of products on the Home page"
+    },
+    {
       "variable": "products_per_page",
       "label": "Products per page",
       "type": "select",
       "options": "1..100",
-      "default": 9,
+      "default": 36,
       "description": "The number of products shown per page"
     },
     {
-      "variable": "show_similar_products",
-      "label": "Show related products",
-      "type": "boolean",
-      "default": true,
-      "description": "Displays related products on the Product page"
+      "variable": "number_related_products",
+      "label": "Number of related products",
+      "type": "select",
+      "options": "0..6",
+      "default": 2,
+      "description": "The number of related products to show on the Product page"
     },
     {
       "variable": "show_search",
@@ -105,7 +315,7 @@
       "variable": "show_inventory_bars",
       "label": "Show inventory bars",
       "type": "boolean",
-      "default": false,
+      "default": true,
       "description": "Shows a product's inventory amounts (when using inventory tracking)",
       "requires": "inventory"
     },
@@ -116,6 +326,20 @@
       "default": true,
       "description": "Shows sold out product options in the Product page dropdowns",
       "requires": "inventory"
+    },
+    {
+      "variable": "show_quickview",
+      "label": "Show quickview",
+      "type": "boolean",
+      "default": true,
+      "description": "Shows quick view"
+    },
+    {
+      "variable": "uppercase_text",
+      "label": "Uppercase text layout",
+      "type": "boolean",
+      "default": true,
+      "description": "Shows all text in uppercase"
     },
     {
       "variable": "money_format",
@@ -132,31 +356,36 @@
       "variable": "twitter_url",
       "label": "Twitter URL",
       "type": "text",
-      "description": "Ex: http://twitter.com/bigcartel"
+      "description": "Ex: http://twitter.com/bigcartel",
+      "default": "asdf"
     },
     {
       "variable": "facebook_url",
       "label": "Facebook URL",
       "type": "text",
-      "description": "Ex: http://facebook.com/bigcartel"
+      "description": "Ex: http://facebook.com/bigcartel",
+      "default": "asdf"
     },
     {
       "variable": "tumblr_url",
       "label": "Tumblr URL",
       "type": "text",
-      "description": "Ex: http://bigcartel.tumblr.com"
+      "description": "Ex: http://bigcartel.tumblr.com",
+      "default": "asdf"
     },
     {
       "variable": "instagram_url",
       "label": "Instagram URL",
       "type": "text",
-      "description": "Ex: http://instagram.com/bigcartel"
+      "description": "Ex: http://instagram.com/bigcartel",
+      "default": "asdf"
     },
     {
       "variable": "pinterest_url",
       "label": "Pinterest URL",
       "type": "text",
-      "description": "Ex: http://pinterest.com/bigcartel"
+      "description": "Ex: http://pinterest.com/bigcartel",
+      "default": "asdf"
     }
   ]
 }

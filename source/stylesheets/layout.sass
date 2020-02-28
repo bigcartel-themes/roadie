@@ -83,6 +83,7 @@ body
 .secondary-above-header-nav
   +flexbox
   +justify-content(flex-end)
+  height: 1.5em
   margin-bottom: $base-padding / 2
 
 header
@@ -218,6 +219,8 @@ header
 
   &.upper-nav-cart
     +flexbox
+    height: 100%
+    line-height: 1.5em
     position: relative
 
   .right-sidebar &
@@ -364,7 +367,7 @@ _:-ms-fullscreen, :root .content-wrapper
 
   .secondary-above-header-nav &
     border-right: $small-border
-    height: auto
+    height: 100%
     margin-right: $base-padding * 2
     padding-right: $base-padding * 2
 
