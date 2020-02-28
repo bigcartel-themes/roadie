@@ -8,9 +8,7 @@
 
 {% if theme.promo_image != blank %}
   <section class="home-promo-image">
-    <div class="promo-container">
-      <img class="promo-image" alt="Promo image" src="{{ theme.promo_image.url | constrain: 1800 }}">
-    </div>
+    <img class="promo-image" alt="Promo image" src="{{ theme.promo_image.url | constrain: 1800 }}">
   </section>
 {% endif %}
 
