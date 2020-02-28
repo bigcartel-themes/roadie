@@ -1,11 +1,33 @@
 {% assign pageQuerystring = page.full_url | split:'sort=' | last %}
 
-{% if pageQuerystring == 'newest' %}
-  {% assign sort_order = 'newest' %}
+{% if pageQuerystring == 'on_sale' %}
+  {% assign sort_order = 'on_sale' %}
+
 {% elsif pageQuerystring == 'top_selling' %}
   {% assign sort_order = 'top_selling' %}
-{% elsif pageQuerystring == 'most_viewed' %}
-  {% assign sort_order = 'most_viewed' %}
+
+{% elsif pageQuerystring == 'title-ascending' %}
+  {% assign sort_order = 'title-ascending' %}
+
+{% elsif pageQuerystring == 'title-descending' %}
+  {% assign sort_order = 'title-descending' %}
+
+{% elsif pageQuerystring == 'date-ascending' %}
+  {% assign sort_order = 'date-ascending' %}
+
+{% elsif pageQuerystring == 'date-descending' %}
+  {% assign sort_order = 'date-descending' %}
+
+{% elsif pageQuerystring == 'price-ascending' %}
+  {% assign sort_order = 'price-ascending' %}
+
+{% elsif pageQuerystring == 'price-descending' %}
+  {% assign sort_order = 'price-descending' %}
+
+
+
+
+
 {% elsif pageQuerystring == '' %}
   {% assign sort_order = pageQuerystring %}
 {% endif %}
@@ -17,16 +39,16 @@
     <div class="select product-sort-options">
       <select class="product-sort-options-select">
         <option value="default"{% if sort_order == '' %} selected="selected"{% endif %}>Featured</option>
-        <option value="top_selling"{% if sort_order == 'on_sale' %} selected="selected"{% endif %}>On sale</option>
+        <option value="on_sale"{% if sort_order == 'on_sale' %} selected="selected"{% endif %}>On sale</option>
         <option value="top_selling"{% if sort_order == 'top_selling' %} selected="selected"{% endif %}>Top selling</option>
-        <option value="newest"{% if sort_order == 'title-ascending' %} selected="selected"{% endif %}>Alphabetically (A to Z)</option>
-        <option value="newest"{% if sort_order == 'title-descending' %} selected="selected"{% endif %}>Alphabetically (Z to A)</option>
+        <option value="title-ascending"{% if sort_order == 'title-ascending' %} selected="selected"{% endif %}>Alphabetically (A to Z)</option>
+        <option value="title-descending"{% if sort_order == 'title-descending' %} selected="selected"{% endif %}>Alphabetically (Z to A)</option>
 
-        <option value="newest"{% if sort_order == 'date-ascending' %} selected="selected"{% endif %}>Date (new to old)</option>
-        <option value="newest"{% if sort_order == 'date-descending' %} selected="selected"{% endif %}>Date (old to new)</option>
+        <option value="date-ascending"{% if sort_order == 'date-ascending' %} selected="selected"{% endif %}>Date (new to old)</option>
+        <option value="date-descending"{% if sort_order == 'date-descending' %} selected="selected"{% endif %}>Date (old to new)</option>
 
-        <option value="newest"{% if sort_order == 'price-ascending' %} selected="selected"{% endif %}>Price (low to high)</option>
-        <option value="newest"{% if sort_order == 'price-descending' %} selected="selected"{% endif %}>Price (high to low)</option>
+        <option value="price-ascending"{% if sort_order == 'price-ascending' %} selected="selected"{% endif %}>Price (low to high)</option>
+        <option value="price-descending"{% if sort_order == 'price-descending' %} selected="selected"{% endif %}>Price (high to low)</option>
 
       </select>
       <svg aria-hidden="true" width="10" height="8" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg>

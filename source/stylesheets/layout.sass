@@ -115,8 +115,11 @@ header
   +flexbox
   +align-items(center)
   +justify-content(center)
-  padding: 20px 0
+  padding: $base-padding * 3 0
   position: relative
+
+  @media screen and (max-width: $break-small)
+    padding: $base-padding * 2 0
 
   &.header-left-align
     +justify-content(space-between)
@@ -237,6 +240,7 @@ header
 
     @media screen and (max-width: $break-small)
       border-right: 0
+      margin-right: 0
       padding-right: 0
 
   .header-cart-total
@@ -568,6 +572,17 @@ button, .button
   text-align: center
   text-decoration: none
 
+  &.has-right-icon
+    +flexbox
+    +align-items(center)
+    +justify-content(center)
+    padding: $base-padding * 2
+
+    .button-icon-right-arrow
+      fill: $button-text-color
+      margin-left: auto
+
+
   svg
     +all-transitions
 
@@ -576,7 +591,6 @@ button, .button
     color: $primary-text-color
     border: none
     display: inline-block
-    font-size: 14px
     font-weight: bold
     padding: 0
 
@@ -729,3 +743,39 @@ button.quick-shop-close
   list-style: none
   padding: $base-padding * 2
   text-align: center
+
+body#maintenance
+  +flexbox
+  +align-items(center)
+  +justify-content(center)
+  padding: $base-padding * 4
+
+.maintenance-container
+  border: $medium-border
+  max-width: 688px
+  padding: $base-padding * 4
+  width: 100%
+
+.maintenance-store-name
+  +fluid-type(24px, 64px)
+  border-bottom: $large-border
+  font-weight: bold
+  line-height: 1em
+
+h1.maintenance-title
+  +fluid-type(18px, 24px)
+  margin: 0
+
+p.maintenance-caption
+  margin: 0
+
+.maintenance-social-links
+  border-top: $small-border
+  margin-top: $base-padding
+  padding-top: $base-padding
+
+  .social-links
+    +justify-content(flex-start)
+
+    > a
+      margin-right: $base-padding
