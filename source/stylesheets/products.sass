@@ -36,12 +36,14 @@
     height: 100%
     padding: 0 $base-padding * 2 0 0
     position: relative
+    text-align-last: right
     width: 100%
     z-index: 2
 
     option
       background-color: #FFF
       color: #000
+      direction: rtl
 
       &:disabled
         color: graytext
@@ -103,27 +105,40 @@
     +flex-basis(calc(100% / 4))
     width: calc(100% / 4)
 
-    .full-width &
-      +flex-basis(calc(100% / 6))
-      width: calc(100% / 6)
+    .grid-full-width &
+      +flex-basis(calc(100% / 5))
+      width: calc(100% / 5)
+
+      @media screen and (min-width: $break-large)
+        +flex-basis(calc(100% / 6))
+        width: calc(100% / 6)
 
   &.product-image-medium
     +flex-basis(calc(100% / 3))
     width: calc(100% / 3)
 
-    .full-width &
-      +flex-basis(calc(100% / 5))
-      width: calc(100% / 5)
+    .grid-full-width &
+      +flex-basis(calc(100% / 4))
+      width: calc(100% / 4)
+
+      @media screen and (min-width: $break-large)
+        +flex-basis(calc(100% / 5))
+        width: calc(100% / 5)
 
   &.product-image-large
     +flex-basis(calc(100% / 2))
     width: calc(100% / 2)
 
-    .full-width &
+    .grid-full-width &
       +flex-basis(calc(100% / 3))
       width: calc(100% / 3)
 
-  @media only screen and (min-width: $break-medium) and (hover: hover), (-moz-touch-enabled: 0)
+      @media screen and (min-width: $break-large)
+        +flex-basis(calc(100% / 4))
+        width: calc(100% / 4)
+
+
+  @media only screen and (min-width: $break-small) and (hover: hover), (-moz-touch-enabled: 0)
 
     &.show-quickview
       &:hover, &:active, &:focus
@@ -159,18 +174,27 @@
           opacity: .8
 
   @media screen and (max-width: $break-small)
+    .mobile-medium &
+      +flex-basis(calc(100% / 1) !important)
+      width: calc(100% / 1) !important
+
+    .mobile-small &
+      +flex-basis(calc(100% / 2) !important)
+      width: calc(100% / 2) !important
+
     .mobile-horizontal &
       +flexbox
-      +flex-basis(100%)
-      width: 100%
+      +flex-basis(100% !important)
+      border-bottom: $small-border
+      width: 100% !important
 
       .product-list-item-container
-        height: 100px
-        width: 100px
+        height: 104px
+        width: 104px
 
       .product-list-item-info
         padding-left: $base-padding * 2
-        width: calc(100% - 100px)
+        width: calc(100% - 104px)
 
       .product-list-item-info-headers
         text-align: left !important

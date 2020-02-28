@@ -44,7 +44,7 @@
         </div>
       </aside>
     {% endif %}
-    <div class="outer-wrapper {% if theme.layout_style == 'fixed_width' %}fixed-width{% endif %}">
+    <div class="outer-wrapper {% if theme.layout_style == 'fixed_width' %}fixed-width{% else %}full-width{% endif %}">
       {% if theme.theme_layout == 'above_header' %}
         <aside class="header-above">
           <nav class="upper-nav" aria-label="Main navigation">
@@ -171,7 +171,7 @@
 
               <section class="nav-section nav-section-info">
                 <div class="nav-section-title"><button class="toggle-nav">Info <svg aria-hidden="true" width="10" height="8" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></button></div>
-                <ul class="sidebar-nav-links">
+                <ul class="sidebar-nav-links compact-nav-links">
                   {% for page in pages.all %}
                     <li class="sidebar-nav-link">{{ page | link_to }}</li>
                   {% endfor %}
@@ -260,7 +260,7 @@
             {% endif %}
 
             <section class="nav-section nav-section-info">
-              <ul class="sidebar-nav-links">
+              <ul class="sidebar-nav-links compact-nav-links">
                 {% for page in pages.all %}
                   <li class="sidebar-nav-link medium-border">{{ page | link_to }}</li>
                 {% endfor %}

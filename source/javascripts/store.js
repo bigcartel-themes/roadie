@@ -1,87 +1,8 @@
 
 var inPreview = (/\/admin\/design/.test(top.location.pathname));
+var window_width = $(window).width();
 
 
-$('.product-option-select').on('change',function() {
-  var option_price = $(this).find("option:selected").attr("data-price");
-  enableAddButton(option_price);
-});
-
-
-
-function enableAddButton(updated_price) {
-  var addButton = $('.add-to-cart-button');
-  var addButtonTextElement = addButton.find('.button-add-text');
-  var addButtonPriceTextElement = addButton.find('.button-add-price');
-  var addButtonTitle = addButton.attr('data-add-title');
-  addButton.attr("disabled",false);
-  if (updated_price) {
-    quantity = parseInt($('#quantity').val());
-    if (quantity > 0) {
-      updated_total_price = quantity * updated_price;
-    }
-    addButtonPriceTextElement.html(Format.money(updated_total_price, true, true));
-    addButton.attr('data-selected-price',updated_price);
-    addButtonPriceTextElement.addClass('visible');
-  }
-  else {
-    priceTitle = '';
-    addButtonPriceTextElement.hide();
-  }
-  addButtonTextElement.html(addButtonTitle);
-}
-
-function disableAddButton(type) {
-  var addButton = $('.add-to-cart-button');
-  var addButtonTextElement = addButton.find('.button-add-text');
-  var addButtonPriceTextElement = addButton.find('.button-add-price');
-  var addButtonTitle = addButton.attr('data-add-title');
-  if (type == "sold-out") {
-    var addButtonTitle = addButton.attr('data-sold-title');
-  }
-  if (!addButton.is(":disabled")) {
-    addButton.attr("disabled","disabled");
-  }
-  addButtonTextElement.html(addButtonTitle);
-  addButtonPriceTextElement.removeClass('visible');
-}
-
-function enableSelectOption(select_option) {
-  select_option.removeAttr("disabled");
-  select_option.text(select_option.attr("data-name"));
-  select_option.removeAttr("disabled-type");
-  if ((select_option.parent().is('span'))) {
-    select_option.unwrap();
-  }
-}
-function disableSelectOption(select_option, type) {
-  if (type === "sold-out") {
-    disabled_text = select_option.parent().attr("data-sold-text");
-    disabled_type = "sold-out";
-    if (show_sold_out_product_options === 'false') {
-      hide_option = true;
-    }
-    else {
-      hide_option = false;
-    }
-  }
-  if (type === "unavailable") {
-    disabled_text = select_option.parent().attr("data-unavailable-text");
-    disabled_type = "unavailable";
-    hide_option = true;
-  }
-  if (select_option.val() > 0) {
-    var name = select_option.attr("data-name");
-    select_option.attr("disabled",true);
-    select_option.text(name + ' ' + disabled_text);
-    select_option.attr("disabled-type",disabled_type);
-    if (hide_option === true) {
-      if (!(select_option.parent().is('span'))) {
-        select_option.wrap('<span>');
-      }
-    }
-  }
-}
 
 
 
@@ -130,15 +51,20 @@ document.addEventListener('input', function (event) {
 
 $('.open-menu').click(function(e) {
   e.preventDefault();
-  if (localStorage.getItem('sidebar') == 'visible') {
-    $('.sidebar').hide();
-    localStorage.setItem('sidebar','hidden');
+  if (window_width > 767) {
+    if (localStorage.getItem('sidebar') == 'visible') {
+      $('.sidebar').hide();
+      localStorage.setItem('sidebar','hidden');
+    }
+    else {
+      $('.sidebar').show();
+      localStorage.setItem('sidebar','visible');
+    }
   }
   else {
-    $('.sidebar').show();
-    localStorage.setItem('sidebar','visible');
+    $('.sidebar').toggle();
   }
-  //$('.sidebar').toggle();
+
 });
 
 $('.under-header .nav-section').hover(function(e) {
@@ -265,21 +191,23 @@ $(function() {
 });
 
 if ($('body').hasClass('has-sidebar')) {
-  if(!localStorage.getItem('sidebar')) {
-    populateStorage();
-  } else {
-    setStyles();
-  }
-  function setStyles() {
-    var sidebarState = localStorage.getItem('sidebar');
-
-    if (sidebarState == 'hidden') {
-      $('.has-sidebar .sidebar').addClass('hidden');
+  if (window_width > 767) {
+    if(!localStorage.getItem('sidebar')) {
+      populateStorage();
+    } else {
+      setStyles();
     }
-  }
-  function populateStorage() {
-    localStorage.setItem('sidebar','visible');
-    setStyles();
+    function setStyles() {
+      var sidebarState = localStorage.getItem('sidebar');
+
+      if (sidebarState == 'hidden') {
+        $('.has-sidebar .sidebar').addClass('hidden');
+      }
+    }
+    function populateStorage() {
+      localStorage.setItem('sidebar','visible');
+      setStyles();
+    }
   }
 }
 

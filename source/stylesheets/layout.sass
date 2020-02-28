@@ -89,18 +89,12 @@ header
   border-bottom: $large-border
   padding: 0
 
-  .above-header &
-    display: none
+  @media screen and (min-width: $break-small +1)
+    .above-header &
+      display: none
 
-    @media screen and (max-width: $break-small)
-      display: block !important
-
-  .sidebar-no-header &
-    display: none
-
-    @media screen and (max-width: $break-small)
-      border-bottom: 0
-      display: block !important
+    .sidebar-no-header &
+      display: none
 
 .outer-wrapper
   +flexbox
@@ -111,7 +105,8 @@ header
   width: 100%
 
   .sidebar-no-header &
-    margin-top: $base-padding * 4
+    @media screen and (min-width: $break-small +1)
+      margin-top: $base-padding * 4
 
   &.fixed-width
     max-width: 1040px
@@ -172,11 +167,12 @@ header
   text-align: center
   width: 100%
 
-  .sidebar-no-header &
-    border-bottom: $large-border
-    max-width: 100%
-    padding-bottom: $base-padding * 2
-    text-align: left
+  @media screen and (min-width: $break-small +1)
+    .sidebar-no-header &
+      border-bottom: $large-border
+      max-width: 100%
+      padding-bottom: $base-padding * 2
+      text-align: left
 
 .header-home-link
   +fluid-type(18px, 64px)
@@ -184,10 +180,18 @@ header
   display: block
   font-weight: bold
   line-height: 1em
+  text-align: center
   text-decoration: none
 
   .sidebar-no-header &
     +fluid-type(18px, 40px)
+
+    @media screen and (min-width: $break-small +1)
+      text-align: left
+
+  @media screen and (min-width: $break-small +1)
+    .above-header &
+      text-align: left
 
 .store-logo
   display: block
@@ -334,18 +338,22 @@ _:-ms-fullscreen, :root .content-wrapper
     .has-sidebar.sidebar-header &
       display: none
 
-  .nav-cart-link
-    +flexbox
-    color: $primary-text-color
-    font-weight: bold
-    padding: $base-padding 0
-    text-decoration: none
+    .nav-cart-link
+      +flexbox
+      color: $primary-text-color
+      font-weight: bold
+      padding: $base-padding 0
+      text-decoration: none
 
-    .sidebar-cart-count
-      border-right: $small-border
-      padding-right: $base-padding
-      margin-left: auto
-      margin-right: $base-padding
+      .sidebar-cart-count
+        border-right: $small-border
+        padding-right: $base-padding
+        margin-left: auto
+        margin-right: $base-padding
+
+  .nav-section-social
+    border-bottom: none
+    padding-top: $base-padding
 
 .search-form
   +flexbox
@@ -388,11 +396,9 @@ _:-ms-fullscreen, :root .content-wrapper
 
 .nav-section-title
   border-bottom: $medium-border
-  margin-bottom: $base-padding
 
   .under-header &
     border-bottom: none
-    margin-bottom: 0
 
   button.toggle-nav
     background: none
@@ -418,9 +424,14 @@ _:-ms-fullscreen, :root .content-wrapper
         right: 0
 
 .sidebar-nav-links
+  line-height: 1.25em
   list-style: none
-  margin: 0
+  margin: $base-padding 0
   padding: 0
+
+  &.compact-nav-links
+    line-height: 1.5em
+    margin: 0
 
   .under-header &
     background: $background-color
@@ -456,10 +467,6 @@ _:-ms-fullscreen, :root .content-wrapper
 
       &:hover, &:focus
         text-decoration: underline
-
-.nav-section-social
-  border-bottom: none
-  padding-top: $base-padding
 
 .social-links
   +flexbox
