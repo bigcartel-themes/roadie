@@ -21,27 +21,42 @@
   +flexbox
   +flex-direction(row)
 
-  @media screen and (max-width: $break-small)
+  @media screen and (max-width: $break-product-details)
     +flex-direction(column)
 
 .product-images
   +flex(1 1 auto)
   order: 1
 
-  img
+  .primary-product-image
     display: block
     margin-bottom: $base-padding * 2
     width: 100%
+
+  .secondary-images
+    +flexbox
+
+    .swap-secondary-image
+      display: block
+      margin: 0
+      width: 25%
+
+      img
+        display: block
+        width: 100%
 
 .product-details
   +flex(0 0 328px)
   order: 2
   padding-left: $base-padding * 2
 
-  @media screen and (max-width: $break-small)
+  @media screen and (max-width: $break-product-details)
     padding-left: 0
 
 .product-options-container
+  margin-bottom: $base-padding * 2
+
+.product-form
   margin-bottom: $base-padding * 2
 
 .product-option-select-container
@@ -77,6 +92,7 @@
 .product-form-quantity-button
   +flexbox
   +flex-direction(row)
+  +flex-wrap(wrap)
 
 .product-form-quantity
   +flexbox
@@ -105,7 +121,7 @@
     width: 100%
 
 .add-to-cart-button
-  +flex-basis(100%)
+  +flex-basis(calc(100% - 72px))
   +flexbox
   +flex-direction(column)
   +justify-content(center)
@@ -135,6 +151,32 @@
 
     svg
       fill: $button-text-color
+
+.product-form-cart-link-container
+  +flex-basis(100%)
+  display: none
+
+.product-form-cart-link
+  +flexbox
+  +align-items(center)
+  border: $medium-border
+  color: $primary-text-color
+  font-weight: bold
+  margin-top: $base-padding
+  padding: $base-padding * 1.5 $base-padding
+  text-decoration: none
+  width: 100%
+
+  span
+    margin-left: $base-padding
+
+  .product-form-cart-link-icon
+    fill: $primary-text-color
+    height: 20px
+    width: 20px
+
+  .product-form-cart-link-arrow-icon
+    margin-left: auto
 
 .reset-selection-button-container
   text-align: right
@@ -180,7 +222,6 @@
   border-top: $medium-border
   border-bottom: $small-border
   font-size: 14px
-  margin-top: $base-padding * 2
 
   .description-inventory-tab
     +appearance(none)
