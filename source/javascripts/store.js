@@ -4,9 +4,6 @@ var window_width = $(window).width();
 
 
 
-
-
-
 $('.contact-form input, .contact-form textarea').addClass('shrink-label');
 
 $('.shrink-label').change(function(){
@@ -49,15 +46,23 @@ document.addEventListener('input', function (event) {
 
 
 
+$('.under-header .nav-section').hover(function(e) {
+  $('.sidebar-nav-links').removeClass('expanded');
+  $(this).find('.sidebar-nav-links').toggleClass('expanded');
+})
+
+
+
+
 $('.open-menu').click(function(e) {
   e.preventDefault();
   if (window_width > 767) {
     if (localStorage.getItem('sidebar') == 'visible') {
-      $('.sidebar').hide();
+      $('.has-sidebar .sidebar').addClass('hidden');
       localStorage.setItem('sidebar','hidden');
     }
     else {
-      $('.sidebar').show();
+      $('.has-sidebar .sidebar').removeClass('hidden');
       localStorage.setItem('sidebar','visible');
     }
   }
@@ -66,64 +71,6 @@ $('.open-menu').click(function(e) {
   }
 
 });
-
-$('.under-header .nav-section').hover(function(e) {
-  $('.sidebar-nav-links').removeClass('expanded');
-  $(this).find('.sidebar-nav-links').toggleClass('expanded');
-})
-
-$(document).keyup(function(e) {
-  if (e.keyCode === 27) $('.quick-shop-close').click();   // esc
-});
-
-$('body').on('click', ".open-quickview", function(e){
-  e.preventDefault();
-  var permalink = $(this).data('permalink');
-
-  Product.find(permalink, function(product) {
-    //loadProductDetails(product, has_default);
-    processProduct(product);
-
-    loadProductContent(product);
-  });
-});
-$('.quick-shop-close').click(function(e) {
-  e.preventDefault();
-  $('.quick-shop-modal').removeClass('opened');
-})
-$(document).mouseup(function (e){
-  var container = $(".quick-shop-modal-content");
-  if (!container.is(e.target) && container.has(e.target).length === 0){
-    $('.quick-shop-modal').removeClass('opened');
-  }
-});
-function loadProductContent(product) {
-  var $container = $('.quick-shop-product-details');
-  //Product.find(product.permalink, processProduct)
-
-  $.get("/product/" + product.permalink + "?" + $.now(), function(response, status, xhr) {
-      // error checking
-      $container.html($(response).find(".main")); // Any <script> tags in the response string will execute
-      // post processing
-      $('.quick-shop-modal').addClass('opened');
-      /*
-      if ($('.product-page').data('prev').length) {
-        $('.quick-shop-nav-button--previous').data('permalink',$('.product-page').data('prev')).show();
-      }
-      else {
-        $('.quick-shop-nav-button--previous').data('permalink','').hide();
-      }
-      if ($('.product-page').data('next').length) {
-        $('.quick-shop-nav-button--next').data('permalink',$('.product-page').data('next')).show();
-      }
-      else {
-        $('.quick-shop-nav-button--next').data('permalink','').hide();
-      }
-      */
-  });
-}
-
-
 
 
 if ($('body').hasClass('has-sidebar')) {
@@ -179,5 +126,38 @@ $('.description-inventory-tab').click(function(e) {
   $('.' + tab_name).show();
 })
 
+/* Gradients */
+if ($('.background-image-overlay-gradient_overlay').length) {
+  (function( $ ) {
+    $.fn.drawGradient = function() {
+      this.filter( ".background-image-overlay-gradient_overlay" ).each(function() {
+        var element = $(this);
+        var primaryGradient = themeOptions.primaryGradientColor;
+        element.css(
+          {
+          "background-image": "linear-gradient(180deg, "+hexToRGB(primaryGradient,'0')+" 0%,"+ primaryGradient +" 100%)",
+          "background-color": hexToRGB(primaryGradient,".7")
+        });
+      });
+      return this;
+    };
+  }( jQuery ));
 
+  $('.background-image-overlay-gradient_overlay').drawGradient();
+}
 
+function hexToRGB(hex,opacity) {
+  let r = 0, g = 0, b = 0;
+  // 3 digits
+  if (hex.length == 4) {
+    r = "0x" + hex[1] + hex[1];
+    g = "0x" + hex[2] + hex[2];
+    b = "0x" + hex[3] + hex[3];
+  // 6 digits
+  } else if (hex.length == 7) {
+    r = "0x" + hex[1] + hex[2];
+    g = "0x" + hex[3] + hex[4];
+    b = "0x" + hex[5] + hex[6];
+  }
+  return "rgba("+ +r + "," + +g + "," + +b + ","+opacity+")";
+}
