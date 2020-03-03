@@ -26,11 +26,13 @@ a:active
 a:hover, a:focus
   color: $link-hover-color
 
+.currency_code
+  font-weight: normal
+
 html, body
   height: 100%
   margin: 0
   padding: 0
-
 
 html
 
@@ -204,6 +206,9 @@ header
   line-height: 1em
   text-align: center
   text-decoration: none
+
+  .header-left-align &
+    text-align: left !important
 
   .sidebar-no-header &
     +fluid-type(18px, 40px)
@@ -786,14 +791,19 @@ body#maintenance
   @media screen and (max-width: $break-small)
     border-left: none
     border-right: none
+    border-top: $large-border
+    border-bottom: $small-border
     padding: $base-padding * 2 0
 
 .maintenance-store-name
-  +fluid-type(24px, 64px)
+  +fluid-type(40px, 96px)
   border-bottom: $large-border
   font-weight: bold
   line-height: 1em
   padding-bottom: $base-padding
+
+  @media screen and (max-width: $break-small)
+    border-bottom: $medium-border
 
 h1.maintenance-title
   +fluid-type(18px, 24px)

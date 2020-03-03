@@ -142,7 +142,7 @@
 
   .button-add-price
     font-size: 16px
-    font-weight: normal
+    font-weight: bold
     margin-bottom: $base-padding / 2
     display: none
 
@@ -191,6 +191,10 @@
     display: none
 
 .product-description
+
+  p:first-child
+    margin-top: 0
+
   *
     text-transform: none
 
@@ -228,14 +232,16 @@
   border-top: $medium-border
   border-bottom: $small-border
   font-size: 14px
+  margin-bottom: $base-padding * 2
 
   .description-inventory-tab
     +appearance(none)
     +flex-basis(50%)
     background: none
     color: $primary-text-color
+    font-weight: normal
     height: auto
-    outline: nonez
+    outline: none
     padding: $base-padding * 2 $base-padding * 2
     text-align: center
 
@@ -248,7 +254,6 @@
 
 .product-inventory
   display: none
-  padding-top: $base-padding * 2
 
 .inventory-bars
   list-style: none
@@ -265,6 +270,9 @@
 
 .inventory-option-available
   font-weight: normal
+
+.inventory-option-percentage-text
+  float: right
 
 .inventory-option-percentage
   background: $primary-text-color

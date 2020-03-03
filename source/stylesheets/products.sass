@@ -357,6 +357,7 @@
     font-weight: bold
 
 .pagination
+  +flexbox
   border-top: $small-border
   padding: $base-padding 0
 
@@ -373,7 +374,7 @@
       background: $background-color
       color: $primary-text-color
       border-radius: 100%
-      text-decoration: none
+      text-decoration: underline
 
       &:hover, &:active, &:focus, &.current
         background: $button-background-color
@@ -381,7 +382,7 @@
 
     &.previous, &.next
       svg
-        +transform(translateY(-50%))
+        +transform(translateY(-50%) translateX(-50%))
         top: 50%
         position: absolute
-        display: block
+        display: inline-block

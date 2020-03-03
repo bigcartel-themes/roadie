@@ -138,6 +138,8 @@
                   Sold out
                 {% else %}
                   {{ option.quantity }} available
+
+                  <span class="inventory-option-percentage-text">{{ option.inventory }}%</span>
                 {% endif %}
               </div>
               <div class="inventory-option-bar">

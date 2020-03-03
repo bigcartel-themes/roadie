@@ -2,15 +2,23 @@
 
 .custom-page
   +flexbox
-  +flex-direction(row)
+  +flex-direction(column)
   +align-items(flex-start)
 
-  @media screen and (max-width: $break-small)
-    +flex-direction(column)
+  .full-width &
+    @media screen and (min-width: $break-small +1)
+      +flex-direction(column)
 
   .page-heading
-    +flex(0 1 564px)
-    margin-right: $base-padding * 4
+    +flex(0 1 100%)
+    width: 100%
+
+    .full-width &
+      +flex(0 1 564px)
+      margin-right: $base-padding * 4
 
   .custom-page-content
-    +flex(0 1 764px)
+    +flex(0 1 100%)
+
+    .full-width &
+      +flex(0 1 764px)
