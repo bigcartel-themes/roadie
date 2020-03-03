@@ -1,61 +1,58 @@
 {% assign pageQuerystring = page.full_url | split:'sort=' | last %}
 
-{% if pageQuerystring == 'on_sale' %}
+{% if pageQuerystring contains 'on_sale' %}
   {% assign sort_order = 'on_sale' %}
 
-{% elsif pageQuerystring == 'top_selling' %}
-  {% assign sort_order = 'top_selling' %}
+{% elsif pageQuerystring contains 'sales' %}
+  {% assign sort_order = 'sales' %}
 
-{% elsif pageQuerystring == 'title-ascending' %}
-  {% assign sort_order = 'title-ascending' %}
+{% elsif pageQuerystring contains 'name_a_to_z' %}
+  {% assign sort_order = 'name_a_to_z' %}
 
-{% elsif pageQuerystring == 'title-descending' %}
-  {% assign sort_order = 'title-descending' %}
+{% elsif pageQuerystring contains 'name_z_to_a' %}
+  {% assign sort_order = 'name_z_to_a' %}
 
-{% elsif pageQuerystring == 'date-ascending' %}
-  {% assign sort_order = 'date-ascending' %}
+{% elsif pageQuerystring contains 'date_new_to_old' %}
+  {% assign sort_order = 'date_new_to_old' %}
 
-{% elsif pageQuerystring == 'date-descending' %}
-  {% assign sort_order = 'date-descending' %}
+{% elsif pageQuerystring contains 'date_old_to_new' %}
+  {% assign sort_order = 'date_old_to_new' %}
 
-{% elsif pageQuerystring == 'price-ascending' %}
-  {% assign sort_order = 'price-ascending' %}
+{% elsif pageQuerystring contains 'price_low_to_high' %}
+  {% assign sort_order = 'price_low_to_high' %}
 
-{% elsif pageQuerystring == 'price-descending' %}
-  {% assign sort_order = 'price-descending' %}
-
-
-
-
+{% elsif pageQuerystring contains 'price_high_to_low' %}
+  {% assign sort_order = 'price_high_to_low' %}
 
 {% elsif pageQuerystring == '' %}
-  {% assign sort_order = pageQuerystring %}
+  {% assign sort_order = '' %}
 {% endif %}
 
-<div class="page-heading has-sorting">
+<div class="page-heading {% if theme.enable_product_sorting %}has-sorting{% endif %}">
   <h1 class="page-title">{{ page.name }}</h1>
-  <div class="product-sort">
-    <div class="product-sort-caption">Sort by</div>
-    <div class="select product-sort-options">
-      <select class="product-sort-options-select">
-        <option value="default"{% if sort_order == '' %} selected="selected"{% endif %}>Featured</option>
-        <option value="on_sale"{% if sort_order == 'on_sale' %} selected="selected"{% endif %}>On sale</option>
-        <option value="top_selling"{% if sort_order == 'top_selling' %} selected="selected"{% endif %}>Top selling</option>
-        <option value="title-ascending"{% if sort_order == 'title-ascending' %} selected="selected"{% endif %}>Alphabetically (A to Z)</option>
-        <option value="title-descending"{% if sort_order == 'title-descending' %} selected="selected"{% endif %}>Alphabetically (Z to A)</option>
+  {% if theme.enable_product_sorting %}
+    <div class="product-sort">
+      <div class="product-sort-caption">Sort by</div>
+      <div class="select product-sort-options">
+        <select class="product-sort-options-select">
+          <option value="default"{% if sort_order == '' %} selected="selected"{% endif %}>Featured</option>
+          <option value="on_sale"{% if sort_order == 'on_sale' %} selected="selected"{% endif %}>On sale</option>
+          <option value="sales"{% if sort_order == 'sales' %} selected="selected"{% endif %}>Top selling</option>
+          <option value="name_a_to_z"{% if sort_order == 'name_a_to_z' %} selected="selected"{% endif %}>Alphabetically (A to Z)</option>
+          <option value="name_z_to_a"{% if sort_order == 'name_z_to_a' %} selected="selected"{% endif %}>Alphabetically (Z to A)</option>
 
-        <option value="date-ascending"{% if sort_order == 'date-ascending' %} selected="selected"{% endif %}>Date (new to old)</option>
-        <option value="date-descending"{% if sort_order == 'date-descending' %} selected="selected"{% endif %}>Date (old to new)</option>
+          <option value="date_new_to_old"{% if sort_order == 'date_new_to_old' %} selected="selected"{% endif %}>Date (new to old)</option>
+          <option value="date_old_to_new"{% if sort_order == 'date_old_to_new' %} selected="selected"{% endif %}>Date (old to new)</option>
 
-        <option value="price-ascending"{% if sort_order == 'price-ascending' %} selected="selected"{% endif %}>Price (low to high)</option>
-        <option value="price-descending"{% if sort_order == 'price-descending' %} selected="selected"{% endif %}>Price (high to low)</option>
+          <option value="price_low_to_high"{% if sort_order == 'price_low_to_high' %} selected="selected"{% endif %}>Price (low to high)</option>
+          <option value="price_high_to_low"{% if sort_order == 'price_high_to_low' %} selected="selected"{% endif %}>Price (high to low)</option>
 
-      </select>
-      <svg aria-hidden="true" width="10" height="8" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg>
+        </select>
+        <svg aria-hidden="true" width="10" height="8" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg>
+      </div>
     </div>
-  </div>
+  {% endif %}
 </div>
-
 
 {% paginate products from products.current by theme.products_per_page order: sort_order %}
   {% if products != blank %}
@@ -100,7 +97,13 @@
               <div class="product-list-item-background"></div>
               <div class="product-list-item-info-headers">
                 <div class="product-list-item-name">{{ product.name }}</div>
-                <div class="product-list-item-price">{{ product.default_price | money: theme.money_format }}</div>
+                <div class="product-list-item-price">
+                  {% if product.variable_pricing %}
+                    {{ product.min_price | money: theme.money_format }} - {{ product.max_price | money: theme.money_format }}
+                  {% else %}
+                    {{ product.default_price | money: theme.money_format }}
+                  {% endif %}
+                </div>
                 {% if product_status != blank and theme.product_badge_style == 'inline' %}<div class="product-list-item-status {{ theme.product_badge_style }}">{{ product_status }}</div>{% endif %}
               </div>
             </div>
@@ -109,7 +112,7 @@
       </div>
     </div>
     {% if paginate.pages > 1 %}
-      {{ paginate | default_pagination, 'pagination', 'pagination', '<svg aria-hidden="true" width="12" height="20" viewBox="0 0 12 20" xmlns="http://www.w3.org/2000/svg"><path fill="#000" d="M0 9.99663714L9.99663714 0l1.87436946 1.87436946-8.12548453 8.12608504 8.12548453 8.125176L9.99663714 20 0 10.0033629l.00353434-.0029084z" fill-rule="evenodd"/></svg>', '<svg aria-hidden="true" width="12" height="20" viewBox="0 0 12 20" xmlns="http://www.w3.org/2000/svg"><path fill="#000" d="M11.871006 9.99663714L1.87436886 0-6e-7 1.87436946l8.12548453 8.12608504L-6e-7 18.1256305 1.87436886 20l9.99663714-9.9966371-.00353434-.0029084z" fill-rule="evenodd"/></svg>' }}
+      {{ paginate | default_pagination, 'pagination', 'pagination', '<svg aria-hidden="true" width="12" height="20" viewBox="0 0 12 20" xmlns="http://www.w3.org/2000/svg"><path d="M0 9.99663714L9.99663714 0l1.87436946 1.87436946-8.12548453 8.12608504 8.12548453 8.125176L9.99663714 20 0 10.0033629l.00353434-.0029084z" fill-rule="evenodd"/></svg>', '<svg aria-hidden="true" width="12" height="20" viewBox="0 0 12 20" xmlns="http://www.w3.org/2000/svg"><path d="M11.871006 9.99663714L1.87436886 0-6e-7 1.87436946l8.12548453 8.12608504L-6e-7 18.1256305 1.87436886 20l9.99663714-9.9966371-.00353434-.0029084z" fill-rule="evenodd"/></svg>' }}
     {% endif %}
   {% else %}
     <div class="empty-products centered-message">No products found.</div>

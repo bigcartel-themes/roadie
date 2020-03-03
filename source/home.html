@@ -58,7 +58,13 @@
                 <div class="product-list-item-background"></div>
                 <div class="product-list-item-info-headers">
                   <div class="product-list-item-name">{{ product.name }}</div>
-                  <div class="product-list-item-price">{{ product.default_price | money: theme.money_format }}</div>
+                  <div class="product-list-item-price">
+                    {% if product.variable_pricing %}
+                      {{ product.min_price | money: theme.money_format }} - {{ product.max_price | money: theme.money_format }}
+                    {% else %}
+                      {{ product.default_price | money: theme.money_format }}
+                    {% endif %}
+                  </div>
                   {% if product_status != blank and theme.product_badge_style == 'inline' %}<div class="product-list-item-status {{ theme.product_badge_style }}">{{ product_status }}</div>{% endif %}
                 </div>
               </div>
