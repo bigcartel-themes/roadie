@@ -209,7 +209,7 @@ $('.product-form').submit(function(e) {
           setTimeout(function() {
             updateElement.html(addedText);
             $('.product-form-cart-link-container').slideDown('fast');
-            //updateCart(cart);
+            updateCart(cart);
             addButton.removeClass('adding');
             setTimeout(function() {
               updateElement.html(addText);
