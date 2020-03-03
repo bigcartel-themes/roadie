@@ -28,6 +28,9 @@
   +flex(1 1 auto)
   order: 1
 
+  @media screen and (max-width: $break-product-details)
+    margin-bottom: $base-padding * 2
+
   .primary-product-image
     display: block
     margin-bottom: $base-padding * 2
@@ -51,11 +54,13 @@
   padding-left: $base-padding * 2
 
   @media screen and (max-width: $break-product-details)
-    border-top: $small-border
     padding-left: 0
 
 .product-options-container
   margin-bottom: $base-padding * 2
+
+  @media screen and (max-width: $break-product-details)
+    border-top: $small-border
 
 .product-form
   margin-bottom: $base-padding * 2
@@ -230,6 +235,7 @@
     background: none
     color: $primary-text-color
     height: auto
+    outline: nonez
     padding: $base-padding * 2 $base-padding * 2
     text-align: center
 
@@ -267,4 +273,7 @@
 .similar-products-title
   border-bottom: $medium-border
   font-size: 32px
+  margin-bottom: 0
   padding-bottom: $base-padding
+
+

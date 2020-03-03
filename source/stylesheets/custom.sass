@@ -1,0 +1,16 @@
+@import 'variables'
+
+.custom-page
+  +flexbox
+  +flex-direction(row)
+  +align-items(flex-start)
+
+  @media screen and (max-width: $break-small)
+    +flex-direction(column)
+
+  .page-heading
+    +flex(0 1 564px)
+    margin-right: $base-padding * 4
+
+  .custom-page-content
+    +flex(0 1 764px)

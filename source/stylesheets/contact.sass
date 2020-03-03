@@ -11,7 +11,13 @@
     position: relative
     width: 100%
 
+    &.contact-captcha-group:focus-within
+      #captcha_image
+        border-color: $border-color
+        border-left: $medium-border
+
     input, textarea
+      background-color: transparent
       border: $small-border
       border-color: transparent
       display: block
@@ -25,6 +31,9 @@
 
     &.contact-captcha
       margin-bottom: 40px
+
+      #captcha
+        border-right: $small-border
 
     .form-label
       +all-transitions
@@ -44,6 +53,10 @@
 
       .send-message-button
         margin-left: auto
+        width: 240px
+
+        @media screen and (max-width: $break-small)
+          width: 100%
 
   .focused .form-label
     font-size: 12px
@@ -55,7 +68,7 @@
     padding-top: $base-padding * 3
 
   #captcha_image
-    border-left: $small-border
+    border: $small-border
     height: 56px
     position: absolute
     right: 0
