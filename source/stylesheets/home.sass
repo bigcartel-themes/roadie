@@ -8,3 +8,24 @@
 .promo-image
   display: block
   width: 100%
+
+.view-all-link-container
+  border-top: $medium-border
+  text-align: right
+
+  .view-all-link
+    color: $primary-text-color
+    display: inline-block
+    font-weight: bold
+    padding: $base-padding 0
+    padding-right: $base-padding * 4
+    position: relative
+    text-decoration: none
+
+    svg
+      +transform(translateY(-50%))
+      height: 24px
+      fill: $primary-text-color
+      position: absolute
+      right: 0
+      top: 50%
