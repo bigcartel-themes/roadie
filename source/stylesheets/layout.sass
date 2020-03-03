@@ -23,16 +23,29 @@
 a:active
   opacity: .6
 
+a:hover, a:focus
+  color: $link-hover-color
+
 html, body
   height: 100%
   margin: 0
   padding: 0
 
+
+html
+
+  &.fixed-background
+    background-image: #{"{% if theme.images.background_image != blank %}url(\'{{ theme.images.background_image.url | constrain: 1200, 1200 }}\') {% else %}none{% endif %}"}
+    background-attachment: fixed
+    background-repeat: no-repeat
+    background-size: cover
+
+  &.repeating-background
+    background-image: #{"{% if theme.images.background_image != blank %}url(\'{{ theme.images.background_image.url }}\') {% else %}none{% endif %}"}
+    background-repeat: repeat
+
 body
-  background-color: $background-color
-  background-image: #{"{% if theme.images.background_image != blank %}url(\'{{ theme.images.background_image.url | constrain: 1200, 1200 }}\'){% else %}none{% endif %}"}
-  background-repeat: no-repeat
-  background-size: cover
+  background-color: #{"{% unless theme.images.background_image != blank %} {{ theme.background_color }} {% endunless %}"}
   color: $primary-text-color
   font-family: $primary-font
   font-size: 16px
@@ -41,14 +54,18 @@ body
   position: relative
 
 .background-image-overlay
-  background-color: $background-overlay-color
   height: 100%
   left: 0
-  opacity: .9
   position: fixed
   top: 0
   z-index: -1
   width: 100%
+
+  &.background-image-overlay-transparent_color_overlay
+    background-color: $background-color
+    opacity: .9
+
+  &.background-image-overlay-gradient_overlay
 
 .header-above
   border-bottom: $large-border
@@ -152,9 +169,10 @@ header
   margin: 0
   margin-top: 4px
 
-  .right-sidebar &
-    left: auto
-    right: 0
+  @media screen and (min-width: $break-small +1)
+    .right-sidebar &
+      left: auto
+      right: 0
 
   .no-sidebar &, .hide-toggle &
     display: none
@@ -223,9 +241,10 @@ header
     line-height: 1.5em
     position: relative
 
-  .right-sidebar &
-    left: 0
-    right: auto
+  @media screen and (min-width: $break-small +1)
+    .right-sidebar &
+      left: 0
+      right: auto
 
   .header-cart-icon
     margin-right: $base-padding
@@ -260,15 +279,16 @@ header
   &.has-sidebar
     +flex-direction(row)
 
-  .right-sidebar &
+  @media screen and (min-width: $break-small +1)
+    .right-sidebar &
 
-    .sidebar
-      order: 2
-      padding-left: $base-padding * 4
-      padding-right: 0
+      .sidebar
+        order: 2
+        padding-left: $base-padding * 4
+        padding-right: 0
 
-    .main
-      order: 1
+      .main
+        order: 1
 
 _:-ms-fullscreen, :root .content-wrapper
   +flex(1 0 auto)
@@ -753,17 +773,27 @@ body#maintenance
   +justify-content(center)
   padding: $base-padding * 4
 
+  @media screen and (max-width: $break-small)
+    padding: $base-padding * 2
+
 .maintenance-container
   border: $medium-border
+  line-height: 1.5em
   max-width: 688px
   padding: $base-padding * 4
   width: 100%
+
+  @media screen and (max-width: $break-small)
+    border-left: none
+    border-right: none
+    padding: $base-padding * 2 0
 
 .maintenance-store-name
   +fluid-type(24px, 64px)
   border-bottom: $large-border
   font-weight: bold
   line-height: 1em
+  padding-bottom: $base-padding
 
 h1.maintenance-title
   +fluid-type(18px, 24px)
