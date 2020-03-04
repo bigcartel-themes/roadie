@@ -39,7 +39,7 @@
   .secondary-images
     +flexbox
 
-    .swap-secondary-image
+    .secondary-product-image-link
       display: block
       margin: 0
       width: 25%
@@ -84,6 +84,7 @@
     background: none
     color: $primary-text-color
     display: block
+    font-family: $primary-font
     font-size: 20px
     font-weight: bold
     width: 100%
@@ -199,6 +200,8 @@
     text-transform: none
 
   a
+    color: $primary-text-color
+    font-weight: bold
     text-decoration: underline
 
   ol, ul
@@ -229,25 +232,28 @@
   +flexbox
   +align-items(center)
   +justify-content(space-around)
-  border-top: $medium-border
-  border-bottom: $small-border
+  border: $small-border
+  border-color: $button-background-color
   font-size: 14px
   margin-bottom: $base-padding * 2
 
-  .description-inventory-tab
+  button.description-inventory-tab
     +appearance(none)
     +flex-basis(50%)
-    background: none
-    color: $primary-text-color
+    background: $button-text-color
+    color: $button-background-color
+    font-size: 14px
     font-weight: normal
     height: auto
     outline: none
-    padding: $base-padding * 2 $base-padding * 2
+    padding: $base-padding * 1.5 $base-padding * 2
     text-align: center
+    text-decoration: none !important
 
     &.active-tab
+      background-color: $button-background-color
+      color: $button-text-color
       font-weight: bold
-      text-decoration: underline
 
     &:first-of-type
       border-right: $small-border
@@ -265,7 +271,7 @@
   margin-bottom: $base-padding * 2
 
 .inventory-option-bar
-  border-top: $small-border
+  border-bottom: $small-border
   height: 6px
 
 .inventory-option-available

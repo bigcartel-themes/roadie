@@ -29,13 +29,13 @@
 
 <div class="product-page-columns">
   <div class="product-images {{ theme.product_image_zooming }}">
-    <a href="{{ product.image | product_image_url | constrain: 1500 }}" class="product-image-zoom">
-      <img src="{{ product.image | product_image_url | constrain: 1000 }}" data-zoom="{{ product.image | product_image_url | constrain: 1500 }}" alt="Image of {{ product.name | escape }}" class="primary-product-image">
+    <a class="product-image-link primary-product-image-link" href="{{ product.image | product_image_url | constrain: 1500 }}">
+      <img class="primary-product-image" src="{{ product.image | product_image_url | constrain: 1000 }}" data-zoom="{{ product.image | product_image_url | constrain: 1500 }}" alt="Image of {{ product.name | escape }}">
     </a>
 
     <div class="secondary-images">
       {% for image in product.images offset: 1 %}
-        <a class="swap-secondary-image" href="#"><img src="{{ image | product_image_url | constrain: 1000 }}" alt="Image of {{ product.name | escape }}"></a>
+        <a class="product-image-link secondary-product-image-link" href="{{ image | product_image_url | constrain: 1500 }}"><img src="{{ image | product_image_url | constrain: 1000 }}" alt="Image of {{ product.name | escape }}"></a>
       {% endfor %}
     </div>
   </div>
@@ -113,7 +113,7 @@
       </form>
     {% endif %}
 
-    {% if product.description != blank and theme.show_inventory_bars %}
+    {% if product.description != blank and theme.show_inventory_bars and product.status == 'active' %}
       <div class="description-inventory-tabs">
         <button class="unstyled-button description-inventory-tab active-tab" data-tab="product-description">Description</button>
         <button class="unstyled-button description-inventory-tab" data-tab="product-inventory">Inventory</button>

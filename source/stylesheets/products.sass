@@ -358,6 +358,7 @@
 
 .pagination
   +flexbox
+  +flex-wrap(wrap)
   border-top: $small-border
   padding: $base-padding 0
 
@@ -367,6 +368,7 @@
     line-height: 40px
     text-align: center
     height: 40px
+    margin: 0 $base-padding / 2
     position: relative
     width: 40px
 
@@ -379,6 +381,7 @@
       &:hover, &:active, &:focus, &.current
         background: $button-background-color
         color: $button-text-color
+        text-decoration: none
 
     &.previous, &.next
       svg

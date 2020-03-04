@@ -193,11 +193,12 @@
 
 .lum-close-button {
   position: absolute;
-  right: 5px;
-  top: 5px;
+  right: 20px;
+  top: 20px;
   width: 32px;
   height: 32px;
-  opacity: 0.3;
+  opacity: 0.8;
+  cursor: pointer;
 }
 .lum-close-button:hover {
   opacity: 1;

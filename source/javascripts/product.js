@@ -144,7 +144,7 @@ if ($('.magnify-on-hover .primary-product-image').length) {
 }
 
 
-if ($('.click-to-zoom .product-image-zoom').length) {
+if ($('.click-to-zoom').length) {
   var luminousOptions = {
     // Prefix for generated element class names (e.g. `my-ns` will
     // result in classes such as `my-ns-lightbox`. Default `lum-`
@@ -163,7 +163,7 @@ if ($('.click-to-zoom .product-image-zoom').length) {
     // Automatically close when the page is scrolled.
     closeOnScroll: false,
     // Disable close button
-    showCloseButton: false,
+    showCloseButton: true,
     // A node to append the lightbox element to.
     appendToNode: document.body,
     // A selector defining what to append the lightbox element to.
@@ -183,10 +183,32 @@ if ($('.click-to-zoom .product-image-zoom').length) {
     // section of README.md for more information.
     injectBaseStyles: true
   };
-
-  new Luminous(document.querySelector(".click-to-zoom .product-image-zoom"), luminousOptions);
+  var galleryOpts = {
+    // Whether pressing the arrow keys should move to the next/previous slide.
+    arrowNavigation: true
+  };
+  if ($('.product-image-link').length > 1) {
+    new LuminousGallery(document.querySelectorAll(".primary-product-image-link"), galleryOpts, luminousOptions);
+  }
+  else {
+    new Luminous(document.querySelector(".product-image-link"), luminousOptions);
+  }
 }
 
+$('.secondary-product-image-link').click(function(e) {
+  console.log('ya');
+
+  var large_image = $(this).attr('href');
+  var normal_image = $(this);
+
+
+  $('.primary-product-image').attr('src',large_image);
+
+  //$('.secondary-product-image-link').removeClass('active');
+  //$(this).addClass('active');
+
+  return false;
+});
 
 $('.product-form').submit(function(e) {
   e.preventDefault();

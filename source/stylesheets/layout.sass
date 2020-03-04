@@ -365,6 +365,9 @@ _:-ms-fullscreen, :root .content-wrapper
     border-bottom: $medium-border
     position: relative
 
+    &.hidden-nav
+      border-bottom: none
+
   .nav-section-cart
 
     .has-sidebar.sidebar-header &
@@ -397,10 +400,10 @@ _:-ms-fullscreen, :root .content-wrapper
     padding-right: $base-padding * 2
 
   .search-input
-    appearance: none
-    -webkit-appearance: none
+    +appearance(none)
     background: none
     border: none
+    border-radius: 0
     font-family: $primary-font
     font-size: 16px
     font-weight: bold
@@ -432,12 +435,14 @@ _:-ms-fullscreen, :root .content-wrapper
   .under-header &
     border-bottom: none
 
-  button.toggle-nav
+  .toggle-nav
+    +transition(none)
     background: none
     color: $primary-text-color
     display: block
     font-weight: bold
     height: auto
+    line-height: 1em
     padding: $base-padding * 1.5 0
     padding-right: $base-padding * 5
     position: relative
@@ -502,7 +507,7 @@ _:-ms-fullscreen, :root .content-wrapper
 
 .social-links
   +flexbox
-  +justify-content(space-around)
+  +justify-content(space-between)
 
   .under-header &
     display: none
@@ -533,7 +538,6 @@ _:-ms-fullscreen, :root .content-wrapper
       width: 20px
 
 .nav-section-credit
-  margin-top: $base-padding * 2
   border: none !important
 
   .under-header &
@@ -560,6 +564,9 @@ _:-ms-fullscreen, :root .content-wrapper
 footer
   +flexbox
   flex-shrink: 0
+
+  .social-links
+    +justify-content(space-around)
 
   .footer-nav
     +flexbox
