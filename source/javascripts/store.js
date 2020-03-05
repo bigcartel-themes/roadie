@@ -1,6 +1,11 @@
-
 var inPreview = (/\/admin\/design/.test(top.location.pathname));
 
+$('.announcement-message-close').click(function(e) {
+  $('.announcement-message').slideUp('fast', function() {
+    $('.announcement-message').removeClass('visible');
+    setCookie('hide-announcement-message',hashedMessage,7);
+  });
+})
 
 $('.contact-form input, .contact-form textarea').addClass('shrink-label');
 
@@ -44,13 +49,10 @@ document.addEventListener('input', function (event) {
   autoExpand(event.target);
 }, false);
 
-
-
 $('.under-header .nav-section').hover(function(e) {
   $('.sidebar-nav-links').removeClass('expanded');
   $(this).find('.sidebar-nav-links').toggleClass('expanded');
 })
-
 
 $('.open-menu').click(function(e) {
   e.preventDefault();
@@ -69,10 +71,10 @@ $('.open-menu').click(function(e) {
   }
   else {
     $('.sidebar').toggleClass('visible-mobile');
+    $('body').toggleClass('sidebar-visible-mobile');
   }
 
 });
-
 
 if ($('body').hasClass('has-sidebar')) {
   if ($(window).width() > 767) {
@@ -99,39 +101,6 @@ if ($('body').hasClass('has-sidebar')) {
   }
 }
 
-
-
-  if (themeOptions.hasAnnouncement == true) {
-    var announcementMessage = $('.announcement-message-text').html();
-    var hashedMessage = announcementMessage.hashCode();
-    var cookieValue = getCookie('hide-announcement-message');
-    if (cookieValue) {
-      if (cookieValue != hashedMessage) {
-        $('.announcement-message').addClass('visible');
-      }
-    }
-    else {
-      $('.announcement-message').addClass('visible');
-    }
-  }
-
-
-$('.announcement-message-close').click(function(e) {
-  $('.announcement-message').slideUp('fast', function() {
-    $('.announcement-message').removeClass('visible');
-    setCookie('hide-announcement-message',hashedMessage,7);
-  });
-})
-
-
-$('.description-inventory-tab').click(function(e) {
-  e.preventDefault();
-  var tab_name = $(this).data('tab');
-  $('.description-inventory-tab').removeClass('active-tab')
-  $(this).addClass('active-tab');
-  $('.product-detail-tab-section').hide()
-  $('.' + tab_name).show();
-})
 
 /* Gradients */
 if ($('.background-image-overlay-gradient_overlay').length) {
@@ -168,7 +137,6 @@ function hexToRGB(hex,opacity) {
   }
   return "rgba("+ +r + "," + +g + "," + +b + ","+opacity+")";
 }
-
 
 $('.sidebar-nav .toggle-nav').click(function(e) {
   e.preventDefault();

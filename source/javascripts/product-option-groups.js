@@ -13,7 +13,7 @@ function processProduct(product) {
   }
   if ($('.product-option-select').length) {
     disableAddButton();
-    if (show_sold_out_product_options === 'false') {
+    if (themeOptions.showSoldOutOptions === false) {
       $('option[disabled-type="sold-out"]').wrap('<span>');
     }
   }

@@ -54,7 +54,7 @@ function disableSelectOption(select_option, type) {
   if (type === "sold-out") {
     disabled_text = select_option.parent().attr("data-sold-text");
     disabled_type = "sold-out";
-    if (show_sold_out_product_options === 'false') {
+    if (themeOptions.showSoldOutOptions === false) {
       hide_option = true;
     }
     else {
@@ -246,7 +246,14 @@ $('.product-form').submit(function(e) {
 
 
 
-
+$('.description-inventory-tab').click(function(e) {
+  e.preventDefault();
+  var tab_name = $(this).data('tab');
+  $('.description-inventory-tab').removeClass('active-tab')
+  $(this).addClass('active-tab');
+  $('.product-detail-tab-section').hide()
+  $('.' + tab_name).show();
+})
 
 
 
