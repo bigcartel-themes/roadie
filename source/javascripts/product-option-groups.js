@@ -2,7 +2,7 @@ function processProduct(product) {
   if (product.has_option_groups) {
     disableAddButton("add-to-cart");
     setInitialProductOptionStatuses(product);
-    $(".product-option-group").on('change',function() {
+    $('body').on('change', ".product-option-group", function(e){
       disableAddButton("add-to-cart");
       $('#option').val(0);
       processAvailableDropdownOptions(product, $(this));
@@ -17,7 +17,7 @@ function processProduct(product) {
       $('option[disabled-type="sold-out"]').wrap('<span>');
     }
   }
-  $('.reset-selection-button').on('click', function() {
+  $('body').on('click', ".reset-selection-button", function(e){
     disableAddButton("add-to-cart");
     $('#option').val(0);
     $(this).hide();

@@ -151,65 +151,65 @@
     {% endif %}
   </div>
 </div>
-
+{% assign current_id = product.id %}
 {% if page.full_url contains '/product/' %}
   {% if theme.number_related_products > 0 %}
     {% if product.categories != blank %}
       {% for category in product.categories %}
         {% capture product_divs %}
-
-          {% for product in category.products %}
-            {% assign product_status = '' %}
-            {% case product.status %}
-              {% when 'active' %}
-                {% if product.on_sale %}{% assign product_status = 'On sale' %}{% endif %}
-              {% when 'sold-out' %}
-                {% assign product_status = 'Sold out' %}
-              {% when 'coming-soon' %}
-                {% assign product_status = 'Coming soon' %}
-            {% endcase %}
-            {% capture image_class %}
-              {% if product.image.height > product.image.width %}
-                image-tall
-              {% elsif product.image.height < product.image.width %}
-                image-wide
-              {% else %}
-                image-square
-              {% endif %}
-            {% endcapture %}
-            <a class="product-list-item product-image-{{ theme.product_grid_image_size }} {{ theme.show_overlay }} {{ theme.grid_image_style }} {% if theme.show_quickview %}show-quickview{% endif %}" href="{{ product.url }}" title="View {{ product.name | escape }}">
-              <div class="product-list-item-container">
-                <figure class="product-list-image-container">
-                  <img alt="" class="lazy product-list-image {{ image_class }}" src="{{ product.image | product_image_url | constrain: 50 }}" data-src="{{ product.image | product_image_url | constrain: 1000 }}" data-srcset="{{ product.image | product_image_url | constrain: 2000 }} 2x, {{ product.image | product_image_url | constrain: 1000 }} 1x">
-                  {% if product_status != blank and theme.product_badge_style != 'inline' %}<div class="product-list-item-status {{ theme.product_badge_style }}">{{ product_status }}</div>{% endif %}
-                  {% if theme.show_quickview %}
-                    <div class="product-list-quickview-container">
-                      <div class="product-list-quickview-container-background"></div>
-                      <button class="button open-quickview" data-permalink="{{ product.permalink }}" data-has-default="{{ product.has_default_option }}">
-                        <span class="open-quickview-text">Quick View</span>
-                        <svg aria-hidden="true" class="open-quickview-icon" width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><path d="M2 5.00001907V2.00003099h2.99998808v-2H0v4.99998808h2zm11.9999785 0V.00003099H8.99997854v2h2.99999996v2.99998808h2zm0 8.99997853V9.00000954h-2v2.99999996H8.99997854v1.9999881h4.99999996zm-8.99999042 0v-1.9999881H2V9.00000954H0v4.99998806h4.99998808z" fill-rule="nonzero"/></svg>
-                      </button>
-                    </div>
-                  {% endif %}
-                </figure>
-              </div>
-              <div class="product-list-item-info">
-                <div class="product-list-item-background"></div>
-                <div class="product-list-item-info-headers">
-                  <div class="product-list-item-name">{{ product.name }}</div>
-                  <div class="product-list-item-price">
-                    {% if product.variable_pricing %}
-                      {{ product.min_price | money: theme.money_format }} - {{ product.max_price | money: theme.money_format }}
-                    {% else %}
-                      {{ product.default_price | money: theme.money_format }}
+          {% for category_product in category.products %}
+            {% if category_product.id != current_id %}
+              {% assign product_status = '' %}
+              {% case category_product.status %}
+                {% when 'active' %}
+                  {% if category_product.on_sale %}{% assign product_status = 'On sale' %}{% endif %}
+                {% when 'sold-out' %}
+                  {% assign product_status = 'Sold out' %}
+                {% when 'coming-soon' %}
+                  {% assign product_status = 'Coming soon' %}
+              {% endcase %}
+              {% capture image_class %}
+                {% if category_product.image.height > category_product.image.width %}
+                  image-tall
+                {% elsif category_product.image.height < category_product.image.width %}
+                  image-wide
+                {% else %}
+                  image-square
+                {% endif %}
+              {% endcapture %}
+              <a class="product-list-item product-image-{{ theme.product_grid_image_size }} {{ theme.show_overlay }} {{ theme.grid_image_style }} {% if theme.show_quickview %}show-quickview{% endif %}" href="{{ category_product.url }}" title="View {{ category_product.name | escape }}">
+                <div class="product-list-item-container">
+                  <figure class="product-list-image-container">
+                    <img alt="" class="lazy product-list-image {{ image_class }}" src="{{ category_product.image | product_image_url | constrain: 50 }}" data-src="{{ category_product.image | product_image_url | constrain: 1000 }}" data-srcset="{{ product.image | product_image_url | constrain: 2000 }} 2x, {{ product.image | product_image_url | constrain: 1000 }} 1x">
+                    {% if product_status != blank and theme.product_badge_style != 'inline' %}<div class="product-list-item-status {{ theme.product_badge_style }}">{{ product_status }}</div>{% endif %}
+                    {% if theme.show_quickview %}
+                      <div class="product-list-quickview-container">
+                        <div class="product-list-quickview-container-background"></div>
+                        <button class="button open-quickview" data-permalink="{{ category_product.permalink }}" data-has-default="{{ category_product.has_default_option }}">
+                          <span class="open-quickview-text">Quick View</span>
+                          <svg aria-hidden="true" class="open-quickview-icon" width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><path d="M2 5.00001907V2.00003099h2.99998808v-2H0v4.99998808h2zm11.9999785 0V.00003099H8.99997854v2h2.99999996v2.99998808h2zm0 8.99997853V9.00000954h-2v2.99999996H8.99997854v1.9999881h4.99999996zm-8.99999042 0v-1.9999881H2V9.00000954H0v4.99998806h4.99998808z" fill-rule="nonzero"/></svg>
+                        </button>
+                      </div>
                     {% endif %}
-                  </div>
-                  {% if product_status != blank and theme.product_badge_style == 'inline' %}<div class="product-list-item-status {{ theme.product_badge_style }}">{{ product_status }}</div>{% endif %}
+                  </figure>
                 </div>
-              </div>
-            </a>
+                <div class="product-list-item-info">
+                  <div class="product-list-item-background"></div>
+                  <div class="product-list-item-info-headers">
+                    <div class="product-list-item-name">{{ category_product.name }}</div>
+                    <div class="product-list-item-price">
+                      {% if category_product.variable_pricing %}
+                        {{ category_product.min_price | money: theme.money_format }} - {{ category_product.max_price | money: theme.money_format }}
+                      {% else %}
+                        {{ category_product.default_price | money: theme.money_format }}
+                      {% endif %}
+                    </div>
+                    {% if product_status != blank and theme.product_badge_style == 'inline' %}<div class="product-list-item-status {{ theme.product_badge_style }}">{{ product_status }}</div>{% endif %}
+                  </div>
+                </div>
+              </a>
+            {% endif %}
           {% endfor %}
-
         {% endcapture %}
       {% endfor %}
     {% endif %}

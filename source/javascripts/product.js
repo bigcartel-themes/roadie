@@ -1,9 +1,7 @@
-$('.product-option-select').on('change',function() {
+$('body').on('change', ".product-option-select", function(){
   var option_price = $(this).find("option:selected").attr("data-price");
   enableAddButton(option_price);
 });
-
-
 
 function enableAddButton(updated_price) {
   var addButton = $('.add-to-cart-button');
@@ -195,22 +193,23 @@ if ($('.click-to-zoom').length) {
   }
 }
 
-$('.secondary-product-image-link').click(function(e) {
-  console.log('ya');
+$('body').on('click', ".secondary-product-image-link", function(e){
 
   var large_image = $(this).attr('href');
   var normal_image = $(this);
 
 
   $('.primary-product-image').attr('src',large_image);
-
+  if ($('.magnify-on-hover .primary-product-image').length) {
+    new Drift(document.querySelector('.magnify-on-hover .primary-product-image'), driftOptions);
+  }
   //$('.secondary-product-image-link').removeClass('active');
   //$(this).addClass('active');
 
   return false;
 });
 
-$('.product-form').submit(function(e) {
+$('body').on('submit', ".product-form", function(e){
   e.preventDefault();
   var quantity = $("#quantity").val()
   , itemID = $("#option").val()
@@ -245,8 +244,7 @@ $('.product-form').submit(function(e) {
 });
 
 
-
-$('.description-inventory-tab').click(function(e) {
+$('body').on('click', ".description-inventory-tab", function(e){
   e.preventDefault();
   var tab_name = $(this).data('tab');
   $('.description-inventory-tab').removeClass('active-tab')
