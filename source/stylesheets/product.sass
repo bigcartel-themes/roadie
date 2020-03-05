@@ -57,13 +57,13 @@
     padding-left: 0
 
 .product-options-container
-  margin-bottom: $base-padding * 2
+  margin-bottom: $base-padding
 
   @media screen and (max-width: $break-product-details)
     border-top: $small-border
 
 .product-form
-  margin-bottom: $base-padding * 2
+  margin-bottom: $base-padding
 
 .product-option-select-container
   border-bottom: $small-border
@@ -80,12 +80,8 @@
       margin-top: -22px
 
   select
-    -webkit-appearance: none
-    border: none
-    background: none
     color: $primary-text-color
     display: block
-    font-family: $primary-font
     font-size: 20px
     font-weight: bold
     height: 100%
@@ -237,7 +233,6 @@
   margin-bottom: $base-padding * 2
 
 .description-inventory-tab
-  +appearance(none)
   +flex-basis(50%)
   background: $background-color
   color: $primary-text-color
@@ -247,12 +242,16 @@
   outline: none
   padding: $base-padding * 1.5 $base-padding * 2
   text-align: center
-  text-decoration: none !important
+
+  &:hover, &:focus
+    background-color: $background-color
+    text-decoration: underline
 
   &.active-tab
     background-color: $button-background-color
     color: $button-text-color
     font-weight: bold
+    text-decoration: none
 
   &:first-of-type
     border-right: $small-border

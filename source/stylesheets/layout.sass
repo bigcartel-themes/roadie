@@ -462,12 +462,11 @@ _:-ms-fullscreen, :root .content-wrapper
 
   .toggle-nav
     +transition(none)
-    background: none
     display: block
     font-weight: bold
     height: auto
-    line-height: 1em
-    padding: $base-padding * 1.5 0
+    line-height: $base-padding * 5
+    padding: 0
     padding-right: $base-padding * 5
     position: relative
     text-align: left
@@ -483,6 +482,10 @@ _:-ms-fullscreen, :root .content-wrapper
 
       .under-header &
         right: 0
+
+.nav-section-title-text
+  font-weight: bold
+  line-height: $base-padding * 5
 
 .sidebar-nav-links
   line-height: 1.25em
@@ -547,13 +550,15 @@ _:-ms-fullscreen, :root .content-wrapper
 .nav-section-credit
   border: none !important
 
-  a
-    color: $primary-text-color
-    display: block
-    font-size: 14px
-    font-weight: bold
-    margin-top: $base-padding * 2
-    text-decoration: none
+.badge a
+  display: block
+  font-size: 14px
+  font-weight: bold
+  margin-top: $base-padding * 2
+  text-decoration: none
+
+  &:hover, &:focus
+    text-decoration: underline
 
 .main
   +flex(1)
@@ -594,16 +599,13 @@ h1
   .sidebar-no-header &
     padding-top: 0
 
-button, .button
+.button
   +all-transitions
   background-color: $button-background-color
-  border-radius: 0
-  border: none
   color: $button-text-color
   cursor: pointer
   display: block
   font-size: 16px
-  font-family: $primary-font
   height: 55px
   line-height: 1em
   text-align: center
@@ -625,12 +627,10 @@ button, .button
   &.unstyled-button
     background: none
     color: $primary-text-color
-    border: none
     display: inline-block
     font-weight: bold
-    padding: 0
 
-    &:not(:disabled):hover, &:not(:disabled):active, &:not(:disabled):focus
+    &:hover, &:focus
       background: none
       color: $link-hover-color
       text-decoration: underline
@@ -642,7 +642,7 @@ button, .button
     cursor: not-allowed
     opacity: .3
 
-  &:not(:disabled):hover, &:not(:disabled):active, &:not(:disabled):focus
+  &:hover, &:focus
     background: $button-hover-background-color
     color: $button-hover-text-color
     text-decoration: none

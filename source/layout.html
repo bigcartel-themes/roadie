@@ -146,33 +146,31 @@
 
             <nav class="horizontal-nav main-nav header-nav-container" aria-label="Main navigation">
 
-
-            <ul class="nav" role="menubar" aria-hidden="false">
-              <li class="nav-menu-item" role="menuitem" aria-haspopup="true">
-                <a href="#">{{ pages.products.name }} <svg aria-hidden="true" width="10" height="8" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></a>
-                {% if categories.active != blank %}
-                  <ul aria-hidden="true" role="menu" class="horizontal-nav-links">
-                    <li class="horizontal-nav-link" role="menuitem"><a href="/products" tabindex="-1">View All</a></li>
-                    {% if categories.active != blank %}
-                      {% for category in categories.active %}
-                        <li class="horizontal-nav-link"><a href="{{ category.url }}" tabindex="-1">{{ category.name }}</a></li>
-                      {% endfor %}
-                    {% endif %}
-                  </ul>
-                {% endif %}
-              </li>
-
-
-              {% if artists.active != blank %}
+              <ul class="nav" role="menubar" aria-hidden="false">
                 <li class="nav-menu-item" role="menuitem" aria-haspopup="true">
-                  <a href="#">Artists <svg aria-hidden="true" width="10" height="8" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></a>
-                  <ul aria-hidden="true" role="menu" class="horizontal-nav-links">
-                    {% for artist in artists.active %}
-                      <li class="horizontal-nav-link"><a href="{{ artist.url }}" tabindex="-1">{{ artist.name }}</a></li>
-                    {% endfor %}
-                  </ul>
+                  <a href="#">{{ pages.products.name }} <svg aria-hidden="true" width="10" height="8" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></a>
+                  {% if categories.active != blank %}
+                    <ul aria-hidden="true" role="menu" class="horizontal-nav-links">
+                      <li class="horizontal-nav-link" role="menuitem"><a href="/products" tabindex="-1">View All</a></li>
+                      {% if categories.active != blank %}
+                        {% for category in categories.active %}
+                          <li class="horizontal-nav-link"><a href="{{ category.url }}" tabindex="-1">{{ category.name }}</a></li>
+                        {% endfor %}
+                      {% endif %}
+                    </ul>
+                  {% endif %}
                 </li>
-              {% endif %}
+
+                {% if artists.active != blank %}
+                  <li class="nav-menu-item" role="menuitem" aria-haspopup="true">
+                    <a href="#">Artists <svg aria-hidden="true" width="10" height="8" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></a>
+                    <ul aria-hidden="true" role="menu" class="horizontal-nav-links">
+                      {% for artist in artists.active %}
+                        <li class="horizontal-nav-link"><a href="{{ artist.url }}" tabindex="-1">{{ artist.name }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  </li>
+                {% endif %}
 
                 <li class="nav-menu-item" role="menuitem" aria-haspopup="true">
                   <a href="#">Info <svg aria-hidden="true" width="10" height="8" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></a>
@@ -187,8 +185,7 @@
                   </ul>
                 </li>
 
-            </ul>
-
+              </ul>
 
               {% if theme.show_search %}
                 <section class="nav-section nav-section-search">
@@ -211,7 +208,6 @@
               <a class="header-home-link" href="/" title="Home">
                 {% if theme.images.logo != blank %}
                   <img class="store-logo" srcset="{{ theme.images.logo.url | constrain: 240 }} 1x, {{ theme.images.logo.url | constrain: 480 }} 2x" src="{{ theme.images.logo.url | constrain: 480 }}"/>
-
 
                 {% else %}
                   {{ store.name }}
@@ -241,9 +237,9 @@
             <section class="nav-section nav-section-categories">
               <div class="nav-section-title">
                 {% if theme.allow_sidebar_section_collapse %}
-                  <button class="unstyled-button toggle-nav">{{ pages.products.name }} <svg aria-hidden="true" width="10" height="8" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></button>
+                  <button class="button unstyled-button toggle-nav">{{ pages.products.name }} <svg aria-hidden="true" width="10" height="8" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></button>
                 {% else %}
-                  <div class="unstyled-button toggle-nav">{{ pages.products.name }}</div>
+                  <div class="nav-section-title-text">{{ pages.products.name }}</div>
                 {% endif %}
               </div>
               <ul class="sidebar-nav-links">
@@ -260,7 +256,7 @@
                   {% if theme.allow_sidebar_section_collapse %}
                     <button class="button unstyled-button toggle-nav">Artists <svg aria-hidden="true" width="10" height="8" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></button>
                   {% else %}
-                    <div class="unstyled-button toggle-nav">Artists</div>
+                    <div class="nav-section-title-text">Artists</div>
                   {% endif %}
                 </div>
                 <ul class="sidebar-nav-links">

@@ -248,13 +248,18 @@
 .open-quickview
   +flexbox
   bottom: $base-padding * 2
+  height: auto
   left: $base-padding * 2
   margin-top: auto
-  padding-left: $base-padding * 2
-  padding-right: $base-padding * 2
+  padding: $base-padding * 2 $base-padding * 2
   position: relative
   width: calc(100% - 8px * 4)
   z-index: 5
+
+  @media screen and (max-width: $break-small)
+    bottom: 0
+    left: 0
+    width: 100%
 
   .open-quickview-icon
     fill: $button-text-color
