@@ -30,12 +30,13 @@
     <link href="{{ theme | theme_css_url }}" media="screen" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet">
     {{ head_content }}
+
   </head>
 
   <body id="{{ page.permalink }}_page" class="{{ body_class }} {{ page.category }} {% if theme.show_layout_gutters %}show-gutters{% else %}no-gutters{% endif %}">
     {% if theme.images.background_image != blank and theme.background_image_style != 'plain_image' %}<div class="background-image-overlay background-image-overlay-{{ theme.background_image_style }}"></div>{% endif %}
     {% if theme.announcement_message_text != blank %}
-      <aside role="complementary" aria-label="Announcement message" class="announcement-message">
+      <aside role="complementary" aria-label="Announcement message" class="announcement-message" id="announce-message">
         <div class="announcement-wrapper">
           <div class="announcement-message-text">{{ theme.announcement_message_text }}</div>
         </div>
@@ -384,15 +385,15 @@
     <script>
       var themeOptions = {
         primaryGradientColor: '{{ theme.background_color }}',
-        hasAnnouncement: {% if theme.announcement_message_text %}true{%else %}false{%endif %}
-      };
-    </script>
-    <script>
-      var show_sold_out_product_options = '{{ theme.show_sold_out_product_options }}';
+        hasAnnouncement: {% if theme.announcement_message_text %}true{%else %}false{%endif %},
+        showSoldOutOptions: {{ theme.show_sold_out_product_options }}
+      }
+      function setCookie(e,n,t){var o="";if(t){var i=new Date;i.setTime(i.getTime()+24*t*60*60*1e3),o="; expires="+i.toUTCString()}document.cookie=e+"="+(n||"")+o+"; path=/"}function getCookie(e){for(var n=e+"=",t=document.cookie.split(";"),o=0;o<t.length;o++){for(var i=t[o];" "==i.charAt(0);)i=i.substring(1,i.length);if(0==i.indexOf(n))return i.substring(n.length,i.length)}return null}function eraseCookie(e){document.cookie=e+"=; Max-Age=-99999999;"}String.prototype.hashCode=function(){var e,n=0;if(0===this.length)return n;for(e=0;e<this.length;e++)n=(n<<5)-n+this.charCodeAt(e),n|=0;return n},1==themeOptions.hasAnnouncement&&(announceDiv=document.getElementById("announce-message"),announcementMessage=document.querySelector(".announcement-message-text").innerHTML,hashedMessage=announcementMessage.hashCode(),cookieValue=getCookie("hide-announcement-message"),cookieValue?cookieValue!=hashedMessage?announceDiv.classList.toggle("visible"):announceDiv.parentNode.removeChild(element):announceDiv.classList.toggle("visible"));
     </script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="{{ 'api' | theme_js_url }}"></script>
     <script type="text/javascript">
+
       var formatMoney = Format.money;
       Format.money = function(number) {
         {% case theme.money_format %}
@@ -406,6 +407,7 @@
       };
     </script>
     <script src="{{ theme | theme_js_url }}"></script>
+
     {% if page.full_url contains '/product/' %}
       <script>
         Product.find('{{ product.permalink }}', processProduct)
