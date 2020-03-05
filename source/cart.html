@@ -45,7 +45,7 @@
         <a class="continue-shopping-link" href="/products"><svg aria-hidden="true" width="21" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.445798 0l9.9966372 9.99663714-.0035344.00381736.0035344.0029084L10.445798 20l-1.87436943-1.8743695L15.1964286 11.5H0v-3h15.1964286L8.57142857 1.87436946z" fill-rule="evenodd"/></svg> Continue shopping</a>
         <div class="cart-subtotal">Subtotal: <span class="cart-subtotal-amount">{{ cart.subtotal | money: theme.money_format }}</span></div>
       </div>
-      <button type="submit" name="checkout" class="button checkout-button">Checkout</button>
+      <button type="submit" name="checkout" class="button checkout-button has-right-icon">Checkout <svg aria-hidden="true" class="button-icon-right-arrow" width="21" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.445798 0l9.9966372 9.99663714-.0035344.00381736.0035344.0029084L10.445798 20l-1.87436943-1.8743695L15.1964286 11.5H0v-3h15.1964286L8.57142857 1.87436946z" fill-rule="evenodd"/></svg></button>
     </div>
   </form>
 {% else %}

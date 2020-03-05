@@ -4,4 +4,5 @@
 //= require javascripts/grid
 //= require javascripts/product
 //= require javascripts/quickshop
+//= require javascripts/navigation
 //= require javascripts/product-option-groups

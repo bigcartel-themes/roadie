@@ -1,0 +1,64 @@
+@import 'variables'
+
+.quick-shop-modal
+  height: 100vh
+  width: 100vw
+  position: fixed
+  left: 0
+  top: 0
+  right: 0
+  bottom: 0
+  opacity: 0
+  z-index: 1000
+  opacity: 0
+  visibility: hidden
+
+  &.opened
+    opacity: 1
+    visibility: visible
+
+.quick-shop-modal-background
+  background-color: $background-color
+  opacity: .9
+  width: 100%
+  height: 100%
+
+.quick-shop-modal-controls
+  +flexbox
+  +align-items(center)
+  +justify-content(flex-end)
+  border-bottom: $medium-border
+
+.quick-shop-modal-button
+  background: none
+  padding: $base-padding
+
+  svg
+    fill: $primary-text-color
+    height: 24px
+    width: 24px
+
+.quick-shop-close
+  margin-right: auto
+
+.quick-shop-modal-content
+  +flexbox
+  +flex-direction(column)
+  +transform(translateX(-50%) translateY(-20%))
+  position: fixed
+  z-index: 10044
+  max-width: 1024px
+  width: 100%
+  height: 80vh
+  background: $background-color
+  border: $medium-border
+  top: 20%
+  left: 50%
+  padding: $base-padding * 3
+
+.quick-shop-product-details
+  overflow-x: scroll
+  width: 100%
+
+  .related-products-container
+    display: none

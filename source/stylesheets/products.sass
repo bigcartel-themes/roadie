@@ -14,56 +14,6 @@
   margin-left: auto
   white-space: nowrap
 
-  @media screen and (max-width: $break-small)
-    margin-left: 0
-    padding: $base-padding 0
-    width: 100%
-
-  .product-sort-caption
-    border-right: $small-border
-    font-weight: bold
-    padding-right: $base-padding * 2
-    margin-right: $base-padding * 2
-
-    @media screen and (max-width: $break-small)
-      border: none
-
-  .product-sort-options
-    position: relative
-
-    @media screen and (max-width: $break-small)
-      margin-left: auto
-
-  .product-sort-options-select
-    +appearance(none)
-    background: none
-    border: 0
-    color: $primary-text-color
-    font-family: $primary-font
-    font-weight: bold
-    height: 100%
-    padding: 0 $base-padding * 2.5 0 0
-    position: relative
-    width: 100%
-    z-index: 2
-
-    @media screen and (max-width: $break-small)
-      text-align-last: right
-
-    option
-      background-color: #FFF
-      color: #000
-
-      &:disabled
-        color: graytext
-
-    &:focus
-      box-shadow: none
-      outline: none
-
-    &::-ms-expand
-      display: none
-
   svg
     +all-transitions
     +transform(translateY(-50%))
@@ -84,6 +34,51 @@
 
     svg
       fill: $primary-text-color
+
+  @media screen and (max-width: $break-small)
+    margin-left: 0
+    padding: $base-padding 0
+    width: 100%
+
+.product-sort-caption
+  border-right: $small-border
+  font-weight: bold
+  padding-right: $base-padding * 2
+  margin-right: $base-padding * 2
+
+  @media screen and (max-width: $break-small)
+    border: none
+
+.product-sort-options
+  position: relative
+
+  @media screen and (max-width: $break-small)
+    margin-left: auto
+
+.product-sort-options-select
+  font-weight: bold
+  height: 100%
+  padding: 0 $base-padding * 2.5 0 0
+  position: relative
+  width: 100%
+  z-index: 2
+
+  @media screen and (max-width: $break-small)
+    text-align-last: right
+
+  option
+    background-color: #FFF
+    color: #000
+
+    &:disabled
+      color: graytext
+
+  &:focus
+    box-shadow: none
+    outline: none
+
+  &::-ms-expand
+    display: none
 
 .product-list-container
   overflow: hidden
@@ -183,6 +178,14 @@
           opacity: .8
 
   @media screen and (max-width: $break-small)
+    &.show-quickview
+      .product-list-quickview-container
+        opacity: 1
+        visibility: visible
+
+        .product-list-quickview-container-background
+          opacity: 0
+
     .mobile-medium &
       +flex-basis(calc(100% / 1) !important)
       width: calc(100% / 1) !important
@@ -233,28 +236,29 @@
   width: 100%
   visibility: hidden
 
-  .product-list-quickview-container-background
-    background-color: $button-background-color
-    height: 100%
-    left: 0
-    opacity: .6
-    position: absolute
-    top: 0
-    width: 100%
+.product-list-quickview-container-background
+  background-color: $button-background-color
+  height: 100%
+  left: 0
+  opacity: .2
+  position: absolute
+  top: 0
+  width: 100%
 
-  .open-quickview
-    +flexbox
-    border-top: 1px solid $button-text-color
-    margin-top: auto
-    padding-left: $base-padding * 2
-    padding-right: $base-padding * 2
-    position: relative
-    width: 100%
-    z-index: 5
+.open-quickview
+  +flexbox
+  bottom: $base-padding * 2
+  left: $base-padding * 2
+  margin-top: auto
+  padding-left: $base-padding * 2
+  padding-right: $base-padding * 2
+  position: relative
+  width: calc(100% - 8px * 4)
+  z-index: 5
 
-    .open-quickview-icon
-      fill: $button-text-color
-      margin-left: auto
+  .open-quickview-icon
+    fill: $button-text-color
+    margin-left: auto
 
 .product-list-image
   display: block
@@ -342,13 +346,13 @@
 
   &.bar
     background: $button-background-color
-    bottom: 0
     color: $button-text-color
     font-size: 13px
     line-height: 1.25em
     position: absolute
-    right: 0
     padding: $base-padding
+    right: 0
+    top: 0
 
   &.inline
     color: $primary-text-color
@@ -363,6 +367,9 @@
   padding: $base-padding 0
 
   > a, span
+    background: $background-color
+    border-radius: 100%
+    color: $primary-text-color
     display: inline-block
     font-weight: bold
     line-height: 40px
@@ -370,20 +377,21 @@
     height: 40px
     margin: 0 $base-padding / 2
     position: relative
+    text-decoration: underline
     width: 40px
 
-    &:not(.previous):not(.next)
-      background: $background-color
-      color: $primary-text-color
-      border-radius: 100%
-      text-decoration: underline
-
-      &:hover, &:active, &:focus, &.current
-        background: $button-background-color
-        color: $button-text-color
-        text-decoration: none
+    &:hover, &:focus, &.current
+      background: $button-background-color
+      color: $button-text-color
+      text-decoration: none
 
     &.previous, &.next
+      border-radius: 0
+      text-decoration: none
+
+      &:hover, &:focus, &.current
+        color: $primary-text-color
+
       svg
         +transform(translateY(-50%) translateX(-50%))
         top: 50%

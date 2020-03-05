@@ -39,7 +39,7 @@
         <div class="announcement-wrapper">
           <div class="announcement-message-text">{{ theme.announcement_message_text }}</div>
         </div>
-        <button aria-label="Close announcement" class="announcement-message-close" title="Close announcement message">
+        <button aria-label="Close announcement" class="button announcement-message-close" title="Close announcement message">
           <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.7777778 0L20 2.22222222 12.222 10 20 17.7777778 17.7777778 20 10 12.222 2.22222222 20 0 17.7777778 7.778 10 0 2.22222222 2.22222222 0 10 7.778z" fill-rule="evenodd"/></svg>
         </button>
       </aside>
@@ -96,8 +96,8 @@
             {% if theme.show_search %}
               <form class="search-form" name="search" action="/products" method="get" accept-charset="utf8">
                 <input type="hidden" name="utf8" value='✓'>
-                <label for="search-input" class="visually-hidden">Search</label>
-                <input id="search-input" class="search-input" name="search" placeholder="Search..." type="text" autocomplete="off" />
+                <label for="search-input" class="visually-hidden">Search products</label>
+                <input id="search-input" class="search-input" name="search" placeholder="Search" type="text" autocomplete="off" />
                 <button class="search-button" type="submit"><svg width="20" height="20" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M6.31895387 0c3.48986186 0 6.31895383 2.82909201 6.31895383 6.31895387 0 1.36478192-.4326703 2.62850826-1.1683262 3.66149429L16 14.5106083 14.5106083 16l-4.53016014-4.5304185c-1.03298603.7356559-2.29671237 1.1683262-3.66149429 1.1683262C2.82909201 12.6379077 0 9.80881573 0 6.31895387S2.82909201 0 6.31895387 0zm0 2.10631796c-2.32657457 0-4.21263591 1.88606134-4.21263591 4.21263591 0 2.32657458 1.88606134 4.21263593 4.21263591 4.21263593 2.32657458 0 4.21263593-1.88606135 4.21263593-4.21263593 0-2.32657457-1.88606135-4.21263591-4.21263593-4.21263591z" fill-rule="evenodd"/></svg></button>
               </form>
             {% endif %}
@@ -144,60 +144,62 @@
         {% if theme.theme_layout == 'below_header' %}
           <aside class="horizontal-navigation-bar">
 
-            <nav class="horizontal-nav" aria-label="Main navigation">
+            <nav class="horizontal-nav main-nav header-nav-container" aria-label="Main navigation">
 
-              <section class="nav-section nav-section-categories">
-                <div class="nav-section-title"><button class="toggle-nav">{{ pages.products.name }} <svg aria-hidden="true" width="10" height="8" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></button></div>
-                <ul class="sidebar-nav-links">
-                  <li class="sidebar-nav-link"><a href="/products">View All</a></li>
-                  {% for category in categories.active %}
-                    <li class="sidebar-nav-link">{{ category | link_to }}</li>
-                  {% endfor %}
-                </ul>
-              </section>
+
+            <ul class="nav" role="menubar" aria-hidden="false">
+              <li class="nav-menu-item" role="menuitem" aria-haspopup="true">
+                <a href="#">{{ pages.products.name }} <svg aria-hidden="true" width="10" height="8" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></a>
+                {% if categories.active != blank %}
+                  <ul aria-hidden="true" role="menu" class="horizontal-nav-links">
+                    <li class="horizontal-nav-link" role="menuitem"><a href="/products" tabindex="-1">View All</a></li>
+                    {% if categories.active != blank %}
+                      {% for category in categories.active %}
+                        <li class="horizontal-nav-link"><a href="{{ category.url }}" tabindex="-1">{{ category.name }}</a></li>
+                      {% endfor %}
+                    {% endif %}
+                  </ul>
+                {% endif %}
+              </li>
+
 
               {% if artists.active != blank %}
-                <section class="nav-section nav-section-artists">
-                  <div class="nav-section-title"><button class="toggle-nav">Artists <svg aria-hidden="true" width="10" height="8" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></button></div>
-                  <ul class="sidebar-nav-links">
+                <li class="nav-menu-item" role="menuitem" aria-haspopup="true">
+                  <a href="#">Artists <svg aria-hidden="true" width="10" height="8" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></a>
+                  <ul aria-hidden="true" role="menu" class="horizontal-nav-links">
                     {% for artist in artists.active %}
-                      <li class="sidebar-nav-link">{{ artist | link_to }}</li>
+                      <li class="horizontal-nav-link"><a href="{{ artist.url }}" tabindex="-1">{{ artist.name }}</a></li>
                     {% endfor %}
                   </ul>
-                </section>
+                </li>
               {% endif %}
 
-              <section class="nav-section nav-section-info">
-                <div class="nav-section-title"><button class="toggle-nav">Info <svg aria-hidden="true" width="10" height="8" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></button></div>
-                <ul class="sidebar-nav-links compact-nav-links">
-                  {% for page in pages.all %}
-                    <li class="sidebar-nav-link">{{ page | link_to }}</li>
-                  {% endfor %}
-                  <li class="sidebar-nav-link"><a href="/contact">Contact</a></li>
-                  {% if store.website != blank %}
-                    <li class="sidebar-nav-link"><a href="{{ store.website }}">Back to site</a></li>
-                  {% endif %}
-                </ul>
-              </section>
+                <li class="nav-menu-item" role="menuitem" aria-haspopup="true">
+                  <a href="#">Info <svg aria-hidden="true" width="10" height="8" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></a>
+                  <ul aria-hidden="true" role="menu" class="horizontal-nav-links">
+                    {% for page in pages.all %}
+                      <li class="horizontal-nav-link" role="menuitem"><a href="{{ page.url }}" tabindex="-1">{{ page.name }}</a></li></li>
+                    {% endfor %}
+                    <li class="horizontal-nav-link" role="menuitem"><a href="/contact" tabindex="-1">Contact</a></li>
+                    {% if store.website != blank %}
+                      <li class="horizontal-nav-link" role="menuitem"><a href="{{ store.website }}" tabindex="-1">Back to site</a></li>
+                    {% endif %}
+                  </ul>
+                </li>
+
+            </ul>
+
 
               {% if theme.show_search %}
                 <section class="nav-section nav-section-search">
                   <form class="search-form" name="search" action="/products" method="get" accept-charset="utf8">
                     <input type="hidden" name="utf8" value='✓'>
-                    <label for="search-input" class="visually-hidden">Search</label>
-                    <input id="search-input" class="search-input" name="search" placeholder="Search products..." type="text" autocomplete="off" />
+                    <label for="search-input" class="visually-hidden">Search products</label>
+                    <input id="search-input" class="search-input" name="search" placeholder="Search" type="text" autocomplete="off" />
                     <button class="search-button" type="submit" title="Search"><svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M6.31895387 0c3.48986186 0 6.31895383 2.82909201 6.31895383 6.31895387 0 1.36478192-.4326703 2.62850826-1.1683262 3.66149429L16 14.5106083 14.5106083 16l-4.53016014-4.5304185c-1.03298603.7356559-2.29671237 1.1683262-3.66149429 1.1683262C2.82909201 12.6379077 0 9.80881573 0 6.31895387S2.82909201 0 6.31895387 0zm0 2.10631796c-2.32657457 0-4.21263591 1.88606134-4.21263591 4.21263591 0 2.32657458 1.88606134 4.21263593 4.21263591 4.21263593 2.32657458 0 4.21263593-1.88606135 4.21263593-4.21263593 0-2.32657457-1.88606135-4.21263591-4.21263593-4.21263591z" fill-rule="evenodd"/></svg></button>
                   </form>
                 </section>
               {% endif %}
-
-              <section class="nav-section nav-section-cart">
-                <a href="/cart" class="nav-cart-link" title="View cart">
-                  <span class="sidebar-cart-title">Cart</span>
-                  <span class="sidebar-cart-count">{{ cart.item_count }}</span>
-                  <span class="sidebar-cart-total">{{ cart.total | money: theme.money_format }}</span>
-                </a>
-              </section>
 
             </nav>
           </aside>
@@ -208,7 +210,9 @@
             <div class="header-branding">
               <a class="header-home-link" href="/" title="Home">
                 {% if theme.images.logo != blank %}
-                  <img class="store-logo" src="{{ theme.images.logo.url | constrain: 1800, 500 }}" alt="{{ store.name }} Home">
+                  <img class="store-logo" srcset="{{ theme.images.logo.url | constrain: 240 }} 1x, {{ theme.images.logo.url | constrain: 480 }} 2x" src="{{ theme.images.logo.url | constrain: 480 }}"/>
+
+
                 {% else %}
                   {{ store.name }}
                 {% endif %}
@@ -227,8 +231,8 @@
               <section class="nav-section nav-section-search">
                 <form class="search-form" name="search" action="/products" method="get" accept-charset="utf8">
                   <input type="hidden" name="utf8" value='✓'>
-                  <label for="search-input" class="visually-hidden">Search</label>
-                  <input id="search-input" class="search-input" name="search" placeholder="Search products..." type="text" autocomplete="off" />
+                  <label for="search-input" class="visually-hidden">Search products</label>
+                  <input id="search-input" class="search-input" name="search" placeholder="Search" type="text" autocomplete="off" />
                   <button class="search-button" type="submit" title="Search"><svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M6.31895387 0c3.48986186 0 6.31895383 2.82909201 6.31895383 6.31895387 0 1.36478192-.4326703 2.62850826-1.1683262 3.66149429L16 14.5106083 14.5106083 16l-4.53016014-4.5304185c-1.03298603.7356559-2.29671237 1.1683262-3.66149429 1.1683262C2.82909201 12.6379077 0 9.80881573 0 6.31895387S2.82909201 0 6.31895387 0zm0 2.10631796c-2.32657457 0-4.21263591 1.88606134-4.21263591 4.21263591 0 2.32657458 1.88606134 4.21263593 4.21263591 4.21263593 2.32657458 0 4.21263593-1.88606135 4.21263593-4.21263593 0-2.32657457-1.88606135-4.21263591-4.21263593-4.21263591z" fill-rule="evenodd"/></svg></button>
                 </form>
               </section>
@@ -254,7 +258,7 @@
               <section class="nav-section nav-section-artists">
                 <div class="nav-section-title">
                   {% if theme.allow_sidebar_section_collapse %}
-                    <button class="unstyled-button toggle-nav">Artists <svg aria-hidden="true" width="10" height="8" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></button>
+                    <button class="button unstyled-button toggle-nav">Artists <svg aria-hidden="true" width="10" height="8" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></button>
                   {% else %}
                     <div class="unstyled-button toggle-nav">Artists</div>
                   {% endif %}
@@ -351,8 +355,22 @@
     <div class="quick-shop-modal">
       <div class="quick-shop-modal-background"></div>
       <div class="quick-shop-modal-content">
-        <button class="quick-shop-nav-button quick-shop-nav-button--previous">Previous</button>
-        <button class="quick-shop-nav-button quick-shop-nav-button--next">Next</button>
+
+        <div class="quick-shop-modal-controls">
+          <button class="button quick-shop-modal-button quick-shop-close" title="Close quick shop">
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.7777778 0L20 2.22222222 12.222 10 20 17.7777778 17.7777778 20 10 12.222 2.22222222 20 0 17.7777778 7.778 10 0 2.22222222 2.22222222 0 10 7.778z" fill-rule="evenodd"/></svg>
+          </button>
+
+          <button class="button quick-shop-modal-button quick-shop-nav-button quick-shop-nav-button--previous" title="View previous product">
+            <svg aria-hidden="true" width="12" height="20" viewBox="0 0 12 20" xmlns="http://www.w3.org/2000/svg"><path d="M0 9.99663714L9.99663714 0l1.87436946 1.87436946-8.12548453 8.12608504 8.12548453 8.125176L9.99663714 20 0 10.0033629l.00353434-.0029084z" fill-rule="evenodd"/></svg>
+          </button>
+
+          <button class="button quick-shop-modal-button quick-shop-nav-button quick-shop-nav-button--next" title="View next product">
+            <svg aria-hidden="true" width="12" height="20" viewBox="0 0 12 20" xmlns="http://www.w3.org/2000/svg"><path d="M11.871006 9.99663714L1.87436886 0-6e-7 1.87436946l8.12548453 8.12608504L-6e-7 18.1256305 1.87436886 20l9.99663714-9.9966371-.00353434-.0029084z" fill-rule="evenodd"/></svg>
+          </button>
+
+        </div>
+
         <div class="quick-shop-product-details">
           <div class="quick-shop-product-title">ASDF</div>
           <div class="quick-shop-product-price">$0.00</div>
@@ -364,16 +382,13 @@
           </form>
           <div class="quick-shop-product-description"></div>
         </div>
-        <button class="cart-item-remove quick-shop-close">
-          <svg aria-hidden="true" width="11" height="11" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9.5 1.45l-8 8.1m0-8.1l8 8.1" stroke="#666" stroke-width="2" fill="none" fill-rule="evenodd" stroke-linecap="round"/>
-          </svg>
-        </button>
+
       </div>
     </div>
     <script>
       var themeOptions = {
-        primaryGradientColor: '{{ theme.background_color }}'
+        primaryGradientColor: '{{ theme.background_color }}',
+        hasAnnouncement: {% if theme.announcement_message_text %}true{%else %}false{%endif %}
       };
     </script>
     <script>

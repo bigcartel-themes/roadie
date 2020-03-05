@@ -1,0 +1,83 @@
+@import 'variables'
+
+.main-nav
+  position: relative
+
+.nav, .horizontal-nav-links
+  margin: 0
+  padding: 0
+  list-style: none
+
+.nav
+  +flexbox
+  +align-items(center)
+  +justify-content(flex-start)
+
+.nav-menu-item
+  color: $primary-text-color
+  margin-right: $base-padding * 4
+  position: relative
+  width: 160px
+
+  > a
+    color: $primary-text-color
+    display: block
+    font-weight: bold
+    position: relative
+    text-decoration: none
+
+    &:hover, &:focus
+      background: $background-color
+      color: $link-hover-color
+      outline: 0
+
+    svg
+      +transform(translateY(-50%))
+      fill: $primary-text-color
+      position: absolute
+      right: 0
+      top: 50%
+
+.horizontal-nav-links
+  background: $background-color
+  border: $small-border
+  left: -9999px
+  min-width: 200px
+  max-height: 440px
+  opacity: 0
+  overflow-y: scroll
+  padding: $base-padding
+  position: absolute
+  top: 100%
+  z-index: 100
+
+.horizontal-nav-link
+  position: static
+
+  a
+    +transition(.1s linear all)
+    color: $primary-text-color
+    display: block
+    padding: $base-padding / 2 $base-padding
+    text-decoration: none
+
+    &:hover, &:focus
+      color: $link-hover-color
+      text-decoration: underline
+
+
+/* Top level hover state, preserve hover state when hovering dropdown  */
+.nav li:focus > a,
+.nav li:hover > a,
+.nav li:focus-within > a
+  background: $background-color
+  color: $link-hover-color
+  outline: 0
+
+  > svg
+    fill: $link-hover-color
+
+.nav li:hover ul, .nav li:focus ul, ul.show-menu
+  left: 0
+  right: auto
+  opacity: 1

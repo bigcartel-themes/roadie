@@ -20,14 +20,22 @@
   box-sizing: border-box
   text-transform: #{"{% if theme.uppercase_text %} uppercase {% endif%}"}
 
-a:active
-  opacity: .6
+a
+  color: $primary-text-color
 
-a:hover, a:focus
-  color: $link-hover-color
+  &:active
+    opacity: .7
 
-.currency_code
-  font-weight: normal
+  &:hover, &:focus
+    color: $link-hover-color
+
+button, input, textarea, select
+  +appearance(none)
+  background: none
+  border: none
+  border-radius: 0
+  color: $primary-text-color
+  font-family: $primary-font
 
 html, body
   height: 100%
@@ -35,6 +43,7 @@ html, body
   padding: 0
 
 html
+  background-color: $background-color
 
   &.fixed-background
     background-image: #{"{% if theme.images.background_image != blank %}url(\'{{ theme.images.background_image.url | constrain: 1200, 1200 }}\') {% else %}none{% endif %}"}
@@ -157,6 +166,10 @@ header
     .header-branding
       text-align: left
 
+      .above-header &
+        @media screen and (min-width: $break-small +1)
+          max-width: 100%
+
     .header-cart
       position: relative
 
@@ -179,9 +192,9 @@ header
   .no-sidebar &, .hide-toggle &
     display: none
 
-  &:hover, &:active, &:focus
-    background: none !important
-    color: $primary-text-color !important
+  &:hover, &:focus
+    background: none
+    color: $link-hover-color
 
   @media screen and (max-width: $break-small)
     display: block !important
@@ -198,6 +211,10 @@ header
       padding-bottom: $base-padding * 2
       text-align: left
 
+    .above-header &
+      max-width: 100%
+      text-align: left
+
 .header-home-link
   +fluid-type(18px, 64px)
   color: $primary-text-color
@@ -209,6 +226,10 @@ header
 
   .header-left-align &
     text-align: left !important
+
+    @media screen and (min-width: $break-small +1)
+      .store-logo
+        margin: 0
 
   .sidebar-no-header &
     +fluid-type(18px, 40px)
@@ -226,19 +247,20 @@ header
   max-width: 100%
   max-height: 70px
 
+  @media screen and (min-width: $break-small +1)
+    .above-header &
+      margin: 0
+      max-height: none
+
 .header-cart
   +flexbox
   +align-items(center)
   +justify-content(center)
-  color: $primary-text-color
   font-size: 1.5em
   font-weight: bold
   position: absolute
   right: 0
   text-decoration: none
-
-  .no-sidebar &
-    display: none
 
   &.upper-nav-cart
     +flexbox
@@ -318,14 +340,15 @@ _:-ms-fullscreen, :root .content-wrapper
     +flex-basis(160px)
     border-bottom: none
     margin-right: $base-padding * 2
+    position: relative
     z-index: 2
 
     &:last-child
+      margin-left: auto
       margin-right: 0
 
   .nav-cart-link
     +flexbox
-    color: $primary-text-color
     font-weight: bold
     padding: $base-padding 0
     text-decoration: none
@@ -356,6 +379,15 @@ _:-ms-fullscreen, :root .content-wrapper
     +flex(0 0 100%)
     display: none
 
+  &.visible-mobile
+    background-color: $background-color
+    display: block
+    left: 0
+    padding: 0 $base-padding * 2
+    position: absolute
+    width: 100%
+    z-index: 100
+
 .sidebar-nav
   +flexbox
   +flex-direction(column)
@@ -375,7 +407,6 @@ _:-ms-fullscreen, :root .content-wrapper
 
     .nav-cart-link
       +flexbox
-      color: $primary-text-color
       font-weight: bold
       padding: $base-padding 0
       text-decoration: none
@@ -400,10 +431,6 @@ _:-ms-fullscreen, :root .content-wrapper
     padding-right: $base-padding * 2
 
   .search-input
-    +appearance(none)
-    background: none
-    border: none
-    border-radius: 0
     font-family: $primary-font
     font-size: 16px
     font-weight: bold
@@ -414,14 +441,12 @@ _:-ms-fullscreen, :root .content-wrapper
       font-size: 24px
       height: auto
       line-height: 1.25em
-      width: 150px
+      width: 140px
+
+    .below-header &
+      width: 140px
 
   .search-button
-    appearance: none
-    -webkit-appearance: none
-    background: none
-    border: none
-    color: $primary-text-color
     font-weight: bold
     height: auto
     margin-left: auto
@@ -438,7 +463,6 @@ _:-ms-fullscreen, :root .content-wrapper
   .toggle-nav
     +transition(none)
     background: none
-    color: $primary-text-color
     display: block
     font-weight: bold
     height: auto
@@ -470,19 +494,6 @@ _:-ms-fullscreen, :root .content-wrapper
     line-height: 1.5em
     margin: 0
 
-  .under-header &
-    background: $background-color
-    border: $small-border
-    display: none
-    max-height: 50vh
-    padding: $base-padding $base-padding * 2
-    overflow-y: scroll
-    position: absolute
-    width: 240px
-
-    &.expanded
-      display: block
-
   .sidebar-nav-link
 
     &.medium-border
@@ -496,7 +507,6 @@ _:-ms-fullscreen, :root .content-wrapper
         border-bottom: none
 
     a
-      color: $primary-text-color
       display: block
       font-weight: normal
       padding: $base-padding / 2 0
@@ -508,9 +518,6 @@ _:-ms-fullscreen, :root .content-wrapper
 .social-links
   +flexbox
   +justify-content(space-between)
-
-  .under-header &
-    display: none
 
   a
     +flexbox
@@ -539,9 +546,6 @@ _:-ms-fullscreen, :root .content-wrapper
 
 .nav-section-credit
   border: none !important
-
-  .under-header &
-    display: none
 
   a
     color: $primary-text-color
@@ -580,8 +584,6 @@ footer
     .has-sidebar &
       display: none
 
-
-/* -------------- Misc element styles ------------- */
 h1
   font-size: 2em
   font-weight: bold
@@ -617,7 +619,6 @@ button, .button
       fill: $button-text-color
       margin-left: auto
 
-
   svg
     +all-transitions
 
@@ -631,8 +632,11 @@ button, .button
 
     &:not(:disabled):hover, &:not(:disabled):active, &:not(:disabled):focus
       background: none
-      color: $primary-text-color
+      color: $link-hover-color
       text-decoration: underline
+
+      svg
+        fill: $link-hover-color
 
   &:disabled, &.disabled
     cursor: not-allowed
@@ -656,123 +660,24 @@ button, .button
   position: absolute
   width: 1px
 
-
 .announcement-message
-  display: none
-
-.announcement-wrapper
-  +flexbox
-  +align-items(center)
-  +justify-content(center)
-  position: relative
-  margin: 0 auto
-  max-width: 100%
-
-  .fixed-width &
-    max-width: 1040px
-
-.has-announcement-message .announcement-message
-  display: block
   background-color: $announcement-background-color
   color: $announcement-text-color
+  opacity: 0
   padding: $base-padding * 2
   position: relative
-  width: 100%
-
-  .announcement-message-close
-    +transform(translateY(-50%))
-    cursor: pointer
-    height: auto
-    position: absolute
-    right: $base-padding
-    top: 50%
-    width: auto
-
-    svg
-      fill: $announcement-text-color
-      height: 18px
-      width: 18px
-
-.quick-shop-modal
-  height: 100vh
-  width: 100vw
-  position: fixed
-  left: 0
-  top: 0
-  right: 0
-  bottom: 0
-  opacity: 0
-  z-index: 10042
-  opacity: 0
+  text-align: center
   visibility: hidden
 
-  &.opened
+  &.visible
     opacity: 1
     visibility: visible
 
-
-.quick-shop-modal-background
-  background-color: #000
-  opacity: .3
-  width: 100%
-  height: 100%
-
-.quick-shop-modal-content
-  +flexbox
-  +flex-direction(row)
-  position: fixed
-  z-index: 10044
-  width: 1024px
-  height: 65vh
-  background: white
-  border: 2px solid black
-  top: 20%
-  left: 50%
-  transform: translateX(-50%) translateY(-20%)
-  padding: 40px 60px 20px
-  font-size: 16px
-
-.quick-shop-nav-button
-  +transform(translateX(-50%))
-  display: none !important
+.announcement-message-close
+  +transform(translateY(-50%))
+  position: absolute
+  right: 0
   top: 50%
-  position: absolute
-  width: 150px
-
-.quick-shop-nav-button--previous
-  left: -75px
-
-.quick-shop-nav-button--next
-  left: calc(100% + 75px)
-
-.quick-shop-product-form
-  margin-top: 20px
-
-.quick-shop-product-details
-  padding-left: 20px
-  padding-top: 30px
-  width: 100%
-  overflow-x: scroll
-
-.quick-shop-product-description
-  margin-top: 20px
-
-.quick-shop-product-image
-  display: block
-  height: auto
-  width: auto
-  margin: 0 auto
-  max-width: 100%
-  max-height: 100%
-
-button.quick-shop-close
-  height: 44px !important
-  width: 44px !important
-  fill: #000 !important
-  color: #000 !important
-  position: absolute
-  top: 10px
-  right: 10px
 
 .errors
   background: $error-background-color
@@ -781,53 +686,6 @@ button.quick-shop-close
   padding: $base-padding * 2
   text-align: center
 
-body#maintenance
-  +flexbox
-  +align-items(center)
-  +justify-content(center)
-  padding: $base-padding * 4
+.currency_code
+  font-weight: normal
 
-  @media screen and (max-width: $break-small)
-    padding: $base-padding * 2
-
-.maintenance-container
-  border: $medium-border
-  line-height: 1.5em
-  max-width: 688px
-  padding: $base-padding * 4
-  width: 100%
-
-  @media screen and (max-width: $break-small)
-    border-left: none
-    border-right: none
-    border-top: $large-border
-    border-bottom: $small-border
-    padding: $base-padding * 2 0
-
-.maintenance-store-name
-  +fluid-type(40px, 96px)
-  border-bottom: $large-border
-  font-weight: bold
-  line-height: 1em
-  padding-bottom: $base-padding
-
-  @media screen and (max-width: $break-small)
-    border-bottom: $medium-border
-
-h1.maintenance-title
-  +fluid-type(18px, 24px)
-  margin: 0
-
-p.maintenance-caption
-  margin: 0
-
-.maintenance-social-links
-  border-top: $small-border
-  margin-top: $base-padding
-  padding-top: $base-padding
-
-  .social-links
-    +justify-content(flex-start)
-
-    > a
-      margin-right: $base-padding

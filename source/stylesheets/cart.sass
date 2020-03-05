@@ -54,6 +54,7 @@
   margin-top: $base-padding
 
 .cart-item-details-unit-price
+  +flex-shrink(0)
   font-size: 20px
   text-align: right
 
@@ -90,6 +91,7 @@
       width: 20px
 
 .cart-item-details-price
+  +flex-shrink(0)
   font-size: 20px
   font-weight: 600
   margin-left: auto
@@ -104,12 +106,12 @@
   margin-bottom: $base-padding * 2
   padding: $base-padding * 2 0
 
-  .cart-subtotal
-    font-size: 18px
-    margin-left: auto
+.cart-subtotal
+  font-size: 18px
+  margin-left: auto
 
-    .cart-subtotal-amount
-      font-weight: bold
+  .cart-subtotal-amount
+    font-weight: bold
 
 
 .continue-shopping-link
@@ -128,4 +130,4 @@
     top: 50%
 
 .checkout-button
-  display: inline-block
+  margin-left: auto
