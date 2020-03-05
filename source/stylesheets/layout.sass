@@ -373,6 +373,11 @@ _:-ms-fullscreen, :root .content-wrapper
   padding-right: $base-padding * 4
   width: 272px
 
+  @media screen and (min-width: $break-large +1)
+    .full-width &
+      +flex(0 0 386px)
+      width: 386px
+
   &.hidden
     display: none
 
