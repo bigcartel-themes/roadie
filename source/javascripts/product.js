@@ -9,6 +9,8 @@ function enableAddButton(updated_price) {
   var addButtonPriceTextElement = addButton.find('.button-add-price');
   var addButtonTitle = addButton.attr('data-add-title');
   addButton.attr("disabled",false);
+  $('.product-form-quantity').removeClass('disabled')
+  $('.product-quantity').attr("disabled",false)
   if (updated_price) {
     quantity = parseInt($('#quantity').val());
     if (quantity > 0) {
@@ -35,9 +37,13 @@ function disableAddButton(type) {
   }
   if (!addButton.is(":disabled")) {
     addButton.attr("disabled","disabled");
+
   }
+  $('.product-quantity').attr("disabled","disabled")
+  $('.product-form-quantity').addClass('disabled')
   addButtonTextElement.html(addButtonTitle);
   addButtonPriceTextElement.removeClass('visible');
+
 }
 
 function enableSelectOption(select_option) {
@@ -264,7 +270,7 @@ $('body').on('click', ".description-inventory-tab", function(e){
 
 $(document).ready(function() {
   if ($('.all-similar-products').length) {
-    var num_products = $('.all-similar-products .product-list-item').length;
+    var num_products = $('.all-similar-products .prod-thumb').length;
     var elements = $('.all-similar-products').children().toArray();
     var num_to_display = $('.related-products-container').data('num-products');
     for (var i=1; i<=num_to_display; i++) {

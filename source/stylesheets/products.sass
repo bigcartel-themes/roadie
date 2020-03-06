@@ -93,7 +93,7 @@
   @media screen and (max-width: $break-medium)
     width: auto
 
-.product-list-item
+.prod-thumb
   +flex-basis(calc(100% / 3))
   color: $primary-text-color
   display: block
@@ -153,7 +153,7 @@
     &.rollover
       margin-bottom: 0px
 
-      .product-list-item-info
+      .prod-thumb-info
         +flexbox
         +align-items(center)
         background: $primary-text-color
@@ -169,7 +169,7 @@
           color: $background-color
 
       &:hover, &:focus
-        .product-list-item-info
+        .prod-thumb-info
           opacity: 1
 
         .open-quickview
@@ -209,18 +209,18 @@
       border-bottom: $small-border
       width: 100% !important
 
-      .product-list-item-container
+      .prod-thumb-container
         height: 104px
         width: 104px
 
-      .product-list-item-info
+      .prod-thumb-info
         padding-left: $base-padding * 2
         width: calc(100% - 104px)
 
-      .product-list-item-info-headers
+      .prod-thumb-info-headers
         text-align: left !important
 
-.product-list-item-container
+.prod-thumb-container
   position: relative
   width: 100%
 
@@ -314,10 +314,10 @@
       height: 100%
       width: 100%
 
-.product-list-item-info
+.prod-thumb-info
   padding: $base-padding 0
 
-.product-list-item-info-headers
+.prod-thumb-info-headers
   +fluid-type(16px, 18px)
   +flexbox
   +justify-content(flex-start)
@@ -330,19 +330,19 @@
   width: 100%
   z-index: 1
 
-.product-list-item-name
+.prod-thumb-name
   position: relative
   overflow-wrap: break-word
 
   @media screen and (max-width: $break-medium)
     padding-right: 0
 
-.product-list-item-price
+.prod-thumb-price
   font-size: .9em
   font-weight: normal
   margin-top: $base-padding / 2
 
-.product-list-item-status
+.prod-thumb-status
 
   &.circle
     +flexbox

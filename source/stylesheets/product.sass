@@ -28,18 +28,41 @@
   order: 1
   padding: $base-padding * 2 0
 
+  @media screen and (min-width: $break-large + 1)
+    +flexbox
+    +flex-direction(row)
+
 .primary-product-image
   display: block
   margin-bottom: $base-padding * 2
   width: 100%
 
+.primary-product-image-link
+  @media screen and (min-width: $break-large + 1)
+    +flex(1 0 80%)
+    order: 2
+
+    .right-sidebar &
+      order: 1
+
 .secondary-images
   +flexbox
+
+  @media screen and (min-width: $break-large + 1)
+    +flex(1 0 20%)
+    +flex-direction(column)
+    order: 1
+
+    .right-sidebar &
+      order: 2
 
   .secondary-product-image-link
     display: block
     margin: 0
     width: 20%
+
+    @media screen and (min-width: $break-large + 1)
+      width: 100%
 
     img
       display: block
@@ -129,6 +152,13 @@
   color: $button-text-color
   height: 64px
   width: 64px
+
+  &.disabled
+    opacity: .3
+    cursor: not-allowed
+
+    .product-quantity
+      cursor: not-allowed
 
   .product-quantity-label
     font-size: 14px

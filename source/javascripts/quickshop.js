@@ -9,7 +9,7 @@ $('body').on('click', ".open-quickview", function(e){
   e.preventDefault();
   var permalink = $(this).data('permalink');
 
-  this_product = $(this).closest('.product-list-item')
+  this_product = $(this).closest('.prod-thumb')
 
   Product.find(permalink, function(product) {
     processProduct(product);
@@ -80,7 +80,7 @@ $(document).mouseup(function (e) {
 function loadProductContent(product) {
   var $container = $('.qs-product-details');
 
-  var this_product = $(".open-quickview[data-permalink='" + product.permalink + "']").closest('.product-list-item');
+  var this_product = $(".open-quickview[data-permalink='" + product.permalink + "']").closest('.prod-thumb');
 
   populatePreviousAndNext(this_product);
 
@@ -97,8 +97,8 @@ function loadProductContent(product) {
 
 function populatePreviousAndNext(this_product) {
 
-  previous_product = this_product.prev('.product-list-item');
-  next_product = this_product.next('.product-list-item');
+  previous_product = this_product.prev('.prod-thumb');
+  next_product = this_product.next('.prod-thumb');
 
   if (previous_product) {
     permalink = previous_product.find('.open-quickview').data('permalink');

@@ -6,7 +6,7 @@ $(window).on("load resize", function() {
     window_width = $(window).width();
 
     var $grid = $('.masonry').masonry({
-      itemSelector: '.product-list-item',
+      itemSelector: '.prod-thumb',
       percentPosition: true
     });
 

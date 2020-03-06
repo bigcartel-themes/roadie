@@ -240,7 +240,7 @@
             <section class="nav-section nav-section-categories">
               <div class="nav-section-title">
                 {% if theme.allow_sidebar_section_collapse %}
-                  <button class="button unstyled-button toggle-nav">{{ pages.products.name }} <svg aria-hidden="true" width="10" height="8" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></button>
+                  <button class="button min-btn toggle-nav">{{ pages.products.name }} <svg aria-hidden="true" width="10" height="8" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></button>
                 {% else %}
                   <div class="nav-section-title-text">{{ pages.products.name }}</div>
                 {% endif %}
@@ -257,7 +257,7 @@
               <section class="nav-section nav-section-artists">
                 <div class="nav-section-title">
                   {% if theme.allow_sidebar_section_collapse %}
-                    <button class="button unstyled-button toggle-nav">Artists <svg aria-hidden="true" width="10" height="8" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></button>
+                    <button class="button min-btn toggle-nav">Artists <svg aria-hidden="true" width="10" height="8" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></button>
                   {% else %}
                     <div class="nav-section-title-text">Artists</div>
                   {% endif %}
@@ -351,30 +351,30 @@
       </footer>
     </div>
 
-    <div role="dialog" class="quick-shop-modal">
-      <div class="quick-shop-modal-background"></div>
-      <div class="quick-shop-modal-content">
+    <div role="dialog" class="qs-modal">
+      <div class="qs-modal-background"></div>
+      <div class="qs-modal-content">
 
-        <div class="quick-shop-modal-controls">
-          <div class="quick-shop-modal-controls-close">
-            <button class="button quick-shop-modal-button quick-shop-close" title="Close quick shop window">
+        <div class="qs-modal-controls">
+          <div class="qs-modal-controls-close">
+            <button class="button qs-modal-button qs-close" title="Close quick shop window">
               <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.7777778 0L20 2.22222222 12.222 10 20 17.7777778 17.7777778 20 10 12.222 2.22222222 20 0 17.7777778 7.778 10 0 2.22222222 2.22222222 0 10 7.778z" fill-rule="evenodd"/></svg>
             </button>
-            <span class="quick-shop-modal-title">{{ page.name }}</span>
+            <span class="qs-modal-title">{{ page.name }}</span>
           </div>
-          <div class="quick-shop-modal-controls-arrows">
-            <button class="button quick-shop-modal-button quick-shop-nav quick-shop-nav-previous" title="View previous product">
+          <div class="qs-modal-controls-arrows">
+            <button class="button qs-modal-button qs-nav qs-nav-previous" title="View previous product">
               <svg aria-hidden="true" width="12" height="20" viewBox="0 0 12 20" xmlns="http://www.w3.org/2000/svg"><path d="M0 9.99663714L9.99663714 0l1.87436946 1.87436946-8.12548453 8.12608504 8.12548453 8.125176L9.99663714 20 0 10.0033629l.00353434-.0029084z" fill-rule="evenodd"/></svg>
             </button>
 
-            <button class="button quick-shop-modal-button quick-shop-nav quick-shop-nav-next" title="View next product">
+            <button class="button qs-modal-button qs-nav qs-nav-next" title="View next product">
               <svg aria-hidden="true" width="12" height="20" viewBox="0 0 12 20" xmlns="http://www.w3.org/2000/svg"><path d="M11.871006 9.99663714L1.87436886 0-6e-7 1.87436946l8.12548453 8.12608504L-6e-7 18.1256305 1.87436886 20l9.99663714-9.9966371-.00353434-.0029084z" fill-rule="evenodd"/></svg>
             </button>
           </div>
         </div>
 
-        <div class="quick-shop-product-container" role="document">
-          <div class="quick-shop-product-details">
+        <div class="qs-product-container" role="document">
+          <div class="qs-product-details">
           </div>
         </div>
 

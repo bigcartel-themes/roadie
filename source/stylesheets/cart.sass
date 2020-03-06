@@ -20,6 +20,7 @@
 .cart-item
   +flexbox
   +align-items(center)
+  +flex-wrap(wrap)
   border-bottom: $small-border
   padding: $base-padding * 2 0
 
@@ -71,15 +72,15 @@
 
 .cart-item-details-unit-price
   +flex-shrink(0)
+  margin-left: auto
   font-size: 20px
   text-align: right
 
 .cart-item-quantity-holder
   +flexbox
   +align-items(center)
-  margin-left: $base-padding * 4
-  margin-right: $base-padding * 4
-  width: 160px
+  padding-left: $base-padding * 4
+  padding-right: $base-padding * 4
 
   .option-quantity
     +appearance(none)
@@ -110,7 +111,6 @@
   +flex-shrink(0)
   font-size: 20px
   font-weight: 600
-  margin-left: auto
 
 .cart-footer
   padding-bottom: $base-padding * 2

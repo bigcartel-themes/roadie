@@ -38,11 +38,11 @@
                 image-square
               {% endif %}
             {% endcapture %}
-            <a class="product-list-item product-image-{{ theme.product_grid_image_size }} {{ theme.show_overlay }} {{ theme.grid_image_style }} {% if theme.show_quickview %}show-quickview{% endif %}" href="{{ product.url }}" title="View {{ product.name | escape }}">
-              <div class="product-list-item-container">
+            <a class="prod-thumb product-image-{{ theme.product_grid_image_size }} {{ theme.show_overlay }} {{ theme.grid_image_style }} {% if theme.show_quickview %}show-quickview{% endif %}" href="{{ product.url }}" title="View {{ product.name | escape }}">
+              <div class="prod-thumb-container">
                 <figure class="product-list-image-container">
                   <img alt="" class="lazy product-list-image {{ image_class }}" src="{{ product.image | product_image_url | constrain: 50 }}" data-src="{{ product.image | product_image_url | constrain: 1000 }}" data-srcset="{{ product.image | product_image_url | constrain: 2000 }} 2x, {{ product.image | product_image_url | constrain: 1000 }} 1x">
-                  {% if product_status != blank and theme.product_badge_style != 'inline' %}<div class="product-list-item-status {{ theme.product_badge_style }}">{{ product_status }}</div>{% endif %}
+                  {% if product_status != blank and theme.product_badge_style != 'inline' %}<div class="prod-thumb-status {{ theme.product_badge_style }}">{{ product_status }}</div>{% endif %}
                   {% if theme.show_quickview %}
                     <div class="product-list-quickview-container">
                       <div class="product-list-quickview-container-background"></div>
@@ -54,18 +54,18 @@
                   {% endif %}
                 </figure>
               </div>
-              <div class="product-list-item-info">
-                <div class="product-list-item-background"></div>
-                <div class="product-list-item-info-headers">
-                  <div class="product-list-item-name">{{ product.name }}</div>
-                  <div class="product-list-item-price">
+              <div class="prod-thumb-info">
+                <div class="prod-thumb-background"></div>
+                <div class="prod-thumb-info-headers">
+                  <div class="prod-thumb-name">{{ product.name }}</div>
+                  <div class="prod-thumb-price">
                     {% if product.variable_pricing %}
                       {{ product.min_price | money: theme.money_format }} - {{ product.max_price | money: theme.money_format }}
                     {% else %}
                       {{ product.default_price | money: theme.money_format }}
                     {% endif %}
                   </div>
-                  {% if product_status != blank and theme.product_badge_style == 'inline' %}<div class="product-list-item-status {{ theme.product_badge_style }}">{{ product_status }}</div>{% endif %}
+                  {% if product_status != blank and theme.product_badge_style == 'inline' %}<div class="prod-thumb-status {{ theme.product_badge_style }}">{{ product_status }}</div>{% endif %}
                 </div>
               </div>
             </a>
