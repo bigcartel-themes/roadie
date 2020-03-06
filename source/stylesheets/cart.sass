@@ -1,5 +1,15 @@
 @import 'variables'
 
+
+.cart-empty-message
+  +all-transitions
+  opacity: 0
+  visibility: hidden
+
+  .empty-cart &
+    opacity: 1
+    visibility: visible
+
 .cart-items
   border-bottom: $small-border
   list-style: none
@@ -17,15 +27,20 @@
     border-bottom: none
 
 .cart-item-remove
-  +appearance(none)
-  background: none
-  border: none
-  margin-right: $base-padding
+  margin-right: $base-padding * 2
+  padding: 0
+  height: 24px
+  width: 24px
+
+  svg
+    display: block
+    height: 20px
+    width: 20px
 
 .cart-item-image
   +flex-shrink(0)
   height: 112px
-  object-fit: cover
+  overflow: hidden
   width: 112px
 
   @media screen and (max-width: $break-small)
@@ -35,6 +50,7 @@
   img
     display: block
     height: 100%
+    object-fit: cover
     width: 100%
 
 .cart-item-details
@@ -63,7 +79,7 @@
   +align-items(center)
   margin-left: $base-padding * 4
   margin-right: $base-padding * 4
-  width: 120px
+  width: 160px
 
   .option-quantity
     +appearance(none)
@@ -72,7 +88,7 @@
     border-bottom: $medium-border
     border-radius: 0
     font-family: $primary-font
-    font-size: 24px
+    font-size: 20px
     font-weight: 600
     height: 100%
     margin: 0 $base-padding
@@ -97,6 +113,7 @@
   margin-left: auto
 
 .cart-footer
+  padding-bottom: $base-padding * 2
   text-align: right
 
 .cart-sub-footer
@@ -104,14 +121,47 @@
   +align-items(center)
   border-bottom: $medium-border
   margin-bottom: $base-padding * 2
-  padding: $base-padding * 2 0
+  padding: $base-padding 0
 
 .cart-subtotal
-  font-size: 18px
+  +flexbox
+  +align-items(center)
+  font-size: 16px
   margin-left: auto
 
   .cart-subtotal-amount
+    font-size: 24px
     font-weight: bold
+    margin-left: $base-padding * 2
 
 .checkout-button
+  font-size: 20px
+  font-weight: bold
+  height: 64px
+  line-height: 64px
   margin-left: auto
+  max-width: 256px
+  padding: 0 $base-padding * 2
+  width: 100%
+
+  @media screen and (max-width: $break-small)
+    margin-left: 0
+    max-width: 100%
+
+.cart-empty-message
+  margin-top: $base-padding * 8
+  text-align: center
+
+.cart-empty-header
+  font-size: 24px
+  font-weight: bold
+  margin-bottom: $base-padding * 4
+
+.start-shopping-button
+  font-size: 20px
+  font-weight: bold
+  height: 64px
+  line-height: 64px
+  margin: 0 auto
+  width: 340px
+

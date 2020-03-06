@@ -64,6 +64,9 @@ body
   line-height: 1.5em
   position: relative
 
+  &.no-scroll
+    overflow: hidden
+
 .background-image-overlay
   height: 100%
   left: 0
@@ -95,6 +98,7 @@ body
   +flex(1 1 25%)
   margin-right: $base-padding * 4
   padding-top: $base-padding
+  position: relative
 
   .sidebar-nav-links
     max-height: 172px
@@ -102,6 +106,13 @@ body
 
   &:last-of-type
     margin-right: 0
+
+.scroll-more
+  bottom: 8px
+  display: none
+  height: 32px
+  position: absolute
+  width: 100%
 
 .above-nav-section-title
   font-weight: bold
@@ -182,7 +193,9 @@ header
   padding: 0
   position: absolute
   margin: 0
-  margin-top: 4px
+
+  .hamburger-box
+    display: block
 
   @media screen and (min-width: $break-small +1)
     .right-sidebar &
@@ -195,6 +208,9 @@ header
   &:hover, &:focus
     background: none
     color: $link-hover-color
+
+    .hamburger-inner, .hamburger-inner:before, .hamburger-inner:after
+      background-color: $link-hover-color
 
   @media screen and (max-width: $break-small)
     display: block !important
@@ -249,7 +265,12 @@ header
   display: block
   margin: 0 auto
   max-width: 100%
-  max-height: 70px
+
+  @media screen and (max-width: $break-small)
+    max-height: 70px
+
+    .header-left-align &
+      margin: 0
 
   @media screen and (min-width: $break-small +1)
     .above-header &
@@ -282,6 +303,13 @@ header
 
     svg
       fill: $primary-text-color
+
+  &:hover, &:focus
+    svg
+      fill: $link-hover-color
+
+    .header-cart-count
+      border-right-color: $link-hover-color
 
   @media screen and (max-width: $break-small)
     display: block !important
@@ -373,11 +401,6 @@ _:-ms-fullscreen, :root .content-wrapper
   padding-right: $base-padding * 4
   width: 272px
 
-  @media screen and (min-width: $break-large +1)
-    .full-width &
-      +flex(0 0 386px)
-      width: 386px
-
   &.hidden
     display: none
 
@@ -456,9 +479,9 @@ _:-ms-fullscreen, :root .content-wrapper
       width: 140px
 
   .search-button
-    font-weight: bold
     height: auto
     margin-left: auto
+    padding: 0
 
     svg
       fill: $primary-text-color
@@ -572,13 +595,9 @@ _:-ms-fullscreen, :root .content-wrapper
 .main
   +flex(1)
   order: 2
-  padding-bottom: $base-padding * 2
 
   .sidebar-visible-mobile &
     display: none
-
-  @media screen and (max-width: $break-small)
-    padding-top: $base-padding * 2
 
 .page-heading
   +flexbox
@@ -609,10 +628,11 @@ h1
   font-weight: bold
   line-height: 1em
   margin: 0
-  padding: $base-padding * 2 0
+  padding: $base-padding 0
 
-  .sidebar-no-header &
-    padding-top: 0
+  @media screen and (min-width: $break-small + 1)
+    .sidebar-no-header &
+      padding-top: 0
 
 .button
   +all-transitions
@@ -625,16 +645,6 @@ h1
   line-height: 1em
   text-align: center
   text-decoration: none
-
-  &.has-right-icon
-    +flexbox
-    +align-items(center)
-    +justify-content(center)
-    padding: $base-padding * 2
-
-    .button-icon-right-arrow
-      fill: $button-text-color
-      margin-left: auto
 
   svg
     +all-transitions
@@ -665,6 +675,16 @@ h1
     svg
       fill: $button-hover-text-color
 
+.has-right-icon
+  +flexbox
+  +align-items(center)
+  +justify-content(center)
+  padding: $base-padding * 2
+
+  .button-icon-right-arrow
+    fill: $button-text-color
+    margin-left: auto
+
 .visually-hidden
   border: 0
   clip: rect(0 0 0 0)
@@ -679,7 +699,7 @@ h1
   background-color: $announcement-background-color
   color: $announcement-text-color
   display: none
-  padding: $base-padding * 2
+  padding: $base-padding * 2 $base-padding * 5
   position: relative
   text-align: center
 
@@ -688,9 +708,20 @@ h1
 
 .announcement-message-close
   +transform(translateY(-50%))
+  +transition(none)
+  background: none
   position: absolute
-  right: 0
+  right: $base-padding
   top: 50%
+
+  &:hover, &:focus
+    background: none
+
+    svg
+      fill: $announcement-text-color
+
+  svg
+    fill: $announcement-text-color
 
 .errors
   background: $error-background-color

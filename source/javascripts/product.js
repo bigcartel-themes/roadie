@@ -128,7 +128,7 @@ if ($('.magnify-on-hover .primary-product-image').length) {
     // Setting this to a reasonable amount will allow users to execute
     // scroll-gestures events on touch-enabled devices with the image as
     // a starting point
-    touchDelay: 0,
+    touchDelay: 100,
     // If true, a bounding box will show the area currently being previewed
     // during mouse hover
     hoverBoundingBox: false,

@@ -10,12 +10,13 @@
   width: 100%
 
 .view-all-link-container
-  border-top: $medium-border
+  border-top: $small-border
   text-align: right
 
 .icon-link
   font-weight: bold
-  padding: $base-padding 0
+  line-height: 1em
+  padding: $base-padding * 2 0
   position: relative
   text-decoration: none
 
@@ -34,11 +35,13 @@
   svg
     +transform(translateY(-50%))
     fill: $primary-text-color
+    margin-top: -1px
     position: absolute
     top: 50%
 
-  &:hover svg
-    fill: $link-hover-color
+  &:hover, &:focus
+    svg
+      fill: $link-hover-color
 
 .view-all-link
   display: inline-block

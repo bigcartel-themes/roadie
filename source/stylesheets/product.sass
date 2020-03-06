@@ -10,7 +10,6 @@
   font-weight: bold
   line-height: 1.25em
   padding: $base-padding 0
-  margin-bottom: $base-padding * 2
 
 .page-subheading-status
   font-size: 14px
@@ -27,9 +26,7 @@
 .product-images
   +flex(1 1 auto)
   order: 1
-
-  @media screen and (max-width: $break-product-details)
-    margin-bottom: $base-padding * 2
+  padding: $base-padding * 2 0
 
 .primary-product-image
   display: block
@@ -42,7 +39,7 @@
   .secondary-product-image-link
     display: block
     margin: 0
-    width: 25%
+    width: 20%
 
     img
       display: block
@@ -53,11 +50,14 @@
   order: 2
   padding-left: $base-padding * 2
 
+  @media screen and (min-width: $break-large + 1)
+    .full-width &
+      +flex(0 0 386px)
+
   @media screen and (max-width: $break-product-details)
     padding-left: 0
 
 .product-options-container
-  margin-bottom: $base-padding
 
   @media screen and (max-width: $break-product-details)
     border-top: $small-border
@@ -65,27 +65,28 @@
 .product-form
   margin-bottom: $base-padding
 
+.product-form-controls
+  margin-top: $base-padding * 2
+
+.product-options-container + .product-form-controls
+  margin-top: $base-padding
+
 .product-option-select-container
   border-bottom: $small-border
   height: 58px
   padding: 0
   position: relative
 
-  &.focused
-    padding: $base-padding / 2 0
-
-    select
-      font-size: 16px
-      padding-top: 18px
-      margin-top: -22px
-
   select
+    background: none
     color: $primary-text-color
     display: block
     font-size: 20px
     font-weight: bold
     height: 100%
+    position: relative
     width: 100%
+    z-index: 1
 
   svg
     fill: $primary-text-color
@@ -94,16 +95,24 @@
     top: 50%
     transform: translateY(-50%)
 
+  &.focused select
+    font-size: 16px
+    height: 100%
+    padding-top: $base-padding * 3
+
 .product-option-label
-  display: none
+  opacity: 0
   font-size: 12px
-  left: 15px
-  top: 17px
-  z-index: -1
+  left: 0
+  line-height: 1em
+  position: absolute
+  top: $base-padding * 1.5
+  visibility: hidden
+  z-index: 0
 
   .focused &
-    display: block
-    z-index: 1
+    opacity: 1
+    visibility: visible
 
 .product-form-quantity-button
   +flexbox
@@ -141,7 +150,7 @@
   font-size: 20px
   font-weight: bold
   margin-left: $base-padding
-  padding: $base-padding * 2
+  padding: 0 $base-padding * 2
   position: relative
   height: 64px
 
@@ -265,12 +274,14 @@
 .product-inventory
   display: none
 
-
 .inventory-bars
   font-size: 14px
   list-style: none
   margin: 0
   padding: 0
+
+.inventory-option-name
+  font-size: 16px
 
 .inventory-bar
   font-weight: bold

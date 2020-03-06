@@ -88,8 +88,7 @@
   +flexbox
   +flex-wrap(wrap)
   +justify-content(flex-start)
-  margin: 0 -#{"{{ theme.grid_gutters }}"}
-  margin-top: #{"{{ theme.grid_gutters }}"}
+  margin: #{"{{ theme.grid_gutters }}"} -#{"{{ theme.grid_gutters }}"}
 
   @media screen and (max-width: $break-medium)
     width: auto
@@ -169,9 +168,19 @@
         *
           color: $background-color
 
-      &:hover, &:active, &:focus
+      &:hover, &:focus
         .product-list-item-info
           opacity: 1
+
+        .open-quickview
+          border: 2px solid $button-text-color
+
+          &:hover, &:focus
+            background-color: $button-text-color
+            color: $button-background-color
+
+            svg
+              fill: $button-background-color
 
         img
           +all-transitions
@@ -247,11 +256,13 @@
 
 .open-quickview
   +flexbox
+  +transition(none)
+  border: 2px solid transparent
   bottom: $base-padding * 2
   height: auto
   left: $base-padding * 2
   margin-top: auto
-  padding: $base-padding * 2 $base-padding * 2
+  padding: $base-padding * 1.5 $base-padding * 2
   position: relative
   width: calc(100% - 8px * 4)
   z-index: 5
@@ -262,6 +273,7 @@
     width: 100%
 
   .open-quickview-icon
+    +transition(none)
     fill: $button-text-color
     margin-left: auto
 

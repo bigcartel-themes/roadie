@@ -26,6 +26,8 @@ function processProduct(product) {
         enableSelectOption($(element));
       }
     });
+    $('.shrink-option-label').removeClass('filled');
+    $('.product-option-select-container').removeClass('focused');
     setInitialProductOptionStatuses(product);
   })
 }

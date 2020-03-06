@@ -1,6 +1,6 @@
 @import 'variables'
 
-.quick-shop-modal
+.qs-modal
   height: 100vh
   left: 0
   opacity: 0
@@ -14,48 +14,74 @@
     opacity: 1
     visibility: visible
 
-.quick-shop-modal-content
-  +transform(translateX(-50%) translateY(-20%))
+.qs-modal-content
+  +transform(translateX(-50%))
   background: $background-color
   border: $medium-border
-  height: 80vh
+  height: calc(100vh - 80px)
   left: 50%
   max-width: 1024px
   overflow: scroll
-  padding: $base-padding $base-padding * 3
+  padding: $base-padding * 2 $base-padding * 3
   position: fixed
-  top: 20%
+  top: 40px
   width: 100%
   z-index: 1001
 
-.quick-shop-modal-background
+.qs-modal-background
   background-color: $background-color
   height: 100%
   opacity: .9
   width: 100%
 
-.quick-shop-modal-controls
+.qs-modal-controls
   +flexbox
   +align-items(center)
-  +justify-content(flex-end)
+  +justify-content(flex-start)
   border-bottom: $medium-border
+  padding-bottom: $base-padding * 2
 
-.quick-shop-modal-button
+.qs-modal-controls-arrows
+  +flexbox
+  +align-items(center)
+  margin-left: auto
+
+.qs-modal-controls-close
+  +flexbox
+  +align-items(center)
+  font-size: 24px
+  font-weight: bold
+
+.qs-modal-button
   background: none
-  padding: $base-padding
+  display: inline-block
+  height: auto
+  margin-right: $base-padding
+  padding: 0
 
   svg
+    display: block
     fill: $primary-text-color
-    height: 24px
-    width: 24px
 
-.quick-shop-close
-  margin-right: auto
+  &:hover, &:focus
+    background: none
 
-.quick-shop-product-details
-  overflow-x: scroll
-  padding-top: $base-padding * 2
+    svg
+      fill: $link-hover-color
+
+.qs-nav-next
+  margin-left: $base-padding * 2
+  margin-right: 0
+
+.qs-product-container
+  height: calc(100% - 64px)
+  overflow: scroll
+
+.qs-product-details
   width: 100%
+
+  .page-title
+    padding: $base-padding 0
 
   .related-products-container
     display: none
