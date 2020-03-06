@@ -101,16 +101,17 @@ body
   position: relative
 
   .sidebar-nav-links
-    max-height: 172px
-    overflow: scroll
+    margin-bottom: 0
+    max-height: 158px
+    overflow: auto
 
   &:last-of-type
     margin-right: 0
 
 .scroll-more
-  bottom: 8px
+  bottom: -2px
   display: none
-  height: 32px
+  height: 31px
   position: absolute
   width: 100%
 
@@ -122,8 +123,11 @@ body
 .secondary-above-header-nav
   +flexbox
   +justify-content(flex-end)
-  height: 1.5em
-  margin-bottom: $base-padding / 2
+  padding-bottom: $base-padding
+
+  .header-cart-icon
+    position: relative
+    top: 3px
 
 header
   border-bottom: $large-border
@@ -460,6 +464,7 @@ _:-ms-fullscreen, :root .content-wrapper
     border-right: $small-border
     height: 100%
     margin-right: $base-padding * 2
+    margin-top: 2px
     padding-right: $base-padding * 2
 
   .search-input
@@ -468,6 +473,7 @@ _:-ms-fullscreen, :root .content-wrapper
     font-weight: bold
     height: 40px
     line-height: 40px
+    margin-right: $base-padding / 2
 
     .secondary-above-header-nav &
       font-size: 24px

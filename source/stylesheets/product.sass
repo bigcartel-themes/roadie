@@ -29,8 +29,9 @@
   padding: $base-padding * 2 0
 
   @media screen and (min-width: $break-large + 1)
-    +flexbox
-    +flex-direction(row)
+    .full-width &
+      +flexbox
+      +flex-direction(row)
 
 .primary-product-image
   display: block
@@ -39,8 +40,10 @@
 
 .primary-product-image-link
   @media screen and (min-width: $break-large + 1)
-    +flex(1 0 80%)
     order: 2
+
+    .full-width &
+      +flex(1 0 80%)
 
     .right-sidebar &
       order: 1
@@ -49,9 +52,11 @@
   +flexbox
 
   @media screen and (min-width: $break-large + 1)
-    +flex(1 0 20%)
-    +flex-direction(column)
     order: 1
+
+    .full-width &
+      +flex(1 0 20%)
+      +flex-direction(column)
 
     .right-sidebar &
       order: 2
@@ -62,7 +67,8 @@
     width: 20%
 
     @media screen and (min-width: $break-large + 1)
-      width: 100%
+      .full-width &
+        width: 100%
 
     img
       display: block
