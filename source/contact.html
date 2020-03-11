@@ -9,8 +9,8 @@
   </ul>
 {% endif %}
 {% if contact.sent %}
-  Your message has been sent and we'll get back to you soon.
-  <a href="/products" class="button">Continue shopping</a>
+  <div class="empty-products">Your message has been sent! We'll get back to you soon.</div>
+  <a href="/products" class="button start-shopping-button">Continue shopping</a>
 {% else %}
   <form method="post" action="/contact" class="contact-form">
     <div class="form-group contact-form-group">

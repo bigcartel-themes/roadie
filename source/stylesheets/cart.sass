@@ -27,7 +27,7 @@
   &:last-child
     border-bottom: none
 
-.cart-item-remove
+button.cart-item-remove
   margin-right: $base-padding * 2
   padding: 0
   height: 24px
@@ -60,6 +60,9 @@
   padding-right: $base-padding * 3
   text-decoration: none
   width: 50%
+
+  @media screen and (max-width: $break-small)
+    width: calc(100% - 96px - 56px)
 
 .cart-item-details-name
   font-size: 20px
@@ -96,7 +99,7 @@
   text-align: center
   width: $base-padding * 6
 
-.qty-button
+button.qty-button
   height: 20px
   line-height: 1em
   padding: 0
@@ -165,3 +168,13 @@
   margin: 0 auto
   width: 340px
 
+.page-heading .continue-shopping-link
+  display: none
+
+@media screen and (max-width: $break-small)
+  .cart-sub-footer .continue-shopping-link
+    display: none
+
+  .page-heading .continue-shopping-link
+    display: block
+    margin-left: auto

@@ -17,19 +17,21 @@
   color: $primary-text-color
   margin-right: $base-padding * 4
   position: relative
-  width: 160px
 
   > a
     color: $primary-text-color
     display: block
     font-weight: bold
+    line-height: 48px
     position: relative
     text-decoration: none
 
-    &:hover, &:focus
-      background: $background-color
-      color: $link-hover-color
-      outline: 0
+    span
+      border-bottom: $medium-border
+      border-color: transparent
+      font-size: 20px
+      padding-right: 24px
+      padding-bottom: 8px
 
     svg
       +transform(translateY(-50%))
@@ -49,7 +51,7 @@
   padding: $base-padding
   position: absolute
   top: 100%
-  z-index: 100
+  z-index: 0
 
 .horizontal-nav-link
   position: static
@@ -65,8 +67,6 @@
       color: $link-hover-color
       text-decoration: underline
 
-
-/* Top level hover state, preserve hover state when hovering dropdown  */
 .nav li:focus > a,
 .nav li:hover > a,
 .nav li:focus-within > a
@@ -74,10 +74,15 @@
   color: $link-hover-color
   outline: 0
 
-  > svg
+  span
+    border-color: $border-color
+
+  svg
     fill: $link-hover-color
 
 .nav li:hover ul, .nav li:focus ul, ul.show-menu
   left: 0
   right: auto
   opacity: 1
+  top: calc(100% - 4px)
+  z-index: 100

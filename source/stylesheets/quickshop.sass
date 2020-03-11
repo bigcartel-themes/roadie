@@ -28,6 +28,11 @@
   width: 100%
   z-index: 1001
 
+  @media screen and (max-width: $break-small)
+    height: 100vh
+    top: 0
+
+
 .qs-modal-background
   background-color: $background-color
   height: 100%
@@ -52,7 +57,7 @@
   font-size: 24px
   font-weight: bold
 
-.qs-modal-button
+button.qs-modal-button
   background: none
   display: inline-block
   height: auto
@@ -64,10 +69,10 @@
     fill: $primary-text-color
 
   &:hover, &:focus
-    background: none
+    background: none !important
 
     svg
-      fill: $link-hover-color
+      fill: $link-hover-color !important
 
 .qs-nav-next
   margin-left: $base-padding * 2
@@ -78,6 +83,7 @@
   overflow: scroll
 
 .qs-product-details
+  padding-bottom: $base-padding * 2
   width: 100%
 
   .page-title

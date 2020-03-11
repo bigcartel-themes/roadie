@@ -1,30 +1,7 @@
 $(document).ready(function() {
   $('.nav').setup_navigation();
 
-  $('.nav > li[aria-haspopup="true"] > a').click(function(e) {
-    e.preventDefault();
-    if ($(window).width() <= 768) {
-      var list_element = $(this).next('ul');
-      if ($('.nav > li[aria-haspopup="true"] > ul').not(list_element).length) {
-        $('.nav > li[aria-haspopup="true"] > ul').not(list_element).slideUp('fast', function() {
-          toggleList(list_element);
-        });
-      }
-      else {
-        toggleList(list_element);
-      }
-    }
-  });
-  function toggleList(list_element) {
-    list_element.slideToggle('fast', function() {
-      if (list_element.is(":hidden")) {
-        list_element.attr("aria-hidden", "true")
-      }
-      else {
-        list_element.attr("aria-hidden", "false")
-      }
-    });
-  }
+
 });
 $.fn.setup_navigation = function(settings) {
   settings = jQuery.extend({
@@ -34,7 +11,6 @@ $.fn.setup_navigation = function(settings) {
   var top_level_links = $(this).find('> li > a');
   $(top_level_links).attr('tabindex','0');
   $(top_level_links).next('ul')
-    .attr('data-test','true')
     .attr({ 'aria-hidden': 'true', 'role': 'menu' })
     .find('a')
       .attr('tabIndex',-1);

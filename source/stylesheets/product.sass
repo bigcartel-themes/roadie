@@ -75,9 +75,16 @@
       width: 100%
 
 .product-details
-  +flex(0 0 328px)
+  +flex(0 0 386px)
   order: 2
   padding-left: $base-padding * 2
+
+  .sidebar-visible &
+    +flex(0 0 328px)
+
+  @media screen and (min-width: $break-product-details + 1)
+    .no-sidebar &, .full-width &
+      +flex(0 0 386px)
 
   @media screen and (min-width: $break-large + 1)
     .full-width &
@@ -174,7 +181,6 @@
     color: $button-text-color
     font-size: 20px
     font-weight: bold
-    padding-left: $base-padding * 1.5
     text-align: center
     width: 100%
 
@@ -189,6 +195,14 @@
   padding: 0 $base-padding * 2
   position: relative
   height: 64px
+
+  &:hover, &:focus
+    &.spinner:before
+      border-color: $button-hover-text-color
+      border-top-color: $button-hover-background-color
+
+  &.adding .button-add-icon
+    display: none
 
 .button-add-price
   display: none
@@ -205,7 +219,11 @@
   right: $base-padding * 2
   top: 50%
 
+  .check-icon
+    display: none
+
   svg
+    display: block
     fill: $button-text-color
 
 .product-form-cart-link-container
@@ -277,14 +295,16 @@
   +flexbox
   +align-items(center)
   +justify-content(space-around)
-  border: $small-border
+  border-top: $medium-border
+  border-bottom: $small-border
   border-color: $button-background-color
   font-size: 14px
   margin-bottom: $base-padding * 2
 
-.description-inventory-tab
+button.description-inventory-tab
   +flex-basis(50%)
   background: $background-color
+  border: none
   color: $primary-text-color
   font-size: 14px
   font-weight: normal
@@ -295,13 +315,13 @@
 
   &:hover, &:focus
     background-color: $background-color
+    color: $primary-text-color
     text-decoration: underline
 
   &.active-tab
-    background-color: $button-background-color
-    color: $button-text-color
+    color: $primary-text-color
     font-weight: bold
-    text-decoration: none
+    text-decoration: underline
 
   &:first-of-type
     border-right: $small-border
@@ -343,3 +363,24 @@
   margin-bottom: 0
   padding-bottom: $base-padding
 
+@keyframes spinner
+  to
+    transform: rotate(360deg)
+
+.spinner:before
+  +animation(spinner .6s linear infinite)
+  border-radius: 50%
+  border: 2px solid $button-text-color
+  border-top: 2px solid $button-background-color
+  content: ''
+  height: 20px
+  margin-top: -13px
+  right: 12px
+  position: absolute
+  top: 50%
+  width: 20px
+
+
+input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-outer-spin-button
+  +appearance(none)
+  margin: 0

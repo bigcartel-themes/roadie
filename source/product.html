@@ -40,7 +40,7 @@
     </div>
   </div>
 
-  <div class="product-details">
+  <div class="product-details product-{{ product.status }}">
     {% if product.status == 'active' %}
       <form method="post" class="product-form {% if theme.show_sold_out_product_options %}show-sold-out{% else %}hide-sold-out{% endif %}" action="/cart" accept-charset="utf8">
         <input type="hidden" name="utf8" value='✓'>
@@ -80,16 +80,21 @@
         {% endif %}
         <div class="product-form-controls">
           <div class="product-form-quantity-button">
-            <div class="product-form-quantity">
+            <div class="product-form-quantity {% unless product.has_default_option %}disabled{% endunless %}">
               <label class="product-quantity-label" for="quantity" aria-label="Enter quantity">Qty</label>
-              <input autocomplete="off" type="number" class="product-quantity" id="quantity" name="cart[add][quantity]" type="text" min="1" value="1">
+              <input autocomplete="off" type="number" class="product-quantity" id="quantity" name="cart[add][quantity]" type="text" min="1" value="1" {% unless product.has_default_option %}disabled="disabled"{% endunless %}>
             </div>
 
-            <button class="button add-to-cart-button" name="submit" type="submit" title="Add to Cart" data-adding-text="Adding..." data-added-text="Added!" data-add-title="Add to Cart" data-sold-title="Sold out"{% if product.has_default_option %}{% else %}disabled="disabled"{% endif %}>
+            <button class="button add-to-cart-button" name="submit" type="submit" title="Add to Cart" data-adding-text="Adding..." data-added-text="Added!" data-add-title="Add to Cart" data-sold-title="Sold out"{% unless product.has_default_option %}disabled="disabled"{% endunless %}>
               <span class="button-add-price {% if product.has_default_option %} visible{% endif %}">{{ product.default_price | money: theme.money_format }}</span>
               <span class="button-add-text">Add to Cart</span>
-              <span class="button-add-icon"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M9 0v7h7v2H9v7H7V8.999L0 9V7l7-.001V0z" fill-rule="evenodd"/></svg></span>
+              <span class="button-add-icon">
+                <svg class="plus-icon" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M9 0v7h7v2H9v7H7V8.999L0 9V7l7-.001V0z" fill-rule="evenodd"/></svg>
+
+                <svg class="check-icon" aria-hidden="true" width="21" height="16" viewBox="0 0 21 16" xmlns="http://www.w3.org/2000/svg"><path d="M1.39130435 8.34782609l4.86956522 4.86956521L19.4782609 0l1.3913043 1.39130435L6.26086957 16 0 9.73913043z" fill-rule="evenodd"/></svg>
+              </span>
             </button>
+
 
             <div class="product-form-cart-link-container">
               <a class="product-form-cart-link" href="/cart">
@@ -106,9 +111,9 @@
             </div>
           {% endif %}
 
-          <!--
+
           {{ store | instant_checkout_button: 'dark', '44px' }}
-          -->
+
         </div>
       </form>
     {% endif %}
@@ -188,6 +193,7 @@
                         <button class="button open-quickview" data-permalink="{{ category_product.permalink }}" data-has-default="{{ category_product.has_default_option }}">
                           <span class="open-quickview-text">Quick View</span>
                           <svg aria-hidden="true" class="open-quickview-icon" width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><path d="M2 5.00001907V2.00003099h2.99998808v-2H0v4.99998808h2zm11.9999785 0V.00003099H8.99997854v2h2.99999996v2.99998808h2zm0 8.99997853V9.00000954h-2v2.99999996H8.99997854v1.9999881h4.99999996zm-8.99999042 0v-1.9999881H2V9.00000954H0v4.99998806h4.99998808z" fill-rule="nonzero"/></svg>
+
                         </button>
                       </div>
                     {% endif %}
@@ -205,6 +211,12 @@
                       {% endif %}
                     </div>
                     {% if product_status != blank and theme.product_badge_style == 'inline' %}<div class="prod-thumb-status {{ theme.product_badge_style }}">{{ product_status }}</div>{% endif %}
+                    {% if theme.show_quickview and theme.mobile_product_grid_style == 'horizontal' %}
+                      <button class="button open-quickview mobile-stacked-quickview" data-permalink="{{ category_product.permalink }}" data-has-default="{{ category_product.has_default_option }}">
+                        <span class="open-quickview-text">Quick View</span>
+                        <svg aria-hidden="true" class="open-quickview-icon" width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><path d="M2 5.00001907V2.00003099h2.99998808v-2H0v4.99998808h2zm11.9999785 0V.00003099H8.99997854v2h2.99999996v2.99998808h2zm0 8.99997853V9.00000954h-2v2.99999996H8.99997854v1.9999881h4.99999996zm-8.99999042 0v-1.9999881H2V9.00000954H0v4.99998806h4.99998808z" fill-rule="nonzero"/></svg>
+                      </button>
+                    {% endif %}
                   </div>
                 </div>
               </a>
