@@ -29,13 +29,15 @@
 
 <div class="product-page-columns">
   <div class="product-images {{ theme.product_image_zooming }}">
-    <a class="product-image-link primary-product-image-link" href="{{ product.image | product_image_url | constrain: 1500 }}">
+    <div class="primary-product-image-container">
       <img class="primary-product-image" src="{{ product.image | product_image_url | constrain: 1000 }}" data-zoom="{{ product.image | product_image_url | constrain: 1500 }}" alt="Image of {{ product.name | escape }}">
-    </a>
+    </div>
 
-    <div class="secondary-images">
+    <div class="secondary-images secondary-{{ theme.secondary_product_images }}">
       {% for image in product.images %}
-        <a class="product-image-link secondary-product-image-link" href="{{ image | product_image_url | constrain: 1500 }}"><img src="{{ image | product_image_url | constrain: 1000 }}" alt="Image of {{ product.name | escape }}"></a>
+        <a class="product-image-link secondary-product-image-link" href="{{ image | product_image_url | constrain: 1500 }}">
+          <img src="{{ image | product_image_url | constrain: 1000 }}" alt="Image of {{ product.name | escape }}">
+        </a>
       {% endfor %}
     </div>
   </div>
@@ -120,8 +122,8 @@
 
     {% if product.description != blank and theme.show_inventory_bars and product.status == 'active' %}
       <div class="description-inventory-tabs">
-        <button class="button description-inventory-tab active-tab" data-tab="product-description">Description</button>
-        <button class="button description-inventory-tab" data-tab="product-inventory">Inventory</button>
+        <button class="button min-btn description-inventory-tab active-tab" data-tab="product-description">Description</button>
+        <button class="button min-btn description-inventory-tab" data-tab="product-inventory">Inventory</button>
       </div>
     {% endif %}
     {% if product.description != blank %}
@@ -190,10 +192,9 @@
                     {% if theme.show_quickview %}
                       <div class="product-list-quickview-container">
                         <div class="product-list-quickview-container-background"></div>
-                        <button class="button open-quickview" data-permalink="{{ category_product.permalink }}" data-has-default="{{ category_product.has_default_option }}">
+                        <button class="button open-quickview" data-permalink="{{ category_product.permalink }}" data-has-default="{{ category_product.has_default_option }}" title="Quick view {{ category_product.name | escape }}">
                           <span class="open-quickview-text">Quick View</span>
                           <svg aria-hidden="true" class="open-quickview-icon" width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><path d="M2 5.00001907V2.00003099h2.99998808v-2H0v4.99998808h2zm11.9999785 0V.00003099H8.99997854v2h2.99999996v2.99998808h2zm0 8.99997853V9.00000954h-2v2.99999996H8.99997854v1.9999881h4.99999996zm-8.99999042 0v-1.9999881H2V9.00000954H0v4.99998806h4.99998808z" fill-rule="nonzero"/></svg>
-
                         </button>
                       </div>
                     {% endif %}
@@ -212,7 +213,7 @@
                     </div>
                     {% if product_status != blank and theme.product_badge_style == 'inline' %}<div class="prod-thumb-status {{ theme.product_badge_style }}">{{ product_status }}</div>{% endif %}
                     {% if theme.show_quickview and theme.mobile_product_grid_style == 'horizontal' %}
-                      <button class="button open-quickview mobile-stacked-quickview" data-permalink="{{ category_product.permalink }}" data-has-default="{{ category_product.has_default_option }}">
+                      <button class="button open-quickview mobile-stacked-quickview" data-permalink="{{ category_product.permalink }}" data-has-default="{{ category_product.has_default_option }}" title="Quick view {{ category_product.name | escape }}">
                         <span class="open-quickview-text">Quick View</span>
                         <svg aria-hidden="true" class="open-quickview-icon" width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><path d="M2 5.00001907V2.00003099h2.99998808v-2H0v4.99998808h2zm11.9999785 0V.00003099H8.99997854v2h2.99999996v2.99998808h2zm0 8.99997853V9.00000954h-2v2.99999996H8.99997854v1.9999881h4.99999996zm-8.99999042 0v-1.9999881H2V9.00000954H0v4.99998806h4.99998808z" fill-rule="nonzero"/></svg>
                       </button>
