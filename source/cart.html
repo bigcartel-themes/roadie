@@ -1,4 +1,4 @@
-<div class="page-heading">
+<div class="page-heading{% if cart.item_count == 0 %} empty-cart-heading{% endif %}">
   <h1 class="page-title">{{ page.name }}</h1>
   <a class="icon-link icon-left-link continue-shopping-link" href="/products">
     <svg width="16" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.996638 20L8e-7 10.00336286l.0035344-.00381736L8e-7 9.9966371 9.996638 0l1.87436943 1.8743695L5.2460074 8.5H20.442436v3H5.2460074l6.62500003 6.62563054z" fill-rule="evenodd"/></svg>

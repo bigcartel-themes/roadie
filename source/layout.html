@@ -428,6 +428,8 @@
               setStyles();
             }
           }
+        {% else %}
+          $('body').addClass('sidebar-visible');
         {% endif %}
         if (!localStorage.getItem('show-sidebar-categories')) {
           localStorage.setItem('show-sidebar-categories','visible');

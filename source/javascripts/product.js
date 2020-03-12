@@ -116,7 +116,7 @@ if (!is_touch_device()) {
       onHide: null,
       injectBaseStyles: true,
       hoverDelay: 0,
-      touchDelay: 400,
+      touchDelay: 100,
       hoverBoundingBox: false,
       touchBoundingBox: false,
       boundingBoxContainer: document.body,
