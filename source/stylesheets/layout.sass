@@ -268,6 +268,9 @@ header
   margin: 0 auto
   max-width: 100%
 
+  .has-sidebar &
+    max-height: 100px
+
   @media screen and (max-width: $break-small)
     max-height: 70px
 
@@ -333,7 +336,6 @@ header
 
 .content-wrapper
   +flexbox
-  +flex(1)
 
   &.under-header
     +flex-direction(column)
@@ -351,9 +353,6 @@ header
 
       .main
         order: 1
-
-_:-ms-fullscreen, :root .content-wrapper
-  +flex(1 0 auto)
 
 .horizontal-navigation-bar
   +flexbox
@@ -631,7 +630,6 @@ _:-ms-fullscreen, :root .content-wrapper
 
 footer
   +flexbox
-  flex-shrink: 0
 
   .social-links
     +justify-content(space-around)
@@ -672,20 +670,6 @@ h1
   text-align: center
   text-decoration: none
 
-  &.min-btn
-    background: none
-    color: $primary-text-color
-    display: inline-block
-    font-weight: bold
-
-    &:hover, &:focus
-      background: none
-      color: $link-hover-color
-      text-decoration: underline
-
-      svg
-        fill: $link-hover-color
-
   &:not(:disabled):hover, &:not(:disabled):focus
     background: $button-hover-background-color
     color: $button-hover-text-color
@@ -701,6 +685,20 @@ h1
     &:hover, &:focus
       background: $button-background-color
       color: $button-text-color
+
+  &.min-btn
+    background: none
+    color: $primary-text-color
+    display: inline-block
+    font-weight: bold
+
+    &:hover, &:focus
+      background: none
+      color: $link-hover-color
+      text-decoration: underline
+
+      svg
+        fill: $link-hover-color
 
 .has-right-icon
   +flexbox
