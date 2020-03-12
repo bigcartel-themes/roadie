@@ -46,7 +46,7 @@
                   {% if theme.show_quickview %}
                     <div class="product-list-quickview-container">
                       <div class="product-list-quickview-container-background"></div>
-                      <button class="button open-quickview" data-permalink="{{ product.permalink }}" data-has-default="{{ product.has_default_option }}" title="Quick view {{ product.name | escape }}">
+                      <button class="button open-quickview" data-permalink="{{ product.permalink }}" data-has-default="{{ product.has_default_option }}" title="Quick view {{ product.name | escape }}" tabindex="-1">
                         <span class="open-quickview-text">Quick View</span>
                         <svg aria-hidden="true" class="open-quickview-icon" width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><path d="M2 5.00001907V2.00003099h2.99998808v-2H0v4.99998808h2zm11.9999785 0V.00003099H8.99997854v2h2.99999996v2.99998808h2zm0 8.99997853V9.00000954h-2v2.99999996H8.99997854v1.9999881h4.99999996zm-8.99999042 0v-1.9999881H2V9.00000954H0v4.99998806h4.99998808z" fill-rule="nonzero"/></svg>
                       </button>

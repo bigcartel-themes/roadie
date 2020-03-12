@@ -21,7 +21,6 @@
   height: calc(100vh - 80px)
   left: 50%
   max-width: 1024px
-  overflow: scroll
   padding: $base-padding * 2 $base-padding * 3
   position: fixed
   top: 40px
@@ -31,7 +30,6 @@
   @media screen and (max-width: $break-small)
     height: 100vh
     top: 0
-
 
 .qs-modal-background
   background-color: $background-color
@@ -57,7 +55,7 @@
   font-size: 24px
   font-weight: bold
 
-button.qs-modal-button
+.button.qs-modal-button
   background: none
   display: inline-block
   height: auto
@@ -80,7 +78,7 @@ button.qs-modal-button
 
 .qs-product-container
   height: calc(100% - 64px)
-  overflow: scroll
+  overflow-y: scroll
 
 .qs-product-details
   padding-bottom: $base-padding * 2

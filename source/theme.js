@@ -5,4 +5,5 @@
 //= require javascripts/product
 //= require javascripts/quickshop
 //= require javascripts/navigation
+//= require javascripts/cart
 //= require javascripts/product-option-groups

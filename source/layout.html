@@ -28,7 +28,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{{ theme | theme_css_url }}" media="screen" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600&display=swap" rel="stylesheet">
     {{ head_content }}
 
   </head>
@@ -53,7 +52,7 @@
               <div class="header-branding">
                 <a class="header-home-link" href="/" title="Home">
                   {% if theme.images.logo != blank %}
-                    <img class="store-logo" src="{{ theme.images.logo.url | constrain: 1800, 500 }}" alt="{{ store.name }} Home">
+                    <img alt="{{ store.name }} Home" class="store-logo" srcset="{{ theme.images.logo.url | constrain: 900,100 }} 1x, {{ theme.images.logo.url | constrain: 1800,200 }} 2x" src="{{ theme.images.logo.url | constrain: 1800,200 }}"/>
                   {% else %}
                     {{ store.name }}
                   {% endif %}
@@ -102,7 +101,7 @@
                 <input type="hidden" name="utf8" value='✓'>
                 <label for="search-input" class="visually-hidden">Search products</label>
                 <input id="search-input" class="search-input" name="search" placeholder="Search" type="text" autocomplete="off" />
-                <button class="search-button" type="submit"><svg width="20" height="20" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M6.31895387 0c3.48986186 0 6.31895383 2.82909201 6.31895383 6.31895387 0 1.36478192-.4326703 2.62850826-1.1683262 3.66149429L16 14.5106083 14.5106083 16l-4.53016014-4.5304185c-1.03298603.7356559-2.29671237 1.1683262-3.66149429 1.1683262C2.82909201 12.6379077 0 9.80881573 0 6.31895387S2.82909201 0 6.31895387 0zm0 2.10631796c-2.32657457 0-4.21263591 1.88606134-4.21263591 4.21263591 0 2.32657458 1.88606134 4.21263593 4.21263591 4.21263593 2.32657458 0 4.21263593-1.88606135 4.21263593-4.21263593 0-2.32657457-1.88606135-4.21263591-4.21263593-4.21263591z" fill-rule="evenodd"/></svg></button>
+                <button class="button min-btn search-button" type="submit"><svg width="20" height="20" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M6.31895387 0c3.48986186 0 6.31895383 2.82909201 6.31895383 6.31895387 0 1.36478192-.4326703 2.62850826-1.1683262 3.66149429L16 14.5106083 14.5106083 16l-4.53016014-4.5304185c-1.03298603.7356559-2.29671237 1.1683262-3.66149429 1.1683262C2.82909201 12.6379077 0 9.80881573 0 6.31895387S2.82909201 0 6.31895387 0zm0 2.10631796c-2.32657457 0-4.21263591 1.88606134-4.21263591 4.21263591 0 2.32657458 1.88606134 4.21263593 4.21263591 4.21263593 2.32657458 0 4.21263593-1.88606135 4.21263593-4.21263593 0-2.32657457-1.88606135-4.21263591-4.21263593-4.21263591z" fill-rule="evenodd"/></svg></button>
               </form>
             {% endif %}
             <div>
@@ -127,7 +126,7 @@
           <div class="header-branding">
             <a class="header-home-link" href="/" title="Home">
               {% if theme.images.logo != blank %}
-                <img class="store-logo" src="{{ theme.images.logo.url | constrain: 1800, 500 }}" alt="{{ store.name }} Home">
+                <img alt="{{ store.name }} Home" class="store-logo" srcset="{{ theme.images.logo.url | constrain: 900,100 }} 1x, {{ theme.images.logo.url | constrain: 1800,200 }} 2x" src="{{ theme.images.logo.url | constrain: 1800,200 }}"/>
               {% else %}
                 {{ store.name }}
               {% endif %}
@@ -197,7 +196,7 @@
                     <input type="hidden" name="utf8" value='✓'>
                     <label for="search-input" class="visually-hidden">Search products</label>
                     <input id="search-input" class="search-input" name="search" placeholder="Search" type="text" autocomplete="off" />
-                    <button class="search-button" type="submit" title="Search"><svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M6.31895387 0c3.48986186 0 6.31895383 2.82909201 6.31895383 6.31895387 0 1.36478192-.4326703 2.62850826-1.1683262 3.66149429L16 14.5106083 14.5106083 16l-4.53016014-4.5304185c-1.03298603.7356559-2.29671237 1.1683262-3.66149429 1.1683262C2.82909201 12.6379077 0 9.80881573 0 6.31895387S2.82909201 0 6.31895387 0zm0 2.10631796c-2.32657457 0-4.21263591 1.88606134-4.21263591 4.21263591 0 2.32657458 1.88606134 4.21263593 4.21263591 4.21263593 2.32657458 0 4.21263593-1.88606135 4.21263593-4.21263593 0-2.32657457-1.88606135-4.21263591-4.21263593-4.21263591z" fill-rule="evenodd"/></svg></button>
+                    <button class="button min-btn search-button" type="submit" title="Search"><svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M6.31895387 0c3.48986186 0 6.31895383 2.82909201 6.31895383 6.31895387 0 1.36478192-.4326703 2.62850826-1.1683262 3.66149429L16 14.5106083 14.5106083 16l-4.53016014-4.5304185c-1.03298603.7356559-2.29671237 1.1683262-3.66149429 1.1683262C2.82909201 12.6379077 0 9.80881573 0 6.31895387S2.82909201 0 6.31895387 0zm0 2.10631796c-2.32657457 0-4.21263591 1.88606134-4.21263591 4.21263591 0 2.32657458 1.88606134 4.21263593 4.21263591 4.21263593 2.32657458 0 4.21263593-1.88606135 4.21263593-4.21263593 0-2.32657457-1.88606135-4.21263591-4.21263593-4.21263591z" fill-rule="evenodd"/></svg></button>
                   </form>
                 </section>
               {% endif %}
@@ -211,7 +210,7 @@
             <div class="header-branding">
               <a class="header-home-link" href="/" title="Home">
                 {% if theme.images.logo != blank %}
-                  <img class="store-logo" srcset="{{ theme.images.logo.url | constrain: 240 }} 1x, {{ theme.images.logo.url | constrain: 480 }} 2x" src="{{ theme.images.logo.url | constrain: 480 }}"/>
+                  <img alt="{{ store.name }} Home" class="store-logo" srcset="{{ theme.images.logo.url | constrain: 240 }} 1x, {{ theme.images.logo.url | constrain: 480 }} 2x" src="{{ theme.images.logo.url | constrain: 480 }}"/>
                 {% else %}
                   {{ store.name }}
                 {% endif %}
@@ -232,7 +231,7 @@
                   <input type="hidden" name="utf8" value='✓'>
                   <label for="search-input" class="visually-hidden">Search products</label>
                   <input id="search-input" class="search-input" name="search" placeholder="Search" type="text" autocomplete="off" />
-                  <button class="search-button" type="submit" title="Search"><svg width="18" height="18" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M6.31895387 0c3.48986186 0 6.31895383 2.82909201 6.31895383 6.31895387 0 1.36478192-.4326703 2.62850826-1.1683262 3.66149429L16 14.5106083 14.5106083 16l-4.53016014-4.5304185c-1.03298603.7356559-2.29671237 1.1683262-3.66149429 1.1683262C2.82909201 12.6379077 0 9.80881573 0 6.31895387S2.82909201 0 6.31895387 0zm0 2.10631796c-2.32657457 0-4.21263591 1.88606134-4.21263591 4.21263591 0 2.32657458 1.88606134 4.21263593 4.21263591 4.21263593 2.32657458 0 4.21263593-1.88606135 4.21263593-4.21263593 0-2.32657457-1.88606135-4.21263591-4.21263593-4.21263591z" fill-rule="evenodd"/></svg></button>
+                  <button class="button min-btn search-button" type="submit" title="Search"><svg width="18" height="18" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M6.31895387 0c3.48986186 0 6.31895383 2.82909201 6.31895383 6.31895387 0 1.36478192-.4326703 2.62850826-1.1683262 3.66149429L16 14.5106083 14.5106083 16l-4.53016014-4.5304185c-1.03298603.7356559-2.29671237 1.1683262-3.66149429 1.1683262C2.82909201 12.6379077 0 9.80881573 0 6.31895387S2.82909201 0 6.31895387 0zm0 2.10631796c-2.32657457 0-4.21263591 1.88606134-4.21263591 4.21263591 0 2.32657458 1.88606134 4.21263593 4.21263591 4.21263593 2.32657458 0 4.21263593-1.88606135 4.21263593-4.21263593 0-2.32657457-1.88606135-4.21263591-4.21263593-4.21263591z" fill-rule="evenodd"/></svg></button>
                 </form>
               </section>
             {% endif %}
@@ -389,10 +388,25 @@
       function setCookie(e,n,t){var o="";if(t){var i=new Date;i.setTime(i.getTime()+24*t*60*60*1e3),o="; expires="+i.toUTCString()}document.cookie=e+"="+(n||"")+o+"; path=/"}function getCookie(e){for(var n=e+"=",t=document.cookie.split(";"),o=0;o<t.length;o++){for(var i=t[o];" "==i.charAt(0);)i=i.substring(1,i.length);if(0==i.indexOf(n))return i.substring(n.length,i.length)}return null}function eraseCookie(e){document.cookie=e+"=; Max-Age=-99999999;"}String.prototype.hashCode=function(){var e,n=0;if(0===this.length)return n;for(e=0;e<this.length;e++)n=(n<<5)-n+this.charCodeAt(e),n|=0;return n},1==themeOptions.hasAnnouncement&&(announceDiv=document.getElementById("announce-message"),announcementMessage=document.querySelector(".announcement-message-text").innerHTML,hashedMessage=announcementMessage.hashCode(),cookieValue=getCookie("hide-announcement-message"),cookieValue?cookieValue!=hashedMessage?announceDiv.classList.toggle("visible"):announceDiv.parentNode.removeChild(announceDiv):announceDiv.classList.toggle("visible"));
     </script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="{{ 'api' | theme_js_url }}"></script>
+    <script type="text/javascript">
+      var formatMoney = Format.money;
+      Format.money = function(number) {
+        {% case theme.money_format %}
+        {% when 'sign' %}
+          return formatMoney(number, true, true, false);
+        {% when 'code' %}
+          return formatMoney(number, true, false, true);
+        {% when 'sign_and_code' %}
+          return formatMoney(number, true, true, true);
+        {% endcase %}
+      };
+    </script>
+    <script src="{{ theme | theme_js_url }}"></script>
     <script>
       if ($('body').hasClass('has-sidebar')) {
         {% if theme.show_sidebar_toggle %}
-          if ($(window).width() > 767) {
+          if ($(window).width() > 767 || inPreview) {
             if(!localStorage.getItem('sidebar')) {
               populateStorage();
             } else {
@@ -421,30 +435,16 @@
         if (!localStorage.getItem('show-sidebar-artists')) {
           localStorage.setItem('show-sidebar-artists','visible');
         }
-        if (localStorage.getItem('show-sidebar-categories') == 'hidden') {
-          $('.nav-section-categories').addClass('hidden-nav');
-        }
-        if (localStorage.getItem('show-sidebar-artists') == 'hidden') {
-          $('.nav-section-artists').addClass('hidden-nav');
-        }
+        {% if theme.allow_sidebar_section_collapse %}
+          if (localStorage.getItem('show-sidebar-categories') == 'hidden') {
+            $('.nav-section-categories').addClass('hidden-nav');
+          }
+          if (localStorage.getItem('show-sidebar-artists') == 'hidden') {
+            $('.nav-section-artists').addClass('hidden-nav');
+          }
+        {% endif %}
       }
     </script>
-    <script src="{{ 'api' | theme_js_url }}"></script>
-    <script type="text/javascript">
-      var formatMoney = Format.money;
-      Format.money = function(number) {
-        {% case theme.money_format %}
-        {% when 'sign' %}
-          return formatMoney(number, true, true, false);
-        {% when 'code' %}
-          return formatMoney(number, true, false, true);
-        {% when 'sign_and_code' %}
-          return formatMoney(number, true, true, true);
-        {% endcase %}
-      };
-    </script>
-    <script src="{{ theme | theme_js_url }}"></script>
-
     {% if page.full_url contains '/product/' %}
       <script>
         Product.find('{{ product.permalink }}', processProduct)

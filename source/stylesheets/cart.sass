@@ -17,26 +17,45 @@
   padding: 0
   width: 100%
 
+  @media screen and (max-width: $break-small)
+    border-bottom: $medium-border
+
 .cart-item
   +flexbox
   +align-items(center)
   +flex-wrap(wrap)
+  +justify-content(flex-start)
   border-bottom: $small-border
   padding: $base-padding * 2 0
+  position: relative
+
+  @media screen and (max-width: $break-small)
+    border-bottom: $medium-border
+    padding: $base-padding 0
 
   &:last-child
     border-bottom: none
 
-button.cart-item-remove
+.button.cart-item-remove
   margin-right: $base-padding * 2
   padding: 0
   height: 24px
   width: 24px
 
+  @media screen and (max-width: $break-small)
+    margin-right: 0
+    position: absolute
+    right: 0
+    top: $base-padding
+
   svg
     display: block
     height: 20px
     width: 20px
+
+    @media screen and (max-width: $break-small)
+      height: 24px
+      width: 24px
 
 .cart-item-image
   +flex-shrink(0)
@@ -45,6 +64,7 @@ button.cart-item-remove
   width: 112px
 
   @media screen and (max-width: $break-small)
+    +align-self(flex-start)
     height: 96px
     width: 96px
 
@@ -55,41 +75,78 @@ button.cart-item-remove
     width: 100%
 
 .cart-item-details
+  +flex(0 1 50%)
   color: $primary-text-color
   margin-left: $base-padding * 2
-  padding-right: $base-padding * 3
+  padding-right: $base-padding * 5
   text-decoration: none
-  width: 50%
+
+  .fixed-width.sidebar-visible &
+    +flex-basis(45%)
 
   @media screen and (max-width: $break-small)
-    width: calc(100% - 96px - 56px)
+    +align-self(flex-start)
+    +flex(1 1 calc(100% - 112px))
+    border-bottom: $small-border
+    margin-bottom: $base-padding
+    margin-left: $base-padding
+    min-height: 96px
+    padding-bottom: $base-padding
+    padding-right: $base-padding * 4
 
 .cart-item-details-name
   font-size: 20px
   font-weight: 600
+
+  @media screen and (max-width: $break-small)
+    font-size: 16px
 
 .cart-item-details-option
   font-size: 16px
   line-height: 1.5em
   margin-top: $base-padding
 
+  @media screen and (max-width: $break-small)
+    font-size: 14px
+    margin-top: $base-padding / 2
+
 .cart-item-details-unit-price
   +flex-shrink(0)
   margin-left: auto
   font-size: 20px
+  padding-right: $base-padding * 6
   text-align: right
+
+  .fixed-width &
+    display: none
+
+  @media screen and (max-width: $break-small)
+    display: none
+
+.cart-item-details-unit-price-inline
+  display: none
+  font-weight: bold
+  margin-top: $base-padding
+
+  .fixed-width &
+    display: block
+
+  @media screen and (max-width: $break-small)
+    display: block
+    margin-top: 0
 
 .cart-item-quantity-holder
   +flexbox
   +align-items(center)
-  padding-left: $base-padding * 4
-  padding-right: $base-padding * 4
+
+  @media screen and (max-width: $break-small)
+    margin-left: 104px
 
 .option-quantity
   +appearance(none)
   background: none
   border: none
-  border-bottom: $medium-border
+  border-bottom: $small-border
   border-radius: 0
   font-family: $primary-font
   font-size: 20px
@@ -99,21 +156,40 @@ button.cart-item-remove
   text-align: center
   width: $base-padding * 6
 
-button.qty-button
+  @media screen and (max-width: $break-small)
+    border-bottom: 0
+
+.button.qty-button
   height: 20px
   line-height: 1em
   padding: 0
   width: 20px
+
+  @media screen and (max-width: $break-small)
+    height: 24px
+    width: 24px
 
   svg
     display: block
     height: 20px
     width: 20px
 
+    @media screen and (max-width: $break-small)
+      height: 24px
+      width: 24px
+
 .cart-item-details-price
   +flex-shrink(0)
   font-size: 20px
   font-weight: 600
+  padding-left: $base-padding * 3
+  text-align: right
+
+  .fixed-width &
+    margin-left: auto
+
+  @media screen and (max-width: $break-small)
+    margin-left: auto
 
 .cart-footer
   padding-bottom: $base-padding * 2
@@ -126,16 +202,29 @@ button.qty-button
   margin-bottom: $base-padding * 2
   padding: $base-padding 0
 
+  @media screen and (max-width: $break-small)
+    border-bottom: 0
+    margin-bottom: 0
+    padding: $base-padding * 2 0
+
 .cart-subtotal
   +flexbox
   +align-items(center)
   font-size: 16px
   margin-left: auto
 
+  @media screen and (max-width: $break-small)
+    font-weight: bold
+    margin-left: 0
+    width: 100%
+
 .cart-subtotal-amount
   font-size: 24px
   font-weight: bold
   margin-left: $base-padding * 2
+
+  @media screen and (max-width: $break-small)
+    margin-left: auto
 
 .checkout-button
   font-size: 20px

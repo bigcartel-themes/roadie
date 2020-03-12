@@ -7,14 +7,20 @@ $(document).keyup(function(e) {
 
 $('body').on('click', ".open-quickview", function(e){
   e.preventDefault();
-  var permalink = $(this).data('permalink');
 
-  this_product = $(this).closest('.prod-thumb')
+  if (inPreview) {
+    alert('Sorry, quick view is unavailable in the Customize Design area');
+  }
+  else {
+    var permalink = $(this).data('permalink');
 
-  Product.find(permalink, function(product) {
-    processProduct(product);
-    loadProductContent(product, this_product);
-  });
+    this_product = $(this).closest('.prod-thumb')
+
+    Product.find(permalink, function(product) {
+      processProduct(product);
+      loadProductContent(product, this_product);
+    });
+  }
 });
 
 $('body').on('click', ".qs-nav", function(e){
@@ -33,6 +39,11 @@ $('.qs-close').click(function(e) {
   closeQuickShop();
 })
 
+$('body').on('click', ".qs-product-details .primary-product-image-link", function(e) {
+  e.preventDefault();
+  return false;
+});
+
 function closeQuickShop() {
   $('.qs-modal').removeClass('opened');
   $('body').removeClass('no-scroll');
@@ -40,34 +51,6 @@ function closeQuickShop() {
 function openQuickShop() {
   $('body').addClass('no-scroll');
   $('.qs-modal').addClass('opened');
-}
-
-function trapFocus(element, namespace) {
-    var focusableEls = element.querySelectorAll('a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled])'),
-        firstFocusableEl = focusableEls[0];
-        lastFocusableEl = focusableEls[focusableEls.length - 1];
-        KEYCODE_TAB = 9;
-
-    element.addEventListener('keydown', function(e) {
-        var isTabPressed = (e.key === 'Tab' || e.keyCode === KEYCODE_TAB);
-
-        if (!isTabPressed) {
-            return;
-        }
-
-        if ( e.shiftKey ) /* shift + tab */ {
-            if (document.activeElement === firstFocusableEl) {
-                lastFocusableEl.focus();
-                e.preventDefault();
-            }
-        } else /* tab */ {
-            if (document.activeElement === lastFocusableEl) {
-                firstFocusableEl.focus();
-                e.preventDefault();
-            }
-        }
-
-    });
 }
 
 $(document).mouseup(function (e) {
@@ -89,30 +72,32 @@ function loadProductContent(product) {
 
     $container.html($(response).find(".main")); // Any <script> tags in the response string will execute
     // post processing
-
+$('.qs-product-container').animate({
+    scrollTop: 0
+  }, 0);
     openQuickShop();
-
   });
 }
 
 function populatePreviousAndNext(this_product) {
-
+  $('.qs-nav').attr("disabled", false);
   previous_product = this_product.prev('.prod-thumb');
   next_product = this_product.next('.prod-thumb');
-
-  if (previous_product) {
+  if (previous_product.length > 0) {
     permalink = previous_product.find('.open-quickview').data('permalink');
     $('.qs-nav-previous').data('permalink',permalink)
   }
   else {
     $('.qs-nav-previous').data('permalink','')
+    $('.qs-nav-previous').attr("disabled", "disabled");
   }
 
-  if (next_product) {
+  if (next_product.length > 0) {
     permalink = next_product.find('.open-quickview').data('permalink');
     $('.qs-nav-next').data('permalink',permalink)
   }
   else {
     $('.qs-nav-next').data('permalink','')
+    $('.qs-nav-next').attr("disabled", "disabled");
   }
 }

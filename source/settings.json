@@ -1,6 +1,6 @@
 {
   "name": "Roadie",
-  "version": "0.0.041",
+  "version": "0.0.1",
   "images": [
     {
       "variable": "logo",
@@ -10,13 +10,12 @@
     {
       "variable": "background_image",
       "label": "Background Image",
-      "description": "Adds a repeating background image"
+      "description": "Adds a background image"
     },
     {
       "variable": "promo_image",
       "label": "Promo Image",
-      "description": "Adds an image to the Home page",
-      "default": "promo.png"
+      "description": "Adds an image to the Home page"
     }
   ],
   "fonts": [
@@ -38,6 +37,11 @@
       "default": "#000000"
     },
     {
+      "variable": "link_hover_color",
+      "label": "Link hover color",
+      "default": "#1b63a6"
+    },
+    {
       "variable": "border_color",
       "label": "Border Color",
       "default": "#000000"
@@ -55,12 +59,12 @@
     {
       "variable": "button_hover_background_color",
       "label": "Button Hover Background Color",
-      "default": "#ABABAB"
+      "default": "#1b63a6"
     },
     {
       "variable": "button_hover_text_color",
       "label": "Button Hover Text Color",
-      "default": "#000000"
+      "default": "#FFFFFF"
     },
     {
       "variable": "announcement_background_color",
@@ -70,11 +74,6 @@
     {
       "variable": "announcement_text_color",
       "label": "Announcement Message Text",
-      "default": "#FFFFFF"
-    },
-    {
-      "variable": "background_overlay_color",
-      "label": "Background overlay color",
       "default": "#FFFFFF"
     },
     {
@@ -93,21 +92,27 @@
       "variable": "announcement_message_text",
       "label": "Announcement text",
       "type": "text",
-      "description": "Displays an announcement message on the top of every page",
-      "default": "Welcome to my super cool shop. Use discount DISCOUNT for 10% off!"
+      "description": "Displays an announcement message on the top of every page"
     },
     {
       "variable": "theme_layout",
-      "label": "Theme layout",
+      "label": "Desktop Theme layout",
       "type": "select",
       "options": [
-        ["Nav above header", "above_header"],
-        ["Nav below header", "below_header"],
+        ["Navigation above header", "above_header"],
+        ["Navigation below header", "below_header"],
         ["Sidebar with header", "sidebar_header"],
         ["Sidebar without header", "sidebar_no_header"]
       ],
-      "default": "above_header",
+      "default": "below_header",
       "description": "Sets the overall theme layout on desktops and large screens"
+    },
+    {
+      "variable": "show_sidebar_toggle",
+      "label": "Show sidebar toggle on desktop",
+      "type": "boolean",
+      "default": true,
+      "description": "Allows the sidebar to be hidden via the hamburger menu"
     },
     {
       "variable": "sidebar_position",
@@ -118,18 +123,14 @@
         ["Right", "right"]
       ],
       "default": "left",
-      "description": "Sets the position the sidebar when enabled"
+      "description": "Sets the position the sidebar & product details"
     },
     {
-      "variable": "header_position",
-      "label": "Header position",
-      "type": "select",
-      "options": [
-        ["Left", "left"],
-        ["Center", "center"]
-      ],
-      "default": "center",
-      "description": "Sets the position of your logo or store name"
+      "variable": "allow_sidebar_section_collapse",
+      "label": "Allow sidebar sections to be collapsed",
+      "type": "boolean",
+      "default": true,
+      "description": "Allows customers to hide category/artist navigation in the sidebar"
     },
     {
       "variable": "layout_style",
@@ -146,19 +147,78 @@
       "variable": "show_layout_gutters",
       "label": "Show layout gutters",
       "type": "boolean",
-      "default": false,
+      "default": true,
       "description": "Show layout gutters"
     },
     {
-      "variable": "show_sidebar_toggle",
-      "label": "Always show sidebar toggle on desktop",
+      "variable": "header_position",
+      "label": "Header position",
+      "type": "select",
+      "options": [
+        ["Left", "left"],
+        ["Center", "center"]
+      ],
+      "default": "center",
+      "description": "Sets the position of your logo or store name"
+    },
+    {
+      "variable": "uppercase_text",
+      "label": "Uppercase text layout",
       "type": "boolean",
       "default": true,
-      "description": "Allows the sidebar to be hidden via the hamburger menu"
+      "description": "Shows all text in uppercase"
+    },
+    {
+      "variable": "border_style",
+      "label": "Border style",
+      "type": "select",
+      "options": [
+        ["Thick", "thick"],
+        ["Thin", "thin"]
+      ],
+      "default": "thick",
+      "description": "Sets the size of theme borders"
+    },
+    {
+      "variable": "background_image_layout",
+      "label": "Background image style",
+      "type": "select",
+      "options": [
+        ["Repeating", "repeating"],
+        ["Fixed", "fixed"]
+      ],
+      "default": "fixed",
+      "description": "Sets how to display the uploaded background image"
+    },
+    {
+      "variable": "background_image_style",
+      "label": "Background image overlay",
+      "type": "select",
+      "options": [
+        ["Plain background image", "plain_image"],
+        ["Transparent overlay", "transparent_color_overlay"],
+        ["Gradient overlay", "gradient_overlay"]
+      ],
+      "default": "gradient_overlay",
+      "description": "Sets the overlay style when a background image is used"
+    },
+    {
+      "variable": "enable_product_sorting",
+      "label": "Show product sorting dropdown",
+      "type": "boolean",
+      "default": true,
+      "description": "Show product sorting dropdown on Products page"
+    },
+    {
+      "variable": "show_quickview",
+      "label": "Show quick view",
+      "type": "boolean",
+      "default": true,
+      "description": "Shows quick view button on all product thumbnails"
     },
     {
       "variable": "product_list_layout",
-      "label": "Product List Layout",
+      "label": "Product grid layout",
       "type": "select",
       "options": [
           ["Masonry", "masonry"],
@@ -168,39 +228,16 @@
       "description": "The arrangement of your products on the Home and Products pages"
     },
     {
-      "variable": "product_badge_style",
-      "label": "Product Badge Style",
+      "variable": "product_grid_image_size",
+      "label": "Product grid image size",
       "type": "select",
       "options": [
-          ["Circle", "circle"],
-          ["Bar", "bar"],
-          ["Inline", "inline"]
+        ["Small", "small"],
+        ["Medium", "medium"],
+        ["Large", "large"]
       ],
-      "default": "inline",
-      "description": "The display of your product status on the Home and Products pages"
-    },
-    {
-      "variable": "product_detail_alignment",
-      "label": "Product detail alignment",
-      "type": "select",
-      "options": [
-          ["Left", "left"],
-          ["Center", "center"]
-      ],
-      "default": "center",
-      "description": "Alignment for product details under thumbnail images"
-    },
-    {
-      "variable": "grid_gutters",
-      "label": "Product grid spacing",
-      "type": "select",
-      "options": [
-        ["Large", "16px"],
-        ["Small", "8px"],
-        ["None", "0px"]
-      ],
-      "default": "8px",
-      "description": "Sets the spacing between each product thumbnail"
+      "default": "small",
+      "description": "Sets the size of product image thumbnails"
     },
     {
       "variable": "grid_image_style",
@@ -215,38 +252,40 @@
       "description": "Sets the display of thumbnail images"
     },
     {
-      "variable": "border_style",
-      "label": "Border style",
+      "variable": "grid_gutters",
+      "label": "Product grid spacing",
       "type": "select",
       "options": [
-        ["Thick", "thick"],
-        ["Thin", "thin"]
+        ["Large", "16px"],
+        ["Small", "8px"],
+        ["None", "0px"]
       ],
-      "default": "thick",
-      "description": "Sets the size of theme borders"
+      "default": "8px",
+      "description": "Sets the spacing between each product thumbnail"
+    },
+    {
+      "variable": "product_badge_style",
+      "label": "Product grid badges",
+      "type": "select",
+      "options": [
+          ["Circle", "circle"],
+          ["Bar", "bar"],
+          ["Inline", "inline"]
+      ],
+      "default": "bar",
+      "description": "The display of your product status on the Home and Products pages"
     },
     {
       "variable": "show_overlay",
-      "label": "Product list info",
+      "label": "Product grid info",
       "type": "select",
       "options": [
-        ["On rollover", "rollover"],
-        ["Under image", "under_image"]
+        ["On mouseover", "rollover"],
+        ["Left align under image", "under_image left-align"],
+        ["Center align under image", "under_image center-align"]
       ],
-      "default": "under_image",
-      "description": "Shows a product's name & price on hover, or under the image"
-    },
-    {
-      "variable": "product_grid_image_size",
-      "label": "Product grid image size",
-      "type": "select",
-      "options": [
-        ["Small", "small"],
-        ["Medium", "medium"],
-        ["Large", "large"]
-      ],
-      "default": "medium",
-      "description": "Sets the size of product image thumbnails"
+      "default": "under_image left-align",
+      "description": "Shows a product's name & price on mouseover, or under the image"
     },
     {
       "variable": "mobile_product_grid_style",
@@ -262,15 +301,21 @@
     },
     {
       "variable": "product_image_zooming",
-      "label": "Product image zooming",
+      "label": "Enable Desktop Product Image Zooming",
+      "type": "boolean",
+      "default": true,
+      "description": "Allow zooming of product detail images on hover"
+    },
+    {
+      "variable": "secondary_product_images",
+      "label": "Secondary product images",
       "type": "select",
       "options": [
-        ["Magnify on hover", "magnify-on-hover"],
-        ["Click to zoom", "click-to-zoom"],
-        ["Magnify + Click to zoom", "magnify-on-hover click-to-zoom"]
+        ["Full width", "full"],
+        ["Thumbnails", "thumbs"]
       ],
-      "default": "magnify-on-hover click-to-zoom",
-      "description": "Sets the mobile thumbnail display"
+      "default": "full",
+      "description": "Display secondary product images full-width or as thumbnails on the Product page"
     },
     {
       "variable": "featured_items",
@@ -293,7 +338,7 @@
       "label": "Products per page",
       "type": "select",
       "options": "1..100",
-      "default": 36,
+      "default": 24,
       "description": "The number of products shown per page"
     },
     {
@@ -301,7 +346,7 @@
       "label": "Number of related products",
       "type": "select",
       "options": "0..6",
-      "default": 2,
+      "default": 3,
       "description": "The number of related products to show on the Product page"
     },
     {
@@ -323,23 +368,9 @@
       "variable": "show_sold_out_product_options",
       "label": "Show sold out product options",
       "type": "boolean",
-      "default": true,
+      "default": false,
       "description": "Shows sold out product options in the Product page dropdowns",
       "requires": "inventory"
-    },
-    {
-      "variable": "show_quickview",
-      "label": "Show quickview",
-      "type": "boolean",
-      "default": true,
-      "description": "Shows quick view"
-    },
-    {
-      "variable": "uppercase_text",
-      "label": "Uppercase text layout",
-      "type": "boolean",
-      "default": true,
-      "description": "Shows all text in uppercase"
     },
     {
       "variable": "money_format",
@@ -356,36 +387,139 @@
       "variable": "twitter_url",
       "label": "Twitter URL",
       "type": "text",
-      "description": "Ex: http://twitter.com/bigcartel",
-      "default": "asdf"
+      "description": "Ex: http://twitter.com/bigcartel"
     },
     {
       "variable": "facebook_url",
       "label": "Facebook URL",
       "type": "text",
-      "description": "Ex: http://facebook.com/bigcartel",
-      "default": "asdf"
+      "description": "Ex: http://facebook.com/bigcartel"
     },
     {
       "variable": "tumblr_url",
       "label": "Tumblr URL",
       "type": "text",
-      "description": "Ex: http://bigcartel.tumblr.com",
-      "default": "asdf"
+      "description": "Ex: http://bigcartel.tumblr.com"
     },
     {
       "variable": "instagram_url",
       "label": "Instagram URL",
       "type": "text",
-      "description": "Ex: http://instagram.com/bigcartel",
-      "default": "asdf"
+      "description": "Ex: http://instagram.com/bigcartel"
     },
     {
       "variable": "pinterest_url",
       "label": "Pinterest URL",
       "type": "text",
-      "description": "Ex: http://pinterest.com/bigcartel",
-      "default": "asdf"
+      "description": "Ex: http://pinterest.com/bigcartel"
     }
-  ]
+  ],
+ "checkout": {
+    "optimize_legibility": "optimizeLegibility",
+    "header_image_max_width": "400px",
+    "header_image_max_height": "200px",
+    "antialias_text": "antialiased",
+    "header_image": "{{ logo }}",
+    "background_color": "{{ background_color }}",
+    "gutter_width": "28px",
+    "body_font": "{{ primary_font }}",
+    "body_font_size": "16px",
+    "step_header_font": "{{ primary_font }}",
+    "step_header_font_size": "20px",
+    "step_header_font_weight": "bold",
+    "title_font": "{{ primary_font }}",
+    "title_vertical_padding": "60px",
+    "title_background_color": "transparent",
+    "title_position": "center",
+    "title_font_size": "42px",
+    "title_font_weight": "bold",
+    "title_text_transform": "uppercase",
+    "title_color": "{{ primary_text_color }}",
+    "secondary_font": "{{ primary_font }}",
+    "secondary_font_size": "14px",
+    "content_border_radius": "0",
+    "content_header_vertical_padding": "28px",
+    "content_background_color": "{{ background_color }}",
+    "content_banded": "true",
+    "content_header_height": "120px",
+    "content_horizontal_padding": "0",
+    "content_header_background_color": "{{ background_color }}",
+    "content_border_color": "transparent",
+    "content_border_width": "0",
+    "content_primary_font_size": "24px",
+    "content_header_color": "{{ primary_text_color }}",
+    "content_color": "{{ primary_text_color }}",
+    "link_font_size": "14px",
+    "link_color": "{{ primary_text_color }}",
+    "link_hover_color": "{{ link_hover_color }}",
+    "error_border_width": "0",
+    "error_font_size": "16px",
+    "error_background_color": "#ea4859",
+    "error_color": "#ffffff",
+    "error_border_radius": "0",
+    "error_border_color": "#ea4859",
+    "custom_inputs": true,
+    "input_focus_color": "#000000",
+    "input_focus_background_color": "#ffffff",
+    "input_border_radius": "0",
+    "input_focus_border_color": "#000000",
+    "input_error_border_color": "#ea4859",
+    "input_color": "#000000",
+    "input_error_color": "#000000",
+    "input_border_color": "#8e8e8e",
+    "input_font_size": "16px",
+    "input_font": "{{ primary_font }}",
+    "input_horizontal_padding": "8px",
+    "input_border_width": "2px",
+    "input_height": "37px",
+    "input_background_color": "#ffffff",
+    "input_error_background_color": "#ffffff",
+    "label_text_transform": "normal",
+    "label_color": "#999999",
+    "label_font_weight": "normal",
+    "label_font_size": "16px",
+    "in_field_labels": false,
+    "button_border_color": "{{ button_background_color }}",
+    "button_border_radius": "0",
+    "button_hover_border_color": "{{ button_hover_background_color }}",
+    "button_height": "47px",
+    "button_border_width": "2px",
+    "button_font": "{{ primary_font }}",
+    "button_font_size": "16px",
+    "button_font_weight": "bold",
+    "button_text_transform": "uppercase",
+    "button_background_color": "{{ button_background_color }}",
+    "button_color": "{{ button_text_color }}",
+    "button_hover_color": "{{ button_hover_text_color }}",
+    "button_position": "center",
+    "button_hover_background_color": "{{ button_hover_background_color }}",
+    "step_inactive_header_color": "opacify({{ text_color }}, .25)",
+    "step_border_color": "{{ border_color }}",
+    "step_border_width": "4px",
+    "step_header_text_transform": "uppercase",
+    "step_background_color": "{{ background_color }}",
+    "step_inactive_border_color": "opacify({{ border_color }}, .25)",
+    "step_primary_font_weight": "normal",
+    "step_header_color": "{{ primary_text_color }}",
+    "step_header_position": "center",
+    "step_inactive_background_color": "{{ background_color }}",
+    "step_vertical_padding": "30px",
+    "step_primary_font_size": "24px",
+    "step_border_style": "solid",
+    "step_primary_font": "{{ primary_font }}",
+    "summary_inactive_item_border_color": "opacify({{ border_color }}, .25)",
+    "summary_font_size": "14px",
+    "summary_submit_background_color": "{{ background_color }}",
+    "summary_inactive_color": "opacify({{ primary_text_color }}, .25)",
+    "summary_submit_border_color": "opacify({{ border_color }}, .25)",
+    "summary_item_border_width": "1px",
+    "summary_item_border_color": "{{ border_color }}",
+    "summary_secondary_color": "{{ primary_text_color }}",
+    "summary_submit_border_width": "2px",
+    "summary_item_list_border_color": "{{ border_color }}",
+    "summary_inactive_secondary_color": "opacify({{ primary_text_color }}, .25)",
+    "summary_item_list_border_width": "2px",
+    "summary_color": "{{ primary_text_color }}",
+    "summary_inactive_item_list_border_color": "opacify({{ border_color }}, .25)"
+  }
 }

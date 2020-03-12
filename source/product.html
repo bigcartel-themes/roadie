@@ -28,18 +28,20 @@
 </div>
 
 <div class="product-page-columns">
-  <div class="product-images {{ theme.product_image_zooming }}">
+  <div class="product-images {% if theme.product_image_zooming %}product-image-zooming{% endif %}">
     <div class="primary-product-image-container">
       <img class="primary-product-image" src="{{ product.image | product_image_url | constrain: 1000 }}" data-zoom="{{ product.image | product_image_url | constrain: 1500 }}" alt="Image of {{ product.name | escape }}">
     </div>
 
-    <div class="secondary-images secondary-{{ theme.secondary_product_images }}">
-      {% for image in product.images %}
-        <a class="product-image-link secondary-product-image-link" href="{{ image | product_image_url | constrain: 1500 }}">
-          <img src="{{ image | product_image_url | constrain: 1000 }}" alt="Image of {{ product.name | escape }}">
-        </a>
-      {% endfor %}
-    </div>
+    {% if product.images.size > 1 %}
+      <div class="secondary-images secondary-{{ theme.secondary_product_images }}">
+        {% for image in product.images %}
+          <a class="product-image-link secondary-product-image-link" href="{{ image | product_image_url | constrain: 1000 }}" data-zoom="{{ image | product_image_url | constrain: 1500 }}">
+            <img src="{{ image | product_image_url | constrain: 400 }}" alt="Image of {{ product.name | escape }}">
+          </a>
+        {% endfor %}
+      </div>
+    {% endif %}
   </div>
 
   <div class="product-details product-{{ product.status }}">
@@ -132,7 +134,7 @@
       </div>
     {% endif %}
 
-    {% if theme.show_inventory_bars %}
+    {% if theme.show_inventory_bars and product.status == 'active' %}
       <div class="product-detail-tab-section product-inventory">
         <ul class="inventory-bars">
           {% for option in product.options %}
@@ -192,7 +194,7 @@
                     {% if theme.show_quickview %}
                       <div class="product-list-quickview-container">
                         <div class="product-list-quickview-container-background"></div>
-                        <button class="button open-quickview" data-permalink="{{ category_product.permalink }}" data-has-default="{{ category_product.has_default_option }}" title="Quick view {{ category_product.name | escape }}">
+                        <button class="button open-quickview" data-permalink="{{ category_product.permalink }}" data-has-default="{{ category_product.has_default_option }}" title="Quick view {{ category_product.name | escape }}" tabindex="-1">
                           <span class="open-quickview-text">Quick View</span>
                           <svg aria-hidden="true" class="open-quickview-icon" width="14" height="14" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg"><path d="M2 5.00001907V2.00003099h2.99998808v-2H0v4.99998808h2zm11.9999785 0V.00003099H8.99997854v2h2.99999996v2.99998808h2zm0 8.99997853V9.00000954h-2v2.99999996H8.99997854v1.9999881h4.99999996zm-8.99999042 0v-1.9999881H2V9.00000954H0v4.99998806h4.99998808z" fill-rule="nonzero"/></svg>
                         </button>

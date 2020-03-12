@@ -27,7 +27,7 @@
     top: 50%
     z-index: 1
 
-  &:hover, &:active, &:focus, &:focus-within
+  &:hover, &:focus, &:focus-within
     color: $primary-text-color
 
     svg
@@ -57,7 +57,6 @@ ul.sort-by-nav-links
   right: 0 !important
 
 .product-list-container
-  overflow: hidden
   position: relative
 
 .product-list
@@ -71,7 +70,7 @@ ul.sort-by-nav-links
 
   @media screen and (max-width: $break-small)
     &.mobile-horizontal
-      margin-top: 0
+      margin: 0
 
 .prod-thumb
   +flex-basis(calc(100% / 3))
@@ -194,13 +193,10 @@ ul.sort-by-nav-links
         width: calc(100% / 2)
 
   &.show-quickview
-    &:hover, &:active, &:focus
+    &:hover, &:focus
       .product-list-quickview-container
         opacity: 1
         visibility: visible
-
-      .prod-thumb-info-headers
-        margin-bottom: 56px
 
   &.rollover
     margin-bottom: 0px
@@ -221,6 +217,13 @@ ul.sort-by-nav-links
         *
           color: $background-color
 
+    @media screen and (max-width: $break-small)
+      .prod-thumb-info
+        display: none
+
+        .mobile-horizontal &
+          display: block
+
     &:hover, &:focus
       .prod-thumb-info
         opacity: 1
@@ -236,17 +239,23 @@ ul.sort-by-nav-links
             fill: $button-background-color
 
       img
-        +all-transitions
         opacity: .8
 
   @media screen and (max-width: $break-small)
     &.show-quickview
       .product-list-quickview-container
+        bottom: 0
+        height: auto
         opacity: 1
+        top: auto
         visibility: visible
 
         .product-list-quickview-container-background
-          opacity: 0
+          background-color: $button-background-color
+          opacity: .6
+
+        .open-quickview
+          background-color: transparent
 
     .mobile-medium &
       +flex-basis(calc(100% / 1) !important)
@@ -260,17 +269,19 @@ ul.sort-by-nav-links
       +flexbox
       +flex-basis(100% !important)
       border-bottom: $small-border
+      padding-left: 0
+      padding-right: 0
       width: 100% !important
 
       &:last-child
         border-bottom: 0
 
       .prod-thumb-container
-        width: 104px
+        width: 136px
 
       .prod-thumb-info
         padding: 0 0 0 $base-padding * 2
-        width: calc(100% - 104px)
+        width: calc(100% - 136px)
 
       .prod-thumb-info-headers
         text-align: left !important
@@ -280,7 +291,8 @@ ul.sort-by-nav-links
   width: 100%
 
   @media screen and (min-width: $break-small + 1)
-    height: 100%
+    .rollover &
+      height: 100%
 
 .product-list-image-container
   font-size: 0
@@ -353,8 +365,10 @@ ul.sort-by-nav-links
   display: block
 
   &.lazy
-    -webkit-filter: blur(5px)
-    filter: blur(5px)
+    filter: blur(2px)
+
+  &.not-lazy
+    filter: blur(0)
 
   .default &
     width: 100%
@@ -403,6 +417,10 @@ ul.sort-by-nav-links
   width: 100%
   z-index: 1
 
+  @media screen and (min-width: $break-small + 1)
+    .rollover &
+      margin-bottom: 56px
+
   @media screen and (min-width: 1201px)
     .full-width &
       font-size: 18px
@@ -420,6 +438,7 @@ ul.sort-by-nav-links
   margin-top: $base-padding / 2
 
 .prod-thumb-status
+  font-weight: bold
 
   &.circle
     +flexbox
@@ -438,21 +457,28 @@ ul.sort-by-nav-links
     top: $base-padding
     width: 70px
 
+    @media screen and (max-width: $break-small)
+      font-size: 12px
+      height: 54px
+      width: 54px
+
   &.bar
     background: $button-background-color
     color: $button-text-color
     font-size: 13px
-    line-height: 1.25em
+    line-height: 1em
     position: absolute
     padding: $base-padding
     right: 0
     top: 0
 
+    @media screen and (max-width: $break-small)
+      font-size: 12px
+
   &.inline
     color: $primary-text-color
     display: inline-block
     font-size: 13px
-    font-weight: bold
 
     .mobile-horizontal &
       margin-top: $base-padding
@@ -460,7 +486,7 @@ ul.sort-by-nav-links
 .pagination
   +flexbox
   +flex-wrap(wrap)
-  +justify-content(center)
+  +justify-content(flex-start)
   border-top: $small-border
   padding: $base-padding 0
 
@@ -476,9 +502,26 @@ ul.sort-by-nav-links
     text-align: center
     height: 40px
     margin: 0 $base-padding / 2
+    order: 1
     position: relative
     text-decoration: underline
     width: 40px
+
+    &.previous, &.next
+      order: 2
+
+      &:not(.disabled):hover, &:not(.disabled):focus
+        background: none
+        color: $primary-text-color
+
+        svg
+          fill: $link-hover-color
+
+    &.previous
+      margin-left: auto
+
+    &.gap
+      text-decoration: none
 
     &.current
       background: $button-background-color

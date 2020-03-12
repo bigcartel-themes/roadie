@@ -32,7 +32,7 @@ $break-product-details: 968px
 $break-small: 767px
 $break-extra-small: 640px
 
-$product-detail-alignment: #{"{{ theme.product_detail_alignment }}"}
+$product-detail-alignment: #{"{% if theme.show_overlay contains 'left' %} left {% else %} center {% endif %}"}
 
 $large-border: #{"{% if theme.border_style == 'thick' %} 8px {% else %} 4px {% endif %}"} solid $border-color
 $medium-border: #{"{% if theme.border_style == 'thick' %} 4px {% else %} 2px {% endif %}"} solid $border-color

@@ -7,13 +7,13 @@ $('.announcement-message-close').click(function(e) {
   });
 })
 
-$('.contact-form input, .contact-form textarea').addClass('shrink-label');
+$('.contact-form input[type="text"], .contact-form textarea').addClass('shrink-label');
 
 $('body').on('change', ".shrink-label", function(){
   $(this).parents('.form-group').addClass('focused');
 });
 
-$('.contact-form .shrink-label').focus(function(){
+$('.contact-form input[type="text"], .contact-form textarea').focus(function(){
   $(this).parents('.form-group').addClass('focused');
 });
 
@@ -56,10 +56,28 @@ document.addEventListener('input', function (event) {
   autoExpand(event.target);
 }, false);
 
-$('.under-header .nav-section').hover(function(e) {
-  $('.sidebar-nav-links').removeClass('expanded');
-  $(this).find('.sidebar-nav-links').toggleClass('expanded');
+
+$('.sidebar-nav .toggle-nav').click(function(e) {
+  e.preventDefault();
+  var sidebar_link = $(this).parent().parent().find('.sidebar-nav-links');
+  var display = sidebar_link.css('display');
+  var nav_container = sidebar_link.parent();
+  var nav_type = nav_container.data('type');
+  if (display == 'block') {
+    sidebar_link.slideUp('fast', function() {
+      nav_container.addClass('hidden-nav');
+    });
+    localStorage.setItem('show-sidebar-'+nav_type,'hidden');
+  }
+  else {
+    sidebar_link.slideDown('fast', function() {
+      nav_container.removeClass('hidden-nav');
+    });
+    localStorage.setItem('show-sidebar-'+nav_type,'visible');
+  }
 })
+
+
 
 $('.open-menu').click(function(e) {
   e.preventDefault();
@@ -80,33 +98,8 @@ $('.open-menu').click(function(e) {
     $('.sidebar').toggleClass('visible-mobile');
     $('body').toggleClass('sidebar-visible-mobile');
   }
-
 });
 
-if ($('body').hasClass('has-sidebar')) {
-  if ($(window).width() > 767) {
-    if(!localStorage.getItem('sidebar')) {
-      populateStorage();
-    } else {
-      setStyles();
-    }
-    function setStyles() {
-      var sidebarState = localStorage.getItem('sidebar');
-
-      if (sidebarState == 'hidden') {
-        $('.has-sidebar .sidebar').addClass('hidden');
-        $('body').removeClass('sidebar-visible');
-      }
-      else {
-        $('body').addClass('sidebar-visible');
-      }
-    }
-    function populateStorage() {
-      localStorage.setItem('sidebar','visible');
-      setStyles();
-    }
-  }
-}
 
 
 /* Gradients */
@@ -127,15 +120,7 @@ if ($('.background-image-overlay-gradient_overlay').length) {
 
   $('.background-image-overlay-gradient_overlay').drawGradient();
 }
-if ($('.scroll-more').length) {
-  $('.scroll-more').each(function() {
-    var primaryGradient = themeOptions.primaryGradientColor;
-    $(this).css(
-      {
-      "background-image": "linear-gradient(-180deg, "+hexToRGB(primaryGradient,'.8')+" 0%,"+ primaryGradient +" 100%)",
-    });
-  })
-}
+
 
 function hexToRGB(hex,opacity) {
   let r = 0, g = 0, b = 0;
@@ -153,115 +138,26 @@ function hexToRGB(hex,opacity) {
   return "rgba("+ +r + "," + +g + "," + +b + ","+opacity+")";
 }
 
-$('.sidebar-nav .toggle-nav').click(function(e) {
-  e.preventDefault();
-  $(this).parent().parent().find('.sidebar-nav-links').slideToggle('fast', function() {
-    $(this).parent().toggleClass('hidden-nav');
-  });
-})
-
-
-$('body')
-  .on( 'click','.qty-button', function(e) {
-    e.preventDefault();
-    var $t = $(this)
-    , input = $(this).parent().find('input')
-    , val = parseInt(input.val())
-    , valMin = 1
-    , item_id = $(this).parent().data("item-id");
-    if (isNaN(val) || val < valMin) {
-      var new_val = valMin;
-    }
-    if ($t.data('func') == 'plus') {
-      var new_val = val + 1;
-    }
-    else {
-      if (val > valMin) {
-        var new_val = val - 1;
-      }
-    }
-    if (new_val > 0) {
-      Cart.updateItem(item_id, new_val, function(cart) {
-        processUpdate(input, item_id, new_val, cart);
-      });
-    }
-    else {
-      Cart.removeItem(item_id, function(cart) {
-        processUpdate(input, item_id, 0, cart);
-      });
-    }
-  })
-  .on( 'click', '.cart-item-remove', function(e) {
-    e.preventDefault();
-    item_id = $(this).parent().data("item-id");
-    new_val = 0;
-    Cart.updateItem(item_id, new_val, function(cart) {
-      processUpdate('', item_id, '', cart);
-    });
-  })
-  .on( 'blur','.option-quantity', function(e) {
-    var item_id = $(this).parent().data("item-id");
-    var new_val = $(this).val();
-    var input = $(this);
-    Cart.updateItem(item_id, new_val, function(cart) {
-      processUpdate(input, item_id, new_val, cart);
-    });
-  })
-
-var updateCart = function(cart) {
-  var sub_total = Format.money(cart.total, true, true);
-  var item_count = cart.item_count;
-  $('.header-cart-total').html(sub_total);
-  $('.cart-subtotal-amount').html(sub_total);
-  $('.header-cart-count').html(item_count);
-}
-
-var processUpdate = function(input, item_id, new_val, cart) {
-  var sub_total = Format.money(cart.total, true, true);
-  var item_count = cart.item_count;
-  $('.header-cart-total').html(sub_total);
-  $('.cart-subtotal-amount').html(sub_total);
-  $('.header-cart-count').html(item_count);
-  if (item_count == 0) {
-    $('.cart-form').slideUp('fast',function() {
-      $('.cart-container').addClass('empty-cart');
-      $("html, body").animate({ scrollTop: 0 }, "fast");
-    });
-  }
-  else {
-    $('.errors').hide();
-    if (input) {
-      input.val(new_val);
-    }
-  }
-  if (new_val > 0) {
-
-  }
-  else {
-    $('.cart-item[data-item-id="'+item_id+'"]').slideUp('fast');
-  }
-  return false;
-}
 
 $('.overflow-scroll').each(function() {
   is_overflow = checkOverflow($(this).find('.sidebar-nav-links')[0])
-  console.log(is_overflow);
   if (is_overflow) {
     $(this).find('.scroll-more').show();
     $(this).find('.sidebar-nav-links').css('padding-bottom','24px')
+    $(this).find('.scroll-more').css('background','linear-gradient(0deg, '+themeOptions.primaryGradientColor+', transparent)');
   }
 })
-function checkOverflow(el)
-{
-   var curOverflow = el.style.overflow;
 
-   if ( !curOverflow || curOverflow === "visible" )
-      el.style.overflow = "hidden";
-
-   var isOverflowing = el.clientWidth < el.scrollWidth
-      || el.clientHeight < el.scrollHeight;
-
-   el.style.overflow = curOverflow;
-
-   return isOverflowing;
+function checkOverflow(el) {
+  var curOverflow = el.style.overflow;
+  if ( !curOverflow || curOverflow === "visible" )
+    el.style.overflow = "hidden";
+  var isOverflowing = el.clientWidth < el.scrollWidth
+    || el.clientHeight < el.scrollHeight;
+  el.style.overflow = curOverflow;
+  return isOverflowing;
 }
+
+
+
+/*"background-image": "linear-gradient(0deg, "+hexToRGB(primaryGradient,'.8')+" 0%,"+ primaryGradient +" 100%)",*/

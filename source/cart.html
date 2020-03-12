@@ -29,6 +29,7 @@
               {% unless item.product.has_default_option %}
                 <div class="cart-item-details-option">{{ item.option.name }}</div>
               {% endunless %}
+              <div class="cart-item-details-unit-price-inline">{{ item.unit_price | money: theme.money_format }}</div>
             </a>
             <div class="cart-item-details-unit-price">{{ item.unit_price | money: theme.money_format }}</div>
 
