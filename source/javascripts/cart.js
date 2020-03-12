@@ -56,6 +56,7 @@ var updateCart = function(cart) {
 var processUpdate = function(input, item_id, new_val, cart) {
   var sub_total = Format.money(cart.total, true, true);
   var item_count = cart.item_count;
+
   $('.header-cart-total').html(sub_total);
   $('.cart-subtotal-amount').html(sub_total);
   $('.header-cart-count').html(item_count);
@@ -72,6 +73,11 @@ var processUpdate = function(input, item_id, new_val, cart) {
     }
   }
   if (new_val > 0) {
+    for (itemIndex = 0; itemIndex < cart.items.length; itemIndex++) {
+      item_price = cart.items[itemIndex].price;
+      formatted_item_price = Format.money(item_price, true, true);
+      $('.cart-item[data-item-id="'+item_id+'"]').find('.cart-item-details-price').html(formatted_item_price)
+    }
 
   }
   else {

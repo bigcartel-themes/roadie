@@ -2,13 +2,10 @@
 
 
 .cart-empty-message
-  +all-transitions
-  opacity: 0
-  visibility: hidden
+  display: none
 
   .empty-cart &
-    opacity: 1
-    visibility: visible
+    display: block
 
 .cart-items
   border-bottom: $small-border
