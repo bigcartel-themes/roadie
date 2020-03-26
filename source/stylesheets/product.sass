@@ -23,61 +23,43 @@
   @media screen and (max-width: $break-product-details)
     +flex-direction(column)
 
+.product-image
+  display: block
+  width: 100%
+
 .product-images
   +flex(1 1 auto)
   order: 1
   padding: $base-padding * 2 0
 
-  @media screen and (min-width: $break-large + 1)
-    .full-width &
-      +flexbox
-      +flex-direction(row)
+  @media screen and (max-width: $break-product-details)
+    order: 1 !important
 
-.primary-product-image
-  display: block
-  margin-bottom: $base-padding * 2
-  width: 100%
 
 .primary-product-image-container
-  @media screen and (min-width: $break-large + 1)
-    order: 2
 
-    .full-width &
-      +flex(1 0 80%)
 
-    .right-sidebar &
-      order: 1
-
-.secondary-images
+.secondary-product-image-container
   +flexbox
+  +flex-direction(column)
 
-  &.secondary-full
-    +flex-direction(column)
-
-    .product-image-link
-      width: 100%
-
-  @media screen and (min-width: $break-large + 1)
-    order: 1
-
-    .full-width &
-      +flex(1 0 20%)
-      +flex-direction(column)
-
-    .right-sidebar &
-      order: 2
+  @media screen and (max-width: $break-product-details)
+    +flex-direction(row)
 
   .secondary-product-image-link
-    display: block
-    margin: 0
+    width: 100%
 
-    @media screen and (min-width: $break-large + 1)
-      .full-width &
-        width: 100%
+    @media screen and (max-width: $break-product-details)
+      width: 20%
 
-    img
-      display: block
-      width: 100%
+    &:first-child
+      display: none
+
+      @media screen and (max-width: $break-product-details)
+        display: block
+
+
+
 
 .product-details
   +flex(0 0 386px)
@@ -193,6 +175,7 @@
     color: $button-text-color
     font-size: 20px
     font-weight: bold
+    opacity: 1 !important
     text-align: center
     width: 100%
 
@@ -336,6 +319,11 @@ button.description-inventory-tab
     color: $primary-text-color !important
     font-weight: bold !important
     text-decoration: underline
+
+    @media screen and (max-width: $break-small)
+      background-color: $button-background-color !important
+      color: $button-text-color !important
+      text-decoration: none
 
   &:first-of-type
     border-right: $small-border

@@ -96,8 +96,6 @@ function is_touch_device() {
 }
 
 if (!is_touch_device()) {
-  $('body').addClass('touch-device');
-  $('body').removeClass('pointer-device');
 
   if ($('.product-image-zooming .primary-product-image').length) {
     var driftOptions = {
@@ -125,7 +123,7 @@ if (!is_touch_device()) {
   }
 }
 
-$('body').on('click', ".secondary-thumbs .secondary-product-image-link", function(e){
+$('body').on('click', ".secondary-product-image-link", function(e){
 
   e.preventDefault();
 
@@ -143,10 +141,10 @@ $('body').on('click', ".secondary-thumbs .secondary-product-image-link", functio
 
   if ($('.product-images').hasClass('product-image-zooming')) {
     if (drift) {
-      console.log('drift');
+      //console.log('drift');
     }
     else {
-      console.log('no drift');
+      //console.log('no drift');
     }
   }
 

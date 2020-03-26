@@ -24,17 +24,12 @@ if (!inPreview) {
 }
 
 $('body').on('blur', ".shrink-label", function(){
-
-  if ($(this).hasClass('.shrink-option-label')) {
-    var inputValue = $(this).val();
-  }
-  else {
-    var inputValue = $(this).val().length;
-  }
-  if (inputValue == 0) {
+  inValue = $(this).val();
+  if (!inValue) {
     $(this).removeClass('filled');
     $(this).parents('.form-group').removeClass('focused');
-  } else {
+  }
+  else {
     $(this).addClass('filled');
   }
 })
@@ -157,7 +152,14 @@ function checkOverflow(el) {
   el.style.overflow = curOverflow;
   return isOverflowing;
 }
+function setDocHeight() {
+  document.documentElement.style.setProperty('--vh', `${window.innerHeight/100}px`);
+};
 
+addEventListener('resize', setDocHeight)
+addEventListener('orientationchange', setDocHeight)
+
+setDocHeight();
 
 
 /*"background-image": "linear-gradient(0deg, "+hexToRGB(primaryGradient,'.8')+" 0%,"+ primaryGradient +" 100%)",*/
