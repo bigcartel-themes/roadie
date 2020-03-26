@@ -38,7 +38,6 @@
     padding: 0
     width: 100%
 
-
 .product-sort-caption
   border-right: $small-border
   font-weight: bold
@@ -252,7 +251,7 @@ ul.sort-by-nav-links
 
         .product-list-quickview-container-background
           background-color: $button-background-color
-          opacity: .6
+          opacity: .8
 
         .open-quickview
           background-color: transparent
@@ -432,10 +431,18 @@ ul.sort-by-nav-links
   @media screen and (max-width: $break-medium)
     padding-right: 0
 
+  @media screen and (max-width: $break-small)
+    .mobile-medium &
+      font-size: 20px
+
 .prod-thumb-price
   font-size: .9em
   font-weight: normal
   margin-top: $base-padding / 2
+
+  @media screen and (max-width: $break-small)
+    .mobile-medium &
+      font-size: 16px
 
 .prod-thumb-status
   font-weight: bold
@@ -444,27 +451,33 @@ ul.sort-by-nav-links
     +flexbox
     +align-items(center)
     +justify-content(center)
-    background: $button-background-color
+    background: $badge-background-color
     border-radius: 50%
-    color: $button-text-color
-    font-size: 13px
+    color: $badge-text-color
+    font-size: 12px
     line-height: 1.25em
-    height: 70px
+    height: 64px
     right: $base-padding
     padding: $base-padding
     position: absolute
     text-align: center
     top: $base-padding
-    width: 70px
+    width: 64px
 
     @media screen and (max-width: $break-small)
-      font-size: 12px
-      height: 54px
-      width: 54px
+      font-size: 11px
+      height: 60px
+      right: $base-padding / 2
+      top: $base-padding / 2
+      width: 60px
+
+      .mobile-medium &
+        right: $base-padding
+        top: $base-padding
 
   &.bar
-    background: $button-background-color
-    color: $button-text-color
+    background: $badge-background-color
+    color: $badge-text-color
     font-size: 13px
     line-height: 1em
     position: absolute
@@ -485,12 +498,20 @@ ul.sort-by-nav-links
 
 .pagination
   +flexbox
-  +flex-wrap(wrap)
+  +flex-direction(row)
   +justify-content(flex-start)
   border-top: $small-border
   padding: $base-padding 0
 
-  > a, span
+.pagination-numbers
+  +flexbox
+  +flex-wrap(wrap)
+  +justify-content(flex-start)
+
+  .previous, .next
+    display: none
+
+  > a, > span
     +flexbox
     +align-items(center)
     +justify-content(center)
@@ -501,24 +522,11 @@ ul.sort-by-nav-links
     line-height: 40px
     text-align: center
     height: 40px
-    margin: 0 $base-padding / 2
+    margin-right: $base-padding
     order: 1
     position: relative
     text-decoration: underline
     width: 40px
-
-    &.previous, &.next
-      order: 2
-
-      &:not(.disabled):hover, &:not(.disabled):focus
-        background: none
-        color: $primary-text-color
-
-        svg
-          fill: $link-hover-color
-
-    &.previous
-      margin-left: auto
 
     &.gap
       text-decoration: none
@@ -529,11 +537,97 @@ ul.sort-by-nav-links
       text-decoration: none
 
     &.disabled
-      opacity: .6
+      cursor: not-allowed
+      opacity: .4
 
     svg
       display: block
       fill: $primary-text-color
+
+  > a
+    &:hover, &:focus
+      background: $button-background-color
+      color: $button-text-color
+      text-decoration: none
+
+      svg
+        fill: $button-text-color
+
+.pagination-arrows
+  +flexbox
+  margin-left: auto
+
+  > a, > span
+    +flexbox
+    +align-items(center)
+    +justify-content(center)
+    background: $background-color
+    border-radius: 100%
+    color: $primary-text-color
+    font-weight: bold
+    line-height: 40px
+    text-align: center
+    height: 40px
+    margin-right: $base-padding
+    order: 1
+    position: relative
+    text-decoration: underline
+    width: 40px
+
+    &.previous, &.next
+      font-size: 16px
+      order: 2
+      padding: 0
+      text-decoration: none
+      width: auto
+
+      &:not(.disabled):hover, &:not(.disabled):focus
+        background: none
+        color: $link-hover-color
+        text-decoration: underline
+
+        svg
+          fill: $link-hover-color
+
+    &.next
+      margin-left: $base-padding * 3
+      margin-right: 0
+
+      span
+        margin-right: $base-padding
+
+        @media screen and (max-width: $break-small)
+          display: none
+
+    &.previous
+      margin-left: auto
+      margin-right: 0
+
+      span
+        margin-left: $base-padding
+
+        @media screen and (max-width: $break-small)
+          display: none
+
+    &.gap
+      text-decoration: none
+
+    &.current
+      background: $button-background-color
+      color: $button-text-color
+      text-decoration: none
+
+    &.disabled
+      cursor: not-allowed
+      opacity: .4
+
+    svg
+      display: block
+      fill: $primary-text-color
+
+      @media screen and (max-width: $break-small)
+        height: 20px
+        width: 20px
 
   > a
     &:hover, &:focus

@@ -125,7 +125,24 @@
       </div>
     </div>
     {% if paginate.pages > 1 %}
-      {{ paginate | default_pagination, 'pagination', 'pagination', '<svg aria-hidden="true" width="12" height="20" viewBox="0 0 12 20" xmlns="http://www.w3.org/2000/svg"><path d="M0 9.99663714L9.99663714 0l1.87436946 1.87436946-8.12548453 8.12608504 8.12548453 8.125176L9.99663714 20 0 10.0033629l.00353434-.0029084z" fill-rule="evenodd"/></svg>', '<svg aria-hidden="true" width="12" height="20" viewBox="0 0 12 20" xmlns="http://www.w3.org/2000/svg"><path d="M11.871006 9.99663714L1.87436886 0-6e-7 1.87436946l8.12548453 8.12608504L-6e-7 18.1256305 1.87436886 20l9.99663714-9.9966371-.00353434-.0029084z" fill-rule="evenodd"/></svg>' }}
+      <div class="pagination">
+        {{ paginate | default_pagination, 'pagination-numbers', 'pagination-numbers' }}
+
+        <div class="pagination-arrows">
+          {% if paginate.previous.is_link %}
+            <a aria-label="Go to previous page" class="previous" href="{{ paginate.previous.url }}"><svg width="16" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.996638 20L8e-7 10.00336286l.0035344-.00381736L8e-7 9.9966371 9.996638 0l1.87436943 1.8743695L5.2460074 8.5H20.442436v3H5.2460074l6.62500003 6.62563054z" fill-rule="evenodd"/></svg><span>Previous</span></a>
+          {% else %}
+            <span class="previous disabled"><svg width="16" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.996638 20L8e-7 10.00336286l.0035344-.00381736L8e-7 9.9966371 9.996638 0l1.87436943 1.8743695L5.2460074 8.5H20.442436v3H5.2460074l6.62500003 6.62563054z" fill-rule="evenodd"/></svg><span>Previous</span></span>
+          {% endif %}
+
+          {% if paginate.next.is_link %}
+            <a aria-label="Go to next page" class="next" href="{{ paginate.next.url }}"><span>Next</span><svg aria-hidden="true" width="16" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.445798 0l9.9966372 9.99663714-.0035344.00381736.0035344.0029084L10.445798 20l-1.87436943-1.8743695L15.1964286 11.5H0v-3h15.1964286L8.57142857 1.87436946z" fill-rule="evenodd"/></svg></a>
+          {% else %}
+            <span class="disabled next"><span>Next</span><svg aria-hidden="true" width="16" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.445798 0l9.9966372 9.99663714-.0035344.00381736.0035344.0029084L10.445798 20l-1.87436943-1.8743695L15.1964286 11.5H0v-3h15.1964286L8.57142857 1.87436946z" fill-rule="evenodd"/></svg></span>
+          {% endif %}
+        </div>
+      </div>
+
     {% endif %}
   {% else %}
     <div class="empty-products">No products found.</div>

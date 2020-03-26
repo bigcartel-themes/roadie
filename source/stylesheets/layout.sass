@@ -1,5 +1,23 @@
 @import 'variables'
 
+.skip-link
+  +transform(translateY(-100%))
+  +transition(transform .3s)
+  background: $background-color
+  border: $small-border
+  border-color: $primary-text-color
+  color: $primary-text-color !important
+  font-weight: bold
+  left: $base-padding * 2
+  padding: $base-padding $base-padding * 2
+  position: absolute
+  text-decoration: underline
+  transform: translateY(-100%)
+  z-index: 100
+
+  &:focus
+    +transform(translateY($base-padding * 2))
+
 ::-webkit-input-placeholder
   color: $primary-text-color
   opacity: .8
@@ -115,6 +133,15 @@ body
   height: 31px
   position: absolute
   width: 100%
+  position: absolute
+  z-index: 1
+  background-image: linear-gradient(to top, rgba(255, 255, 255, 0.25), rgb(255, 255, 255))
+  display: block
+  left: 0px
+  top: 0px
+  width: 100%
+  height: 50px
+  transition: height 0.5s ease-in-out 0s
 
 .above-nav-section-title
   font-weight: bold
@@ -166,6 +193,9 @@ header
   &.header-left-align
     +justify-content(space-between)
     padding-left: $base-padding * 8
+
+    .right-sidebar &
+      padding-left: 0
 
     .below-header &
       padding-left: 0
@@ -300,9 +330,12 @@ header
     position: relative
 
   @media screen and (min-width: $break-small +1)
-    .right-sidebar &
-      left: 0
-      right: auto
+    .right-sidebar.has-sidebar &
+      left: auto
+      right: 64px
+
+    .right-sidebar .hide-toggle &
+      right: 0
 
   .header-cart-icon
     margin-right: $base-padding
@@ -348,7 +381,7 @@ header
 
       .sidebar
         order: 2
-        padding-left: $base-padding * 4
+        padding-left: $base-padding * 2
         padding-right: 0
 
       .main
@@ -415,15 +448,16 @@ header
     +flex(0 0 100%)
     display: none
 
-  &.visible-mobile
-    background-color: $background-color
-    display: block
-    left: 0
-    padding: 0 $base-padding * 2
-    padding-bottom: $base-padding * 3
-    position: absolute
-    width: 100%
-    z-index: 100
+    &.visible-mobile
+      background-color: $background-color
+      display: block
+      left: 0
+      padding: 0 $base-padding * 2
+      padding-bottom: $base-padding * 3
+      position: absolute
+      width: 100%
+      z-index: 100
+
 
 .sidebar-nav
   +flexbox
@@ -620,8 +654,9 @@ header
   +flex(1)
   order: 2
 
-  .sidebar-visible-mobile &
-    display: none
+  @media screen and (max-width: $break-small)
+    .sidebar-visible-mobile &
+      display: none
 
 .page-heading
   +flexbox
