@@ -28,16 +28,17 @@
 </div>
 
 <div class="product-page-columns">
-  <div class="product-images {% if theme.product_image_zooming %}product-image-zooming{% endif %}">
+  <div class="product-images {% if theme.product_image_zooming %}product-image-zooming{% endif %} product-images-{{ theme.secondary_product_images }}">
+
     <div class="primary-product-image-container">
-      <img class="primary-product-image" src="{{ product.image | product_image_url | constrain: 1000 }}" data-zoom="{{ product.image | product_image_url | constrain: 1500 }}" alt="Image of {{ product.name | escape }}">
+      <img class="product-image primary-product-image" src="{{ product.image | product_image_url | constrain: 1000 }}" data-zoom="{{ product.image | product_image_url | constrain: 1500 }}" alt="Image of {{ product.name | escape }}">
     </div>
 
     {% if product.images.size > 1 %}
-      <div class="secondary-images secondary-{{ theme.secondary_product_images }}">
+      <div class="secondary-product-image-container">
         {% for image in product.images %}
           <a class="product-image-link secondary-product-image-link" href="{{ image | product_image_url | constrain: 1000 }}" data-zoom="{{ image | product_image_url | constrain: 1500 }}">
-            <img src="{{ image | product_image_url | constrain: 400 }}" alt="Image of {{ product.name | escape }}">
+            <img class="product-image secondary-product-image" src="{{ image | product_image_url | constrain: 1000 }}" data-zoom="{{ image | product_image_url | constrain: 1500 }}" alt="Image of {{ product.name | escape }}">
           </a>
         {% endfor %}
       </div>
