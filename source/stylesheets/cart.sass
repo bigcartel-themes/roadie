@@ -95,7 +95,7 @@
   font-size: 20px
   font-weight: 600
 
-  @media screen and (max-width: $break-small)
+  @media screen and (max-width: $break-medium)
     font-size: 16px
 
 .cart-item-details-option
@@ -103,9 +103,18 @@
   line-height: 1.5em
   margin-top: $base-padding
 
-  @media screen and (max-width: $break-small)
+  @media screen and (max-width: $break-medium)
     font-size: 14px
     margin-top: $base-padding / 2
+
+.cart-item-information
+  +flexbox
+  +align-items(center)
+  margin-left: auto
+
+  @media screen and (max-width: $break-small)
+    margin-left: 104px
+    width: 100%
 
 .cart-item-details-unit-price
   +flex-shrink(0)
@@ -135,9 +144,6 @@
 .cart-item-quantity-holder
   +flexbox
   +align-items(center)
-
-  @media screen and (max-width: $break-small)
-    margin-left: 104px
 
 .option-quantity
   +appearance(none)

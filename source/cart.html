@@ -31,17 +31,19 @@
               {% endunless %}
               <div class="cart-item-details-unit-price-inline">{{ item.unit_price | money: theme.money_format }}</div>
             </a>
-            <div class="cart-item-details-unit-price">{{ item.unit_price | money: theme.money_format }}</div>
+            <div class="cart-item-information">
+              <div class="cart-item-details-unit-price">{{ item.unit_price | money: theme.money_format }}</div>
 
-            <div class="cart-item-quantity-holder" data-item-id="{{ item.id }}">
-              <button title="Decrease quantity" class="decrease-qty-button qty-button button min-btn" data-func="minus" type="button"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c6.6290323 0 12 5.37096774 12 12 0 6.6290323-5.3709677 12-12 12-6.62903226 0-12-5.3709677-12-12C0 5.37096774 5.37096774 0 12 0zm0 1.5483871C6.1983682 1.5483871 1.5483871 6.25644216 1.5483871 12c0 5.8016318 4.70805506 10.4516129 10.4516129 10.4516129 5.8016318 0 10.4516129-4.7080551 10.4516129-10.4516129 0-5.8016318-4.7080551-10.4516129-10.4516129-10.4516129zM18 11.25v1.5H6v-1.5h12z" fill-rule="evenodd"/></svg></button>
+              <div class="cart-item-quantity-holder" data-item-id="{{ item.id }}">
+                <button title="Decrease quantity" class="decrease-qty-button qty-button button min-btn" data-func="minus" type="button"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c6.6290323 0 12 5.37096774 12 12 0 6.6290323-5.3709677 12-12 12-6.62903226 0-12-5.3709677-12-12C0 5.37096774 5.37096774 0 12 0zm0 1.5483871C6.1983682 1.5483871 1.5483871 6.25644216 1.5483871 12c0 5.8016318 4.70805506 10.4516129 10.4516129 10.4516129 5.8016318 0 10.4516129-4.7080551 10.4516129-10.4516129 0-5.8016318-4.7080551-10.4516129-10.4516129-10.4516129zM18 11.25v1.5H6v-1.5h12z" fill-rule="evenodd"/></svg></button>
 
-              <label class="visually-hidden" for="item_{{item.id}}_qty">Quantity</label>
-              {{ item | item_quantity_input, nil, 'option-quantity' }}
+                <label class="visually-hidden" for="item_{{item.id}}_qty">Quantity</label>
+                {{ item | item_quantity_input, nil, 'option-quantity' }}
 
-              <button title="Increase quantity" class="increase-qty-button qty-button button min-btn" data-func="plus" type="button"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c6.6290323 0 12 5.37096774 12 12 0 6.6290323-5.3709677 12-12 12-6.62903226 0-12-5.3709677-12-12C0 5.37096774 5.37096774 0 12 0zm0 1.5483871C6.1983682 1.5483871 1.5483871 6.25644216 1.5483871 12c0 5.8016318 4.70805506 10.4516129 10.4516129 10.4516129 5.8016318 0 10.4516129-4.7080551 10.4516129-10.4516129 0-5.8016318-4.7080551-10.4516129-10.4516129-10.4516129zM12.75 6v5.25H18v1.5h-5.25V18h-1.5v-5.25075L6 12.75v-1.5l5.25-.00075V6h1.5z" fill-rule="evenodd"/></svg></button>
+                <button title="Increase quantity" class="increase-qty-button qty-button button min-btn" data-func="plus" type="button"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c6.6290323 0 12 5.37096774 12 12 0 6.6290323-5.3709677 12-12 12-6.62903226 0-12-5.3709677-12-12C0 5.37096774 5.37096774 0 12 0zm0 1.5483871C6.1983682 1.5483871 1.5483871 6.25644216 1.5483871 12c0 5.8016318 4.70805506 10.4516129 10.4516129 10.4516129 5.8016318 0 10.4516129-4.7080551 10.4516129-10.4516129 0-5.8016318-4.7080551-10.4516129-10.4516129-10.4516129zM12.75 6v5.25H18v1.5h-5.25V18h-1.5v-5.25075L6 12.75v-1.5l5.25-.00075V6h1.5z" fill-rule="evenodd"/></svg></button>
+              </div>
+              <div class="cart-item-details-price">{{ item.price | money: theme.money_format }}</div>
             </div>
-            <div class="cart-item-details-price">{{ item.price | money: theme.money_format }}</div>
           </li>
         {% endfor %}
       </ul>
