@@ -123,19 +123,19 @@
     </div>
     {% if paginate.pages > 1 %}
       <div class="pagination">
-        {{ paginate | default_pagination, 'pagination-numbers', 'pagination-numbers' }}
+        {{ paginate | default_pagination, 'page-numbers', 'page-numbers' }}
 
-        <div class="pagination-arrows">
+        <div class="page-arrows">
           {% if paginate.previous.is_link %}
-            <a aria-label="Go to previous page" class="previous" href="{{ paginate.previous.url }}"><svg width="16" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.996638 20L8e-7 10.00336286l.0035344-.00381736L8e-7 9.9966371 9.996638 0l1.87436943 1.8743695L5.2460074 8.5H20.442436v3H5.2460074l6.62500003 6.62563054z" fill-rule="evenodd"/></svg><span>Previous</span></a>
+            <a aria-label="Go to previous page" class="page-link previous-page-link" href="{{ paginate.previous.url }}"><svg width="16" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.996638 20L8e-7 10.00336286l.0035344-.00381736L8e-7 9.9966371 9.996638 0l1.87436943 1.8743695L5.2460074 8.5H20.442436v3H5.2460074l6.62500003 6.62563054z" fill-rule="evenodd"/></svg><span>Previous</span></a>
           {% else %}
-            <span class="previous disabled"><svg width="16" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.996638 20L8e-7 10.00336286l.0035344-.00381736L8e-7 9.9966371 9.996638 0l1.87436943 1.8743695L5.2460074 8.5H20.442436v3H5.2460074l6.62500003 6.62563054z" fill-rule="evenodd"/></svg><span>Previous</span></span>
+            <span class="page-link previous-page-link disabled"><svg width="16" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.996638 20L8e-7 10.00336286l.0035344-.00381736L8e-7 9.9966371 9.996638 0l1.87436943 1.8743695L5.2460074 8.5H20.442436v3H5.2460074l6.62500003 6.62563054z" fill-rule="evenodd"/></svg><span>Previous</span></span>
           {% endif %}
 
           {% if paginate.next.is_link %}
-            <a aria-label="Go to next page" class="next" href="{{ paginate.next.url }}"><span>Next</span><svg aria-hidden="true" width="16" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.445798 0l9.9966372 9.99663714-.0035344.00381736.0035344.0029084L10.445798 20l-1.87436943-1.8743695L15.1964286 11.5H0v-3h15.1964286L8.57142857 1.87436946z" fill-rule="evenodd"/></svg></a>
+            <a aria-label="Go to next page" class="page-link next-page-link" href="{{ paginate.next.url }}"><span>Next</span><svg aria-hidden="true" width="16" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.445798 0l9.9966372 9.99663714-.0035344.00381736.0035344.0029084L10.445798 20l-1.87436943-1.8743695L15.1964286 11.5H0v-3h15.1964286L8.57142857 1.87436946z" fill-rule="evenodd"/></svg></a>
           {% else %}
-            <span class="disabled next"><span>Next</span><svg aria-hidden="true" width="16" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.445798 0l9.9966372 9.99663714-.0035344.00381736.0035344.0029084L10.445798 20l-1.87436943-1.8743695L15.1964286 11.5H0v-3h15.1964286L8.57142857 1.87436946z" fill-rule="evenodd"/></svg></span>
+            <span class="page-link next-page-link disabled"><span>Next</span><svg aria-hidden="true" width="16" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.445798 0l9.9966372 9.99663714-.0035344.00381736.0035344.0029084L10.445798 20l-1.87436943-1.8743695L15.1964286 11.5H0v-3h15.1964286L8.57142857 1.87436946z" fill-rule="evenodd"/></svg></span>
           {% endif %}
         </div>
       </div>

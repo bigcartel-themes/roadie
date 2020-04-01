@@ -501,9 +501,11 @@ ul.sort-by-nav-links
   +flex-direction(row)
   +justify-content(flex-start)
   border-top: $small-border
+  font-weight: bold
+  line-height: 40px
   padding: $base-padding 0
 
-.pagination-numbers
+.page-numbers
   +flexbox
   +flex-wrap(wrap)
   +justify-content(flex-start)
@@ -518,8 +520,6 @@ ul.sort-by-nav-links
     background: $background-color
     border-radius: 100%
     color: $primary-text-color
-    font-weight: bold
-    line-height: 40px
     text-align: center
     height: 40px
     margin-right: $base-padding
@@ -527,9 +527,6 @@ ul.sort-by-nav-links
     position: relative
     text-decoration: underline
     width: 40px
-
-    &.gap
-      text-decoration: none
 
     &.current
       background: $button-background-color
@@ -553,93 +550,62 @@ ul.sort-by-nav-links
       svg
         fill: $button-text-color
 
-.pagination-arrows
+.page-arrows
   +flexbox
   margin-left: auto
 
   @media screen and (max-width: $break-small)
     +align-items(center)
 
-  > a, > span
-    +flexbox
-    +align-items(center)
-    +justify-content(center)
-    background: $background-color
-    border-radius: 100%
-    color: $primary-text-color
-    font-weight: bold
-    line-height: 40px
-    text-align: center
-    height: 40px
-    margin-right: $base-padding
-    order: 1
-    position: relative
+.page-link
+  +flexbox
+  +align-items(center)
+  +justify-content(center)
+  color: $primary-text-color
+  line-height: 40px
+  text-align: center
+  height: 40px
+  padding: 0
+  position: relative
+  text-decoration: none
+
+  &:not(.disabled):hover, &:not(.disabled):focus
+    background: none
+    color: $link-hover-color
     text-decoration: underline
-    width: 40px
-
-    &.previous, &.next
-      font-size: 16px
-      order: 2
-      padding: 0
-      text-decoration: none
-      width: auto
-
-      &:not(.disabled):hover, &:not(.disabled):focus
-        background: none
-        color: $link-hover-color
-        text-decoration: underline
-
-        svg
-          fill: $link-hover-color
-
-    &.next
-      margin-left: $base-padding * 3
-      margin-right: 0
-
-      span
-        margin-right: $base-padding
-
-        @media screen and (max-width: $break-small)
-          display: none
-
-    &.previous
-      margin-left: auto
-      margin-right: 0
-
-      span
-        margin-left: $base-padding
-
-        @media screen and (max-width: $break-small)
-          display: none
-
-    &.gap
-      text-decoration: none
-
-    &.current
-      background: $button-background-color
-      color: $button-text-color
-      text-decoration: none
-
-    &.disabled
-      cursor: not-allowed
-      opacity: .4
 
     svg
-      display: block
-      fill: $primary-text-color
+      fill: $link-hover-color
+
+  &.next-page-link
+    margin-left: $base-padding * 3
+
+    span
+      margin-right: $base-padding
 
       @media screen and (max-width: $break-small)
-        height: 20px
-        width: 20px
+        display: none
 
-  > a
-    &:hover, &:focus
-      background: $button-background-color
-      color: $button-text-color
-      text-decoration: none
+  &.previous-page-link
+    margin-left: auto
 
-      svg
-        fill: $button-text-color
+    span
+      margin-left: $base-padding
+
+      @media screen and (max-width: $break-small)
+        display: none
+
+  &.disabled
+    cursor: not-allowed
+    opacity: .5
+
+  svg
+    display: block
+    fill: $primary-text-color
+
+    @media screen and (max-width: $break-small)
+      height: 20px
+      width: 20px
 
 .empty-products
   font-size: 24px
