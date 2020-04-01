@@ -26,12 +26,18 @@
   position: relative
 
   .mobile-cart &
-    +flex-wrap(wrap)
     border-bottom: $medium-border
     padding: $base-padding 0
 
   &:last-child
     border-bottom: none
+
+.cart-item-name-info
+  +flexbox
+  +flex-basis(100%)
+
+  .mobile-cart &
+    +flex-direction(column)
 
 .button.cart-item-remove
   margin-right: $base-padding * 2
@@ -81,12 +87,9 @@
   text-decoration: none
 
   .mobile-cart &
-    +align-self(flex-start)
-    +flex(1 1 calc(100% - 112px))
     border-bottom: $small-border
     margin-bottom: $base-padding
     margin-left: $base-padding
-    min-height: 96px
     padding-bottom: $base-padding
     padding-right: $base-padding * 4
 
@@ -119,8 +122,7 @@
 
   .mobile-cart &
     +flex-basis(auto)
-    margin-left: 104px
-    width: 100%
+    margin-left: $base-padding
 
 .cart-item-details-unit-price
   +flex-shrink(0)
@@ -205,7 +207,7 @@
   font-size: 20px
   font-weight: 600
   margin-left: auto
-  min-width: 25%
+  min-width: 220px
   padding-left: $base-padding * 5
   text-align: right
 

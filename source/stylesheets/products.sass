@@ -361,13 +361,12 @@ ul.sort-by-nav-links
     margin-left: auto
 
 .product-list-image
+  -webkit-transform: translate3d(0, 0, 0)
   display: block
+  overflow: hidden
 
   &.lazy
-    filter: blur(2px)
-
-  &.not-lazy
-    filter: blur(0)
+    filter: blur(5px)
 
   .default &
     width: 100%
