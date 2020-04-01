@@ -28,20 +28,33 @@
 </div>
 
 <div class="product-page-columns">
-  <div class="product-images {% if theme.product_image_zooming %}product-image-zooming{% endif %} product-images-{{ theme.secondary_product_images }}">
+  <div class="product-images product-image-zooming product-images-{{ theme.secondary_product_images }}">
 
     <div class="primary-product-image-container">
-      <img class="product-image primary-product-image" src="{{ product.image | product_image_url | constrain: 1000 }}" data-zoom="{{ product.image | product_image_url | constrain: 1500 }}" alt="Image of {{ product.name | escape }}">
+      <img class="product-image primary-product-image product-image-zoom" src="{{ product.image | product_image_url | constrain: 1000 }}" data-zoom="{{ product.image | product_image_url | constrain: 1500 }}" alt="{{ product.name | escape }}">
     </div>
 
     {% if product.images.size > 1 %}
-      <div class="secondary-product-image-container">
+
+      <div class="secondary-product-image-container secondary-product-image-container--thumbs {% if theme.secondary_product_images == 'full' %}has-full{% endif %}">
         {% for image in product.images %}
-          <a class="product-image-link secondary-product-image-link" href="{{ image | product_image_url | constrain: 1000 }}" data-zoom="{{ image | product_image_url | constrain: 1500 }}">
-            <img class="product-image secondary-product-image" src="{{ image | product_image_url | constrain: 1000 }}" data-zoom="{{ image | product_image_url | constrain: 1500 }}" alt="Image of {{ product.name | escape }}">
-          </a>
+          <div class="product-image-link secondary-product-image-link secondary-product-image-link--thumbs{% if forloop.index == 1 %} active{% endif %}" data-url="{{ image | product_image_url | constrain: 1000 }}" data-zoom="{{ image | product_image_url | constrain: 1500 }}">
+            <img class="product-image secondary-product-image" src="{{ image | product_image_url | constrain: 1000 }}" data-zoom="{{ image | product_image_url | constrain: 1500 }}" alt="{{ product.name | escape }}">
+          </div>
         {% endfor %}
       </div>
+
+
+      {% if theme.secondary_product_images == 'full' %}
+        <div class="secondary-product-image-container secondary-product-image-container--full">
+          {% for image in product.images offset: 1 %}
+            <div class="product-image-link secondary-product-image-link" data-url="{{ image | product_image_url | constrain: 1000 }}" data-zoom="{{ image | product_image_url | constrain: 1500 }}">
+              <img class="product-image secondary-product-image product-image-zoom" src="{{ image | product_image_url | constrain: 1000 }}" data-zoom="{{ image | product_image_url | constrain: 1500 }}" alt="{{ product.name | escape }}">
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
     {% endif %}
   </div>
 
@@ -117,7 +130,7 @@
           {% endif %}
 
 
-          {{ store | instant_checkout_button: 'dark', '44px' }}
+          {{ store | instant_checkout_button: 'dark', '50px' }}
 
         </div>
       </form>
@@ -236,7 +249,7 @@
     <div class="all-similar-products" style="display: none">{{ product_divs }}</div>
     <h2 class="similar-products-title">Related products</h2>
     <div class="product-list-container">
-      <div class="similar-product-list product-list {{ theme.product_list_layout }} mobile-{{ theme.mobile_product_grid_style }} {% if theme.layout_style == 'full_width' %}grid-full-width{% endif %}">
+      <div class="similar-product-list product-list {{ theme.product_list_layout }} mobile-{{ theme.mobile_product_grid_style }} grid-{{ theme.layout_style }}">
 
       </div>
     </div>

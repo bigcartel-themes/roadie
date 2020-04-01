@@ -1,4 +1,5 @@
 {% assign pageQuerystring = page.full_url | split:'sort=' | last %}
+{% assign pageURL = page.full_url | split:'?' | first %}
 
 {% if pageQuerystring contains 'on_sale' %}
   {% assign sort_order = 'on_sale' %}
@@ -31,40 +32,36 @@
 
 <div class="page-heading {% if theme.enable_product_sorting %}has-sorting{% endif %}">
   <h1 class="page-title">{% if page.name == 'Products' %}All Products{% else %}{{ page.name}}{% endif %}</h1>
-  {% if theme.enable_product_sorting %}
-    <div class="product-sort">
-      <div class="product-sort-caption">Sort by</div>
+  <div class="product-sort">
+    <div class="product-sort-caption">Sort by</div>
 
+    <nav class="main-nav header-nav-container product-sort-options" aria-label="Sort products">
 
-      <nav class="main-nav header-nav-container product-sort-options" aria-label="Sort products">
+      <ul class="nav" role="menubar" aria-hidden="false">
+        <li class="nav-menu-item" role="menuitem" aria-haspopup="true" style="width:auto;margin-right:0;">
+          <a href="#"><span class="hover-underline">{{ sort_order_name }} <svg aria-hidden="true" width="16" height="10" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></span></a>
 
-        <ul class="nav" role="menubar" aria-hidden="false">
-          <li class="nav-menu-item" role="menuitem" aria-haspopup="true" style="width:auto;margin-right:0;">
-            <a href="#"><span class="hover-underline">{{ sort_order_name }} <svg aria-hidden="true" width="16" height="10" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></span></a>
-
-            <ul aria-hidden="true" role="menu" class="horizontal-nav-links sort-by-nav-links">
-              <li class="horizontal-nav-link" role="menuitem"><a href="{{ page.full_path }}" tabindex="-1">Featured</a></li>
-              <li class="horizontal-nav-link" role="menuitem"><a href="{{ page.full_path }}?sort=on_sale" tabindex="-1">On sale</a></li>
-              <li class="horizontal-nav-link" role="menuitem"><a href="{{ page.full_path }}?sort=sales" tabindex="-1">Top selling</a></li>
-              <li class="horizontal-nav-link" role="menuitem"><a href="{{ page.full_path }}?sort=name_a_to_z" tabindex="-1">Alphabetically (A to Z)</a></li>
-              <li class="horizontal-nav-link" role="menuitem"><a href="{{ page.full_path }}?sort=name_z_to_a" tabindex="-1">Alphabetically (Z to A)</a></li>
-              <li class="horizontal-nav-link" role="menuitem"><a href="{{ page.full_path }}?sort=date_new_to_old" tabindex="-1">Date (new to old)</a></li>
-              <li class="horizontal-nav-link" role="menuitem"><a href="{{ page.full_path }}?sort=date_old_to_new" tabindex="-1">Date (old to new)</a></li>
-              <li class="horizontal-nav-link" role="menuitem"><a href="{{ page.full_path }}?sort=price_low_to_high" tabindex="-1">Price (low to high)</a></li>
-              <li class="horizontal-nav-link" role="menuitem"><a href="{{ page.full_path }}?sort=price_high_to_low" tabindex="-1">Price (high to low)</a></li>
-            </ul>
-          </li>
-        </ul>
-
-      </nav>
-    </div>
-  {% endif %}
+          <ul aria-hidden="true" role="menu" class="horizontal-nav-links sort-by-nav-links">
+            <li class="horizontal-nav-link" role="menuitem"><a href="{{ pageURL }}" tabindex="-1">Featured</a></li>
+            <li class="horizontal-nav-link" role="menuitem"><a title="Sort products by on sale status" href="{{ pageURL }}?sort=on_sale" tabindex="-1">On sale</a></li>
+            <li class="horizontal-nav-link" role="menuitem"><a title="Sort products by top selling" href="{{ pageURL }}?sort=sales" tabindex="-1">Top selling</a></li>
+            <li class="horizontal-nav-link" role="menuitem"><a title="Sort products alphabetically (A to Z)" href="{{ pageURL }}?sort=name_a_to_z" tabindex="-1">Alphabetically (A to Z)</a></li>
+            <li class="horizontal-nav-link" role="menuitem"><a title="Sort products alphabetically (Z to A)" href="{{ pageURL }}?sort=name_z_to_a" tabindex="-1">Alphabetically (Z to A)</a></li>
+            <li class="horizontal-nav-link" role="menuitem"><a title="Sort products by date (new to old)" href="{{ pageURL }}?sort=date_new_to_old" tabindex="-1">Date (new to old)</a></li>
+            <li class="horizontal-nav-link" role="menuitem"><a title="Sort products by date (old to new)" href="{{ pageURL }}?sort=date_old_to_new" tabindex="-1">Date (old to new)</a></li>
+            <li class="horizontal-nav-link" role="menuitem"><a title="Sort products by price price (low to high)" href="{{ pageURL }}?sort=price_low_to_high" tabindex="-1">Price (low to high)</a></li>
+            <li class="horizontal-nav-link" role="menuitem"><a title="Sort products by price (high to low)" href="{{ pageURL }}?sort=price_high_to_low" tabindex="-1">Price (high to low)</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
 </div>
 
 {% paginate products from products.current by theme.products_per_page order: sort_order %}
   {% if products != blank %}
     <div class="product-list-container">
-      <div class="product-list {{ theme.product_list_layout }} mobile-{{ theme.mobile_product_grid_style }} {% if theme.layout_style == 'full_width' %}grid-full-width{% endif %}">
+      <div class="product-list {{ theme.product_list_layout }} mobile-{{ theme.mobile_product_grid_style }} grid-{{ theme.layout_style }}">
         {% for product in products %}
           {% assign product_status = '' %}
           {% case product.status %}
@@ -84,7 +81,7 @@
               image-square
             {% endif %}
           {% endcapture %}
-          <a class="prod-thumb product-image-{{ theme.product_grid_image_size }} {{ theme.show_overlay }} {{ theme.grid_image_style }} {% if theme.show_quickview %}show-quickview{% endif %}" href="{{ product.url }}" title="View {{ product.name | escape }}">
+         <a data-height="{{ product.image.height }}" data-width="{{ product.image.width }}" class="prod-thumb product-image-{{ theme.product_grid_image_size }} {{ theme.show_overlay }} {{ theme.grid_image_style }} {% if theme.show_quickview %}show-quickview{% endif %}" href="{{ product.url }}" title="View {{ product.name | escape }}">title="View {{ product.name | escape }}">
             <div class="prod-thumb-container">
               <figure class="product-list-image-container">
                 <img alt="" class="lazy product-list-image {{ image_class }}" src="{{ product.image | product_image_url | constrain: 50 }}" data-src="{{ product.image | product_image_url | constrain: 1000 }}" data-srcset="{{ product.image | product_image_url | constrain: 2000 }} 2x, {{ product.image | product_image_url | constrain: 1000 }} 1x">
@@ -145,9 +142,11 @@
 
     {% endif %}
   {% else %}
-    <div class="empty-products">No products found.</div>
-    {% if page.full_url contains 'search' %}
-      <a href="/products" class="button start-shopping-button">Browse all products</a>
-    {% endif %}
+    <div class="empty-products">
+      <div class="empty-products-message">No products found.</div>
+      {% if page.full_url contains 'search' %}
+        <a href="/products" class="button start-shopping-button">Browse all products</a>
+      {% endif %}
+    </div>
   {% endif %}
 {% endpaginate %}

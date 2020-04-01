@@ -28,16 +28,28 @@
   width: 100%
 
 .product-images
-  +flex(1 1 auto)
+  +flex(1 1 100%)
   order: 1
   padding: $base-padding * 2 0
 
   @media screen and (max-width: $break-product-details)
     order: 1 !important
 
+  @media screen and (min-width: $break-large + 1)
+    .full-width &.product-images-thumbs
+      +flexbox
 
-.primary-product-image-container
+      .primary-product-image-container
+        +flex-basis(100%)
+        order: 2
 
+      .secondary-product-image-container--thumbs
+        +flex-direction(column)
+        +flex-basis(20%)
+        order: 1
+
+        .secondary-product-image-link
+          width: 100%
 
 .secondary-product-image-container
   +flexbox
@@ -49,17 +61,26 @@
   .secondary-product-image-link
     width: 100%
 
+.secondary-product-image-container--thumbs
+  +flex-direction(row)
+
+  &.has-full
+    display: none
+
     @media screen and (max-width: $break-product-details)
-      width: 20%
+      +flexbox
 
-    &:first-child
-      display: none
+  .secondary-product-image-link
+    cursor: pointer
+    opacity: .8
+    width: 20%
 
-      @media screen and (max-width: $break-product-details)
-        display: block
+    &.active, &:hover, &:focus
+      opacity: 1
 
-
-
+.secondary-product-image-container--full
+  @media screen and (max-width: $break-product-details)
+    display: none
 
 .product-details
   +flex(0 0 386px)
@@ -192,6 +213,9 @@
   position: relative
   height: 64px
 
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active)
+    +flex-basis(calc(100% - 104px))
+
   &:hover, &:focus
     &.spinner:before
       border-color: $button-hover-text-color
@@ -297,6 +321,9 @@
   font-size: 14px
   margin-bottom: $base-padding * 2
 
+  @media screen and (max-width: $break-product-details)
+    border: none
+
 button.description-inventory-tab
   +flex-basis(50%)
   background: $background-color
@@ -304,7 +331,7 @@ button.description-inventory-tab
   color: $primary-text-color
   font-size: 14px
   font-weight: normal !important
-  height: auto
+  height: 48px
   outline: none
   padding: $base-padding * 1.5 $base-padding * 2
   text-align: center
@@ -320,10 +347,15 @@ button.description-inventory-tab
     font-weight: bold !important
     text-decoration: underline
 
-    @media screen and (max-width: $break-small)
+    @media screen and (max-width: $break-product-details)
       background-color: $button-background-color !important
       color: $button-text-color !important
-      text-decoration: none
+      font-weight: normal !important
+      text-decoration: none !important
+
+  @media screen and (max-width: $break-product-details)
+    border: $small-border !important
+    font-weight: bold !important
 
   &:first-of-type
     border-right: $small-border

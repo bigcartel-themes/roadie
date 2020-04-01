@@ -37,9 +37,9 @@ $break-extra-small: 640px
 
 $product-detail-alignment: #{"{% if theme.show_overlay contains 'left' %} left {% else %} center {% endif %}"}
 
-$large-border: #{"{% if theme.border_style == 'thick' %} 8px {% else %} 4px {% endif %}"} solid $border-color
-$medium-border: #{"{% if theme.border_style == 'thick' %} 4px {% else %} 2px {% endif %}"} solid $border-color
-$small-border: #{"{% if theme.border_style == 'thick' %} 2px {% else %} 1px {% endif %}"} solid $border-color
+$large-border: 8px solid $border-color
+$medium-border: 4px solid $border-color
+$small-border: 2px solid $border-color
 
 @mixin all-transitions
   +transition(.2s ease-in-out)
@@ -91,7 +91,6 @@ $max_font: 24px
   $u2: unit($max-vw)
   $u3: unit($min-font-size)
   $u4: unit($max-font-size)
-
 
   @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4
     &

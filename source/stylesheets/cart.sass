@@ -1,6 +1,5 @@
 @import 'variables'
 
-
 .cart-empty-message
   display: none
 
@@ -14,19 +13,20 @@
   padding: 0
   width: 100%
 
-  @media screen and (max-width: $break-small)
+  .mobile-cart &
     border-bottom: $medium-border
 
 .cart-item
   +flexbox
   +align-items(center)
-  +flex-wrap(wrap)
+  +flex-wrap(nowrap)
   +justify-content(flex-start)
   border-bottom: $small-border
   padding: $base-padding * 2 0
   position: relative
 
-  @media screen and (max-width: $break-small)
+  .mobile-cart &
+    +flex-wrap(wrap)
     border-bottom: $medium-border
     padding: $base-padding 0
 
@@ -39,7 +39,7 @@
   height: 24px
   width: 24px
 
-  @media screen and (max-width: $break-small)
+  .mobile-cart &
     margin-right: 0
     position: absolute
     right: 0
@@ -50,7 +50,7 @@
     height: 20px
     width: 20px
 
-    @media screen and (max-width: $break-small)
+    .mobile-cart &
       height: 24px
       width: 24px
 
@@ -60,10 +60,12 @@
   overflow: hidden
   width: 112px
 
-  @media screen and (max-width: $break-small)
-    +align-self(flex-start)
+  @media screen and (max-width: $break-medium)
     height: 96px
     width: 96px
+
+  .mobile-cart &
+    +align-self(flex-start)
 
   img
     display: block
@@ -72,16 +74,13 @@
     width: 100%
 
 .cart-item-details
-  +flex(0 1 50%)
+  +flex(1 1 40%)
   color: $primary-text-color
   margin-left: $base-padding * 2
   padding-right: $base-padding * 5
   text-decoration: none
 
-  .fixed-width.sidebar-visible &
-    +flex-basis(45%)
-
-  @media screen and (max-width: $break-small)
+  .mobile-cart &
     +align-self(flex-start)
     +flex(1 1 calc(100% - 112px))
     border-bottom: $small-border
@@ -109,24 +108,35 @@
 
 .cart-item-information
   +flexbox
+  +flex(1 1 auto)
   +align-items(center)
+  +justify-content(flex-end)
   margin-left: auto
 
-  @media screen and (max-width: $break-small)
+  .full-width &
+    @media screen and (min-width: $break-extra-large)
+      +flex(0 1 20%)
+
+  .mobile-cart &
+    +flex-basis(auto)
     margin-left: 104px
     width: 100%
 
 .cart-item-details-unit-price
   +flex-shrink(0)
-  margin-left: auto
   font-size: 20px
-  padding-right: $base-padding * 6
+  padding-right: $base-padding * 5
   text-align: right
 
-  .fixed-width &
-    display: none
+  .sidebar-visible.full-width &
+    @media screen and (max-width: $break-large)
+      display: none
 
-  @media screen and (max-width: $break-small)
+  .full-width &
+    @media screen and (max-width: $break-medium)
+      display: none
+
+  .fixed-width &, .mobile-cart &
     display: none
 
 .cart-item-details-unit-price-inline
@@ -134,16 +144,25 @@
   font-weight: bold
   margin-top: $base-padding
 
+  .sidebar-visible.full-width &
+    @media screen and (max-width: $break-large)
+      display: block
+
+  .full-width &
+    @media screen and (max-width: $break-medium)
+      display: block
+
   .fixed-width &
     display: block
 
-  @media screen and (max-width: $break-small)
+  .mobile-cart &
     display: block
     margin-top: 0
 
 .cart-item-quantity-holder
   +flexbox
   +align-items(center)
+  +justify-content(center)
 
 .option-quantity
   +appearance(none)
@@ -159,7 +178,7 @@
   text-align: center
   width: $base-padding * 6
 
-  @media screen and (max-width: $break-small)
+  .mobile-cart &
     border-bottom: 0
 
 .button.qty-button
@@ -168,7 +187,7 @@
   padding: 0
   width: 20px
 
-  @media screen and (max-width: $break-small)
+  .mobile-cart &
     height: 24px
     width: 24px
 
@@ -177,7 +196,7 @@
     height: 20px
     width: 20px
 
-    @media screen and (max-width: $break-small)
+    .mobile-cart &
       height: 24px
       width: 24px
 
@@ -185,14 +204,10 @@
   +flex-shrink(0)
   font-size: 20px
   font-weight: 600
-  padding-left: $base-padding * 3
+  margin-left: auto
+  min-width: 25%
+  padding-left: $base-padding * 5
   text-align: right
-
-  .fixed-width &
-    margin-left: auto
-
-  @media screen and (max-width: $break-small)
-    margin-left: auto
 
 .cart-footer
   padding-bottom: $base-padding * 2
