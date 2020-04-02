@@ -247,11 +247,13 @@ header
     display: block !important
 
 .header-branding
-  max-width: 60%
+  max-width: 70%
   text-align: center
   width: 100%
 
   @media screen and (max-width: $break-small)
+    max-width: 75%
+
     .sidebar &
       display: none
 
@@ -267,7 +269,7 @@ header
       text-align: left
 
 .header-home-link
-  +fluid-type(18px, 64px)
+  +fluid-type(24px, 64px)
   color: $primary-text-color
   display: block
   font-weight: bold
@@ -284,7 +286,7 @@ header
         margin: 0
 
   .sidebar-no-header &
-    +fluid-type(18px, 40px)
+    +fluid-type(24px, 40px)
 
     @media screen and (min-width: $break-small +1)
       text-align: left
@@ -322,6 +324,7 @@ header
   position: absolute
   right: 0
   text-decoration: none
+  white-space: nowrap
 
   &.upper-nav-cart
     +flexbox
@@ -351,7 +354,7 @@ header
       border-right-color: $link-hover-color
 
   @media screen and (max-width: $break-small)
-    display: block !important
+    display: flex !important
 
   .header-cart-count
     border-right: $small-border

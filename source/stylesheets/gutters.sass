@@ -13,6 +13,10 @@
     padding-left: $base-padding
     padding-right: $base-padding
 
+  .main-nav
+    padding-left: $base-padding
+    padding-right: $base-padding
+
   .outer-wrapper
     padding-left: 0
     padding-right: 0
@@ -42,3 +46,94 @@
   .cart-sub-footer
     padding-left: $base-padding
     padding-right: $base-padding
+
+  .custom-page .page-content, .contact-page .page-content
+    padding-left: $base-padding
+    padding-right: $base-padding
+
+  .content-wrapper.has-sidebar
+    +flex(1)
+
+  .pagination
+    padding-left: $base-padding
+    padding-right: $base-padding
+
+  &.sidebar-no-header .header-home-link
+    padding: 0 $base-padding
+
+  .sidebar
+    padding-left: 0
+    padding-right: 0
+
+    .nav-cart-link
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .search-form
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    @media screen and (min-width: $break-small + 1)
+      &.left-sidebar
+        border-right: $medium-border
+
+      &.right-sidebar
+        border-left: $medium-border
+
+    .nav-section-title
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .sidebar-nav-links .sidebar-nav-link a
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .social-links, .badge
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+  .view-all-link-container
+    padding-right: $base-padding
+
+  .product-sort-caption
+    padding-left: $base-padding
+
+  @media screen and (max-width: $break-small)
+    .mobile-horizontal .prod-thumb
+      padding-left: 8px
+      padding-right: 8px
+
+  .mobile-cart .button.cart-item-remove
+    right: $base-padding
+
+  .page-heading .continue-shopping-link
+    margin-right: $base-padding
+
+  .product-images
+    border-right: $medium-border
+    padding: 0 !important
+
+    @media screen and (max-width: $break-product-details)
+      border-right: 0
+
+  .product-details
+    padding-left: 0
+    padding-right: 0
+
+  .product-option-label
+    left: $base-padding
+
+  .similar-products-title
+    border-top: $medium-border
+    margin: 0
+    padding: $base-padding
+
+  .product-form-controls
+    padding-left: $base-padding
+    padding-right: $base-padding
+
+  .button.description-inventory-tab:first-of-type
+    border-left: 0
+
+  .button.description-inventory-tab:last-of-type
+    border-right: 0

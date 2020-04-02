@@ -72,6 +72,8 @@
 
   .mobile-cart &
     +align-self(flex-start)
+    height: 80px
+    width: 80px
 
   img
     display: block
@@ -83,7 +85,7 @@
   +flex(1 1 40%)
   color: $primary-text-color
   margin-left: $base-padding * 2
-  padding-right: $base-padding * 5
+  padding-right: $base-padding * 4
   text-decoration: none
 
   .mobile-cart &
@@ -159,6 +161,7 @@
 
   .mobile-cart &
     display: block
+    font-size: 14px
     margin-top: 0
 
 .cart-item-quantity-holder
@@ -182,6 +185,7 @@
 
   .mobile-cart &
     border-bottom: 0
+    width: $base-padding * 4
 
 .button.qty-button
   height: 20px
@@ -210,6 +214,15 @@
   min-width: 220px
   padding-left: $base-padding * 5
   text-align: right
+
+  .fixed-width.sidebar-visible &
+    min-width: 160px
+    padding-left: $base-padding * 2
+
+  .mobile-cart &
+    font-size: 16px
+    min-width: 0
+    padding-left: $base-padding * 2
 
 .cart-footer
   padding-bottom: $base-padding * 2

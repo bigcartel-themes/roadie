@@ -11,17 +11,26 @@
   line-height: 1.25em
   padding: $base-padding 0
 
+  @media screen and (max-width: $break-small)
+    +flex-direction(column)
+
 .page-subheading-status
   font-size: 14px
   font-weight: bold
   margin-left: auto
 
+  @media screen and (max-width: $break-small)
+    margin-left: 0
+
 .product-page-columns
   +flexbox
   +flex-direction(row)
+  +align-items(stretch)
+  height: 100%
 
   @media screen and (max-width: $break-product-details)
     +flex-direction(column)
+    height: auto
 
 .product-image
   display: block
@@ -36,6 +45,13 @@
     order: 1 !important
 
   @media screen and (min-width: $break-large + 1)
+
+    .full-width &
+      padding-top: $base-padding * 4
+
+    .full-width.sidebar-visible &
+      padding-top: $base-padding * 3
+
     .full-width &.product-images-thumbs
       +flexbox
 
@@ -48,15 +64,22 @@
         +flex-basis(20%)
         order: 1
         margin-top: 0
-        margin-right: $base-padding / 2
+        margin-right: 0
 
         .right-sidebar &
-          margin-left: $base-padding / 2
+          margin-left: 0
           margin-right: 0
           order: 2
 
         .secondary-product-image-link
           width: 100%
+
+          &:first-child
+            &:after
+              border-top: 0
+
+          &:after
+            border-left: 0
 
 .secondary-product-image-container
   +flexbox
@@ -70,7 +93,7 @@
 
 .secondary-product-image-container--thumbs
   +flex-direction(row)
-  margin-top: $base-padding / 2
+  margin-top: 0
 
   &.has-full
     display: none
@@ -82,6 +105,10 @@
     cursor: pointer
     position: relative
     width: 20%
+
+    &:first-child
+      &:after
+        border-left: 0
 
     &:after
       border: 4px solid transparent
@@ -130,7 +157,7 @@
       +flex(0 0 386px)
 
   @media screen and (max-width: $break-product-details)
-    +flex-basis(100%)
+    flex-basis: 100% !important
     padding-left: 0
 
 .product-options-container
@@ -278,7 +305,10 @@
 .product-form-cart-link
   +flexbox
   +align-items(center)
+  background: $button-text-color
   border: $medium-border
+  border-color: $button-background-color
+  color: $button-background-color
   font-weight: bold
   margin-top: $base-padding
   padding: $base-padding * 1.5 $base-padding
@@ -295,7 +325,7 @@
     margin-left: $base-padding
 
 .product-form-cart-link-icon
-  fill: $primary-text-color
+  fill: $button-background-color
   height: 20px
   width: 20px
 
@@ -447,3 +477,8 @@ input[type=number]
 
 .product-form-quantity-button + #instant-checkout-button
   margin-top: 8px
+
+#instant-checkout-button
+  border: $medium-border
+  border-color: $button-background-color
+  background-color: #000000

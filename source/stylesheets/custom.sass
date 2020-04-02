@@ -1,34 +1,13 @@
 @import 'variables'
 
 .custom-page, .contact-page
-  +flexbox
-  +flex-direction(column)
-  +align-items(flex-start)
-
-  @media screen and (min-width: $break-small+1)
-    .full-width &, .fixed-width &
-      +flex-direction(row)
-
-    .fixed-width.sidebar-visible &
-      +flex-direction(column)
 
   .page-heading
     border-bottom: $medium-border
-    +flex(1 1 100%)
     width: 100%
 
-    @media screen and (min-width: $break-small+1)
-      .full-width &, .fixed-width &
-        +flex(1 1 50%)
-        margin-right: $base-padding * 4
-        max-width: 50%
-
-      .fixed-width.sidebar-visible &
-        +flex(0 1 100%)
-        margin-right: 0
-
   .page-content
-    +flex(0 1 100%)
+    max-width: 768px
     width: 100%
 
 .custom-page .page-content

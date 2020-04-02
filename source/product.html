@@ -123,6 +123,8 @@
             </div>
           </div>
 
+          {{ store | instant_checkout_button: 'light', '50px' }}
+
           {% if product.has_option_groups %}
             <div class="reset-selection-button-container">
               <button class="button min-btn reset-selection-button" type="reset">Reset selection</button>
@@ -130,7 +132,7 @@
           {% endif %}
 
 
-          {{ store | instant_checkout_button: 'dark', '50px' }}
+
 
         </div>
       </form>

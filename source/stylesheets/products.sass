@@ -279,7 +279,7 @@ ul.sort-by-nav-links
         width: 136px
 
       .prod-thumb-info
-        padding: 0 0 0 $base-padding * 2
+        padding: #{"{% case theme.grid_gutters %}{% when '16px' %}0px{% when '8px' %}0px{% when '0px' %}8px{% endcase %}"} 0 0 $base-padding
         width: calc(100% - 136px)
 
       .prod-thumb-info-headers
@@ -322,7 +322,7 @@ ul.sort-by-nav-links
   background-color: $button-background-color
   height: 100%
   left: 0
-  opacity: .2
+  opacity: 0
   position: absolute
   top: 0
   width: 100%
@@ -416,7 +416,7 @@ ul.sort-by-nav-links
   z-index: 1
 
   @media screen and (min-width: $break-small + 1)
-    .rollover &
+    .rollover.show-quickview &
       margin-bottom: 56px
 
   @media screen and (min-width: 1201px)
@@ -616,3 +616,4 @@ ul.sort-by-nav-links
 
 .empty-products-message
   margin-bottom: $base-padding * 2
+
