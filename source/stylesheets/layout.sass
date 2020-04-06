@@ -132,14 +132,10 @@ body
   display: none
   height: 31px
   position: absolute
-  width: 100%
-  position: absolute
   z-index: 1
-  background-image: linear-gradient(to top, rgba(255, 255, 255, 0.25), rgb(255, 255, 255))
   display: block
   left: 0px
   width: 100%
-  height: 50px
   transition: height 0.5s ease-in-out 0s
 
 .above-nav-section-title
@@ -175,6 +171,12 @@ header
   margin: 0 auto
   padding: 0 $base-padding * 2
   width: 100%
+
+  @media screen and (min-width: $break-small + 1)
+    padding: 0 $base-padding * 4
+
+    .no-sidebar &
+      padding: 0 $base-padding * 5
 
   &.fixed-width
     max-width: 1040px
@@ -304,7 +306,7 @@ header
     max-height: 100px
 
   @media screen and (max-width: $break-small)
-    max-height: 70px
+    max-height: 70px !important
 
     .header-left-align &
       margin: 0
@@ -547,6 +549,9 @@ header
 .sidebar .nav-section-title
   border-bottom: $medium-border
 
+  &.no-bottom-border
+    border-bottom: none
+
 .nav-section-title
 
   .toggle-nav
@@ -575,6 +580,13 @@ header
 .nav-section-title-text
   font-weight: bold
   line-height: $base-padding * 5
+
+  > a
+    display: block
+    text-decoration: none
+
+    &:hover, &:focus
+      text-decoration: underline
 
 .sidebar-nav-links
   line-height: 1.25em
@@ -651,8 +663,13 @@ header
     text-decoration: underline
 
 .main
+  +flexbox
+  +flex-direction(column)
   +flex(1)
   order: 2
+
+  @media screen and (max-width: $break-small)
+    display: block
 
   @media screen and (max-width: $break-small)
     .sidebar-visible-mobile &

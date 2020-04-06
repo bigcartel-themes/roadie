@@ -28,13 +28,15 @@
   width: 100%
   z-index: 1001
 
+  @media screen and (max-width: 1040px)
+    width: calc(100vw - 16px)
+
   @media screen and (max-width: $break-small)
     height: calc((var(--vh, 1vh) * 100) - 16px)
     top: 8px
     left: 8px
     right: 8px
     transform: none
-    width: calc(100vw - 16px)
 
 .qs-modal-background
   background-color: $background-color

@@ -152,9 +152,10 @@
             <nav class="horizontal-nav main-nav header-nav-container" aria-label="Main navigation">
 
               <ul class="nav" role="menubar" aria-hidden="false">
-                <li class="nav-menu-item" role="menuitem" aria-haspopup="true">
-                  <a href="#"><span class="hover-underline">{{ pages.products.name }} <svg aria-hidden="true" width="16" height="10" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></span></a>
+                <li class="nav-menu-item" role="menuitem" aria-haspopup="{% if categories.active == blank %}false{% else%}true{% endif %}">
+
                   {% if categories.active != blank %}
+                    <a href="#"><span class="hover-underline">{{ pages.products.name }} <svg aria-hidden="true" width="16" height="10" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></span></a>
                     <ul aria-hidden="true" role="menu" class="horizontal-nav-links">
                       <li class="horizontal-nav-link" role="menuitem"><a href="/products" tabindex="-1">All</a></li>
                       {% if categories.active != blank %}
@@ -163,6 +164,8 @@
                         {% endfor %}
                       {% endif %}
                     </ul>
+                  {% else %}
+                    <a href="/products"><span class="hover-underline no-underline">{{ pages.products.name }}</span></a>
                   {% endif %}
                 </li>
 
@@ -239,19 +242,27 @@
             {% endif %}
 
             <div class="nav-section nav-section-categories" data-type="categories">
-              <div class="nav-section-title">
+              <div class="nav-section-title{% if categories.active.size == 0 %} no-bottom-border{% endif %}">
                 {% if categories.active.size > 10 %}
                   <button class="button min-btn toggle-nav" aria-label="Toggle category list">{{ pages.products.name }} <svg aria-hidden="true" width="10" height="8" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></button>
                 {% else %}
-                  <div class="nav-section-title-text">{{ pages.products.name }}</div>
+                  <div class="nav-section-title-text">
+                    {% if categories.active.size == 0 %}
+                      <a href="/products">{{ pages.products.name }}</a>
+                    {% else %}
+                      {{ pages.products.name }}
+                    {% endif %}
+                  </div>
                 {% endif %}
               </div>
-              <ul class="sidebar-nav-links sidebar-category-links">
-                <li class="sidebar-nav-link"><a href="/products">All</a></li>
-                {% for category in categories.active %}
-                  <li class="sidebar-nav-link">{{ category | link_to }}</li>
-                {% endfor %}
-              </ul>
+              {% if categories.active != blank %}
+                <ul class="sidebar-nav-links sidebar-category-links">
+                  <li class="sidebar-nav-link"><a href="/products">All</a></li>
+                  {% for category in categories.active %}
+                    <li class="sidebar-nav-link">{{ category | link_to }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
             </div>
 
             {% if artists.active != blank %}

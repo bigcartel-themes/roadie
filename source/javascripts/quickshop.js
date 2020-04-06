@@ -68,16 +68,17 @@ function loadProductContent(product) {
   populatePreviousAndNext(this_product);
 
   $.get("/product/" + product.permalink + "?" + $.now(), function(response, status, xhr) {
-    // error checking
 
-    $container.html($(response).find(".main")); // Any <script> tags in the response string will execute
+    $container.html($(response).find(".main"));
     // post processing
-$('.qs-product-container').animate({
-    scrollTop: 0
-  }, 0);
+    $('.qs-product-container').animate({
+      scrollTop: 0
+    }, 0);
     openQuickShop();
   });
 }
+
+
 
 function populatePreviousAndNext(this_product) {
   $('.qs-nav').attr("disabled", false);

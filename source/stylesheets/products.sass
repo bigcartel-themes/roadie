@@ -56,6 +56,7 @@ ul.sort-by-nav-links
   right: 0 !important
 
 .product-list-container
+  overflow: hidden
   position: relative
 
 .product-list
@@ -524,13 +525,12 @@ ul.sort-by-nav-links
     margin-right: $base-padding
     order: 1
     position: relative
-    text-decoration: underline
+    text-decoration: none
     width: 40px
 
     &.current
       background: $button-background-color
       color: $button-text-color
-      text-decoration: none
 
     &.disabled
       cursor: not-allowed
@@ -542,12 +542,8 @@ ul.sort-by-nav-links
 
   > a
     &:hover, &:focus
-      background: $button-background-color
-      color: $button-text-color
-      text-decoration: none
-
-      svg
-        fill: $button-text-color
+      color: $link-hover-color
+      text-decoration: underline
 
 .page-arrows
   +flexbox

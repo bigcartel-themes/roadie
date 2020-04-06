@@ -26,6 +26,7 @@
   +flexbox
   +flex-direction(row)
   +align-items(stretch)
+  +flex(1)
   height: 100%
 
   @media screen and (max-width: $break-product-details)
@@ -47,9 +48,11 @@
   @media screen and (min-width: $break-large + 1)
 
     .full-width &
+      padding-right: $base-padding * 2
       padding-top: $base-padding * 4
 
     .full-width.sidebar-visible &
+      padding-right: $base-padding
       padding-top: $base-padding * 3
 
     .full-width &.product-images-thumbs
@@ -74,12 +77,14 @@
         .secondary-product-image-link
           width: 100%
 
-          &:first-child
-            &:after
-              border-top: 0
+          .no-gutters &
+            &:first-child
+              &:after
+                border-top: 0
 
-          &:after
-            border-left: 0
+          .no-gutters &
+            &:after
+              border-left: 0
 
 .secondary-product-image-container
   +flexbox
@@ -103,12 +108,14 @@
 
   .secondary-product-image-link
     cursor: pointer
+    height: 100%
     position: relative
     width: 20%
 
-    &:first-child
-      &:after
-        border-left: 0
+    .no-gutters &
+      &:first-child
+        &:after
+          border-left: 0
 
     &:after
       border: 4px solid transparent
@@ -156,6 +163,10 @@
     .full-width &
       +flex(0 0 386px)
 
+  @media screen and (max-width: $break-large + 1)
+    .full-width.sidebar-visible &
+      +flex(0 0 328px)
+
   @media screen and (max-width: $break-product-details)
     flex-basis: 100% !important
     padding-left: 0
@@ -171,8 +182,22 @@
 .product-form-controls
   margin-top: $base-padding * 2
 
+  @media screen and (min-width: $break-large + 1)
+
+    .full-width &
+      margin-top: $base-padding * 4
+
+    .full-width.sidebar-visible &
+      margin-top: $base-padding * 3
+
 .product-options-container + .product-form-controls
   margin-top: $base-padding
+
+  .full-width &
+    margin-top: $base-padding
+
+  .full-width.sidebar-visible &
+    margin-top: $base-padding
 
 .product-option-select-container
   border-bottom: $small-border
