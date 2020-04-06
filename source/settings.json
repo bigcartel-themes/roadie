@@ -1,16 +1,16 @@
 {
   "name": "Roadie",
-  "version": "0.0.1",
+  "version": "0.0.40",
   "images": [
     {
       "variable": "logo",
       "label": "Logo",
-      "description": "Adds your logo to the header"
+      "description": "Adds your logo to the header or sidebar"
     },
     {
       "variable": "background_image",
       "label": "Background Image",
-      "description": "Adds a background image"
+      "description": "Adds a fixed or repeating background image"
     },
     {
       "variable": "promo_image",
@@ -67,14 +67,24 @@
       "default": "#FFFFFF"
     },
     {
-      "variable": "announcement_background_color",
-      "label": "Announcement Message Background",
+      "variable": "badge_text_color",
+      "label": "Badge Text Color",
       "default": "#000000"
+    },
+    {
+      "variable": "badge_background_color",
+      "label": "Badge Background Color",
+      "default": "#9aff00"
     },
     {
       "variable": "announcement_text_color",
       "label": "Announcement Message Text",
       "default": "#FFFFFF"
+    },
+    {
+      "variable": "announcement_background_color",
+      "label": "Announcement Message Background",
+      "default": "#000000"
     },
     {
       "variable": "error_text_color",
@@ -96,59 +106,46 @@
     },
     {
       "variable": "theme_layout",
-      "label": "Desktop Theme layout",
+      "label": "Desktop layout",
       "type": "select",
       "options": [
         ["Navigation above header", "above_header"],
         ["Navigation below header", "below_header"],
-        ["Sidebar with header", "sidebar_header"],
+        ["Sidebar + header", "sidebar_header show_toggle"],
+        ["Sidebar + header (no toggle)", "sidebar_header"],
         ["Sidebar without header", "sidebar_no_header"]
       ],
-      "default": "below_header",
+      "default": "above_header",
       "description": "Sets the overall theme layout on desktops and large screens"
     },
     {
-      "variable": "show_sidebar_toggle",
-      "label": "Show sidebar toggle on desktop",
-      "type": "boolean",
-      "default": true,
-      "description": "Allows the sidebar to be hidden via the hamburger menu"
-    },
-    {
-      "variable": "sidebar_position",
-      "label": "Sidebar position",
-      "type": "select",
-      "options": [
-        ["Left", "left"],
-        ["Right", "right"]
-      ],
-      "default": "left",
-      "description": "Sets the position the sidebar & product details"
-    },
-    {
-      "variable": "allow_sidebar_section_collapse",
-      "label": "Allow sidebar sections to be collapsed",
-      "type": "boolean",
-      "default": true,
-      "description": "Allows customers to hide category/artist navigation in the sidebar"
-    },
-    {
       "variable": "layout_style",
-      "label": "Layout style",
+      "label": "Desktop layout style",
       "type": "select",
       "options": [
-        ["Full width", "full_width"],
-        ["Fixed width", "fixed_width"]
+        ["Fixed width", "fixed-width"],
+        ["Full width", "full-width"]
       ],
-      "default": "fixed_width",
+      "default": "full-width",
       "description": "Sets the width of the content area of your store"
     },
     {
       "variable": "show_layout_gutters",
       "label": "Show layout gutters",
       "type": "boolean",
-      "default": true,
-      "description": "Show layout gutters"
+      "default": false,
+      "description": "Adds spacing to the left/right edges of the layout (smaller screens and full width layouts)"
+    },
+    {
+      "variable": "sidebar_position",
+      "label": "Sidebar & product details",
+      "type": "select",
+      "options": [
+        ["Left align", "left"],
+        ["Right align", "right"]
+      ],
+      "default": "left",
+      "description": "Sets the position of sidebar (when using a sidebar layout) & product details page on desktop"
     },
     {
       "variable": "header_position",
@@ -158,7 +155,7 @@
         ["Left", "left"],
         ["Center", "center"]
       ],
-      "default": "center",
+      "default": "left",
       "description": "Sets the position of your logo or store name"
     },
     {
@@ -169,60 +166,36 @@
       "description": "Shows all text in uppercase"
     },
     {
-      "variable": "border_style",
-      "label": "Border style",
-      "type": "select",
-      "options": [
-        ["Thick", "thick"],
-        ["Thin", "thin"]
-      ],
-      "default": "thick",
-      "description": "Sets the size of theme borders"
-    },
-    {
       "variable": "background_image_layout",
-      "label": "Background image style",
+      "label": "Background image layout",
       "type": "select",
       "options": [
         ["Repeating", "repeating"],
         ["Fixed", "fixed"]
       ],
       "default": "fixed",
-      "description": "Sets how to display the uploaded background image"
+      "description": "Sets the display of the uploaded background image"
     },
     {
       "variable": "background_image_style",
-      "label": "Background image overlay",
+      "label": "Background image style",
       "type": "select",
       "options": [
         ["Plain background image", "plain_image"],
-        ["Transparent overlay", "transparent_color_overlay"],
+        ["Color overlay", "transparent_color_overlay"],
         ["Gradient overlay", "gradient_overlay"]
       ],
       "default": "gradient_overlay",
       "description": "Sets the overlay style when a background image is used"
     },
-    {
-      "variable": "enable_product_sorting",
-      "label": "Show product sorting dropdown",
-      "type": "boolean",
-      "default": true,
-      "description": "Show product sorting dropdown on Products page"
-    },
-    {
-      "variable": "show_quickview",
-      "label": "Show quick view",
-      "type": "boolean",
-      "default": true,
-      "description": "Shows quick view button on all product thumbnails"
-    },
+
     {
       "variable": "product_list_layout",
       "label": "Product grid layout",
       "type": "select",
       "options": [
-          ["Masonry", "masonry"],
-          ["Rows", "rows"]
+        ["Rows", "rows"],
+        ["Masonry", "masonry"]
       ],
       "default": "rows",
       "description": "The arrangement of your products on the Home and Products pages"
@@ -236,7 +209,7 @@
         ["Medium", "medium"],
         ["Large", "large"]
       ],
-      "default": "small",
+      "default": "medium",
       "description": "Sets the size of product image thumbnails"
     },
     {
@@ -248,7 +221,7 @@
         ["Fit to square", "fit-to-square"],
         ["Crop to square", "crop-to-square"]
       ],
-      "default": "crop-to-square",
+      "default": "default",
       "description": "Sets the display of thumbnail images"
     },
     {
@@ -256,8 +229,8 @@
       "label": "Product grid spacing",
       "type": "select",
       "options": [
-        ["Large", "16px"],
         ["Small", "8px"],
+        ["Large", "16px"],
         ["None", "0px"]
       ],
       "default": "8px",
@@ -268,8 +241,8 @@
       "label": "Product grid badges",
       "type": "select",
       "options": [
-          ["Circle", "circle"],
           ["Bar", "bar"],
+          ["Circle", "circle"],
           ["Inline", "inline"]
       ],
       "default": "bar",
@@ -280,41 +253,34 @@
       "label": "Product grid info",
       "type": "select",
       "options": [
-        ["On mouseover", "rollover"],
-        ["Left align under image", "under_image left-align"],
-        ["Center align under image", "under_image center-align"]
+        ["Hover (desktop) & Hidden (mobile)", "rollover"],
+        ["Under image (left align)", "under_image left-align"],
+        ["Under image (center align)", "under_image center-align"]
       ],
-      "default": "under_image left-align",
-      "description": "Shows a product's name & price on mouseover, or under the image"
+      "default": "under_image center-align",
+      "description": "Shows a product's name & price on hover, or under the image"
     },
     {
       "variable": "mobile_product_grid_style",
       "label": "Mobile product grid style",
       "type": "select",
       "options": [
-        ["Stacked", "horizontal"],
         ["1 thumbnail across", "medium"],
-        ["2 thumbnails across", "small"]
+        ["2 thumbnails across", "small"],
+        ["Stacked", "horizontal"]
       ],
-      "default": "horizontal",
-      "description": "Sets the mobile thumbnail display"
-    },
-    {
-      "variable": "product_image_zooming",
-      "label": "Enable Desktop Product Image Zooming",
-      "type": "boolean",
-      "default": true,
-      "description": "Allow zooming of product detail images on hover"
+      "default": "small",
+      "description": "Sets the mobile product grid style"
     },
     {
       "variable": "secondary_product_images",
       "label": "Secondary product images",
       "type": "select",
       "options": [
-        ["Full width", "full"],
-        ["Thumbnails", "thumbs"]
+        ["Thumbnails", "thumbs"],
+        ["Full width", "full"]
       ],
-      "default": "full",
+      "default": "thumbs",
       "description": "Display secondary product images full-width or as thumbnails on the Product page"
     },
     {
@@ -350,11 +316,18 @@
       "description": "The number of related products to show on the Product page"
     },
     {
+      "variable": "show_quickview",
+      "label": "Show quick view",
+      "type": "boolean",
+      "default": true,
+      "description": "Enables quick view & buttons on product thumbnails"
+    },
+    {
       "variable": "show_search",
       "label": "Show search",
       "type": "boolean",
       "default": true,
-      "description": "Displays a search field in the footer"
+      "description": "Displays a search field in the layout"
     },
     {
       "variable": "show_inventory_bars",
@@ -368,7 +341,7 @@
       "variable": "show_sold_out_product_options",
       "label": "Show sold out product options",
       "type": "boolean",
-      "default": false,
+      "default": true,
       "description": "Shows sold out product options in the Product page dropdowns",
       "requires": "inventory"
     },
@@ -380,7 +353,7 @@
         ["Currency sign", "sign"],
         ["Currency code with sign", "sign_and_code"]
       ],
-      "default": "sign",
+      "default": "sign_and_code",
       "description": "Sets the display of prices in your shop"
     },
     {
