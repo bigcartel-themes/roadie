@@ -82,15 +82,6 @@
           height: auto
           width: 100%
 
-          .no-gutters &
-            &:first-child
-              &:after
-                border-top: 0
-
-          .no-gutters &
-            &:after
-              border-left: 0
-
 .secondary-product-image-container
   +flexbox
   +flex-direction(column)
@@ -116,11 +107,6 @@
     height: 100%
     position: relative
     width: 20%
-
-    .no-gutters &
-      &:first-child
-        &:after
-          border-left: 0
 
     &:after
       border: 4px solid transparent
