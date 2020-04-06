@@ -106,7 +106,7 @@
                 <button class="button min-btn search-button" type="submit"><svg width="20" height="20" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M6.31895387 0c3.48986186 0 6.31895383 2.82909201 6.31895383 6.31895387 0 1.36478192-.4326703 2.62850826-1.1683262 3.66149429L16 14.5106083 14.5106083 16l-4.53016014-4.5304185c-1.03298603.7356559-2.29671237 1.1683262-3.66149429 1.1683262C2.82909201 12.6379077 0 9.80881573 0 6.31895387S2.82909201 0 6.31895387 0zm0 2.10631796c-2.32657457 0-4.21263591 1.88606134-4.21263591 4.21263591 0 2.32657458 1.88606134 4.21263593 4.21263591 4.21263593 2.32657458 0 4.21263593-1.88606135 4.21263593-4.21263593 0-2.32657457-1.88606135-4.21263591-4.21263593-4.21263591z" fill-rule="evenodd"/></svg></button>
               </form>
             {% endif %}
-            <div>
+            <div class="secondary-above-header-nav-cart">
               <a href="/cart" class="header-cart upper-nav-cart" title="View cart" aria-label="View cart">
                 <span class="header-cart-icon"><svg width="30" height="26" viewBox="0 0 32 28" xmlns="http://www.w3.org/2000/svg"><path d="M25.3749929 27.9999278c1.9329635 0 3.4999917-1.5670227 3.4999917-3.4999862 0-.991796-.4131994-1.8865006-1.0760168-2.5233628.1341029-.1041601.2011543-.1766346.2011543-.2174235V20.124952H11.1430856l-.5134952-2.6249937h17.0846227c.6174225 0 1.1513721-.4303426 1.2824829-1.0337195C30.9224827 7.82207961 31.885376 3.5 31.885376 3.5H7.89030864L7.40576172 0H.65624844v2.62499374h4.38812735L8.85027492 22.0773552c-.60364389.6289048-.9752937 1.4820598-.9752937 2.4225864 0 1.9329635 1.56702813 3.4999862 3.49999168 3.4999862 1.9329635 0 3.4999916-1.5670227 3.4999916-3.4999862 0-.5205981-.2102579-1.3028839-.4693821-1.7499958h7.938801c-.2591242.4471119-.4693821 1.2293977-.4693821 1.7461506 0 1.9368087 1.5670281 3.5038314 3.4999916 3.5038314zm1.2817352-13.1249633H10.1160953L8.40380382 6.1249854H28.5587164l-1.9019883 8.7499791zm-15.2817552 10.937474c-.7237532 0-1.3124969-.5887438-1.3124969-1.3124969 0-.7237532.5887437-1.3124969 1.3124969-1.3124969.7237531 0 1.3124969.5887437 1.3124969 1.3124969 0 .7237531-.5887438 1.3124969-1.3124969 1.3124969zm13.9999666 0c-.7237532 0-1.3124969-.5887438-1.3124969-1.3124969 0-.7237532.5887437-1.3124969 1.3124969-1.3124969s1.3124969.5887437 1.3124969 1.3124969c0 .7237531-.5887437 1.3124969-1.3124969 1.3124969z" fill-rule="nonzero"/></svg></span>
                 <span class="header-cart-count">{{ cart.item_count }}</span>
@@ -180,18 +180,24 @@
                   </li>
                 {% endif %}
 
-                <li class="nav-menu-item" role="menuitem" aria-haspopup="true">
-                  <a href="#"><span class="hover-underline">Info <svg aria-hidden="true" width="16" height="10" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></span></a>
-                  <ul aria-hidden="true" role="menu" class="horizontal-nav-links">
-                    {% for page in pages.all %}
-                      <li class="horizontal-nav-link" role="menuitem"><a href="{{ page.url }}" tabindex="-1">{{ page.name }}</a></li></li>
-                    {% endfor %}
-                    <li class="horizontal-nav-link" role="menuitem"><a href="/contact" tabindex="-1">Contact</a></li>
-                    {% if store.website != blank %}
-                      <li class="horizontal-nav-link" role="menuitem"><a href="{{ store.website }}" tabindex="-1">Back to site</a></li>
-                    {% endif %}
-                  </ul>
-                </li>
+                {% if pages.all.size > 0 or store.website != blank %}
+                  <li class="nav-menu-item" role="menuitem" aria-haspopup="true">
+                    <a href="#"><span class="hover-underline">Info <svg aria-hidden="true" width="16" height="10" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></span></a>
+                    <ul aria-hidden="true" role="menu" class="horizontal-nav-links">
+                      {% for page in pages.all %}
+                        <li class="horizontal-nav-link" role="menuitem"><a href="{{ page.url }}" tabindex="-1">{{ page.name }}</a></li></li>
+                      {% endfor %}
+                      <li class="horizontal-nav-link" role="menuitem"><a href="/contact" tabindex="-1">Contact</a></li>
+                      {% if store.website != blank %}
+                        <li class="horizontal-nav-link" role="menuitem"><a href="{{ store.website }}" tabindex="-1">Back to site</a></li>
+                      {% endif %}
+                    </ul>
+                  </li>
+                {% else %}
+                  <li class="nav-menu-item" role="menuitem" aria-haspopup="false"><a href="/contact"><span class="hover-underline no-underline">Contact</span></a></li>
+                {% endif %}
+
+
 
               </ul>
 

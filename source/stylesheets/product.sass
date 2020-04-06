@@ -55,6 +55,10 @@
       padding-right: $base-padding
       padding-top: $base-padding * 3
 
+    .full-width.right-sidebar &
+      padding-right: 0
+      padding-left: $base-padding
+
     .full-width &.product-images-thumbs
       +flexbox
 
@@ -75,6 +79,7 @@
           order: 2
 
         .secondary-product-image-link
+          height: auto
           width: 100%
 
           .no-gutters &
@@ -506,4 +511,4 @@ input[type=number]
 #instant-checkout-button
   border: $medium-border
   border-color: $button-background-color
-  background-color: #000000
+  background-color: #FFFFFF

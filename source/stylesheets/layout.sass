@@ -295,7 +295,11 @@ header
 
   @media screen and (min-width: $break-small +1)
     .above-header &
+      +fluid-type(24px, 40px)
       text-align: left
+
+    .full-width.above-header &
+      +fluid-type(24px, 64px)
 
 .store-logo
   display: block
