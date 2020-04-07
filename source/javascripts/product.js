@@ -3,7 +3,6 @@ $('body').on('change', ".product-option-select", function(){
   enableAddButton(option_price);
 });
 
-
 function enableAddButton(updated_price) {
   var addButton = $('.add-to-cart-button');
   var addButtonTextElement = addButton.find('.button-add-text');
@@ -211,7 +210,6 @@ $('body').on('submit', ".product-form", function(e){
   }
 });
 
-
 $('body').on('click', ".description-inventory-tab", function(e){
   e.preventDefault();
   var tab_name = $(this).data('tab');
@@ -220,15 +218,6 @@ $('body').on('click', ".description-inventory-tab", function(e){
   $('.product-detail-tab-section').hide()
   $('.' + tab_name).show();
 })
-
-
-
-
-
-
-
-
-
 
 $(document).ready(function() {
   if ($('.all-similar-products').length) {

@@ -1,13 +1,6 @@
 @import 'variables'
 
-
-//- always mobile
-// always full width
-// only fixed width when screen size is smaller than the medium breakpoint
-
-// using js to add remove classes??
-
-.full-width.no-gutters
+.gutters-disabled.no-gutters
 
   header
     padding-left: $base-padding
@@ -116,6 +109,13 @@
     @media screen and (max-width: $break-product-details)
       border-right: 0
 
+  &.right-sidebar .product-images
+    border-left: $medium-border
+    border-right: 0
+
+    @media screen and (max-width: $break-product-details)
+      border-left: 0
+
   .product-details
     padding-left: 0
     padding-right: 0
@@ -159,6 +159,9 @@
     .main
       height: 100%
 
+      @media screen and (max-width: $break-product-details)
+        height: auto
+
   .checkout-button
     margin-right: 8px
 
@@ -170,7 +173,12 @@
 
   &#home_page
     .main
-      padding: 0 $base-padding * 2
+      padding: 0 $grid-gutters
+
+      .product-list
+        margin: 0
+        padding: 0
+        margin-top: $grid-gutters
 
   .secondary-above-header-nav
     padding-left: $base-padding
@@ -179,3 +187,16 @@
   &.above-header
     .header-branding
       padding-left: $base-padding
+
+  &#products_page, &#product_page
+    .product-list
+      margin: $grid-gutters
+
+  .qs-product-details
+    .main
+      padding-left: 0 !important
+      padding-right: 0 !important
+
+    .product-page-columns
+      height: auto
+

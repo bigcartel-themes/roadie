@@ -49,8 +49,9 @@ document.addEventListener("DOMContentLoaded", function() {
     lazyImages.forEach(function(lazyImage) {
       lazyImageObserver.observe(lazyImage);
     });
-  } else {
-    // Possibly fall back to a more compatible method here
+  }
+  else {
+    // TODO: Possibly fall back to a more compatible method here
 
   }
 });

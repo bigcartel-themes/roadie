@@ -56,7 +56,6 @@ ul.sort-by-nav-links
   right: 0 !important
 
 .product-list-container
-  overflow: hidden
   position: relative
 
 .product-list
@@ -122,7 +121,6 @@ ul.sort-by-nav-links
 
     .sidebar-visible .grid-full-width &
 
-
       @media screen and (min-width: $break-extra-large+1)
         +flex-basis(calc(100% / 5))
         width: calc(100% / 5)
@@ -142,7 +140,6 @@ ul.sort-by-nav-links
       @media screen and (max-width: $break-medium)
         +flex-basis(calc(100% / 2))
         width: calc(100% / 2)
-
 
   &.product-image-medium
     +flex-basis(calc(100% / 3))
@@ -167,6 +164,10 @@ ul.sort-by-nav-links
       @media screen and (max-width: $break-large)
         +flex-basis(calc(100% / 3))
         width: calc(100% / 3)
+
+      @media screen and (max-width: $break-medium)
+        +flex-basis(calc(100% / 2))
+        width: calc(100% / 2)
 
   &.product-image-large
     +flex-basis(calc(100% / 2))
@@ -229,7 +230,8 @@ ul.sort-by-nav-links
         opacity: 1
 
       .open-quickview
-        border: 2px solid $button-text-color
+        @media screen and (min-width: $break-small + 1)
+          border: 2px solid $button-text-color
 
         &:hover, &:focus
           background-color: $button-text-color
@@ -348,6 +350,7 @@ ul.sort-by-nav-links
 
     .mobile-horizontal &
       padding: $base-padding
+      height: auto
       font-size: 14px
       font-weight: bold
       margin-top: $base-padding
@@ -602,14 +605,29 @@ ul.sort-by-nav-links
       height: 20px
       width: 20px
 
-.empty-products
+.alert-message
   font-size: 24px
   font-weight: bold
   margin-bottom: $base-padding * 8
   margin-top: $base-padding * 8
-  padding-bottom: $base-padding * 2
   text-align: center
 
-.empty-products-message
-  margin-bottom: $base-padding * 2
+
+.alert-message-header
+  margin-bottom: $base-padding
+
+.alert-message-text
+  font-size: 16px
+  font-weight: normal
+
+.alert-message-button
+  font-size: 20px
+  font-weight: bold
+  height: 64px
+  line-height: 64px
+  margin: 0 auto
+  width: 340px
+
+.alert-message-text + .alert-message-button
+  margin-top: $base-padding * 4
 

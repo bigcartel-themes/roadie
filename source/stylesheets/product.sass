@@ -173,6 +173,9 @@
 .product-form-controls
   margin-top: $base-padding * 2
 
+  @media screen and (max-width: $break-product-details)
+    margin-top: $base-padding
+
   @media screen and (min-width: $break-large + 1)
 
     .full-width &
@@ -387,6 +390,7 @@
   +align-items(center)
   +justify-content(space-around)
   background: $background-color
+  border-color: $button-background-color
   border-top: $medium-border
   border-bottom: $small-border
   margin-bottom: $base-padding * 2
@@ -421,6 +425,7 @@
 
   @media screen and (max-width: $break-product-details)
     border: $small-border
+    border-color: $button-background-color
     font-weight: bold
 
   &:first-of-type
@@ -486,7 +491,6 @@ input[type='number']
   &::-webkit-inner-spin-button /*For Webkits like Chrome and Safari*/
     -webkit-appearance: none
     margin: 0
-
 
 input[type=number]
   -moz-appearance:textfield

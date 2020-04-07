@@ -1,6 +1,6 @@
 {
   "name": "Roadie",
-  "version": "0.0.40",
+  "version": "0.0.47",
   "images": [
     {
       "variable": "logo",
@@ -57,14 +57,14 @@
       "default": "#000000"
     },
     {
-      "variable": "button_hover_background_color",
-      "label": "Button Hover Background Color",
-      "default": "#1b63a6"
-    },
-    {
       "variable": "button_hover_text_color",
       "label": "Button Hover Text Color",
       "default": "#FFFFFF"
+    },
+    {
+      "variable": "button_hover_background_color",
+      "label": "Button Hover Background Color",
+      "default": "#1b63a6"
     },
     {
       "variable": "badge_text_color",
@@ -115,7 +115,7 @@
         ["Sidebar + header (no toggle)", "sidebar_header"],
         ["Sidebar without header", "sidebar_no_header"]
       ],
-      "default": "above_header",
+      "default": "below_header",
       "description": "Sets the overall theme layout on desktops and large screens"
     },
     {
@@ -188,7 +188,6 @@
       "default": "gradient_overlay",
       "description": "Sets the overlay style when a background image is used"
     },
-
     {
       "variable": "product_list_layout",
       "label": "Product grid layout",
@@ -209,7 +208,7 @@
         ["Medium", "medium"],
         ["Large", "large"]
       ],
-      "default": "medium",
+      "default": "small",
       "description": "Sets the size of product image thumbnails"
     },
     {
@@ -253,7 +252,7 @@
       "label": "Product grid info",
       "type": "select",
       "options": [
-        ["Hover (desktop) & Hidden (mobile)", "rollover"],
+        ["Show on hover", "rollover"],
         ["Under image (left align)", "under_image left-align"],
         ["Under image (center align)", "under_image center-align"]
       ],

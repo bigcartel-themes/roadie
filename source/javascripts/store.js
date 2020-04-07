@@ -110,8 +110,6 @@ $('.open-menu').click(function(e) {
   toggleMobileCart();
 });
 
-
-
 /* Gradients */
 if ($('.background-image-overlay-gradient_overlay').length) {
   (function( $ ) {
@@ -127,7 +125,6 @@ if ($('.background-image-overlay-gradient_overlay').length) {
       });
     };
   }( jQuery ));
-
   $('.background-image-overlay-gradient_overlay').drawGradient();
 }
 
@@ -147,7 +144,6 @@ function hexToRGB(hex,opacity) {
   }
   return "rgba("+ +r + "," + +g + "," + +b + ","+opacity+")";
 }
-
 
 $('.overflow-scroll').each(function() {
   is_overflow = checkOverflow($(this).find('.sidebar-nav-links')[0])
@@ -172,11 +168,10 @@ function checkOverflow(el) {
   el.style.overflow = curOverflow;
   return isOverflowing;
 }
-function setDocHeight() {
-  document.documentElement.style.setProperty('--vh', window.innerHeight/100 + "px");
+function setDocHeight(win_width, win_height) {
+  document.documentElement.style.setProperty('--vh', win_height/100 + "px");
 }
-function toggleMobileCart() {
-  win_width = window.innerWidth;
+function toggleMobileCart(win_width) {
 
   if (win_width < 961 && $('body').hasClass('sidebar-visible')) {
     setCartClass('enable');
@@ -218,16 +213,47 @@ function setCartClass(type) {
     }
   }
 }
+function setGutters(win_width) {
+  disable_gutters = 1;
+  if ($('body').hasClass('no-gutters')) {
+    if ($('body').hasClass('full-width')) {
+      disable_gutters = 1;
+    }
+    else {
+      if (win_width < 1024) {
+        disable_gutters = 1;
+      }
+      else {
+        disable_gutters = 0;
+      }
+    }
+  }
+  if (disable_gutters == 1) {
+    $('body').addClass('gutters-disabled')
+  }
+  else {
+    $('body').removeClass('gutters-disabled');
+  }
+}
 window.addEventListener('resize',function(){
-  setDocHeight();
-  toggleMobileCart();
+  win_width = window.innerWidth;
+  win_height = window.innerHeight;
+  setDocHeight(win_width, win_height);
+  toggleMobileCart(win_width);
+  setGutters(win_width);
 });
 window.addEventListener('orientationchange',function(){
-  setDocHeight();
-  toggleMobileCart();
+  win_width = window.innerWidth;
+  win_height = window.innerHeight;
+  setDocHeight(win_width, win_height);
+  toggleMobileCart(win_width);
+  setGutters(win_width);
 });
 $(document).ready(function() {
-  setDocHeight();
-  toggleMobileCart();
+  win_width = window.innerWidth;
+  win_height = window.innerHeight;
+  setDocHeight(win_width, win_height);
+  toggleMobileCart(win_width);
+  setGutters(win_width);
 });
 

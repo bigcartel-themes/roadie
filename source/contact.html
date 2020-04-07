@@ -2,18 +2,21 @@
   <div class="page-heading">
     <h1 class="page-title">{{ page.name }}</h1>
   </div>
-  <div class="page-content">
-    {% if errors != blank %}
-      <ul class="errors {{ page.permalink }}-errors">
-        {% for error in errors %}
-          <li>{{ error }}</li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-    {% if contact.sent %}
-      <div class="empty-products">Your message has been sent! We'll get back to you soon.</div>
-      <a href="/products" class="button start-shopping-button">Continue shopping</a>
-    {% else %}
+  {% if contact.sent %}
+    <div class="alert-message">
+      <div class="alert-message-header">Your message has been sent!</div>
+      <div class="alert-message-text">We'll get back to you soon.</div>
+      <a href="/products" class="button alert-message-button">Continue shopping</a>
+    </div>
+  {% else %}
+    <div class="page-content">
+      {% if errors != blank %}
+        <ul class="errors {{ page.permalink }}-errors">
+          {% for error in errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
       <form method="post" action="/contact" class="contact-form">
         <div class="form-group contact-form-group">
           <label class="form-label contact-form-label contact-name" for="name">Name</label>
@@ -44,6 +47,6 @@
           </button>
         </div>
       </form>
-    {% endif %}
-  </div>
+    </div>
+  {% endif %}
 </div>

@@ -92,12 +92,21 @@
   padding: $base-padding * 2
   padding-top: 0
 
+  &.spinner:before
+    right: 50%
+    height: 48px
+    width: 48px
+
 .qs-product-details
   padding-bottom: $base-padding * 2
   width: 100%
+
+  .spinner &
+    opacity: .2
 
   .page-title
     padding: $base-padding 0
 
   .related-products-container
     display: none
+

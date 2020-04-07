@@ -13,9 +13,10 @@ $('body').on('click', ".open-quickview", function(e){
   }
   else {
     var permalink = $(this).data('permalink');
-
+    clearTimeout(loadingTimer);
+    loadingTimer = setTimeout(showLoading, 400)
     this_product = $(this).closest('.prod-thumb')
-
+    openQuickShop();
     Product.find(permalink, function(product) {
       processProduct(product);
       loadProductContent(product, this_product);
@@ -26,7 +27,8 @@ $('body').on('click', ".open-quickview", function(e){
 $('body').on('click', ".qs-nav", function(e){
   e.preventDefault();
   var permalink = $(this).data('permalink');
-
+  clearTimeout(loadingTimer);
+  loadingTimer = setTimeout(showLoading, 400)
   if (permalink) {
     Product.find(permalink, function(product) {
       processProduct(product);
@@ -45,20 +47,30 @@ $('body').on('click', ".qs-product-details .primary-product-image-link", functio
 });
 
 function closeQuickShop() {
+  clearTimeout(loadingTimer);
   $('.qs-modal').removeClass('opened');
   $('body').removeClass('no-scroll');
+  $('.qs-product-details').html('');
 }
 function openQuickShop() {
   $('body').addClass('no-scroll');
   $('.qs-modal').addClass('opened');
 }
 
-$(document).mouseup(function (e) {
-  var container = $(".qs-modal-content");
-  if (!container.is(e.target) && container.has(e.target).length === 0){
-    closeQuickShop()
-  }
+
+var loadingTimer;
+$(document)
+  .ajaxStart(function () {
+
+  })
+  .ajaxStop(function () {
+    clearTimeout(loadingTimer);
+    $('.qs-product-container').removeClass('spinner');
 });
+
+function showLoading(){
+  $('.qs-product-container').addClass('spinner');
+}
 
 function loadProductContent(product) {
   var $container = $('.qs-product-details');
@@ -67,18 +79,17 @@ function loadProductContent(product) {
 
   populatePreviousAndNext(this_product);
 
+  openQuickShop();
+
   $.get("/product/" + product.permalink + "?" + $.now(), function(response, status, xhr) {
 
     $container.html($(response).find(".main"));
-    // post processing
+    $('.qs-product-container').removeClass('spinner');
     $('.qs-product-container').animate({
       scrollTop: 0
     }, 0);
-    openQuickShop();
   });
 }
-
-
 
 function populatePreviousAndNext(this_product) {
   $('.qs-nav').attr("disabled", false);
