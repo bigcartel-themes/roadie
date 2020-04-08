@@ -26,7 +26,7 @@
     position: relative
     text-decoration: none
 
-    span
+    .hover-underline
       border-bottom: $medium-border
       border-color: transparent
       font-size: 20px
@@ -76,12 +76,16 @@
   background: $background-color
   color: $link-hover-color
 
-  span
+  .hover-underline
     border-color: $border-color
 
     &.no-underline
       border-color: transparent !important
       text-decoration: underline
+
+  .product-sort-caption
+    color: $primary-text-color !important
+    text-decoration: none !important
 
   svg
     fill: $link-hover-color

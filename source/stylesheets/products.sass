@@ -49,7 +49,18 @@
 
 @media screen and (max-width: $break-small)
   .product-sort-options
-    margin-left: auto
+    width: 100%
+
+    .hover-underline
+      margin-left: auto
+
+    .nav-menu-item
+      +flexbox
+      +align-items(center)
+      width: 100% !important
+
+    .nav-menu-item > a
+      margin-left: auto
 
 ul.sort-by-nav-links
   left: auto !important
