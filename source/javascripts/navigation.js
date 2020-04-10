@@ -1,7 +1,5 @@
 $(document).ready(function() {
   $('.nav').setup_navigation();
-
-
 });
 $.fn.setup_navigation = function(settings) {
   settings = jQuery.extend({

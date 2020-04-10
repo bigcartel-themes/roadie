@@ -40,6 +40,7 @@
 
 .product-sort-caption
   border-right: $small-border
+  cursor: pointer
   font-weight: bold
   padding-right: $base-padding * 2
   margin-right: $base-padding * 2
@@ -245,11 +246,12 @@ ul.sort-by-nav-links
           border: 2px solid $button-text-color
 
         &:hover, &:focus
-          background-color: $button-text-color
-          color: $button-background-color
+          background-color: $button-hover-background-color
+          border-color: $button-hover-background-color
+          color: $button-hover-text-color
 
           svg
-            fill: $button-background-color
+            fill: $button-hover-text-color
 
       img
         opacity: .8
@@ -569,7 +571,6 @@ ul.sort-by-nav-links
 .page-link
   +flexbox
   +align-items(center)
-  +justify-content(center)
   color: $primary-text-color
   line-height: 40px
   text-align: center
@@ -621,8 +622,8 @@ ul.sort-by-nav-links
   font-weight: bold
   margin-bottom: $base-padding * 8
   margin-top: $base-padding * 8
+  padding: 0 $base-padding * 4
   text-align: center
-
 
 .alert-message-header
   margin-bottom: $base-padding
@@ -637,7 +638,8 @@ ul.sort-by-nav-links
   height: 64px
   line-height: 64px
   margin: 0 auto
-  width: 340px
+  max-width: 340px
+  width: 100%
 
 .alert-message-text + .alert-message-button
   margin-top: $base-padding * 4

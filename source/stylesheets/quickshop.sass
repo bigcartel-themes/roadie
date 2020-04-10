@@ -50,7 +50,7 @@
   +align-items(center)
   +justify-content(flex-start)
   border-bottom: $medium-border
-  padding: $base-padding * 2 0
+  padding: $base-padding 0
   margin-left: $base-padding * 2
   margin-right: $base-padding * 2
 
@@ -58,19 +58,20 @@
   +flexbox
   +align-items(center)
   margin-left: auto
+  margin-right: -$base-padding
 
 .qs-modal-controls-close
   +flexbox
   +align-items(center)
   font-size: 24px
   font-weight: bold
+  margin-left: -$base-padding
 
 .button.qs-modal-button
   background: none
   display: inline-block
   height: auto
-  margin-right: $base-padding
-  padding: 0
+  padding: $base-padding
 
   svg
     display: block
@@ -87,10 +88,13 @@
   margin-right: 0
 
 .qs-product-container
-  height: calc(100% - 60px)
+  height: calc(100% - 56px)
   overflow-y: scroll
   padding: $base-padding * 2
   padding-top: 0
+
+  @media screen and (max-width: $break-small)
+    height: calc(100% - )
 
   &.spinner:before
     right: 50%
@@ -109,4 +113,36 @@
 
   .related-products-container
     display: none
+
+  .product-images
+    padding-top: $base-padding * 2
+
+.qs-product-details
+  .full-width &
+
+    .product-form-controls
+      margin-top: $base-padding * 2
+
+    .product-options-container + .product-form-controls
+      margin-top: $base-padding
+
+    .product-images
+      padding-right: 0
+
+      &.product-images-thumbs
+        display: block
+
+        .secondary-product-image-container--thumbs
+          +flex-direction(row)
+          +flex-basis(0)
+
+        .primary-product-image-container
+          +flex-basis(0)
+          order: 1 !important
+
+        .secondary-product-image-link
+          cursor: pointer
+          height: 100%
+          position: relative
+          width: 20%
 

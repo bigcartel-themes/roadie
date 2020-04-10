@@ -1,6 +1,6 @@
 {
   "name": "Roadie",
-  "version": "0.0.47",
+  "version": "0.0.54",
   "images": [
     {
       "variable": "logo",
@@ -32,17 +32,17 @@
       "default": "#FFFFFF"
     },
     {
-      "variable": "primary_text_color",
+      "variable": "text_color",
       "label": "Text Color",
       "default": "#000000"
     },
     {
-      "variable": "link_hover_color",
+      "variable": "link_hover",
       "label": "Link hover color",
       "default": "#1b63a6"
     },
     {
-      "variable": "border_color",
+      "variable": "border",
       "label": "Border Color",
       "default": "#000000"
     },
@@ -126,14 +126,14 @@
         ["Fixed width", "fixed-width"],
         ["Full width", "full-width"]
       ],
-      "default": "full-width",
+      "default": "fixed-width",
       "description": "Sets the width of the content area of your store"
     },
     {
       "variable": "show_layout_gutters",
       "label": "Show layout gutters",
       "type": "boolean",
-      "default": false,
+      "default": true,
       "description": "Adds spacing to the left/right edges of the layout (smaller screens and full width layouts)"
     },
     {
@@ -256,7 +256,7 @@
         ["Under image (left align)", "under_image left-align"],
         ["Under image (center align)", "under_image center-align"]
       ],
-      "default": "under_image center-align",
+      "default": "rollover",
       "description": "Shows a product's name & price on hover, or under the image"
     },
     {
@@ -268,7 +268,7 @@
         ["2 thumbnails across", "small"],
         ["Stacked", "horizontal"]
       ],
-      "default": "small",
+      "default": "horizontal",
       "description": "Sets the mobile product grid style"
     },
     {
@@ -406,7 +406,7 @@
     "title_font_size": "42px",
     "title_font_weight": "bold",
     "title_text_transform": "uppercase",
-    "title_color": "{{ primary_text_color }}",
+    "title_color": "{{ text_color }}",
     "secondary_font": "{{ primary_font }}",
     "secondary_font_size": "14px",
     "content_border_radius": "0",
@@ -419,11 +419,11 @@
     "content_border_color": "transparent",
     "content_border_width": "0",
     "content_primary_font_size": "24px",
-    "content_header_color": "{{ primary_text_color }}",
-    "content_color": "{{ primary_text_color }}",
+    "content_header_color": "{{ text_color }}",
+    "content_color": "{{ text_color }}",
     "link_font_size": "14px",
-    "link_color": "{{ primary_text_color }}",
-    "link_hover_color": "{{ link_hover_color }}",
+    "link_color": "{{ text_color }}",
+    "link_hover_color": "{{ link_hover }}",
     "error_border_width": "0",
     "error_font_size": "16px",
     "error_background_color": "#ea4859",
@@ -466,32 +466,32 @@
     "button_position": "center",
     "button_hover_background_color": "{{ button_hover_background_color }}",
     "step_inactive_header_color": "opacify({{ text_color }}, .25)",
-    "step_border_color": "{{ border_color }}",
+    "step_border_color": "{{ border }}",
     "step_border_width": "4px",
     "step_header_text_transform": "uppercase",
     "step_background_color": "{{ background_color }}",
-    "step_inactive_border_color": "opacify({{ border_color }}, .25)",
+    "step_inactive_border_color": "opacify({{ border }}, .25)",
     "step_primary_font_weight": "normal",
-    "step_header_color": "{{ primary_text_color }}",
+    "step_header_color": "{{ text_color }}",
     "step_header_position": "center",
     "step_inactive_background_color": "{{ background_color }}",
     "step_vertical_padding": "30px",
     "step_primary_font_size": "24px",
     "step_border_style": "solid",
     "step_primary_font": "{{ primary_font }}",
-    "summary_inactive_item_border_color": "opacify({{ border_color }}, .25)",
+    "summary_inactive_item_border_color": "opacify({{ border }}, .25)",
     "summary_font_size": "14px",
     "summary_submit_background_color": "{{ background_color }}",
-    "summary_inactive_color": "opacify({{ primary_text_color }}, .25)",
-    "summary_submit_border_color": "opacify({{ border_color }}, .25)",
+    "summary_inactive_color": "opacify({{ text_color }}, .25)",
+    "summary_submit_border_color": "opacify({{ border }}, .25)",
     "summary_item_border_width": "1px",
-    "summary_item_border_color": "{{ border_color }}",
-    "summary_secondary_color": "{{ primary_text_color }}",
+    "summary_item_border_color": "{{ border }}",
+    "summary_secondary_color": "{{ text_color }}",
     "summary_submit_border_width": "2px",
-    "summary_item_list_border_color": "{{ border_color }}",
-    "summary_inactive_secondary_color": "opacify({{ primary_text_color }}, .25)",
+    "summary_item_list_border_color": "{{ border }}",
+    "summary_inactive_secondary_color": "opacify({{ text_color }}, .25)",
     "summary_item_list_border_width": "2px",
-    "summary_color": "{{ primary_text_color }}",
-    "summary_inactive_item_list_border_color": "opacify({{ border_color }}, .25)"
+    "summary_color": "{{ text_color }}",
+    "summary_inactive_item_list_border_color": "opacify({{ border }}, .25)"
   }
 }

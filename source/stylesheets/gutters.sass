@@ -1,76 +1,12 @@
 @import 'variables'
 
-.gutters-disabled.no-gutters
+$break-gutters: 1024px
 
-  header
-    padding-left: $base-padding
-    padding-right: $base-padding
-
-  .main-nav
-    padding-left: $base-padding
-    padding-right: $base-padding
-
-  .outer-wrapper
-    padding-left: 0
-    padding-right: 0
-
-  .page-title
-    padding-left: $base-padding
-    padding-right: $base-padding
-
-  .page-subheading
-    padding-left: $base-padding
-    padding-right: $base-padding
-
-  .product-option-select-container
-    padding: 0 $base-padding
-
-  .product-option-select-container svg
-    right: $base-padding
-
-  .product-description, .product-inventory
-    padding-left: $base-padding
-    padding-right: $base-padding
-
-  .cart-item
-    padding-left: $base-padding
-    padding-right: $base-padding
-
-    @media screen and (max-width: $break-small)
-      padding-right: 0
-
-      .cart-item-details-price
-        padding-right: $base-padding
-
-  .cart-sub-footer
-    padding-left: $base-padding
-    padding-right: $base-padding
-
-  .custom-page .page-content, .contact-page .page-content
-    padding-left: $base-padding
-    padding-right: $base-padding
-
-  .content-wrapper.has-sidebar
-    +flex(1)
-
-  .pagination
-    padding-left: $base-padding
-    padding-right: $base-padding
-
-  &.sidebar-no-header .header-home-link
-    padding: 0 $base-padding
+.full-width.no-gutters
 
   .sidebar
     padding-left: 0
     padding-right: 0
-
-    .nav-cart-link
-      padding-left: $base-padding
-      padding-right: $base-padding
-
-    .search-form
-      padding-left: $base-padding
-      padding-right: $base-padding
 
     @media screen and (min-width: $break-small + 1)
       &.left-sidebar
@@ -79,61 +15,140 @@
       &.right-sidebar
         border-left: $medium-border
 
-    .nav-section-title
-      padding-left: $base-padding
-      padding-right: $base-padding
 
-    .sidebar-nav-links .sidebar-nav-link a
-      padding-left: $base-padding
-      padding-right: $base-padding
+  @media screen and (min-width: $break-gutters + 1)
+    &.sidebar-no-header .header-home-link
+      padding: 0 $base-padding * 2
+
+    .nav-cart-link
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
+
+    .search-form
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
+
+    .nav-section-title
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
+
+    .sidebar
+      .sidebar-nav-links .sidebar-nav-link a
+        padding-left: $base-padding * 2
+        padding-right: $base-padding * 2
 
     .social-links, .badge
-      padding-left: $base-padding
-      padding-right: $base-padding
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
 
-  .view-all-link-container
-    padding-right: $base-padding
+    header
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
 
-  @media screen and (max-width: $break-small)
-    .mobile-horizontal .prod-thumb
-      padding-left: 8px
-      padding-right: 8px
+    .header-above
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
 
-  .mobile-cart .button.cart-item-remove
-    right: $base-padding
+    .main-nav
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
 
-  .page-heading .continue-shopping-link
-    margin-right: $base-padding
+    .page-title
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
 
-  .product-images
-    border-right: $medium-border
-    padding: 0 !important
+    .page-subheading
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
 
-    @media screen and (max-width: $break-product-details)
+    .custom-page .page-content, .contact-page .page-content
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
+
+    .product-details
+      padding-left: 0
+      padding-right: 0
+
+    .product-form-controls
+      margin-bottom: $base-padding * 2 !important
+      margin-top: $base-padding * 2 !important
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
+
+    .product-description, .product-inventory
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
+
+    .description-inventory-tabs
+      border-top: $small-border
+
+    .product-option-select-container
+      padding: 0
+
+      select
+        padding-left: $base-padding * 2
+
+      svg
+        right: $base-padding * 2
+
+    .product-option-label
+      left: $base-padding * 2
+
+    .product-form-quantity-button + #instant-checkout-button
+      margin-top: $base-padding * 2
+
+    .product-images
+      border-right: $small-border
+      padding: 0 !important
+
+      @media screen and (max-width: $break-product-details)
+        border-right: 0
+
+    &.right-sidebar .product-images
+      border-left: $small-border
       border-right: 0
 
-  &.right-sidebar .product-images
-    border-left: $medium-border
-    border-right: 0
+      @media screen and (max-width: $break-product-details)
+        border-left: 0
 
-    @media screen and (max-width: $break-product-details)
-      border-left: 0
+    .similar-products-title
+      border-top: $medium-border
+      margin: 0
+      padding: $base-padding * 2
 
-  .product-details
-    padding-left: 0
-    padding-right: 0
+    .page-heading .continue-shopping-link
+      margin-right: $base-padding
 
-  .product-option-label
-    left: $base-padding
+    .cart-item
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
 
-  .similar-products-title
-    border-top: $medium-border
-    margin: 0
-    padding: $base-padding
+    .cart-sub-footer
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
 
-  .product-form-controls
-    padding-left: $base-padding
-    padding-right: $base-padding
+    .checkout-button
+      margin-right: $base-padding * 2
+
+    .pagination, .view-all-link-container
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
+
+    .product-list
+      margin: $grid-gutters
+
+    .prod-thumb-info
+      padding-left: #{"{% case theme.grid_gutters %}{% when '16px' %}0px{% when '8px' %}0px{% when '0px' %}8px{% endcase %}"}
+      padding-right: #{"{% case theme.grid_gutters %}{% when '16px' %}0px{% when '8px' %}0px{% when '0px' %}8px{% endcase %}"}
+
+.no-gutters
+
+  .outer-wrapper
+    padding-left: 0 !important
+    padding-right: 0 !important
+
+    &.fixed-width
+      max-width: 1024px
 
   .button.description-inventory-tab:first-of-type
     border-left: 0
@@ -141,15 +156,177 @@
   .button.description-inventory-tab:last-of-type
     border-right: 0
 
-  .content-wrapper.has-sidebar
-    height: 100%
+  @media screen and (max-width: $break-gutters)
 
-    @media screen and (max-width: $break-product-details)
-      height: auto
+    &.sidebar-no-header .header-home-link
+      padding: 0 $base-padding
+
+    .sidebar
+      padding-left: 0
+      padding-right: 0
+
+      @media screen and (min-width: $break-small + 1)
+        &.left-sidebar
+          border-right: $medium-border
+
+        &.right-sidebar
+          border-left: $medium-border
+
+      .nav-cart-link
+        padding-left: $base-padding
+        padding-right: $base-padding
+
+      .search-form
+        padding-left: $base-padding
+        padding-right: $base-padding
+
+      .nav-section-title
+        padding-left: $base-padding
+        padding-right: $base-padding
+
+      .sidebar-nav-links .sidebar-nav-link a
+        padding-left: $base-padding
+        padding-right: $base-padding
+
+      .social-links, .badge
+        padding-left: $base-padding
+        padding-right: $base-padding
+
+    header
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .header-above
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .main-nav
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .page-title
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .page-subheading
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .custom-page .page-content, .contact-page .page-content
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .product-details
+      padding-left: 0
+      padding-right: 0
+
+    .product-option-select-container
+      padding: 0
+
+      select
+        padding-left: $base-padding
+
+      svg
+        right: $base-padding
+
+    .product-option-label
+      left: $base-padding
+
+    .product-form-controls
+      margin-bottom: $base-padding !important
+      margin-top: $base-padding !important
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .product-description, .product-inventory
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .description-inventory-tabs
+      border-top: $small-border
+
+    .product-images
+      border-right: $small-border
+      padding: 0 !important
+
+      @media screen and (max-width: $break-product-details)
+        border-right: 0
+
+    &.right-sidebar .product-images
+      border-left: $small-border
+      border-right: 0
+
+      @media screen and (max-width: $break-product-details)
+        border-left: 0
+
+    .similar-products-title
+      border-top: $medium-border
+      margin: 0
+      padding: $base-padding
+
+    .page-heading .continue-shopping-link
+      margin-right: $base-padding
+
+    .cart-item
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .mobile-cart
+      .cart-item
+        padding-right: 0
+
+      .cart-item-details-price
+        padding-right: $base-padding
+
+      .button.cart-item-remove
+        right: $base-padding
+
+    .cart-sub-footer
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .checkout-button
+      margin-right: $base-padding
+
+      @media screen and (max-width: $break-small)
+        margin-right: 0
+
+    .pagination, .view-all-link-container
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .product-list
+      margin: $grid-gutters
+
+      @media screen and (max-width: $break-small)
+        &.product-list
+          margin: 0
+          padding: $grid-gutters
+
+        &.mobile-horizontal
+          padding: 0
+
+          .prod-thumb
+            padding-left: $grid-gutters
+            padding-right: #{"{% case theme.grid_gutters %}{% when '16px' %}16px{% when '8px' %}8px{% when '0px' %}8px{% endcase %}"}
+
+    .prod-thumb-info
+      padding-left: #{"{% case theme.grid_gutters %}{% when '16px' %}0px{% when '8px' %}0px{% when '0px' %}8px{% endcase %}"}
+      padding-right: #{"{% case theme.grid_gutters %}{% when '16px' %}0px{% when '8px' %}0px{% when '0px' %}8px{% endcase %}"}
+
+  @media screen and (max-width: $break-small)
+    .cart-footer
+      padding-bottom: 0
 
   .qs-modal-controls
     margin: 0
-    padding: $base-padding * 2
+    padding: $base-padding $base-padding * 2
+
+    .qs-modal-controls-close
+      margin-left: -$base-padding * 2
+
+    @media screen and (max-width: $break-small)
+      padding: $base-padding $base-padding * 2
 
   .qs-product-container
     padding: 0
@@ -165,38 +342,6 @@
       @media screen and (max-width: $break-product-details)
         height: auto
 
-  .checkout-button
-    margin-right: 8px
-
-    @media screen and (max-width: $break-small)
-      margin-right: 0
-
-  .prod-thumb-info
-    padding: $base-padding
-
-  &#home_page
-    .main
-      padding: 0 $grid-gutters
-
-      .product-list
-        margin: 0
-        padding: 0
-        margin-top: $grid-gutters
-
-  .secondary-above-header-nav
-    padding-left: $base-padding * 2
-    padding-right: $base-padding * 2
-
-  &.above-header
-    .upper-nav
-      padding-left: $base-padding * 2
-      padding-right: $base-padding * 2
-      padding-top: $base-padding * 2
-
-  &#products_page, &#product_page
-    .product-list
-      margin: $grid-gutters
-
   .qs-product-details
     .main
       padding-left: 0 !important
@@ -205,3 +350,61 @@
     .product-page-columns
       height: auto
 
+  .qs-product-details
+    .page-title
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .page-subheading
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .product-images
+      border-right: $small-border
+      padding: 0
+
+      @media screen and (max-width: $break-product-details)
+        border-right: 0
+
+    &.right-sidebar .product-images
+      border-left: $small-border
+      border-right: 0
+
+      @media screen and (max-width: $break-product-details)
+        border-left: 0
+
+    .product-details
+      padding-left: 0
+      padding-right: 0
+
+    .product-description, .product-inventory
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .product-option-select-container
+      padding: 0
+
+      select
+        padding-left: $base-padding
+
+      svg
+        right: $base-padding
+
+    .product-option-label
+      left: $base-padding
+
+    .product-form-controls
+      margin-bottom: $base-padding !important
+      margin-top: $base-padding !important
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .description-inventory-tabs
+      border-top: $small-border
+
+      @media screen and (max-width: $break-small)
+        border-top: none
+
+  @media screen and (max-width: $break-small)
+    .description-inventory-tabs
+      border-top: none

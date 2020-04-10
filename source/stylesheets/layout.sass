@@ -46,6 +46,9 @@ a
   &:hover, &:focus
     color: $link-hover-color
 
+a[href], label[for], select, button, .pointer
+  cursor: pointer
+
 button, input, textarea, select
   +appearance(none)
   background: none
@@ -114,7 +117,9 @@ body
 .above-nav-section
   border-top: $medium-border
   +flex(1 1 25%)
+  height: 100%
   margin-right: $base-padding * 4
+  max-height: 202px
   padding-top: $base-padding
   position: relative
 
@@ -170,14 +175,15 @@ header
   padding: 0 $base-padding * 2
   width: 100%
 
-  @media screen and (min-width: $break-small + 1)
-    padding: 0 $base-padding * 4
+  &.full-width
+    @media screen and (min-width: $break-small + 1)
+      padding: 0 $base-padding * 4
 
-    .no-sidebar &
-      padding: 0 $base-padding * 5
+      .no-sidebar &
+        padding: 0 $base-padding * 5
 
   &.fixed-width
-    max-width: 1040px
+    max-width: 1056px
 
 .header-wrapper
   +flexbox
@@ -200,13 +206,16 @@ header
       padding-left: 0
 
     @media screen and (max-width: $break-small)
-      padding-left: $base-padding * 6 !important
+      padding-left: $base-padding * 5 !important
 
     &.hide-toggle
       padding-left: 0
 
     .header-branding
       text-align: left
+
+      @media screen and (max-width: $break-small)
+        +flexbox
 
       .above-header &
         @media screen and (min-width: $break-small +1)
@@ -251,8 +260,20 @@ header
   text-align: center
   width: 100%
 
+  .has-sidebar .header-center-align &
+    max-width: 50%
+
+  .below-header .header-center-align &
+    max-width: 50%
+
   @media screen and (max-width: $break-small)
-    max-width: 75%
+    +flexbox
+    +justify-content(center)
+    max-width: 65% !important
+
+    .header-left-align &
+      display: block
+      max-width: 75% !important
 
     .sidebar &
       display: none
@@ -261,17 +282,17 @@ header
     .sidebar-no-header &
       border-bottom: $large-border
       max-width: 100%
-      padding-bottom: $base-padding * 2
+      padding-bottom: $base-padding
       text-align: left
 
     .above-header &
-      max-width: 100%
+      max-width: 100% !important
       text-align: left
 
 .header-home-link
   +fluid-type(24px, 64px)
   color: $primary-text-color
-  display: block
+  display: inline-block
   font-weight: bold
   line-height: 1em
   text-align: center
@@ -395,16 +416,11 @@ header
       .main
         order: 1
 
-_:-ms-fullscreen, :root .content-wrapper
+_:-ms-fullscreen, :root .main
   +flex(1 0 auto)
 
-.horizontal-navigation-bar
-  +flexbox
-  +flex(0 0 100%)
-  width: 100%
-
-  @media screen and (max-width: $break-small)
-    display: none
+_:-ms-fullscreen, :root .content-wrapper
+  +flex(1 0 auto)
 
 .horizontal-nav
   +flexbox
@@ -412,30 +428,10 @@ _:-ms-fullscreen, :root .content-wrapper
   border-bottom: $medium-border
   width: 100%
 
-  .nav-section
-    +flex-basis(160px)
-    border-bottom: none
-    margin-right: $base-padding * 2
-    position: relative
-    z-index: 2
+  @media screen and (max-width: $break-small)
+    display: none
 
-    &:last-child
-      margin-left: auto
-      margin-right: 0
-
-  .nav-cart-link
-    +flexbox
-    font-weight: bold
-    padding: $base-padding 0
-    text-decoration: none
-
-    .sidebar-cart-count
-      border-right: $small-border
-      padding-right: $base-padding
-      margin-left: auto
-      margin-right: $base-padding
-
-  .nav-section-search + .nav-section-cart
+  .nav-section-search
     margin-left: auto
 
 .sidebar
@@ -447,9 +443,10 @@ _:-ms-fullscreen, :root .content-wrapper
 
   @media screen and (min-width: $break-large + 1)
     .full-width &
-      +flex(0 0 248px)
       padding-right: $base-padding * 3
-      width: 248px
+
+    .full-width.right-sidebar &
+      padding-left: $base-padding * 3
 
   @media screen and (min-width: $break-small + 1)
     .sidebar-no-header &
@@ -490,6 +487,9 @@ _:-ms-fullscreen, :root .content-wrapper
 
   .nav-section-cart
 
+    @media screen and (max-width: $break-small)
+      display: none
+
     .has-sidebar.sidebar-header &
       display: none
 
@@ -525,13 +525,18 @@ _:-ms-fullscreen, :root .content-wrapper
     padding-right: $base-padding * 2
 
   .search-input
-    font-family: $primary-font
     font-size: 16px
     font-weight: bold
     height: 40px
     line-height: 40px
     margin-right: $base-padding / 2
     padding: 0
+
+    @media screen and (max-width: $break-small)
+      font-size: 24px !important
+      height: 48px
+      line-height: 48px
+      width: calc(100% - 40px) !important
 
     .sidebar-nav &
       font-size: 20px
@@ -558,6 +563,10 @@ _:-ms-fullscreen, :root .content-wrapper
       display: block
       fill: $primary-text-color
 
+      @media screen and (max-width: $break-small)
+        height: 24px
+        width: 24px
+
 .sidebar .nav-section-title
   border-bottom: $medium-border
 
@@ -579,6 +588,9 @@ _:-ms-fullscreen, :root .content-wrapper
     text-decoration: none
     width: 100%
 
+    @media screen and (max-width: $break-small)
+      font-size: 20px
+
     svg
       +transform(translateY(-50%))
       fill: $primary-text-color
@@ -586,12 +598,19 @@ _:-ms-fullscreen, :root .content-wrapper
       right: 0
       top: 50%
 
+      @media screen and (max-width: $break-small)
+        height: 12px
+        width: 12px
+
       .under-header &
         right: 0
 
 .nav-section-title-text
   font-weight: bold
   line-height: $base-padding * 5
+
+  @media screen and (max-width: $break-small)
+    font-size: 20px
 
   > a
     display: block
@@ -606,11 +625,18 @@ _:-ms-fullscreen, :root .content-wrapper
   margin: $base-padding 0
   padding: 0
 
+  @media screen and (max-width: $break-small)
+    font-size: 18px
+
   &.compact-nav-links
     line-height: 1.5em
     margin: 0
 
   .sidebar-nav-link
+
+    &.active-link a
+      font-weight: bold
+      text-decoration: underline
 
     &.medium-border
       border-bottom: $medium-border
@@ -619,6 +645,9 @@ _:-ms-fullscreen, :root .content-wrapper
         font-size: 14px
         font-weight: bold
         padding: $base-padding 0
+
+        @media screen and (max-width: $break-small)
+          font-size: 16px
 
       &:last-of-type
         border-bottom: none
@@ -629,12 +658,18 @@ _:-ms-fullscreen, :root .content-wrapper
       padding: $base-padding / 2 0
       text-decoration: none
 
+      @media screen and (max-width: $break-small)
+        padding: $base-padding 0
+
       &:hover, &:focus
         text-decoration: underline
 
 .social-links
   +flexbox
   +justify-content(space-between)
+
+  @media screen and (max-width: $break-small)
+    +justify-content(flex-start)
 
   a
     +flexbox
@@ -645,6 +680,9 @@ _:-ms-fullscreen, :root .content-wrapper
     height: 40px
     text-align: center
     width: 40px
+
+    @media screen and (max-width: $break-small)
+      margin-right: $base-padding * 2
 
     &:hover, &:focus
       background: $button-hover-background-color
@@ -695,6 +733,9 @@ _:-ms-fullscreen, :root .content-wrapper
 footer
   +flexbox
   +flex-shrink(0)
+
+  @media screen and (max-width: $break-small)
+    display: none
 
   .social-links
     +justify-content(space-around)

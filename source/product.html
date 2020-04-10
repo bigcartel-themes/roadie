@@ -7,11 +7,9 @@
   {% when 'coming-soon' %}
     {% assign product_status = 'Coming soon' %}
 {% endcase %}
-
 <div class="page-heading product-heading">
   <h1 class="page-title">{{ page.name }}</h1>
 </div>
-
 <div class="page-subheading">
   <div class="page-subheading-price">
     {% if product.variable_pricing %}
@@ -26,16 +24,12 @@
     </div>
   {% endif %}
 </div>
-
 <div class="product-page-columns">
   <div class="product-images product-image-zooming product-images-{{ theme.secondary_product_images }}">
-
     <div class="primary-product-image-container">
       <img class="product-image primary-product-image product-image-zoom" src="{{ product.image | product_image_url | constrain: 1000 }}" data-zoom="{{ product.image | product_image_url | constrain: 1500 }}" alt="{{ product.name | escape }}">
     </div>
-
     {% if product.images.size > 1 %}
-
       <div class="secondary-product-image-container secondary-product-image-container--thumbs {% if theme.secondary_product_images == 'full' %}has-full{% endif %}">
         {% for image in product.images %}
           <div class="product-image-link secondary-product-image-link secondary-product-image-link--thumbs{% if forloop.index == 1 %} active{% endif %}" data-url="{{ image | product_image_url | constrain: 1000 }}" data-zoom="{{ image | product_image_url | constrain: 1500 }}">
@@ -43,8 +37,6 @@
           </div>
         {% endfor %}
       </div>
-
-
       {% if theme.secondary_product_images == 'full' %}
         <div class="secondary-product-image-container secondary-product-image-container--full">
           {% for image in product.images offset: 1 %}
@@ -54,10 +46,8 @@
           {% endfor %}
         </div>
       {% endif %}
-
     {% endif %}
   </div>
-
   <div class="product-details product-{{ product.status }}">
     {% if product.status == 'active' %}
       <form method="post" class="product-form {% if theme.show_sold_out_product_options %}show-sold-out{% else %}hide-sold-out{% endif %}" action="/cart" accept-charset="utf8">
@@ -98,22 +88,18 @@
         {% endif %}
         <div class="product-form-controls">
           <div class="product-form-quantity-button">
-            <div class="product-form-quantity {% unless product.has_default_option %}disabled{% endunless %}">
-              <label class="product-quantity-label" for="quantity" aria-label="Enter quantity">Qty</label>
+            <label class="product-form-quantity {% unless product.has_default_option %}disabled{% endunless %}">
+              <span class="product-quantity-label">Qty</span>
               <input autocomplete="off" type="number" class="product-quantity" id="quantity" name="cart[add][quantity]" type="text" min="1" value="1" {% unless product.has_default_option %}disabled="disabled"{% endunless %}>
-            </div>
-
-            <button class="button add-to-cart-button" name="submit" type="submit" title="Add to Cart" data-adding-text="Adding..." data-added-text="Added!" data-add-title="Add to Cart" data-sold-title="Sold out"{% unless product.has_default_option %}disabled="disabled"{% endunless %}>
+            </label>
+            <button class="button add-to-cart-button" name="submit" type="submit" title="Add to Cart" data-adding-text="Adding..." data-added-text="Added!" data-add-title="Add to Cart" data-sold-title="Sold out"{% unless product.has_default_option %}disabled="disabled"{% else %}data-selected-price="{{ product.default_price }}"{% endunless %}>
               <span class="button-add-price {% if product.has_default_option %} visible{% endif %}">{{ product.default_price | money: theme.money_format }}</span>
               <span class="button-add-text">Add to Cart</span>
               <span class="button-add-icon">
                 <svg class="plus-icon" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M9 0v7h7v2H9v7H7V8.999L0 9V7l7-.001V0z" fill-rule="evenodd"/></svg>
-
                 <svg class="check-icon" aria-hidden="true" width="21" height="16" viewBox="0 0 21 16" xmlns="http://www.w3.org/2000/svg"><path d="M1.39130435 8.34782609l4.86956522 4.86956521L19.4782609 0l1.3913043 1.39130435L6.26086957 16 0 9.73913043z" fill-rule="evenodd"/></svg>
               </span>
             </button>
-
-
             <div class="product-form-cart-link-container">
               <a class="product-form-cart-link" href="/cart">
                 <svg class="product-form-cart-link-icon product-form-cart-link-cart-icon" aria-hidden="true" width="32" height="28" viewBox="0 0 32 28" xmlns="http://www.w3.org/2000/svg"><path d="M25.3749929 27.9999278c1.9329635 0 3.4999917-1.5670227 3.4999917-3.4999862 0-.991796-.4131994-1.8865006-1.0760168-2.5233628.1341029-.1041601.2011543-.1766346.2011543-.2174235V20.124952H11.1430856l-.5134952-2.6249937h17.0846227c.6174225 0 1.1513721-.4303426 1.2824829-1.0337195C30.9224827 7.82207961 31.885376 3.5 31.885376 3.5H7.89030864L7.40576172 0H.65624844v2.62499374h4.38812735L8.85027492 22.0773552c-.60364389.6289048-.9752937 1.4820598-.9752937 2.4225864 0 1.9329635 1.56702813 3.4999862 3.49999168 3.4999862 1.9329635 0 3.4999916-1.5670227 3.4999916-3.4999862 0-.5205981-.2102579-1.3028839-.4693821-1.7499958h7.938801c-.2591242.4471119-.4693821 1.2293977-.4693821 1.7461506 0 1.9368087 1.5670281 3.5038314 3.4999916 3.5038314zm1.2817352-13.1249633H10.1160953L8.40380382 6.1249854H28.5587164l-1.9019883 8.7499791zm-15.2817552 10.937474c-.7237532 0-1.3124969-.5887438-1.3124969-1.3124969 0-.7237532.5887437-1.3124969 1.3124969-1.3124969.7237531 0 1.3124969.5887437 1.3124969 1.3124969 0 .7237531-.5887438 1.3124969-1.3124969 1.3124969zm13.9999666 0c-.7237532 0-1.3124969-.5887438-1.3124969-1.3124969 0-.7237532.5887437-1.3124969 1.3124969-1.3124969s1.3124969.5887437 1.3124969 1.3124969c0 .7237531-.5887437 1.3124969-1.3124969 1.3124969z" fill-rule="nonzero"/></svg>
@@ -122,19 +108,15 @@
               </a>
             </div>
           </div>
-
           {{ store | instant_checkout_button: 'light', '50px' }}
-
           {% if product.has_option_groups %}
             <div class="reset-selection-button-container">
               <button class="button min-btn reset-selection-button" type="reset">Reset selection</button>
             </div>
           {% endif %}
-
         </div>
       </form>
     {% endif %}
-
     {% if product.description != blank and theme.show_inventory_bars and product.status == 'active' %}
       <div class="description-inventory-tabs">
         <button class="button min-btn description-inventory-tab active-tab" data-tab="product-description">Description</button>
@@ -146,7 +128,6 @@
         {{ product.description | paragraphs }}
       </div>
     {% endif %}
-
     {% if theme.show_inventory_bars and product.status == 'active' %}
       <div class="product-detail-tab-section product-inventory">
         <ul class="inventory-bars">
@@ -248,9 +229,7 @@
     <div class="all-similar-products" style="display: none">{{ product_divs }}</div>
     <h2 class="similar-products-title">Related products</h2>
     <div class="product-list-container">
-      <div class="similar-product-list product-list {{ theme.product_list_layout }} mobile-{{ theme.mobile_product_grid_style }} grid-{{ theme.layout_style }}">
-
-      </div>
+      <div class="similar-product-list product-list {{ theme.product_list_layout }} mobile-{{ theme.mobile_product_grid_style }} grid-{{ theme.layout_style }}"></div>
     </div>
   </aside>
 {% endif %}

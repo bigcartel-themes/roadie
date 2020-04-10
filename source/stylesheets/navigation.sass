@@ -59,6 +59,10 @@
 .horizontal-nav-link
   position: static
 
+  &.active-link a
+    font-weight: bold
+    text-decoration: underline
+
   a
     +transition(.1s linear all)
     color: $primary-text-color

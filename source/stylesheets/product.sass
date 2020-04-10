@@ -249,6 +249,7 @@
   +flex-shrink(0)
   background: $button-background-color
   color: $button-text-color
+  cursor: pointer
   height: 64px
   width: 64px
 
@@ -369,7 +370,6 @@
     text-transform: none
 
   a
-    color: $primary-text-color
     font-weight: bold
     text-decoration: underline
 
@@ -393,7 +393,6 @@
   +align-items(center)
   +justify-content(space-around)
   background: $background-color
-  border-color: $button-background-color
   border-top: $medium-border
   border-bottom: $small-border
   margin-bottom: $base-padding * 2
@@ -412,7 +411,7 @@
   padding: $base-padding * 1.5 $base-padding * 2
 
   &:hover, &:focus
-    color: $primary-text-color
+    color: $link-hover-color
     text-decoration: underline
 
   &.active-tab
@@ -433,7 +432,9 @@
 
   &:first-of-type
     border-right: $small-border
-    border-color: $button-background-color
+
+    @media screen and (max-width: $break-product-details)
+      border-color: $button-background-color
 
 .product-inventory
   display: none
@@ -505,3 +506,7 @@ input[type=number]
   border: $medium-border
   border-color: $button-background-color
   background-color: #FFFFFF
+
+_:-ms-fullscreen, :root .product-page-columns
+  flex: 1 0 auto
+  height: auto

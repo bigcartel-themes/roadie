@@ -50,8 +50,4 @@ document.addEventListener("DOMContentLoaded", function() {
       lazyImageObserver.observe(lazyImage);
     });
   }
-  else {
-    // TODO: Possibly fall back to a more compatible method here
-
-  }
 });
