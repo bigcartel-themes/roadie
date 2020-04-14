@@ -11,7 +11,7 @@
     {% when 'sidebar_header' %}
       has-sidebar sidebar-header
     {% when 'sidebar_header show_toggle' %}
-      has-sidebar sidebar-header
+      has-sidebar sidebar-header sidebar-hidden
     {% when 'sidebar_no_header' %}
       has-sidebar sidebar-no-header
   {% endcase %}
@@ -52,12 +52,12 @@
           <nav class="upper-nav" aria-label="Main navigation">
             <section class="above-nav-section">
               <div class="header-branding">
-                <a class="header-home-link" href="/" title="Home">
+                <a class="header-home-link{% if theme.images.logo != blank %} has-logo{% endif %}" href="/" title="Home">
                   {% if theme.images.logo != blank %}
                     {% if theme.layout_style == 'fixed-width' %}
-                      <img alt="{{ store.name }} Home" class="store-logo" srcset="{{ theme.images.logo.url | constrain: 400 }} 1x, {{ theme.images.logo.url | constrain: 800 }} 2x" src="{{ theme.images.logo.url | constrain: 400 }}"/>
+                      <img alt="{{ store.name }} Home" class="store-logo" src="{{ theme.images.logo.url | constrain: 800 }}"/>
                     {% else %}
-                      <img alt="{{ store.name }} Home" class="store-logo" srcset="{{ theme.images.logo.url | constrain: 800 }} 1x, {{ theme.images.logo.url | constrain: 1600 }} 2x" src="{{ theme.images.logo.url | constrain: 800 }}"/>
+                      <img alt="{{ store.name }} Home" class="store-logo" src="{{ theme.images.logo.url | constrain: 1400 }}"/>
                     {% endif %}
                   {% else %}
                     {{ store.name }}
@@ -68,7 +68,7 @@
             <section class="above-nav-section overflow-scroll">
               <div class="above-nav-section-title">{{ pages.products.name }}</div>
               <ul class="sidebar-nav-links">
-                <li class="sidebar-nav-link{% if page.url == '/products' %} active-link {% endif %}"><a href="/products">All</a></li>
+                <li class="sidebar-nav-link{% if page.full_url contains '/products' %} active-link{% endif %}"><a href="/products">All</a></li>
                 {% for category in categories.active %}
                   <li class="sidebar-nav-link{% if page.full_url contains category.url && page.name == category.name %} active-link{% endif %}">{{ category | link_to }}</li>
                 {% endfor %}
@@ -130,9 +130,9 @@
           </button>
 
           <div class="header-branding">
-            <a class="header-home-link" href="/" title="Home">
+            <a class="header-home-link{% if theme.images.logo != blank %} has-logo{% endif %}" href="/" title="Home">
               {% if theme.images.logo != blank %}
-                <img alt="{{ store.name }} Home" class="store-logo" srcset="{{ theme.images.logo.url | constrain: 900,100 }} 1x, {{ theme.images.logo.url | constrain: 1800,200 }} 2x" src="{{ theme.images.logo.url | constrain: 1800,200 }}"/>
+                <img alt="{{ store.name }} Home" class="store-logo" src="{{ theme.images.logo.url | constrain: 1800,300 }}"/>
               {% else %}
                 {{ store.name }}
               {% endif %}
@@ -160,7 +160,7 @@
                   {% if categories.active != blank %}
                     <a href="#"><span class="hover-underline">{{ pages.products.name }} <svg aria-hidden="true" width="16" height="10" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></span></a>
                     <ul aria-hidden="true" role="menu" class="horizontal-nav-links">
-                      <li class="horizontal-nav-link {% if page.url == '/products' %} active-link {% endif %}" role="menuitem"><a href="/products" tabindex="-1">All</a></li>
+                      <li class="horizontal-nav-link {% if page.full_url contains '/products' %} active-link{% endif %}" role="menuitem"><a href="/products" tabindex="-1">All</a></li>
 
                       {% if categories.active != blank %}
                         {% for category in categories.active %}
@@ -201,8 +201,6 @@
                   <li class="nav-menu-item" role="menuitem" aria-haspopup="false"><a href="/contact"><span class="hover-underline no-underline">Contact</span></a></li>
                 {% endif %}
 
-
-
               </ul>
 
               {% if theme.show_search %}
@@ -223,9 +221,9 @@
         <aside class="sidebar {{ theme.sidebar_position }}-sidebar">
           {% if theme.theme_layout == 'sidebar_no_header' %}
             <div class="header-branding">
-              <a class="header-home-link" href="/" title="Home">
+              <a class="header-home-link{% if theme.images.logo != blank %} has-logo{% endif %}" href="/" title="Home">
                 {% if theme.images.logo != blank %}
-                  <img alt="{{ store.name }} Home" class="store-logo" srcset="{{ theme.images.logo.url | constrain: 240 }} 1x, {{ theme.images.logo.url | constrain: 480 }} 2x" src="{{ theme.images.logo.url | constrain: 480 }}"/>
+                  <img alt="{{ store.name }} Home" class="store-logo" src="{{ theme.images.logo.url | constrain: 800 }}"/>
                 {% else %}
                   {{ store.name }}
                 {% endif %}
@@ -267,7 +265,7 @@
               </div>
               {% if categories.active != blank %}
                 <ul class="sidebar-nav-links sidebar-category-links">
-                  <li class="sidebar-nav-link{% if page.url == '/products' %} active-link{% endif %}"><a href="/products">All</a></li>
+                  <li class="sidebar-nav-link{% if page.full_url contains '/products' %} active-link{% endif %}"><a href="/products">All</a></li>
                   {% for category in categories.active %}
                     <li class="sidebar-nav-link{% if page.full_url contains category.url && page.name == category.name %} active-link{% endif %}">{{ category | link_to }}</li>
                   {% endfor %}
@@ -475,12 +473,9 @@
           return formatMoney(number, true, true, true);
         {% endcase %}
       };
-    </script>
-    <script src="{{ theme | theme_js_url }}"></script>
-    <script>
       if ($('body').hasClass('has-sidebar')) {
         {% if theme.theme_layout == 'sidebar_header show_toggle' %}
-          if ($(window).width() > 767 || inPreview) {
+          if (window.innerWidth > 767 || inPreview) {
             if (!localStorage.getItem('sidebar')) {
               populateStorage();
             } else {
@@ -491,6 +486,25 @@
           $('body').addClass('sidebar-visible');
         {% endif %}
       }
+      function populateStorage() {
+        localStorage.setItem('sidebar','hidden');
+        setStyles();
+      }
+      function setStyles() {
+        var sidebarState = localStorage.getItem('sidebar');
+
+        if (sidebarState == 'hidden') {
+          $('.has-sidebar .sidebar').addClass('hidden');
+          $('body').removeClass('sidebar-visible');
+        }
+        else {
+          $('body').removeClass('sidebar-hidden');
+          $('body').addClass('sidebar-visible');
+        }
+      }
+    </script>
+    <script src="{{ theme | theme_js_url }}"></script>
+    <script>
       if (!localStorage.getItem('show-sidebar-categories')) {
         localStorage.setItem('show-sidebar-categories','visible');
       }

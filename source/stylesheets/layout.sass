@@ -33,6 +33,18 @@
   color: $primary-text-color
   opacity: .8
 
+input:hover::-webkit-input-placeholder
+  color: $link-hover-color
+
+input:hover::-moz-placeholder
+  color: $link-hover-color
+
+input:hover:-ms-input-placeholder
+  color: $link-hover-color
+
+input:hover:-moz-placeholder
+  color: $link-hover-color
+
 *
   box-sizing: border-box
   text-transform: #{"{% if theme.uppercase_text %} uppercase {% endif%}"}
@@ -119,9 +131,11 @@ body
   +flex(1 1 25%)
   height: 100%
   margin-right: $base-padding * 4
-  max-height: 202px
   padding-top: $base-padding
   position: relative
+
+  &.overflow-scroll
+    max-height: 202px
 
   .sidebar-nav-links
     margin-bottom: 0
@@ -192,6 +206,12 @@ header
   padding: $base-padding * 3 0
   position: relative
 
+  .has-sidebar &
+    padding: $base-padding * 2 0
+
+  .below-header &
+    padding: $base-padding * 2 0
+
   @media screen and (max-width: $break-small)
     padding: $base-padding * 2 0
 
@@ -206,7 +226,7 @@ header
       padding-left: 0
 
     @media screen and (max-width: $break-small)
-      padding-left: $base-padding * 5 !important
+      padding-left: $base-padding * 6 !important
 
     &.hide-toggle
       padding-left: 0
@@ -216,6 +236,7 @@ header
 
       @media screen and (max-width: $break-small)
         +flexbox
+        +justify-content(flex-start)
 
       .above-header &
         @media screen and (min-width: $break-small +1)
@@ -282,7 +303,7 @@ header
     .sidebar-no-header &
       border-bottom: $large-border
       max-width: 100%
-      padding-bottom: $base-padding
+      padding-bottom: $base-padding * 2
       text-align: left
 
     .above-header &
@@ -314,11 +335,11 @@ header
 
   @media screen and (min-width: $break-small +1)
     .above-header &
-      +fluid-type(24px, 40px)
+      +fluid-type(24px, 32px)
       text-align: left
 
     .full-width.above-header &
-      +fluid-type(24px, 64px)
+      +fluid-type(24px, 40px)
 
 .store-logo
   display: block
@@ -326,7 +347,10 @@ header
   max-width: 100%
 
   .has-sidebar &
-    max-height: 100px
+    max-height: 150px
+
+  .below-header &
+    max-height: 150px
 
   @media screen and (max-width: $break-small)
     max-height: 70px !important
@@ -337,8 +361,11 @@ header
   @media screen and (min-width: $break-small +1)
     .above-header &
       margin: 0
-      max-height: none
-      max-width: 60%
+      max-height: 180px
+
+@media screen and (min-width: $break-small + 1)
+  .above-header .header-home-link.has-logo
+    max-width: 60%
 
 .header-cart
   +flexbox
@@ -440,6 +467,9 @@ _:-ms-fullscreen, :root .content-wrapper
   padding-bottom: $base-padding * 8
   padding-right: $base-padding * 2
   width: 256px
+
+  .sidebar-hidden &
+    display: none
 
   @media screen and (min-width: $break-large + 1)
     .full-width &
@@ -546,18 +576,28 @@ _:-ms-fullscreen, :root .content-wrapper
       font-size: 24px
       height: auto
       line-height: 1.25em
+      padding-left: $base-padding
       width: 140px
 
     .under-header &
       font-size: 20px
 
     .below-header &
-      width: 140px
+      height: 100%
+      padding-left: $base-padding
+      width: 156px
+
+      @media screen and (max-width: $break-small)
+        margin-left: -$base-padding
 
   .search-button
     height: auto
     margin-left: auto
-    padding: 0
+    margin-right: -$base-padding
+    padding: $base-padding
+
+    .below-header &
+      height: 100%
 
     svg
       display: block
@@ -864,4 +904,3 @@ h1
 
 .currency_code
   font-weight: normal
-

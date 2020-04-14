@@ -37,7 +37,6 @@ function disableAddButton(type) {
   }
   if (!addButton.is(":disabled")) {
     addButton.attr("disabled","disabled");
-
   }
   $('.product-quantity').attr("disabled","disabled")
   $('.product-form-quantity').addClass('disabled')

@@ -46,6 +46,13 @@ $('body').on('click', ".qs-product-details .primary-product-image-link", functio
   return false;
 });
 
+$(document).mouseup(function (e) {
+  var container = $(".qs-modal-content");
+  if (!container.is(e.target) && container.has(e.target).length === 0){
+    closeQuickShop()
+  }
+});
+
 function closeQuickShop() {
   clearTimeout(loadingTimer);
   $('.qs-modal').removeClass('opened');

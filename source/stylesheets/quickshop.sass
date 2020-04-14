@@ -93,11 +93,10 @@
   padding: $base-padding * 2
   padding-top: 0
 
-  @media screen and (max-width: $break-small)
-    height: calc(100% - )
-
   &.spinner:before
-    right: 50%
+    border: 2px solid $primary-text-color
+    border-top: 2px solid $background-color
+    left: calc(50% - 32px)
     height: 48px
     width: 48px
 

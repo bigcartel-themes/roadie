@@ -74,7 +74,7 @@ ul.sort-by-nav-links
   +flexbox
   +flex-wrap(wrap)
   +justify-content(flex-start)
-  margin: #{"{{ theme.grid_gutters }}"} -#{"{{ theme.grid_gutters }}"}
+  margin: #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"} -#{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"}
 
   @media screen and (max-width: $break-medium)
     width: auto
@@ -88,8 +88,8 @@ ul.sort-by-nav-links
   color: $primary-text-color
   display: block
   font-size: 0
-  padding: #{"{{ theme.grid_gutters }}"}
-  padding-bottom: #{"{{ theme.grid_gutters }}"}
+  padding: #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"}
+  padding-bottom: #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"}
   position: relative
   text-decoration: none
   vertical-align: middle
@@ -218,17 +218,17 @@ ul.sort-by-nav-links
       .prod-thumb-info
         +flexbox
         +align-items(center)
-        background: $primary-text-color
-        height: calc(100% - #{"{{ theme.grid_gutters }}"} * 2)
-        left: #{"{{ theme.grid_gutters }}"}
+        background: $button-background-color
+        height: calc(100% - #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"} * 2)
+        left: #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"}
         padding: $base-padding * 2
         position: absolute
-        top: #{"{{ theme.grid_gutters }}"}
-        width: calc(100% - #{"{{ theme.grid_gutters }}"} * 2)
+        top: #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"}
+        width: calc(100% - #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"} * 2)
         opacity: 0
 
         *
-          color: $background-color
+          color: $button-text-color
 
     @media screen and (max-width: $break-small)
       .prod-thumb-info
@@ -253,17 +253,24 @@ ul.sort-by-nav-links
           svg
             fill: $button-hover-text-color
 
-      img
-        opacity: .8
-
   @media screen and (max-width: $break-small)
     &.show-quickview
       .product-list-quickview-container
-        bottom: 0
-        height: auto
+        bottom: $base-padding
+        height: 44px
+        left: auto
         opacity: 1
+        right: $base-padding
         top: auto
         visibility: visible
+        width: 44px
+
+        .open-quickview-text
+          display: none
+
+        .open-quickview-icon
+          margin: 0 auto
+          display: block
 
         .product-list-quickview-container-background
           background-color: $button-background-color
@@ -271,6 +278,8 @@ ul.sort-by-nav-links
 
         .open-quickview
           background-color: transparent
+          padding: 0
+          text-align: center
 
     .mobile-medium &
       +flex-basis(calc(100% / 1) !important)
@@ -295,7 +304,7 @@ ul.sort-by-nav-links
         width: 136px
 
       .prod-thumb-info
-        padding: #{"{% case theme.grid_gutters %}{% when '16px' %}0px{% when '8px' %}0px{% when '0px' %}8px{% endcase %}"} 0 0 $base-padding
+        padding: #{"{% if theme.show_product_grid_gutters %}0px{% else %}8px{% endif %}"} 0 $base-padding $base-padding
         width: calc(100% - 136px)
 
       .prod-thumb-info-headers
@@ -418,6 +427,9 @@ ul.sort-by-nav-links
 
 .prod-thumb-info
   padding: $base-padding 0
+  padding-left: 0
+  padding-right: #{"{% if theme.show_product_grid_gutters %}0px{% else %}8px{% endif %}"}
+
 
 .prod-thumb-info-headers
   +fluid-type(16px, 16px)
@@ -505,7 +517,6 @@ ul.sort-by-nav-links
       font-size: 12px
 
   &.inline
-    color: $primary-text-color
     display: inline-block
     font-size: 13px
 

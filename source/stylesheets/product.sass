@@ -199,6 +199,13 @@
   padding: 0
   position: relative
 
+  &:hover, &:focus-within
+    label, select
+      color: $link-hover-color
+
+    svg
+      fill: $link-hover-color
+
   select
     background: none
     color: $primary-text-color
@@ -217,10 +224,11 @@
     top: 50%
     transform: translateY(-50%)
 
-  &.focused select
-    font-size: 16px
-    height: 100%
-    padding-top: $base-padding * 3
+  &.focused
+    select
+      font-size: 16px
+      height: 100%
+      padding-top: $base-padding * 3
 
 .product-option-label
   opacity: 0
@@ -259,6 +267,13 @@
 
     .product-quantity
       cursor: not-allowed
+
+  &:not(.disabled):hover, &:not(.disabled):focus-within
+    background: $button-hover-background-color
+    color: $button-hover-text-color
+
+    .product-form-quantity
+      color: $button-hover-text-color
 
   .product-quantity-label
     font-size: 14px
@@ -325,7 +340,7 @@
 .product-form-cart-link
   +flexbox
   +align-items(center)
-  background: $button-text-color
+  background: $background-color
   border: $medium-border
   border-color: $button-background-color
   color: $button-background-color
@@ -397,9 +412,6 @@
   border-bottom: $small-border
   margin-bottom: $base-padding * 2
 
-  @media screen and (max-width: $break-product-details)
-    border: none
-
 .button.description-inventory-tab
   +flex-basis(50%)
   border: none
@@ -419,22 +431,8 @@
     font-weight: bold
     text-decoration: underline
 
-    @media screen and (max-width: $break-product-details)
-      background-color: $button-background-color
-      color: $button-text-color
-      font-weight: bold
-      text-decoration: none
-
-  @media screen and (max-width: $break-product-details)
-    border: $small-border
-    border-color: $button-background-color
-    font-weight: bold
-
   &:first-of-type
     border-right: $small-border
-
-    @media screen and (max-width: $break-product-details)
-      border-color: $button-background-color
 
 .product-inventory
   display: none
@@ -490,9 +488,9 @@
   width: 20px
 
 input[type='number']
-  -moz-appearance: textfield/*For FireFox*/
+  -moz-appearance: textfield
 
-  &::-webkit-inner-spin-button /*For Webkits like Chrome and Safari*/
+  &::-webkit-inner-spin-button
     -webkit-appearance: none
     margin: 0
 
