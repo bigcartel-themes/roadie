@@ -320,52 +320,52 @@ header
   text-decoration: none
   word-break: break-word
 
-  .header-left-align &
-    text-align: left !important
+  &.has-logo
+    max-width: 100%
 
-    @media screen and (min-width: $break-small +1)
-      .store-logo
-        margin: 0
+    @media screen and (min-width: $break-small + 1)
+      height: 100px
+
+      .above-header &
+        height: 180px
+        width: 100%
+        max-height: 180px
+
+        .store-logo
+          height: 100%
+          object-position: left
+          width: 100%
+
+      .sidebar-no-header &
+        height: auto
+
+        .store-logo
+          height: 100%
+          width: 100%
+
+    @media screen and (max-width: $break-small)
+      height: auto
+      max-height: 50px
+
+  .header-left-align &
+    text-align: left
 
   .sidebar-no-header &
     +fluid-type(24px, 40px)
-
-    @media screen and (min-width: $break-small +1)
-      text-align: left
+    text-align: left
 
   @media screen and (min-width: $break-small +1)
     .above-header &
       +fluid-type(24px, 32px)
-      text-align: left
 
     .full-width.above-header &
       +fluid-type(24px, 40px)
 
 .store-logo
   display: block
-  margin: 0 auto
+  height: 100%
   max-width: 100%
-
-  .has-sidebar &
-    max-height: 150px
-
-  .below-header &
-    max-height: 150px
-
-  @media screen and (max-width: $break-small)
-    max-height: 70px !important
-
-    .header-left-align &
-      margin: 0
-
-  @media screen and (min-width: $break-small +1)
-    .above-header &
-      margin: 0
-      max-height: 180px
-
-@media screen and (min-width: $break-small + 1)
-  .above-header .header-home-link.has-logo
-    max-width: 60%
+  object-fit: contain
 
 .header-cart
   +flexbox
@@ -396,6 +396,7 @@ header
     margin-right: $base-padding
 
     svg
+      display: block
       fill: $primary-text-color
 
   &:hover, &:focus

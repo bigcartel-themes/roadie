@@ -91,7 +91,6 @@ function IntersectionObserverEntry(entry) {
  * @constructor
  */
 function IntersectionObserver(callback, opt_options) {
-
   var options = opt_options || {};
 
   if (typeof callback != 'function') {

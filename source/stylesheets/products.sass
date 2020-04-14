@@ -293,8 +293,7 @@ ul.sort-by-nav-links
       +flexbox
       +flex-basis(100% !important)
       border-bottom: $small-border
-      padding-left: 0
-      padding-right: 0
+      padding: $base-padding 0
       width: 100% !important
 
       &:last-child
@@ -304,7 +303,7 @@ ul.sort-by-nav-links
         width: 136px
 
       .prod-thumb-info
-        padding: #{"{% if theme.show_product_grid_gutters %}0px{% else %}8px{% endif %}"} 0 $base-padding $base-padding
+        padding: 0 0 $base-padding $base-padding
         width: calc(100% - 136px)
 
       .prod-thumb-info-headers
@@ -355,6 +354,7 @@ ul.sort-by-nav-links
 .open-quickview
   +flexbox
   +transition(none)
+  +align-items(center)
   border: 2px solid transparent
   bottom: $base-padding * 2
   height: 44px
