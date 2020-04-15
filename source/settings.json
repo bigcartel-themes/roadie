@@ -259,8 +259,8 @@
       "label": "Mobile product grid style",
       "type": "select",
       "options": [
-        ["1 thumbnail across", "medium"],
-        ["2 thumbnails across", "small"],
+        ["1 product across", "medium"],
+        ["2 products across", "small"],
         ["Stacked (no grid)", "horizontal"]
       ],
       "default": "small",
