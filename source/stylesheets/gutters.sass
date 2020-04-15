@@ -319,8 +319,10 @@ $break-gutters: 1024px
       margin: #{"{% if theme.show_product_grid_gutters %}4px{% else %}0px{% endif %}"}
 
       .prod-thumb
+        padding-bottom: #{"{% if theme.show_product_grid_gutters %}4px{% else %}0px{% endif %}"}
         padding-left: #{"{% if theme.show_product_grid_gutters %}4px{% else %}0px{% endif %}"}
         padding-right: #{"{% if theme.show_product_grid_gutters %}4px{% else %}0px{% endif %}"}
+        padding-top: #{"{% if theme.show_product_grid_gutters %}4px{% else %}0px{% endif %}"}
 
       @media screen and (max-width: $break-small)
         margin: 8px
