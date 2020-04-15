@@ -1,6 +1,6 @@
 {
   "name": "Roadie",
-  "version": "0.0.54",
+  "version": "0.1.0",
   "images": [
     {
       "variable": "logo",
@@ -39,7 +39,7 @@
     {
       "variable": "link_hover",
       "label": "Link hover color",
-      "default": "#1b63a6"
+      "default": "#056FFA"
     },
     {
       "variable": "border",
@@ -64,7 +64,7 @@
     {
       "variable": "button_hover_background_color",
       "label": "Button Hover Background Color",
-      "default": "#1b63a6"
+      "default": "#056FFA"
     },
     {
       "variable": "badge_text_color",
@@ -74,7 +74,7 @@
     {
       "variable": "badge_background_color",
       "label": "Badge Background Color",
-      "default": "#9aff00"
+      "default": "#9AFF00"
     },
     {
       "variable": "announcement_text_color",
@@ -94,7 +94,7 @@
     {
       "variable": "error_background_color",
       "label": "Error Background Color",
-      "default": "#991f26"
+      "default": "#EB0000"
     }
   ],
   "options": [
@@ -131,7 +131,7 @@
     },
     {
       "variable": "show_layout_gutters",
-      "label": "Show layout gutters",
+      "label": "Enable layout margins",
       "type": "boolean",
       "default": true,
       "description": "Adds spacing to the left/right edges of the layout (smaller screens and full width layouts)"
@@ -181,12 +181,19 @@
       "label": "Background image style",
       "type": "select",
       "options": [
-        ["Plain background image", "plain_image"],
+        ["Plain image", "plain_image"],
         ["Color overlay", "transparent_color_overlay"],
         ["Gradient overlay", "gradient_overlay"]
       ],
-      "default": "gradient_overlay",
+      "default": "transparent_color_overlay",
       "description": "Sets the overlay style when a background image is used"
+    },
+    {
+      "variable": "show_product_grid_gutters",
+      "label": "Enable product grid spacing",
+      "type": "boolean",
+      "default": true,
+      "description": "Adds spacing around the sides of product thumbnails"
     },
     {
       "variable": "product_list_layout",
@@ -220,20 +227,8 @@
         ["Fit to square", "fit-to-square"],
         ["Crop to square", "crop-to-square"]
       ],
-      "default": "default",
+      "default": "crop-to-square",
       "description": "Sets the display of thumbnail images"
-    },
-    {
-      "variable": "grid_gutters",
-      "label": "Product grid spacing",
-      "type": "select",
-      "options": [
-        ["Small", "8px"],
-        ["Large", "16px"],
-        ["None", "0px"]
-      ],
-      "default": "8px",
-      "description": "Sets the spacing between each product thumbnail"
     },
     {
       "variable": "product_badge_style",
@@ -244,7 +239,7 @@
           ["Circle", "circle"],
           ["Inline", "inline"]
       ],
-      "default": "bar",
+      "default": "circle",
       "description": "The display of your product status on the Home and Products pages"
     },
     {
@@ -256,7 +251,7 @@
         ["Under image (left align)", "under_image left-align"],
         ["Under image (center align)", "under_image center-align"]
       ],
-      "default": "rollover",
+      "default": "under_image left-align",
       "description": "Shows a product's name & price on hover, or under the image"
     },
     {
@@ -266,9 +261,9 @@
       "options": [
         ["1 thumbnail across", "medium"],
         ["2 thumbnails across", "small"],
-        ["Stacked", "horizontal"]
+        ["Stacked (no grid)", "horizontal"]
       ],
-      "default": "horizontal",
+      "default": "small",
       "description": "Sets the mobile product grid style"
     },
     {
@@ -332,7 +327,7 @@
       "variable": "show_inventory_bars",
       "label": "Show inventory bars",
       "type": "boolean",
-      "default": true,
+      "default": false,
       "description": "Shows a product's inventory amounts (when using inventory tracking)",
       "requires": "inventory"
     },
@@ -352,7 +347,7 @@
         ["Currency sign", "sign"],
         ["Currency code with sign", "sign_and_code"]
       ],
-      "default": "sign_and_code",
+      "default": "sign",
       "description": "Sets the display of prices in your shop"
     },
     {
@@ -400,7 +395,7 @@
     "step_header_font_size": "20px",
     "step_header_font_weight": "bold",
     "title_font": "{{ primary_font }}",
-    "title_vertical_padding": "60px",
+    "title_vertical_padding": "16px",
     "title_background_color": "transparent",
     "title_position": "center",
     "title_font_size": "42px",
@@ -413,7 +408,7 @@
     "content_header_vertical_padding": "28px",
     "content_background_color": "{{ background_color }}",
     "content_banded": "true",
-    "content_header_height": "120px",
+    "content_header_height": "80px",
     "content_horizontal_padding": "0",
     "content_header_background_color": "{{ background_color }}",
     "content_border_color": "transparent",

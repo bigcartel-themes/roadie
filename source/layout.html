@@ -105,8 +105,8 @@
             {% if theme.show_search %}
               <form class="search-form" name="search" action="/products" method="get" accept-charset="utf8">
                 <input type="hidden" name="utf8" value='✓'>
-                <label for="search-input" class="visually-hidden">Search products</label>
-                <input id="search-input" class="search-input" name="search" placeholder="Search" type="text" autocomplete="off" />
+                <label for="secondary-search-input" class="visually-hidden">Search products</label>
+                <input id="secondary-search-input" class="search-input" name="search" placeholder="Search" type="text" autocomplete="off" />
                 <button class="button min-btn search-button" type="submit"><svg width="20" height="20" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M6.31895387 0c3.48986186 0 6.31895383 2.82909201 6.31895383 6.31895387 0 1.36478192-.4326703 2.62850826-1.1683262 3.66149429L16 14.5106083 14.5106083 16l-4.53016014-4.5304185c-1.03298603.7356559-2.29671237 1.1683262-3.66149429 1.1683262C2.82909201 12.6379077 0 9.80881573 0 6.31895387S2.82909201 0 6.31895387 0zm0 2.10631796c-2.32657457 0-4.21263591 1.88606134-4.21263591 4.21263591 0 2.32657458 1.88606134 4.21263593 4.21263591 4.21263593 2.32657458 0 4.21263593-1.88606135 4.21263593-4.21263593 0-2.32657457-1.88606135-4.21263591-4.21263593-4.21263591z" fill-rule="evenodd"/></svg></button>
               </form>
             {% endif %}
@@ -207,8 +207,8 @@
                 <section class="nav-section nav-section-search">
                   <form class="search-form" name="search" action="/products" method="get" accept-charset="utf8">
                     <input type="hidden" name="utf8" value='✓'>
-                    <label for="search-input" class="visually-hidden">Search products</label>
-                    <input id="search-input" class="search-input" name="search" placeholder="Search" type="text" autocomplete="off" />
+                    <label for="below-header-search-input" class="visually-hidden">Search products</label>
+                    <input id="below-header-search-input" class="search-input" name="search" placeholder="Search" type="text" autocomplete="off" />
                     <button class="button min-btn search-button" type="submit" title="Search"><svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M6.31895387 0c3.48986186 0 6.31895383 2.82909201 6.31895383 6.31895387 0 1.36478192-.4326703 2.62850826-1.1683262 3.66149429L16 14.5106083 14.5106083 16l-4.53016014-4.5304185c-1.03298603.7356559-2.29671237 1.1683262-3.66149429 1.1683262C2.82909201 12.6379077 0 9.80881573 0 6.31895387S2.82909201 0 6.31895387 0zm0 2.10631796c-2.32657457 0-4.21263591 1.88606134-4.21263591 4.21263591 0 2.32657458 1.88606134 4.21263593 4.21263591 4.21263593 2.32657458 0 4.21263593-1.88606135 4.21263593-4.21263593 0-2.32657457-1.88606135-4.21263591-4.21263593-4.21263591z" fill-rule="evenodd"/></svg></button>
                   </form>
                 </section>
@@ -242,8 +242,8 @@
               <div class="nav-section nav-section-search">
                 <form class="search-form" name="search" action="/products" method="get" accept-charset="utf8">
                   <input type="hidden" name="utf8" value='✓'>
-                  <label for="search-input" class="visually-hidden">Search products</label>
-                  <input id="search-input" class="search-input" name="search" placeholder="Search" type="text" autocomplete="off" />
+                  <label for="sidebar-search-input" class="visually-hidden">Search products</label>
+                  <input id="sidebar-search-input" class="search-input" name="search" placeholder="Search" type="text" autocomplete="off" />
                   <button class="button min-btn search-button" type="submit" title="Search"><svg width="18" height="18" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M6.31895387 0c3.48986186 0 6.31895383 2.82909201 6.31895383 6.31895387 0 1.36478192-.4326703 2.62850826-1.1683262 3.66149429L16 14.5106083 14.5106083 16l-4.53016014-4.5304185c-1.03298603.7356559-2.29671237 1.1683262-3.66149429 1.1683262C2.82909201 12.6379077 0 9.80881573 0 6.31895387S2.82909201 0 6.31895387 0zm0 2.10631796c-2.32657457 0-4.21263591 1.88606134-4.21263591 4.21263591 0 2.32657458 1.88606134 4.21263593 4.21263591 4.21263593 2.32657458 0 4.21263593-1.88606135 4.21263593-4.21263593 0-2.32657457-1.88606135-4.21263591-4.21263593-4.21263591z" fill-rule="evenodd"/></svg></button>
                 </form>
               </div>
@@ -462,6 +462,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="{{ 'api' | theme_js_url }}"></script>
     <script type="text/javascript">
+      var inPreview = (/\/admin\/design/.test(top.location.pathname));
       var formatMoney = Format.money;
       Format.money = function(number) {
         {% case theme.money_format %}

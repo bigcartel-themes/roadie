@@ -150,6 +150,10 @@ $break-gutters: 1024px
       padding-left: #{"{% if theme.show_product_grid_gutters %}0px{% else %}16px{% endif %}"}
       padding-right: #{"{% if theme.show_product_grid_gutters %}0px{% else %}16px{% endif %}"}
 
+    .prod-thumb.rollover .prod-thumb-info
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
+
 .no-gutters
 
   .outer-wrapper
@@ -312,13 +316,18 @@ $break-gutters: 1024px
       padding-right: $base-padding
 
     .product-list
-      margin: #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"}
+      margin: #{"{% if theme.show_product_grid_gutters %}4px{% else %}0px{% endif %}"}
+
+      .prod-thumb
+        padding-left: #{"{% if theme.show_product_grid_gutters %}4px{% else %}0px{% endif %}"}
+        padding-right: #{"{% if theme.show_product_grid_gutters %}4px{% else %}0px{% endif %}"}
 
       @media screen and (max-width: $break-small)
-        margin: 0
+        margin: 8px
         padding: #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"}
 
         &.mobile-horizontal
+          margin: 0
           padding: 0
 
           .prod-thumb
@@ -330,15 +339,15 @@ $break-gutters: 1024px
 
     .prod-thumb-info
       padding-left: #{"{% if theme.show_product_grid_gutters %}0px{% else %}8px{% endif %}"}
-      padding-right: #{"{% if theme.show_product_grid_gutters %}0px{% else %}8px{% endif %}"}
+      padding-right: $base-padding
 
   @media screen and (max-width: $break-small)
     .product-list.mobile-small, .product-list.mobile-medium
-      margin: #{"{% if theme.show_product_grid_gutters %}0px{% else %}4px{% endif %}"}
+      margin: #{"{% if theme.show_product_grid_gutters %}4px{% else %}0px{% endif %}"}
       padding: 0
 
       .prod-thumb
-        padding: #{"{% if theme.show_product_grid_gutters %}0px{% else %}4px{% endif %}"}
+        padding: #{"{% if theme.show_product_grid_gutters %}4px{% else %}0px{% endif %}"}
 
     .cart-footer
       padding-bottom: 0
