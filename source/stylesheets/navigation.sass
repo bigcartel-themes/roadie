@@ -1,0 +1,102 @@
+@import 'variables'
+
+.main-nav
+  position: relative
+
+.nav, .horizontal-nav-links
+  margin: 0
+  padding: 0
+  list-style: none
+
+.nav
+  +flexbox
+  +align-items(center)
+  +justify-content(flex-start)
+
+.nav-menu-item
+  color: $primary-text-color
+  margin-right: $base-padding * 4
+  position: relative
+
+  > a
+    color: $primary-text-color
+    display: block
+    font-weight: bold
+    line-height: 48px
+    position: relative
+    text-decoration: none
+
+    .hover-underline
+      border-bottom: $medium-border
+      border-color: transparent
+      font-size: 20px
+      padding-right: 24px
+      padding-bottom: 8px
+
+      &.no-underline
+        padding-right: 0
+
+    svg
+      +transform(translateY(-50%))
+      fill: $primary-text-color
+      position: absolute
+      right: 0
+      top: 50%
+
+.horizontal-nav-links
+  background: $background-color
+  border: $medium-border
+  left: -9999px
+  min-width: 220px
+  max-height: 440px
+  opacity: 0
+  overflow-y: scroll
+  padding: $base-padding
+  position: absolute
+  top: 100%
+  z-index: 0
+
+.horizontal-nav-link
+  position: static
+
+  &.active-link a
+    font-weight: bold
+    text-decoration: underline
+
+  a
+    +transition(.1s linear all)
+    color: $primary-text-color
+    display: block
+    font-weight: bold
+    padding: $base-padding / 2 $base-padding
+    text-decoration: none
+
+    &:hover, &:focus
+      color: $link-hover-color
+      text-decoration: underline
+
+.nav li:focus > a,
+.nav li:hover > a,
+.nav li:focus-within > a
+  color: $link-hover-color
+
+  .hover-underline
+    border-color: $border-color
+
+    &.no-underline
+      border-color: transparent !important
+      text-decoration: underline
+
+  .product-sort-caption
+    color: $primary-text-color !important
+    text-decoration: none !important
+
+  svg
+    fill: $link-hover-color
+
+.nav li:hover ul, .nav li:focus ul, ul.show-menu
+  left: 0
+  right: auto
+  opacity: 1
+  top: calc(100% - 4px)
+  z-index: 100

@@ -5,7 +5,10 @@
 //= require stylesheets/product
 //= require stylesheets/contact
 //= require stylesheets/cart
+//= require stylesheets/custom
+//= require stylesheets/navigation
+//= require stylesheets/maintenance
+//= require stylesheets/quickshop
+//= require stylesheets/gutters
 
- /*============================================================
-  Colors + Custom Styles - add and override styles below
-============================================================*/
+ /* Colors + Custom Styles - add and override styles below

@@ -1,0 +1,28 @@
+@import 'variables'
+
+.custom-page, .contact-page
+
+  .page-heading
+    border-bottom: $medium-border
+    width: 100%
+
+  .page-content
+    max-width: 768px
+    width: 100%
+
+.custom-page .page-content
+
+  @media screen and (min-width: $break-large + 1)
+    .full-width &
+      font-size: 20px
+      max-width: 800px
+
+  *
+    text-transform: none
+
+  a
+    font-weight: bold
+    text-decoration: underline
+
+  img, iframe
+    max-width: 100%

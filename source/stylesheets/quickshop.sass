@@ -1,0 +1,147 @@
+@import 'variables'
+
+.qs-modal
+  display: none
+  height: calc(var(--vh, 1vh) * 100)
+  left: 0
+  opacity: 0
+  position: fixed
+  top: 0
+  visibility: hidden
+  width: 100vw
+  z-index: 1000
+
+  &.opened
+    display: block
+    opacity: 1
+    visibility: visible
+
+.qs-modal-content
+  +transform(translateX(-50%))
+  background: $background-color
+  border: $medium-border
+  height: calc(100vh - 80px)
+  left: 50%
+  max-width: 1024px
+  position: fixed
+  top: 40px
+  width: 100%
+  z-index: 1001
+
+  @media screen and (max-width: 1040px)
+    width: calc(100vw - 16px)
+
+  @media screen and (max-width: $break-small)
+    height: calc((var(--vh, 1vh) * 100) - 16px)
+    top: 8px
+    left: 8px
+    right: 8px
+    transform: none
+
+.qs-modal-background
+  background-color: $background-color
+  height: 100%
+  opacity: .9
+  position: absolute
+  width: 100%
+
+.qs-modal-controls
+  +flexbox
+  +align-items(center)
+  +justify-content(flex-start)
+  border-bottom: $medium-border
+  padding: $base-padding 0
+  margin-left: $base-padding * 2
+  margin-right: $base-padding * 2
+
+.qs-modal-controls-arrows
+  +flexbox
+  +align-items(center)
+  margin-left: auto
+  margin-right: -$base-padding
+
+.qs-modal-controls-close
+  +flexbox
+  +align-items(center)
+  font-size: 24px
+  font-weight: bold
+  margin-left: -$base-padding
+
+.button.qs-modal-button
+  background: none
+  display: inline-block
+  height: auto
+  padding: $base-padding
+
+  svg
+    display: block
+    fill: $primary-text-color
+
+  &:hover, &:focus
+    background: none !important
+
+    svg
+      fill: $link-hover-color !important
+
+.qs-nav-next
+  margin-left: $base-padding * 2
+  margin-right: 0
+
+.qs-product-container
+  height: calc(100% - 56px)
+  overflow-y: scroll
+  padding: $base-padding * 2
+  padding-top: 0
+
+  &.spinner:before
+    border: 2px solid $primary-text-color
+    border-top: 2px solid $background-color
+    left: calc(50% - 32px)
+    height: 48px
+    width: 48px
+
+.qs-product-details
+  padding-bottom: $base-padding * 2
+  width: 100%
+
+  .spinner &
+    opacity: .2
+
+  .page-title
+    padding: $base-padding 0
+
+  .related-products-container
+    display: none
+
+  .product-images
+    padding-top: $base-padding * 2
+
+.qs-product-details
+  .full-width &
+
+    .product-form-controls
+      margin-top: $base-padding * 2
+
+    .product-options-container + .product-form-controls
+      margin-top: $base-padding
+
+    .product-images
+      padding-right: 0
+
+      &.product-images-thumbs
+        display: block
+
+        .secondary-product-image-container--thumbs
+          +flex-direction(row)
+          +flex-basis(0)
+
+        .primary-product-image-container
+          +flex-basis(0)
+          order: 1 !important
+
+        .secondary-product-image-link
+          cursor: pointer
+          height: 100%
+          position: relative
+          width: 20%
+

@@ -1,14 +1,48 @@
 @import 'variables'
 
-.product-list
-  +flexbox
-  +flex-direction(row)
-  +flex-wrap(wrap)
+.home-promo-image
+  margin-top: #{" {{ theme.grid_gutters }} "}
+  padding-top: #{" {{ theme.grid_gutters }} "}
 
-.product-list-item
-  +flexbox
-  width: 33.33%
+.promo-image
+  display: block
+  width: 100%
 
-  img
-    display: block
-    width: 100%
+.view-all-link-container
+  border-top: $small-border
+  text-align: right
+
+.icon-link
+  font-weight: bold
+  line-height: 1em
+  padding: $base-padding * 2 0
+  position: relative
+  text-decoration: none
+
+  &.icon-right-link
+    padding-right: $base-padding * 3
+
+    svg
+      right: 0
+
+  &.icon-left-link
+    padding-left: $base-padding * 3
+
+    svg
+      left: 0
+
+  svg
+    +transform(translateY(-50%))
+    fill: $primary-text-color
+    margin-top: -1px
+    position: absolute
+    top: 50%
+
+  &:hover, &:focus
+    text-decoration: underline
+
+    svg
+      fill: $link-hover-color
+
+.view-all-link
+  display: inline-block

@@ -1,0 +1,439 @@
+@import 'variables'
+
+$break-gutters: 1024px
+
+.full-width.no-gutters
+
+  .sidebar
+    padding-left: 0
+    padding-right: 0
+
+    @media screen and (min-width: $break-small + 1)
+      &.left-sidebar
+        border-right: $medium-border
+
+      &.right-sidebar
+        border-left: $medium-border
+
+
+  @media screen and (min-width: $break-gutters + 1)
+    &.sidebar-no-header .header-home-link
+      padding: 0 $base-padding * 2
+
+    .nav-cart-link
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
+
+    .search-form
+      padding-left: $base-padding
+      padding-right: $base-padding * 2
+
+      .search-input
+        padding-left: $base-padding
+
+      .search-button
+        margin-right: -$base-padding
+
+    &.below-header .search-form
+      margin-right: -$base-padding * 2
+
+    .nav-section-title
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
+
+    .sidebar
+      .sidebar-nav-links .sidebar-nav-link a
+        padding-left: $base-padding * 2
+        padding-right: $base-padding * 2
+
+    .social-links, .badge
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
+
+    header
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
+
+    .header-above
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
+
+    .main-nav
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
+
+    .page-title
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
+
+    .page-subheading
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
+
+    .custom-page .page-content, .contact-page .page-content
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
+
+    .product-details
+      padding-left: 0
+      padding-right: 0
+
+    .product-form-controls
+      margin-bottom: $base-padding * 2 !important
+      margin-top: $base-padding * 2 !important
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
+
+    .product-description, .product-inventory
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
+
+    .description-inventory-tabs
+      border-top: $small-border
+
+    .product-option-select-container
+      padding: 0
+
+      select
+        padding-left: $base-padding * 2
+
+      svg
+        right: $base-padding * 2
+
+    .product-option-label
+      left: $base-padding * 2
+
+    .product-form-quantity-button + #instant-checkout-button
+      margin-top: $base-padding * 2
+
+    .product-images
+      border-right: $small-border
+      padding: 0 !important
+
+      @media screen and (max-width: $break-product-details)
+        border-right: 0
+
+    &.right-sidebar .product-images
+      border-left: $small-border
+      border-right: 0
+
+      @media screen and (max-width: $break-product-details)
+        border-left: 0
+
+    .similar-products-title
+      border-top: $medium-border
+      margin: 0
+      padding: $base-padding * 2
+
+    .page-heading .continue-shopping-link
+      margin-right: $base-padding
+
+    .cart-item
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
+
+    .cart-sub-footer
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
+
+    .checkout-button
+      margin-right: $base-padding * 2
+
+    .pagination, .view-all-link-container
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
+
+    .product-list
+      margin: #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"}
+
+    .prod-thumb-info
+      padding-left: #{"{% if theme.show_product_grid_gutters %}0px{% else %}16px{% endif %}"}
+      padding-right: #{"{% if theme.show_product_grid_gutters %}0px{% else %}16px{% endif %}"}
+
+    .prod-thumb.rollover .prod-thumb-info
+      padding-left: $base-padding * 2
+      padding-right: $base-padding * 2
+
+.no-gutters
+
+  .outer-wrapper
+    padding-left: 0 !important
+    padding-right: 0 !important
+
+    &.fixed-width
+      max-width: 1024px
+
+  .button.description-inventory-tab:first-of-type
+    border-left: 0
+
+  .button.description-inventory-tab:last-of-type
+    border-right: 0
+
+  @media screen and (max-width: $break-gutters)
+
+    &.sidebar-no-header .header-home-link
+      padding: 0 $base-padding
+
+    .sidebar
+      padding-left: 0
+      padding-right: 0
+
+      @media screen and (min-width: $break-small + 1)
+        &.left-sidebar
+          border-right: $medium-border
+
+        &.right-sidebar
+          border-left: $medium-border
+
+      .nav-cart-link
+        padding-left: $base-padding
+        padding-right: $base-padding
+
+      .search-form
+        padding-left: 0
+        padding-right: $base-padding
+
+        .search-input
+          margin-left: 0
+          padding-left: $base-padding
+
+        .search-button
+          margin-right: -$base-padding
+
+      .nav-section-title
+        padding-left: $base-padding
+        padding-right: $base-padding
+
+      .sidebar-nav-links .sidebar-nav-link a
+        padding-left: $base-padding
+        padding-right: $base-padding
+
+      .social-links, .badge
+        padding-left: $base-padding
+        padding-right: $base-padding
+
+    header
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .header-above
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .main-nav
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .page-title
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .page-subheading
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .custom-page .page-content, .contact-page .page-content
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .product-details
+      padding-left: 0
+      padding-right: 0
+
+    .product-option-select-container
+      padding: 0
+
+      select
+        padding-left: $base-padding
+
+      svg
+        right: $base-padding
+
+    .product-option-label
+      left: $base-padding
+
+    .product-form-controls
+      margin-bottom: $base-padding !important
+      margin-top: $base-padding !important
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .product-description, .product-inventory
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .description-inventory-tabs
+      border-top: $small-border
+
+    .product-images
+      border-right: $small-border
+      padding: 0 !important
+
+      @media screen and (max-width: $break-product-details)
+        border-right: 0
+
+    &.right-sidebar .product-images
+      border-left: $small-border
+      border-right: 0
+
+      @media screen and (max-width: $break-product-details)
+        border-left: 0
+
+    .similar-products-title
+      border-top: $medium-border
+      margin: 0
+      padding: $base-padding
+
+    .page-heading .continue-shopping-link
+      margin-right: $base-padding
+
+    .cart-item
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .mobile-cart
+      .cart-item
+        padding-right: 0
+
+      .cart-item-details-price
+        padding-right: $base-padding
+
+      .button.cart-item-remove
+        right: $base-padding
+
+    .cart-sub-footer
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .checkout-button
+      margin-right: $base-padding
+
+      @media screen and (max-width: $break-small)
+        margin-right: 0
+
+    .pagination, .view-all-link-container
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .product-list
+      margin: #{"{% if theme.show_product_grid_gutters %}4px{% else %}0px{% endif %}"}
+
+      .prod-thumb
+        padding-bottom: #{"{% if theme.show_product_grid_gutters %}4px{% else %}0px{% endif %}"}
+        padding-left: #{"{% if theme.show_product_grid_gutters %}4px{% else %}0px{% endif %}"}
+        padding-right: #{"{% if theme.show_product_grid_gutters %}4px{% else %}0px{% endif %}"}
+        padding-top: #{"{% if theme.show_product_grid_gutters %}4px{% else %}0px{% endif %}"}
+
+      @media screen and (max-width: $break-small)
+        margin: 8px
+        padding: #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"}
+
+        &.mobile-horizontal
+          margin: 0
+          padding: 0
+
+          .prod-thumb
+            padding-left: #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"}
+            padding-right: #{"{% if theme.show_product_grid_gutters %}0px{% else %}8px{% endif %}"}
+
+          .prod-thumb-info
+            padding-right: $base-padding
+
+    .prod-thumb-info
+      padding-left: #{"{% if theme.show_product_grid_gutters %}0px{% else %}8px{% endif %}"}
+      padding-right: $base-padding
+
+  @media screen and (max-width: $break-small)
+    .product-list.mobile-small, .product-list.mobile-medium
+      margin: #{"{% if theme.show_product_grid_gutters %}4px{% else %}0px{% endif %}"}
+      padding: 0
+
+      .prod-thumb
+        padding: #{"{% if theme.show_product_grid_gutters %}4px{% else %}0px{% endif %}"}
+
+    .cart-footer
+      padding-bottom: 0
+
+  .qs-modal-controls
+    margin: 0
+    padding: $base-padding $base-padding * 2
+
+    .qs-modal-controls-close
+      margin-left: -$base-padding * 2
+
+    @media screen and (max-width: $break-small)
+      padding: $base-padding $base-padding * 2
+
+  .qs-product-container
+    padding: 0
+
+  .qs-product-details
+    +flex(1)
+    height: 100%
+    padding-bottom: 0
+
+    .main
+      height: 100%
+
+      @media screen and (max-width: $break-product-details)
+        height: auto
+
+  .qs-product-details
+    .main
+      padding-left: 0 !important
+      padding-right: 0 !important
+
+    .product-page-columns
+      height: auto
+
+  .qs-product-details
+    .page-title
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .page-subheading
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .product-images
+      border-right: $small-border
+      padding: 0
+
+      @media screen and (max-width: $break-product-details)
+        border-right: 0
+
+    &.right-sidebar .product-images
+      border-left: $small-border
+      border-right: 0
+
+      @media screen and (max-width: $break-product-details)
+        border-left: 0
+
+    .product-details
+      padding-left: 0
+      padding-right: 0
+
+    .product-description, .product-inventory
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .product-option-select-container
+      padding: 0
+
+      select
+        padding-left: $base-padding
+
+      svg
+        right: $base-padding
+
+    .product-option-label
+      left: $base-padding
+
+    .product-form-controls
+      margin-bottom: $base-padding !important
+      margin-top: $base-padding !important
+      padding-left: $base-padding
+      padding-right: $base-padding
+
+    .description-inventory-tabs
+      border-top: $small-border

@@ -1,1 +1,660 @@
 @import 'variables'
+
+.page-heading.has-sorting
+  @media screen and (max-width: $break-small)
+    +flex-direction(column)
+    +align-items(flex-start)
+
+    h1.page-title
+      border-bottom: $small-border
+      width: 100%
+
+.product-sort
+  +flexbox
+  +align-items(center)
+  margin-left: auto
+  white-space: nowrap
+
+  .nav-menu-item > a span
+    font-size: 16px
+
+  svg
+    +all-transitions
+    +transform(translateY(-50%))
+    fill: $primary-text-color
+    position: absolute
+    right: 0
+    top: 50%
+    z-index: 1
+
+  &:hover, &:focus, &:focus-within
+    color: $primary-text-color
+
+    svg
+      fill: $primary-text-color
+
+  @media screen and (max-width: $break-small)
+    margin-left: 0
+    padding: 0
+    width: 100%
+
+.product-sort-caption
+  border-right: $small-border
+  cursor: pointer
+  font-weight: bold
+  padding-right: $base-padding * 2
+  margin-right: $base-padding * 2
+
+  @media screen and (max-width: $break-small)
+    border: none
+
+@media screen and (max-width: $break-small)
+  .product-sort-options
+    width: 100%
+
+    .hover-underline
+      margin-left: auto
+
+    .nav-menu-item
+      +flexbox
+      +align-items(center)
+      width: 100% !important
+
+    .nav-menu-item > a
+      margin-left: auto
+
+ul.sort-by-nav-links
+  left: auto !important
+  right: 0 !important
+
+.product-list-container
+  position: relative
+
+.product-list
+  +flexbox
+  +flex-wrap(wrap)
+  +justify-content(flex-start)
+  margin: #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"} -#{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"}
+
+  @media screen and (max-width: $break-medium)
+    width: auto
+
+  @media screen and (max-width: $break-small)
+    &.mobile-horizontal
+      margin: 0
+
+.prod-thumb
+  +flex-basis(calc(100% / 3))
+  color: $primary-text-color
+  display: block
+  font-size: 0
+  padding: #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"}
+  padding-bottom: #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"}
+  position: relative
+  text-decoration: none
+  vertical-align: middle
+  width: calc(100% / 3)
+
+  &.product-image-small
+    +flex-basis(calc(100% / 4))
+    width: calc(100% / 4)
+
+    .sidebar-visible &
+      +flex-basis(calc(100% / 3))
+      width: calc(100% / 3)
+
+    @media screen and (max-width: 900px)
+      +flex-basis(calc(100% / 3))
+      width: calc(100% / 3)
+
+      .sidebar-visible &
+        +flex-basis(calc(100% / 2))
+        width: calc(100% / 2)
+
+    .grid-full-width &
+      +flex-basis(calc(100% / 6))
+      width: calc(100% / 6)
+
+      @media screen and (min-width: $break-extra-large+1)
+        +flex-basis(calc(100% / 6))
+        width: calc(100% / 6)
+
+      @media screen and (max-width: $break-extra-large)
+        +flex-basis(calc(100% / 5))
+        width: calc(100% / 5)
+
+      @media screen and (max-width: $break-large)
+        +flex-basis(calc(100% / 4))
+        width: calc(100% / 4)
+
+      @media screen and (max-width: $break-medium)
+        +flex-basis(calc(100% / 3))
+        width: calc(100% / 3)
+
+    .sidebar-visible .grid-full-width &
+
+      @media screen and (min-width: $break-extra-large+1)
+        +flex-basis(calc(100% / 5))
+        width: calc(100% / 5)
+
+      @media screen and (min-width: 2200px)
+        +flex-basis(calc(100% / 7))
+        width: calc(100% / 7)
+
+      @media screen and (max-width: $break-extra-large)
+        +flex-basis(calc(100% / 4))
+        width: calc(100% / 4)
+
+      @media screen and (max-width: $break-large)
+        +flex-basis(calc(100% / 3))
+        width: calc(100% / 3)
+
+      @media screen and (max-width: $break-medium)
+        +flex-basis(calc(100% / 2))
+        width: calc(100% / 2)
+
+  &.product-image-medium
+    +flex-basis(calc(100% / 3))
+    width: calc(100% / 3)
+
+    .sidebar-visible &
+      +flex-basis(calc(100% / 2))
+      width: calc(100% / 2)
+
+    .grid-full-width &
+      +flex-basis(calc(100% / 4))
+      width: calc(100% / 4)
+
+      @media screen and (min-width: $break-large+1)
+        +flex-basis(calc(100% / 5))
+        width: calc(100% / 5)
+
+      @media screen and (max-width: $break-extra-large)
+        +flex-basis(calc(100% / 4))
+        width: calc(100% / 4)
+
+      @media screen and (max-width: $break-large)
+        +flex-basis(calc(100% / 3))
+        width: calc(100% / 3)
+
+      @media screen and (max-width: $break-medium)
+        +flex-basis(calc(100% / 2))
+        width: calc(100% / 2)
+
+  &.product-image-large
+    +flex-basis(calc(100% / 2))
+    width: calc(100% / 2)
+
+    .sidebar-visible &
+      +flex-basis(calc(100% / 1))
+      width: calc(100% / 1)
+
+    .grid-full-width &
+      +flex-basis(calc(100% / 3))
+      width: calc(100% / 3)
+
+      @media screen and (min-width: $break-large+1)
+        +flex-basis(calc(100% / 4))
+        width: calc(100% / 4)
+
+      @media screen and (max-width: $break-extra-large)
+        +flex-basis(calc(100% / 3))
+        width: calc(100% / 3)
+
+      @media screen and (max-width: $break-large)
+        +flex-basis(calc(100% / 2))
+        width: calc(100% / 2)
+
+  &.show-quickview
+    &:hover, &:focus
+      .product-list-quickview-container
+        opacity: 1
+        visibility: visible
+
+  &.rollover
+    margin-bottom: 0px
+
+    @media screen and (min-width: $break-small+1)
+      .prod-thumb-info
+        +flexbox
+        +align-items(center)
+        background: $button-background-color
+        height: calc(100% - #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"} * 2)
+        left: #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"}
+        padding: $base-padding * 2
+        position: absolute
+        top: #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"}
+        width: calc(100% - #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"} * 2)
+        opacity: 0
+
+        *
+          color: $button-text-color
+
+    @media screen and (max-width: $break-small)
+      .prod-thumb-info
+        display: none
+
+        .mobile-horizontal &
+          display: block
+
+    &:hover, &:focus
+      .prod-thumb-info
+        opacity: 1
+
+      .open-quickview
+        @media screen and (min-width: $break-small + 1)
+          border: 2px solid $button-text-color
+
+        &:hover, &:focus
+          background-color: $button-hover-background-color
+          border-color: $button-hover-background-color
+          color: $button-hover-text-color
+
+          svg
+            fill: $button-hover-text-color
+
+  @media screen and (max-width: $break-small)
+    &.show-quickview
+      .product-list-quickview-container
+        bottom: $base-padding
+        height: 44px
+        left: auto
+        opacity: 1
+        right: $base-padding
+        top: auto
+        visibility: visible
+        width: 44px
+
+        .open-quickview-text
+          display: none
+
+        .open-quickview-icon
+          margin: 0 auto
+          display: block
+
+        .product-list-quickview-container-background
+          background-color: $button-background-color
+          opacity: .8
+
+        .open-quickview
+          background-color: transparent
+          padding: 0
+          text-align: center
+
+          &:focus, &:active
+            background-color: $button-hover-background-color
+
+    .mobile-medium &
+      +flex-basis(calc(100% / 1) !important)
+      width: calc(100% / 1) !important
+
+    .mobile-small &
+      +flex-basis(calc(100% / 2) !important)
+      width: calc(100% / 2) !important
+
+    .mobile-horizontal &
+      +flexbox
+      +flex-basis(100% !important)
+      border-bottom: $small-border
+      padding: $base-padding 0
+      width: 100% !important
+
+      &:last-child
+        border-bottom: 0
+
+      .prod-thumb-container
+        width: 136px
+
+      .prod-thumb-info
+        padding: 0 0 $base-padding $base-padding
+        width: calc(100% - 136px)
+
+      .prod-thumb-info-headers
+        text-align: left !important
+
+.prod-thumb-container
+  position: relative
+  width: 100%
+
+  @media screen and (min-width: $break-small + 1)
+    .rollover &
+      height: 100%
+
+.product-list-image-container
+  font-size: 0
+  margin: 0
+  overflow: hidden
+  padding-bottom: 100%
+  width: 100%
+
+  .default &
+    padding-bottom: 0
+
+.product-list-quickview-container
+  +flexbox
+  cursor: pointer
+  height: 100%
+  left: 0
+  opacity: 0
+  position: absolute
+  top: 0
+  width: 100%
+  visibility: hidden
+
+  @media screen and (max-width: $break-small)
+    .mobile-horizontal &
+      display: none
+
+.product-list-quickview-container-background
+  background-color: $button-background-color
+  height: 100%
+  left: 0
+  opacity: 0
+  position: absolute
+  top: 0
+  width: 100%
+
+.open-quickview
+  +flexbox
+  +transition(none)
+  +align-items(center)
+  border: 2px solid transparent
+  bottom: $base-padding * 2
+  height: 44px
+  left: $base-padding * 2
+  margin-top: auto
+  padding: $base-padding * 1.5 $base-padding * 2
+  position: relative
+  width: calc(100% - 8px * 4)
+  z-index: 5
+
+  @media screen and (max-width: $break-small)
+    bottom: 0
+    left: 0
+    width: 100%
+
+    .mobile-horizontal &
+      padding: $base-padding
+      height: auto
+      font-size: 14px
+      font-weight: bold
+      margin-top: $base-padding
+
+  @media screen and (min-width: $break-small + 1)
+    .mobile-horizontal &.mobile-stacked-quickview
+      display: none
+
+  .open-quickview-icon
+    +transition(none)
+    fill: $button-text-color
+    margin-left: auto
+
+.product-list-image
+  -webkit-transform: translate3d(0, 0, 0)
+  display: block
+  overflow: hidden
+
+  &.lazy
+    filter: blur(5px)
+
+  .default &
+    width: 100%
+
+  .crop-to-square &
+    height: 100%
+    object-fit: cover
+    position: absolute
+    width: 100%
+
+  .fit-to-square &
+    +transform(translate3d(-50%,-50%,0))
+    cursor: pointer
+    left: 50%
+    position: absolute
+    top: 50%
+    max-width: 100%
+    height: 100%
+    width: 100%
+
+    &.image-tall
+      height: 100%
+      width: auto
+
+    &.image-wide
+      height: auto
+      width: 100%
+
+    &.image-square
+      height: 100%
+      width: 100%
+
+.prod-thumb-info
+  padding: $base-padding 0
+  padding-left: 0
+  padding-right: #{"{% if theme.show_product_grid_gutters %}0px{% else %}8px{% endif %}"}
+
+
+.prod-thumb-info-headers
+  +fluid-type(16px, 16px)
+  +flexbox
+  +justify-content(flex-start)
+  +flex-direction(column)
+  font-weight: bold
+  line-height: 1.25em
+  padding: 0
+  position: relative
+  text-align: $product-detail-alignment
+  width: 100%
+  z-index: 1
+
+  @media screen and (min-width: $break-small + 1)
+    .rollover.show-quickview &
+      margin-bottom: 56px
+
+  @media screen and (min-width: 1201px)
+    .full-width &
+      font-size: 18px
+
+.prod-thumb-name
+  position: relative
+  overflow-wrap: break-word
+
+  @media screen and (max-width: $break-medium)
+    padding-right: 0
+
+  @media screen and (max-width: $break-small)
+    .mobile-medium &
+      font-size: 20px
+
+.prod-thumb-price
+  font-size: .9em
+  font-weight: normal
+  margin-top: $base-padding / 2
+
+  @media screen and (max-width: $break-small)
+    .mobile-medium &
+      font-size: 16px
+
+.prod-thumb-status
+  font-weight: bold
+
+  &.circle
+    +flexbox
+    +align-items(center)
+    +justify-content(center)
+    background: $badge-background-color
+    border-radius: 50%
+    color: $badge-text-color
+    font-size: 12px
+    line-height: 1.25em
+    height: 64px
+    right: $base-padding
+    padding: $base-padding
+    position: absolute
+    text-align: center
+    top: $base-padding
+    width: 64px
+
+    @media screen and (max-width: $break-small)
+      font-size: 10px
+      height: 56px
+      right: $base-padding / 2
+      top: $base-padding / 2
+      width: 56px
+
+      .mobile-medium &
+        right: $base-padding
+        top: $base-padding
+
+  &.bar
+    background: $badge-background-color
+    color: $badge-text-color
+    font-size: 13px
+    line-height: 1em
+    position: absolute
+    padding: $base-padding
+    right: 0
+    top: 0
+
+    @media screen and (max-width: $break-small)
+      font-size: 12px
+
+  &.inline
+    display: inline-block
+    font-size: 13px
+
+    .mobile-horizontal &
+      margin-top: $base-padding
+
+.pagination
+  +flexbox
+  +flex-direction(row)
+  +justify-content(flex-start)
+  border-top: $small-border
+  font-weight: bold
+  line-height: 40px
+  padding: $base-padding 0
+
+.page-numbers
+  +flexbox
+  +flex-wrap(wrap)
+  +justify-content(flex-start)
+
+  .previous, .next
+    display: none
+
+  > a, > span
+    +flexbox
+    +align-items(center)
+    +justify-content(center)
+    background: $background-color
+    border-radius: 100%
+    color: $primary-text-color
+    text-align: center
+    height: 40px
+    margin-right: $base-padding
+    order: 1
+    position: relative
+    text-decoration: none
+    width: 40px
+
+    &.current
+      background: $button-background-color
+      color: $button-text-color
+
+    &.disabled
+      cursor: not-allowed
+      opacity: .4
+
+    svg
+      display: block
+      fill: $primary-text-color
+
+  > a
+    &:hover, &:focus
+      color: $link-hover-color
+      text-decoration: underline
+
+.page-arrows
+  +flexbox
+  margin-left: auto
+
+  @media screen and (max-width: $break-small)
+    +align-items(center)
+
+.page-link
+  +flexbox
+  +align-items(center)
+  color: $primary-text-color
+  line-height: 40px
+  text-align: center
+  height: 40px
+  padding: 0
+  position: relative
+  text-decoration: none
+
+  &:not(.disabled):hover, &:not(.disabled):focus
+    background: none
+    color: $link-hover-color
+    text-decoration: underline
+
+    svg
+      fill: $link-hover-color
+
+  &.next-page-link
+    margin-left: $base-padding * 3
+
+    span
+      margin-right: $base-padding
+
+      @media screen and (max-width: $break-small)
+        display: none
+
+  &.previous-page-link
+    margin-left: auto
+
+    span
+      margin-left: $base-padding
+
+      @media screen and (max-width: $break-small)
+        display: none
+
+  &.disabled
+    cursor: not-allowed
+    opacity: .5
+
+  svg
+    display: block
+    fill: $primary-text-color
+
+    @media screen and (max-width: $break-small)
+      height: 20px
+      width: 20px
+
+.alert-message
+  font-size: 24px
+  font-weight: bold
+  margin-bottom: $base-padding * 8
+  margin-top: $base-padding * 8
+  padding: 0 $base-padding * 4
+  text-align: center
+
+.alert-message-header
+  margin-bottom: $base-padding
+
+.alert-message-text
+  font-size: 16px
+  font-weight: normal
+
+.alert-message-button
+  font-size: 20px
+  font-weight: bold
+  height: 64px
+  line-height: 64px
+  margin: 0 auto
+  max-width: 340px
+  width: 100%
+
+.alert-message-text + .alert-message-button
+  margin-top: $base-padding * 4
+

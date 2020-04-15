@@ -1,1 +1,90 @@
 @import 'variables'
+
+
+.contact-form
+  max-width: 100%
+  width: 100%
+
+  .focused .form-label
+    font-size: 12px
+    left: $base-padding + 2
+    transform: translateY(-55%)
+
+  .focused input, .focused textarea
+    padding-top: $base-padding * 3
+
+  #captcha_image
+    border: $small-border
+    border-color: transparent
+    border-left-color: $border-color
+    height: 56px
+    position: absolute
+    right: 0
+    top: 0
+
+  .captcha-instructions
+    font-size: 14px
+    font-weight: bold
+    margin-top: 0
+
+  input, textarea
+    border: $small-border
+    border-color: transparent
+    display: block
+    height: 56px
+    padding: $base-padding
+    text-transform: none !important
+    width: 100%
+
+    &:active, &:focus
+      border-color: $border-color
+      outline: none
+
+  textarea
+    min-height: 128px
+
+.contact-form-group
+  border: $small-border
+  display: block
+  margin: $base-padding * 2 auto
+  position: relative
+  width: 100%
+
+  &.contact-captcha-group
+    margin-bottom: $base-padding
+
+    &:focus-within
+      #captcha_image
+        border-color: $border-color
+        border-left: $medium-border
+
+  &.contact-captcha
+    margin-bottom: 40px
+
+    #captcha
+      border-right: $small-border
+
+  .form-label
+    +all-transitions
+    background-color: transparent
+    color: $primary-text-color
+    cursor: text
+    font-size: 20px
+    font-weight: bold
+    left: $base-padding
+    position: absolute
+    top: $base-padding * 2
+
+  &.contact-send
+    border: none
+    margin-top: $base-padding
+
+    .send-message-button
+      font-size: 20px
+      font-weight: bold
+      height: 64px
+      margin-left: auto
+      width: 240px
+
+      @media screen and (max-width: $break-small)
+        width: 100%

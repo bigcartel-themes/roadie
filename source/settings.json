@@ -1,22 +1,27 @@
 {
   "name": "Roadie",
-  "version": "0.0.02",
+  "version": "1.0.0",
   "images": [
     {
       "variable": "logo",
       "label": "Logo",
-      "description": "Adds your logo to the header"
+      "description": "Adds your logo to the header or sidebar"
     },
     {
       "variable": "background_image",
       "label": "Background Image",
-      "description": "Adds a repeating background image"
+      "description": "Adds a fixed or repeating background image"
+    },
+    {
+      "variable": "promo_image",
+      "label": "Promo Image",
+      "description": "Adds an image to the Home page"
     }
   ],
   "fonts": [
     {
       "variable": "primary_font",
-      "label": "Primary Font",
+      "label": "Font",
       "default": "Poppins"
     }
   ],
@@ -27,52 +32,253 @@
       "default": "#FFFFFF"
     },
     {
-      "variable": "primary_text_color",
+      "variable": "text_color",
       "label": "Text Color",
       "default": "#000000"
     },
     {
-      "variable": "border_color",
+      "variable": "link_hover",
+      "label": "Link hover color",
+      "default": "#056FFA"
+    },
+    {
+      "variable": "border",
       "label": "Border Color",
       "default": "#000000"
+    },
+    {
+      "variable": "button_text_color",
+      "label": "Button Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "variable": "button_background_color",
+      "label": "Button Background Color",
+      "default": "#000000"
+    },
+    {
+      "variable": "button_hover_text_color",
+      "label": "Button Hover Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "variable": "button_hover_background_color",
+      "label": "Button Hover Background Color",
+      "default": "#056FFA"
+    },
+    {
+      "variable": "badge_text_color",
+      "label": "Badge Text Color",
+      "default": "#000000"
+    },
+    {
+      "variable": "badge_background_color",
+      "label": "Badge Background Color",
+      "default": "#9AFF00"
+    },
+    {
+      "variable": "announcement_text_color",
+      "label": "Announcement Message Text",
+      "default": "#FFFFFF"
+    },
+    {
+      "variable": "announcement_background_color",
+      "label": "Announcement Message Background",
+      "default": "#000000"
+    },
+    {
+      "variable": "error_text_color",
+      "label": "Error Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "variable": "error_background_color",
+      "label": "Error Background Color",
+      "default": "#EB0000"
     }
   ],
   "options": [
     {
-      "variable": "layout_style",
-      "label": "Layout style",
+      "variable": "announcement_message_text",
+      "label": "Announcement text",
+      "type": "text",
+      "description": "Displays an announcement message on the top of every page"
+    },
+    {
+      "variable": "theme_layout",
+      "label": "Desktop layout",
       "type": "select",
       "options": [
-        ["Full width", "full_width"],
-        ["Fixed width", "fixed_width"]
+        ["Navigation above header", "above_header"],
+        ["Navigation below header", "below_header"],
+        ["Sidebar + header", "sidebar_header show_toggle"],
+        ["Sidebar + header (no toggle)", "sidebar_header"],
+        ["Sidebar without header", "sidebar_no_header"]
       ],
-      "default": "fixed_width",
+      "default": "below_header",
+      "description": "Sets the overall theme layout on desktops and large screens"
+    },
+    {
+      "variable": "layout_style",
+      "label": "Desktop layout style",
+      "type": "select",
+      "options": [
+        ["Fixed width", "fixed-width"],
+        ["Full width", "full-width"]
+      ],
+      "default": "fixed-width",
       "description": "Sets the width of the content area of your store"
     },
     {
+      "variable": "show_layout_gutters",
+      "label": "Enable layout margins",
+      "type": "boolean",
+      "default": true,
+      "description": "Adds spacing to the left/right edges of the layout (smaller screens and full width layouts)"
+    },
+    {
       "variable": "sidebar_position",
-      "label": "Sidebar position",
+      "label": "Sidebar & product details",
+      "type": "select",
+      "options": [
+        ["Left align", "left"],
+        ["Right align", "right"]
+      ],
+      "default": "left",
+      "description": "Sets the position of sidebar (when using a sidebar layout) & product details page on desktop"
+    },
+    {
+      "variable": "header_position",
+      "label": "Header position",
       "type": "select",
       "options": [
         ["Left", "left"],
-        ["Right", "right"]
+        ["Center", "center"]
       ],
       "default": "left",
-      "description": "Sets the position of the sidebar"
+      "description": "Sets the position of your logo or store name"
     },
     {
-      "variable": "border_style",
-      "label": "Border style",
+      "variable": "uppercase_text",
+      "label": "Uppercase text layout",
+      "type": "boolean",
+      "default": true,
+      "description": "Shows all text in uppercase"
+    },
+    {
+      "variable": "background_image_layout",
+      "label": "Background image layout",
       "type": "select",
       "options": [
-        ["Thick", "thick"],
-        ["Thin", "thin"]
+        ["Repeating", "repeating"],
+        ["Fixed", "fixed"]
       ],
-      "default": "thick",
-      "description": "Sets the thickness of the borders"
+      "default": "fixed",
+      "description": "Sets the display of the uploaded background image"
     },
     {
-      "variable": "featured_products",
+      "variable": "background_image_style",
+      "label": "Background image style",
+      "type": "select",
+      "options": [
+        ["Plain image", "plain_image"],
+        ["Color overlay", "transparent_color_overlay"],
+        ["Gradient overlay", "gradient_overlay"]
+      ],
+      "default": "transparent_color_overlay",
+      "description": "Sets the overlay style when a background image is used"
+    },
+    {
+      "variable": "show_product_grid_gutters",
+      "label": "Enable product grid spacing",
+      "type": "boolean",
+      "default": true,
+      "description": "Adds spacing around the sides of product thumbnails"
+    },
+    {
+      "variable": "product_list_layout",
+      "label": "Product grid layout",
+      "type": "select",
+      "options": [
+        ["Rows", "rows"],
+        ["Masonry", "masonry"]
+      ],
+      "default": "rows",
+      "description": "The arrangement of your products on the Home and Products pages"
+    },
+    {
+      "variable": "product_grid_image_size",
+      "label": "Product grid image size",
+      "type": "select",
+      "options": [
+        ["Small", "small"],
+        ["Medium", "medium"],
+        ["Large", "large"]
+      ],
+      "default": "small",
+      "description": "Sets the size of product image thumbnails"
+    },
+    {
+      "variable": "grid_image_style",
+      "label": "Product grid image style",
+      "type": "select",
+      "options": [
+        ["Default", "default"],
+        ["Fit to square", "fit-to-square"],
+        ["Crop to square", "crop-to-square"]
+      ],
+      "default": "crop-to-square",
+      "description": "Sets the display of thumbnail images"
+    },
+    {
+      "variable": "product_badge_style",
+      "label": "Product grid badges",
+      "type": "select",
+      "options": [
+          ["Bar", "bar"],
+          ["Circle", "circle"],
+          ["Inline", "inline"]
+      ],
+      "default": "circle",
+      "description": "The display of your product status on the Home and Products pages"
+    },
+    {
+      "variable": "show_overlay",
+      "label": "Product grid info",
+      "type": "select",
+      "options": [
+        ["Show on hover", "rollover"],
+        ["Under image (left align)", "under_image left-align"],
+        ["Under image (center align)", "under_image center-align"]
+      ],
+      "default": "under_image left-align",
+      "description": "Shows a product's name & price on hover, or under the image"
+    },
+    {
+      "variable": "mobile_product_grid_style",
+      "label": "Mobile product grid style",
+      "type": "select",
+      "options": [
+        ["1 product across", "medium"],
+        ["2 products across", "small"],
+        ["Stacked (no grid)", "horizontal"]
+      ],
+      "default": "small",
+      "description": "Sets the mobile product grid style"
+    },
+    {
+      "variable": "secondary_product_images",
+      "label": "Secondary product images",
+      "type": "select",
+      "options": [
+        ["Thumbnails", "thumbs"],
+        ["Full width", "full"]
+      ],
+      "default": "thumbs",
+      "description": "Display secondary product images full-width or as thumbnails on the Product page"
+    },
+    {
+      "variable": "featured_items",
       "label": "Featured products",
       "type": "select",
       "options": "0..100",
@@ -80,26 +286,42 @@
       "description": "The number of products featured on the Home page"
     },
     {
+      "variable": "featured_order",
+      "label": "Featured products order",
+      "type": "select",
+      "options": "product_orders",
+      "default": "position",
+      "description": "The order of products on the Home page"
+    },
+    {
       "variable": "products_per_page",
       "label": "Products per page",
       "type": "select",
       "options": "1..100",
-      "default": 9,
+      "default": 24,
       "description": "The number of products shown per page"
     },
     {
-      "variable": "show_similar_products",
-      "label": "Show related products",
+      "variable": "number_related_products",
+      "label": "Number of related products",
+      "type": "select",
+      "options": "0..6",
+      "default": 3,
+      "description": "The number of related products to show on the Product page"
+    },
+    {
+      "variable": "show_quickview",
+      "label": "Show quick view",
       "type": "boolean",
       "default": true,
-      "description": "Displays related products on the Product page"
+      "description": "Enables quick view & buttons on product thumbnails"
     },
     {
       "variable": "show_search",
       "label": "Show search",
       "type": "boolean",
       "default": true,
-      "description": "Displays a search field in the footer"
+      "description": "Displays a search field in the layout"
     },
     {
       "variable": "show_inventory_bars",
@@ -158,5 +380,113 @@
       "type": "text",
       "description": "Ex: http://pinterest.com/bigcartel"
     }
-  ]
+  ],
+ "checkout": {
+    "optimize_legibility": "optimizeLegibility",
+    "header_image_max_width": "400px",
+    "header_image_max_height": "200px",
+    "antialias_text": "antialiased",
+    "header_image": "{{ logo }}",
+    "background_color": "{{ background_color }}",
+    "gutter_width": "28px",
+    "body_font": "{{ primary_font }}",
+    "body_font_size": "16px",
+    "step_header_font": "{{ primary_font }}",
+    "step_header_font_size": "20px",
+    "step_header_font_weight": "bold",
+    "title_font": "{{ primary_font }}",
+    "title_vertical_padding": "16px",
+    "title_background_color": "transparent",
+    "title_position": "center",
+    "title_font_size": "42px",
+    "title_font_weight": "bold",
+    "title_text_transform": "uppercase",
+    "title_color": "{{ text_color }}",
+    "secondary_font": "{{ primary_font }}",
+    "secondary_font_size": "14px",
+    "content_border_radius": "0",
+    "content_header_vertical_padding": "28px",
+    "content_background_color": "{{ background_color }}",
+    "content_banded": "true",
+    "content_header_height": "80px",
+    "content_horizontal_padding": "0",
+    "content_header_background_color": "{{ background_color }}",
+    "content_border_color": "transparent",
+    "content_border_width": "0",
+    "content_primary_font_size": "24px",
+    "content_header_color": "{{ text_color }}",
+    "content_color": "{{ text_color }}",
+    "link_font_size": "14px",
+    "link_color": "{{ text_color }}",
+    "link_hover_color": "{{ link_hover }}",
+    "error_border_width": "0",
+    "error_font_size": "16px",
+    "error_background_color": "#ea4859",
+    "error_color": "#ffffff",
+    "error_border_radius": "0",
+    "error_border_color": "#ea4859",
+    "custom_inputs": true,
+    "input_focus_color": "#000000",
+    "input_focus_background_color": "#ffffff",
+    "input_border_radius": "0",
+    "input_focus_border_color": "#000000",
+    "input_error_border_color": "#ea4859",
+    "input_color": "#000000",
+    "input_error_color": "#000000",
+    "input_border_color": "#8e8e8e",
+    "input_font_size": "16px",
+    "input_font": "{{ primary_font }}",
+    "input_horizontal_padding": "8px",
+    "input_border_width": "2px",
+    "input_height": "37px",
+    "input_background_color": "#ffffff",
+    "input_error_background_color": "#ffffff",
+    "label_text_transform": "normal",
+    "label_color": "#999999",
+    "label_font_weight": "normal",
+    "label_font_size": "16px",
+    "in_field_labels": false,
+    "button_border_color": "{{ button_background_color }}",
+    "button_border_radius": "0",
+    "button_hover_border_color": "{{ button_hover_background_color }}",
+    "button_height": "47px",
+    "button_border_width": "2px",
+    "button_font": "{{ primary_font }}",
+    "button_font_size": "16px",
+    "button_font_weight": "bold",
+    "button_text_transform": "uppercase",
+    "button_background_color": "{{ button_background_color }}",
+    "button_color": "{{ button_text_color }}",
+    "button_hover_color": "{{ button_hover_text_color }}",
+    "button_position": "center",
+    "button_hover_background_color": "{{ button_hover_background_color }}",
+    "step_inactive_header_color": "opacify({{ text_color }}, .25)",
+    "step_border_color": "{{ border }}",
+    "step_border_width": "4px",
+    "step_header_text_transform": "uppercase",
+    "step_background_color": "{{ background_color }}",
+    "step_inactive_border_color": "opacify({{ border }}, .25)",
+    "step_primary_font_weight": "normal",
+    "step_header_color": "{{ text_color }}",
+    "step_header_position": "center",
+    "step_inactive_background_color": "{{ background_color }}",
+    "step_vertical_padding": "30px",
+    "step_primary_font_size": "24px",
+    "step_border_style": "solid",
+    "step_primary_font": "{{ primary_font }}",
+    "summary_inactive_item_border_color": "opacify({{ border }}, .25)",
+    "summary_font_size": "14px",
+    "summary_submit_background_color": "{{ background_color }}",
+    "summary_inactive_color": "opacify({{ text_color }}, .25)",
+    "summary_submit_border_color": "opacify({{ border }}, .25)",
+    "summary_item_border_width": "1px",
+    "summary_item_border_color": "{{ border }}",
+    "summary_secondary_color": "{{ text_color }}",
+    "summary_submit_border_width": "2px",
+    "summary_item_list_border_color": "{{ border }}",
+    "summary_inactive_secondary_color": "opacify({{ text_color }}, .25)",
+    "summary_item_list_border_width": "2px",
+    "summary_color": "{{ text_color }}",
+    "summary_inactive_item_list_border_color": "opacify({{ border }}, .25)"
+  }
 }

@@ -7,11 +7,9 @@
   {% when 'coming-soon' %}
     {% assign product_status = 'Coming soon' %}
 {% endcase %}
-
-<div class="page-heading">
+<div class="page-heading product-heading">
   <h1 class="page-title">{{ page.name }}</h1>
 </div>
-
 <div class="page-subheading">
   <div class="page-subheading-price">
     {% if product.variable_pricing %}
@@ -26,17 +24,31 @@
     </div>
   {% endif %}
 </div>
-
 <div class="product-page-columns">
-  <div class="product-images">
-    {% for image in product.images %}
-      <img src="{{ image | product_image_url | constrain: 1000 }}" alt="Image of {{ product.name | escape }}">
-    {% endfor %}
+  <div class="product-images product-image-zooming product-images-{{ theme.secondary_product_images }}">
+    <div class="primary-product-image-container">
+      <img class="product-image primary-product-image product-image-zoom" src="{{ product.image | product_image_url | constrain: 1000 }}" data-zoom="{{ product.image | product_image_url | constrain: 1500 }}" alt="{{ product.name | escape }}">
+    </div>
+    {% if product.images.size > 1 %}
+      <div class="secondary-product-image-container secondary-product-image-container--thumbs {% if theme.secondary_product_images == 'full' %}has-full{% endif %}">
+        {% for image in product.images %}
+          <div class="product-image-link secondary-product-image-link secondary-product-image-link--thumbs{% if forloop.index == 1 %} active{% endif %}" data-url="{{ image | product_image_url | constrain: 1000 }}" data-zoom="{{ image | product_image_url | constrain: 1500 }}">
+            <img class="product-image secondary-product-image" src="{{ image | product_image_url | constrain: 1000 }}" data-zoom="{{ image | product_image_url | constrain: 1500 }}" alt="{{ product.name | escape }}">
+          </div>
+        {% endfor %}
+      </div>
+      {% if theme.secondary_product_images == 'full' %}
+        <div class="secondary-product-image-container secondary-product-image-container--full">
+          {% for image in product.images offset: 1 %}
+            <div class="product-image-link secondary-product-image-link" data-url="{{ image | product_image_url | constrain: 1000 }}" data-zoom="{{ image | product_image_url | constrain: 1500 }}">
+              <img class="product-image secondary-product-image product-image-zoom" src="{{ image | product_image_url | constrain: 1000 }}" data-zoom="{{ image | product_image_url | constrain: 1500 }}" alt="{{ product.name | escape }}">
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endif %}
   </div>
-
-
-
-  <div class="product-details">
+  <div class="product-details product-{{ product.status }}">
     {% if product.status == 'active' %}
       <form method="post" class="product-form {% if theme.show_sold_out_product_options %}show-sold-out{% else %}hide-sold-out{% endif %}" action="/cart" accept-charset="utf8">
         <input type="hidden" name="utf8" value='✓'>
@@ -48,54 +60,171 @@
               <div class="product-option-groups">
                 <input id="option" name="cart[add][id]" type="hidden" value="0">
                 {% for option_group in product.option_groups %}
-                  <div class="select product-option-select form-group">
+                  <div class="select product-option-select-container form-group">
                     <label class="form-label product-option-label" for="option_group_{{ option_group.id }}">{{ option_group.name }}</label>
-                    <select data-unavailable-text="(Unavailable)" data-sold-text="(Sold out)" id="option_group_{{ option_group.id }}" data-group-id="{{ option_group.id }}" data-group-name="{{ option_group.name | escape }}" class="product-option-group shrink-label" name="option_group[{{ option_group.id }}]" aria-label="Select {{ option_group.name | escape }}">
+                    <select data-unavailable-text="(Unavailable)" data-sold-text="(Sold out)" id="option_group_{{ option_group.id }}" data-group-id="{{ option_group.id }}" data-group-name="{{ option_group.name | escape }}" class="product-option-group shrink-label shrink-option-label" name="option_group[{{ option_group.id }}]" aria-label="Select {{ option_group.name | escape }}">
                       <option value="0" disabled="disabled" selected>Select {{ option_group.name }}</option>
                       {% for value in option_group.values %}
                         <option value="{{ value.id }}" data-name="{{ value.name | escape }}">{{ value.name }}</option>
                       {% endfor %}
                     </select>
-                    <svg aria-hidden="true" height="20" width="20" viewBox="0 0 15 7.6" enable-background="new 0 0 15 7.6"><path d="M15 1.1l-7.5 6.5-7.5-6.3 1-1.2 6.5 5.5 6.5-5.6z"/></svg>
-
+                    <svg aria-hidden="true" width="16" height="12" viewBox="0 0 12 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.99798228 7.12260396L0 1.12462168 1.12462168 0l4.87565104 4.87529072L10.8753783 0 12 1.12462168 6.00201772 7.12260396l-.001745-.00212061z" fill-rule="evenodd"/></svg>
                   </div>
                 {% endfor %}
               </div>
             {% else %}
-              <div class="select product-option-select form-group">
+              <div class="select product-option-select-container form-group">
                 <label class="form-label product-option-label" for="option">Option</label>
-                <select class="product-option-select shrink-label" id="option" name="cart[add][id]" aria-label="Select option">
+                <select class="product-option-select shrink-label shrink-option-label" id="option" name="cart[add][id]" aria-label="Select option">
                   <option value="0" disabled="disabled" selected>Select option</option>
                   {% for option in product.options %}
                     <option value="{{ option.id }}" data-price="{{ option.price }}"{% if option.sold_out %} disabled="disabled" disabled-type="sold-out"{% endif %}>{{ option.name }} {% if option.sold_out %} (Sold out){% endif %}</option>
                   {% endfor %}
                 </select>
-                <svg aria-hidden="true" height="20" width="20" viewBox="0 0 15 7.6" enable-background="new 0 0 15 7.6"><path d="M15 1.1l-7.5 6.5-7.5-6.3 1-1.2 6.5 5.5 6.5-5.6z"/></svg>
+                <svg aria-hidden="true" width="16" height="12" viewBox="0 0 12 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.99798228 7.12260396L0 1.12462168 1.12462168 0l4.87565104 4.87529072L10.8753783 0 12 1.12462168 6.00201772 7.12260396l-.001745-.00212061z" fill-rule="evenodd"/></svg>
               </div>
             {% endif %}
-          {% endif %}
-        </div>
-        {{ product | product_quantity_input, 1, 'product-quantity', 'product-quantity' }}
-        <button class="button add-to-cart-button" name="submit" type="submit" title="Add to Cart" data-adding-text="Adding..." data-added-text="Added!" data-add-title="Add to Cart" data-sold-title="Sold out"{% if product.has_default_option %}{% else %}disabled="disabled"{% endif %}>Add to Cart</button>
-        {{ store | instant_checkout_button: 'dark', '44px' }}
-        {% if product.has_option_groups %}
-          <div class="reset-selection-button-container">
-            <button class="button minimal-button reset-selection-button" title="Reset selection" type="reset">Reset selection</button>
           </div>
         {% endif %}
+        <div class="product-form-controls">
+          <div class="product-form-quantity-button">
+            <label class="product-form-quantity {% unless product.has_default_option %}disabled{% endunless %}">
+              <span class="product-quantity-label">Qty</span>
+              <input autocomplete="off" type="number" class="product-quantity" id="quantity" name="cart[add][quantity]" type="text" min="1" value="1" {% unless product.has_default_option %}disabled="disabled"{% endunless %}>
+            </label>
+            <button class="button add-to-cart-button" name="submit" type="submit" title="Add to Cart" data-adding-text="Adding..." data-added-text="Added!" data-add-title="Add to Cart" data-sold-title="Sold out"{% unless product.has_default_option %}disabled="disabled"{% else %}data-selected-price="{{ product.default_price }}"{% endunless %}>
+              <span class="button-add-price {% if product.has_default_option %} visible{% endif %}">{{ product.default_price | money: theme.money_format }}</span>
+              <span class="button-add-text">Add to Cart</span>
+              <span class="button-add-icon">
+                <svg class="plus-icon" aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M9 0v7h7v2H9v7H7V8.999L0 9V7l7-.001V0z" fill-rule="evenodd"/></svg>
+                <svg class="check-icon" aria-hidden="true" width="21" height="16" viewBox="0 0 21 16" xmlns="http://www.w3.org/2000/svg"><path d="M1.39130435 8.34782609l4.86956522 4.86956521L19.4782609 0l1.3913043 1.39130435L6.26086957 16 0 9.73913043z" fill-rule="evenodd"/></svg>
+              </span>
+            </button>
+            <div class="product-form-cart-link-container">
+              <a class="product-form-cart-link" href="/cart">
+                <svg class="product-form-cart-link-icon product-form-cart-link-cart-icon" aria-hidden="true" width="32" height="28" viewBox="0 0 32 28" xmlns="http://www.w3.org/2000/svg"><path d="M25.3749929 27.9999278c1.9329635 0 3.4999917-1.5670227 3.4999917-3.4999862 0-.991796-.4131994-1.8865006-1.0760168-2.5233628.1341029-.1041601.2011543-.1766346.2011543-.2174235V20.124952H11.1430856l-.5134952-2.6249937h17.0846227c.6174225 0 1.1513721-.4303426 1.2824829-1.0337195C30.9224827 7.82207961 31.885376 3.5 31.885376 3.5H7.89030864L7.40576172 0H.65624844v2.62499374h4.38812735L8.85027492 22.0773552c-.60364389.6289048-.9752937 1.4820598-.9752937 2.4225864 0 1.9329635 1.56702813 3.4999862 3.49999168 3.4999862 1.9329635 0 3.4999916-1.5670227 3.4999916-3.4999862 0-.5205981-.2102579-1.3028839-.4693821-1.7499958h7.938801c-.2591242.4471119-.4693821 1.2293977-.4693821 1.7461506 0 1.9368087 1.5670281 3.5038314 3.4999916 3.5038314zm1.2817352-13.1249633H10.1160953L8.40380382 6.1249854H28.5587164l-1.9019883 8.7499791zm-15.2817552 10.937474c-.7237532 0-1.3124969-.5887438-1.3124969-1.3124969 0-.7237532.5887437-1.3124969 1.3124969-1.3124969.7237531 0 1.3124969.5887437 1.3124969 1.3124969 0 .7237531-.5887438 1.3124969-1.3124969 1.3124969zm13.9999666 0c-.7237532 0-1.3124969-.5887438-1.3124969-1.3124969 0-.7237532.5887437-1.3124969 1.3124969-1.3124969s1.3124969.5887437 1.3124969 1.3124969c0 .7237531-.5887437 1.3124969-1.3124969 1.3124969z" fill-rule="nonzero"/></svg>
+                <span class="product-form-cart-link-text">Go to Cart</span>
+                <svg class="product-form-cart-link-icon product-form-cart-link-arrow-icon" aria-hidden="true" width="21" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.445798 0l9.9966372 9.99663714-.0035344.00381736.0035344.0029084L10.445798 20l-1.87436943-1.8743695L15.1964286 11.5H0v-3h15.1964286L8.57142857 1.87436946z" fill-rule="evenodd"/></svg>
+              </a>
+            </div>
+          </div>
+          {{ store | instant_checkout_button: 'light', '50px' }}
+          {% if product.has_option_groups %}
+            <div class="reset-selection-button-container">
+              <button class="button min-btn reset-selection-button" type="reset">Reset selection</button>
+            </div>
+          {% endif %}
+        </div>
       </form>
     {% endif %}
-
+    {% if product.description != blank and theme.show_inventory_bars and product.status == 'active' %}
+      <div class="description-inventory-tabs">
+        <button class="button min-btn description-inventory-tab active-tab" data-tab="product-description">Description</button>
+        <button class="button min-btn description-inventory-tab" data-tab="product-inventory">Inventory</button>
+      </div>
+    {% endif %}
     {% if product.description != blank %}
-      <div class="product-description">
+      <div class="product-detail-tab-section product-description">
         {{ product.description | paragraphs }}
       </div>
     {% endif %}
-
-    {% if theme.show_inventory_bars == true %}
-      <div class="inventory-bars">
-        yas
+    {% if theme.show_inventory_bars and product.status == 'active' %}
+      <div class="product-detail-tab-section product-inventory">
+        <ul class="inventory-bars">
+          {% for option in product.options %}
+            <li class="inventory-bar">
+              {% unless product.has_default_option %}
+                <div class="inventory-option-name">{{ option.name }}</div>
+              {% endunless %}
+              <div class="inventory-option-available">
+                {% if option.sold_out %}
+                  Sold out
+                {% else %}
+                  {{ option.quantity }} available
+                  <span class="inventory-option-percentage-text">{{ option.inventory }}%</span>
+                {% endif %}
+              </div>
+              <div class="inventory-option-bar">
+                <div class="inventory-option-percentage" style="width:{{ option.inventory }}%;"></div>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
       </div>
     {% endif %}
   </div>
 </div>
+{% assign current_id = product.id %}
+{% if page.full_url contains '/product/' %}
+  {% if theme.number_related_products > 0 %}
+    {% if theme.product_grid_image_size == 'small' %}
+      {% assign product_image_constrain = 350 %}
+      {% assign product_image_constrain_large = product_image_constrain | times: 2 %}
+    {% elsif theme.product_grid_image_size == 'medium' %}
+      {% assign product_image_constrain = 500 %}
+      {% assign product_image_constrain_large = product_image_constrain | times: 2 %}
+    {% elsif theme.product_grid_image_size == 'large %}
+      {% assign product_image_constrain = 650 %}
+      {% assign product_image_constrain_large = product_image_constrain | times: 2 %}
+    {% endif %}
+    {% if product.categories != blank %}
+      {% for category in product.categories %}
+        {% capture product_divs %}
+          {% for category_product in category.products %}
+            {% if category_product.id != current_id %}
+              {% assign product_status = '' %}
+              {% case category_product.status %}
+                {% when 'active' %}
+                  {% if category_product.on_sale %}{% assign product_status = 'On sale' %}{% endif %}
+                {% when 'sold-out' %}
+                  {% assign product_status = 'Sold out' %}
+                {% when 'coming-soon' %}
+                  {% assign product_status = 'Coming soon' %}
+              {% endcase %}
+              {% capture image_class %}
+                {% if category_product.image.height > category_product.image.width %}
+                  image-tall
+                {% elsif category_product.image.height < category_product.image.width %}
+                  image-wide
+                {% else %}
+                  image-square
+                {% endif %}
+              {% endcapture %}
+              <a class="prod-thumb product-image-{{ theme.product_grid_image_size }} {{ theme.show_overlay }} {{ theme.grid_image_style }} {% if theme.show_quickview %}show-quickview{% endif %}" href="{{ category_product.url }}" title="View {{ category_product.name | escape }}">
+                <div class="prod-thumb-container">
+                  <figure class="product-list-image-container">
+                    <img alt="" class="lazy product-list-image {{ image_class }}" src="{{ category_product.image | product_image_url | constrain: 50 }}" data-src="{{ category_product.image | product_image_url | constrain: product_image_constrain }}" data-srcset="{{ category_product.image | product_image_url | constrain: product_image_constrain_large }} 2x, {{ category_product.image | product_image_url | constrain: product_image_constrain }} 1x">
+                    {% if product_status != blank and theme.product_badge_style != 'inline' %}<div class="prod-thumb-status {{ theme.product_badge_style }}">{{ product_status }}</div>{% endif %}
+                  </figure>
+                </div>
+                <div class="prod-thumb-info">
+                  <div class="prod-thumb-background"></div>
+                  <div class="prod-thumb-info-headers">
+                    <div class="prod-thumb-name">{{ category_product.name }}</div>
+                    <div class="prod-thumb-price">
+                      {% if category_product.variable_pricing %}
+                        {{ category_product.min_price | money: theme.money_format }} - {{ category_product.max_price | money: theme.money_format }}
+                      {% else %}
+                        {{ category_product.default_price | money: theme.money_format }}
+                      {% endif %}
+                    </div>
+                    {% if product_status != blank and theme.product_badge_style == 'inline' %}<div class="prod-thumb-status {{ theme.product_badge_style }}">{{ product_status }}</div>{% endif %}
+                  </div>
+                </div>
+              </a>
+            {% endif %}
+          {% endfor %}
+        {% endcapture %}
+      {% endfor %}
+    {% endif %}
+  {% endif %}
+{% endif %}
+{% if product_divs != blank %}
+  <aside class="related-products-container" data-num-products="{{ theme.number_related_products }}" role="complementary" aria-label="Related products">
+    <div class="all-similar-products" style="display: none">{{ product_divs }}</div>
+    <h2 class="similar-products-title">Related products</h2>
+    <div class="product-list-container">
+      <div class="similar-product-list product-list {{ theme.product_list_layout }} mobile-{{ theme.mobile_product_grid_style }} grid-{{ theme.layout_style }}"></div>
+    </div>
+  </aside>
+{% endif %}

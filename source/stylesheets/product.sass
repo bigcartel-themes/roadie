@@ -1,59 +1,508 @@
 @import 'variables'
 
+.product-heading
+  border-bottom: $medium-border
+
 .page-subheading
   +flexbox
   border-bottom: $small-border
   font-size: 24px
+  font-weight: bold
   line-height: 1.25em
   padding: $base-padding 0
-  margin-bottom: $base-padding * 2
+
+  @media screen and (max-width: $break-small)
+    +flex-direction(column)
 
 .page-subheading-status
+  font-size: 14px
+  font-weight: bold
   margin-left: auto
+
+  @media screen and (max-width: $break-small)
+    margin-left: 0
 
 .product-page-columns
   +flexbox
   +flex-direction(row)
+  +align-items(stretch)
+  +flex(1)
+  height: 100%
+
+  @media screen and (max-width: $break-product-details)
+    +flex-direction(column)
+    height: auto
+
+.product-image
+  display: block
+  width: 100%
 
 .product-images
-  +flex(1 0 auto)
+  +flex(1 1 100%)
   order: 1
-  width: 55%
+  padding: $base-padding * 2 0
 
-  img
-    display: block
-    margin-bottom: $base-padding * 2
+  @media screen and (max-width: $break-product-details)
+    order: 1 !important
+
+  @media screen and (min-width: $break-large + 1)
+
+    .full-width &
+      padding-right: $base-padding * 2
+      padding-top: $base-padding * 4
+
+    .full-width.sidebar-visible &
+      padding-right: $base-padding
+      padding-top: $base-padding * 3
+
+    .full-width.right-sidebar &
+      padding-right: 0
+      padding-left: $base-padding
+
+    .full-width &.product-images-thumbs
+      +flexbox
+
+      .primary-product-image-container
+        +flex-basis(100%)
+        order: 2
+
+      .secondary-product-image-container--thumbs
+        +flex-direction(column)
+        +flex-basis(20%)
+        order: 1
+        margin-top: 0
+        margin-right: 0
+
+        .right-sidebar &
+          margin-left: 0
+          margin-right: 0
+          order: 2
+
+        .secondary-product-image-link
+          height: auto
+          width: 100%
+
+.secondary-product-image-container
+  +flexbox
+  +flex-direction(column)
+
+  @media screen and (max-width: $break-product-details)
+    +flex-direction(row)
+
+  .secondary-product-image-link
     width: 100%
 
+.secondary-product-image-container--thumbs
+  +flex-direction(row)
+  margin-top: 0
+
+  &.has-full
+    display: none
+
+    @media screen and (max-width: $break-product-details)
+      +flexbox
+
+  .secondary-product-image-link
+    cursor: pointer
+    height: 100%
+    position: relative
+    width: 20%
+
+    &:after
+      border: 4px solid transparent
+      bottom: 0
+      content: " "
+      left: 0
+      position: absolute
+      right: 0
+      top: 0
+
+    &:hover, &:focus
+      &:after
+        border-color: $link-hover-color
+
+    &.active
+      &:after
+        border-color: $border-color
+
+  .secondary-product-image
+    position: relative
+
+.secondary-product-image-container--full
+  @media screen and (max-width: $break-product-details)
+    display: none
+
 .product-details
-  +flex(1 0 auto)
+  +flex(0 0 386px)
   order: 2
-  padding-left: $base-padding * 4
-  width: 45%
+  padding-left: $base-padding * 2
+
+  &.product-sold-out, &.product-coming-soon
+    padding-top: $base-padding * 2
+
+    @media screen and (max-width: $break-small)
+      border-top: $small-border
+
+  .sidebar-visible &
+    +flex(0 0 328px)
+
+  @media screen and (min-width: $break-product-details + 1)
+    .no-sidebar &, .full-width &
+      +flex(0 0 386px)
+
+  @media screen and (min-width: $break-large + 1)
+    .full-width &
+      +flex(0 0 386px)
+
+  @media screen and (max-width: $break-large + 1)
+    .full-width.sidebar-visible &
+      +flex(0 0 328px)
+
+  @media screen and (max-width: $break-product-details)
+    flex-basis: 100% !important
+    padding-left: 0
 
 .product-options-container
-  margin-bottom: $base-padding * 2
 
-.product-option-select
+  @media screen and (max-width: $break-product-details)
+    border-top: $small-border
+
+.product-form
+  margin-bottom: $base-padding
+
+.product-form-controls
+  margin-top: $base-padding * 2
+
+  @media screen and (max-width: $break-product-details)
+    margin-top: $base-padding
+
+  @media screen and (min-width: $break-large + 1)
+
+    .full-width &
+      margin-top: $base-padding * 4
+
+    .full-width.sidebar-visible &
+      margin-top: $base-padding * 3
+
+.product-options-container + .product-form-controls
+  margin-top: $base-padding
+
+  .full-width &
+    margin-top: $base-padding
+
+  .full-width.sidebar-visible &
+    margin-top: $base-padding
+
+.product-option-select-container
   border-bottom: $small-border
+  height: 58px
+  padding: 0
   position: relative
 
+  &:hover, &:focus-within
+    label, select
+      color: $link-hover-color
+
+    svg
+      fill: $link-hover-color
+
   select
-    -webkit-appearance: none
-    border: none
     background: none
+    color: $primary-text-color
     display: block
+    font-size: 20px
+    font-weight: bold
+    height: 100%
+    position: relative
+    width: 100%
+    z-index: 1
 
   svg
+    fill: $primary-text-color
     position: absolute
     right: 0
     top: 50%
     transform: translateY(-50%)
 
-.right-sidebar .product-images
-  order: 2
+  &.focused
+    select
+      font-size: 16px
+      height: 100%
+      padding-top: $base-padding * 3
 
-.right-sidebar .product-details
-  order: 1
-  padding-left: 0
-  padding-right: $base-padding * 4
+.product-option-label
+  opacity: 0
+  font-size: 12px
+  left: 0
+  line-height: 1em
+  position: absolute
+  top: $base-padding * 1.5
+  visibility: hidden
+  z-index: 0
+
+  .focused &
+    opacity: 1
+    visibility: visible
+
+.product-form-quantity-button
+  +flexbox
+  +flex-direction(row)
+  +flex-wrap(wrap)
+
+.product-form-quantity
+  +flexbox
+  +align-items(center)
+  +justify-content(center)
+  +flex-direction(column)
+  +flex-shrink(0)
+  background: $button-background-color
+  color: $button-text-color
+  cursor: pointer
+  height: 64px
+  width: 64px
+
+  &.disabled
+    opacity: .3
+    cursor: not-allowed
+
+    .product-quantity
+      cursor: not-allowed
+
+  &:not(.disabled):hover, &:not(.disabled):focus-within
+    background: $button-hover-background-color
+    color: $button-hover-text-color
+
+    .product-quantity
+      color: $button-hover-text-color
+
+  .product-quantity-label
+    font-size: 14px
+    font-weight: normal
+
+  .product-quantity
+    color: $button-text-color
+    font-size: 20px
+    font-weight: bold
+    opacity: 1 !important
+    text-align: center
+    width: 100%
+
+.add-to-cart-button
+  +flex-basis(calc(100% - 72px))
+  +flexbox
+  +flex-direction(column)
+  +align-items(flex-start)
+  +justify-content(center)
+  font-size: 20px
+  font-weight: bold
+  margin-left: $base-padding
+  padding: 0 $base-padding * 2
+  position: relative
+  height: 64px
+
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active)
+    +flex-basis(calc(100% - 104px))
+
+  &:hover, &:focus
+    &.spinner:before
+      border-color: $button-hover-text-color
+      border-top-color: $button-hover-background-color
+
+  &.adding .button-add-icon
+    display: none
+
+.button-add-price
+  display: none
+  font-size: 14px
+  font-weight: bold
+  margin-bottom: $base-padding / 2
+
+  &.visible
+    display: block
+
+.button-add-icon
+  +transform(translateY(-50%))
+  position: absolute
+  right: $base-padding * 2
+  top: 50%
+
+  .check-icon
+    display: none
+
+  svg
+    display: block
+    fill: $button-text-color
+
+.product-form-cart-link-container
+  +flex-basis(100%)
+  display: none
+
+.product-form-cart-link
+  +flexbox
+  +align-items(center)
+  border: $medium-border
+  border-color: $button-background-color
+  color: $button-background-color
+  font-weight: bold
+  margin-top: $base-padding
+  padding: $base-padding * 1.5 $base-padding
+  text-decoration: none
+  width: 100%
+
+  &:hover, &:focus
+    border-color: $link-hover-color
+
+    .product-form-cart-link-icon
+      fill: $link-hover-color
+
+  span
+    margin-left: $base-padding
+
+.product-form-cart-link-icon
+  fill: $button-background-color
+  height: 20px
+  width: 20px
+
+.product-form-cart-link-arrow-icon
+  margin-left: auto
+
+.reset-selection-button-container
+  text-align: right
+
+  button.reset-selection-button
+    display: none
+    height: auto
+    margin-top: $base-padding * 2
+    margin-bottom: $base-padding * 2
+
+.product-description
+
+  p:first-child
+    margin-top: 0
+
+  *
+    text-transform: none
+
+  a
+    font-weight: bold
+    text-decoration: underline
+
+  ol, ul
+    padding-left: 1em
+
+  img, iframe
+    max-width: 100%
+
+.right-sidebar
+  .product-images
+    order: 2
+
+  .product-details
+    order: 1
+    padding-left: 0
+    padding-right: $base-padding * 2
+
+.description-inventory-tabs
+  +flexbox
+  +align-items(center)
+  +justify-content(space-around)
+  border-top: $medium-border
+  border-bottom: $small-border
+  margin-bottom: $base-padding * 2
+
+.button.description-inventory-tab
+  +flex-basis(50%)
+  border: none
+  color: $primary-text-color
+  font-size: 14px
+  font-weight: normal
+  height: 48px
+  outline: none
+  padding: $base-padding * 1.5 $base-padding * 2
+
+  &:hover, &:focus
+    color: $link-hover-color
+    text-decoration: underline
+
+  &.active-tab
+    color: $primary-text-color
+    font-weight: bold
+    text-decoration: underline
+
+  &:first-of-type
+    border-right: $small-border
+
+.product-inventory
+  display: none
+
+.inventory-bars
+  font-size: 14px
+  list-style: none
+  margin: 0
+  padding: 0
+
+.inventory-option-name
+  font-size: 16px
+
+.inventory-bar
+  font-weight: bold
+  margin-bottom: $base-padding * 2
+
+.inventory-option-bar
+  border-bottom: $small-border
+  height: 6px
+
+.inventory-option-available
+  font-weight: normal
+
+.inventory-option-percentage-text
+  float: right
+
+.inventory-option-percentage
+  background: $primary-text-color
+  height: 100%
+
+.similar-products-title
+  border-bottom: $medium-border
+  font-size: 32px
+  margin-bottom: 0
+  padding-bottom: $base-padding
+
+@keyframes spinner
+  to
+    transform: rotate(360deg)
+
+.spinner:before
+  +animation(spinner .6s linear infinite)
+  border-radius: 50%
+  border: 2px solid $button-text-color
+  border-top: 2px solid $button-background-color
+  content: ''
+  height: 20px
+  margin-top: -13px
+  right: 12px
+  position: absolute
+  top: 50%
+  width: 20px
+
+input[type='number']
+  -moz-appearance: textfield
+
+  &::-webkit-inner-spin-button
+    -webkit-appearance: none
+    margin: 0
+
+input[type=number]
+  -moz-appearance:textfield
+
+.product-form-quantity-button + #instant-checkout-button
+  margin-top: 8px
+
+#instant-checkout-button
+  border: $medium-border
+  border-color: $button-background-color
+  background-color: #FFFFFF
+
+_:-ms-fullscreen, :root .product-page-columns
+  flex: 1 0 auto
+  height: auto

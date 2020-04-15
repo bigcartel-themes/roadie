@@ -2,24 +2,98 @@
 
 $background-color: #{"{{ theme.background_color }}"}
 
-$primary-text-color: #{"{{ theme.primary_text_color }}"}
+$primary-text-color: #{"{{ theme.text_color }}"}
 
-$border-color: #{"{{ theme.border_color }}"}
+$link-hover-color: #{"{{ theme.link_hover }}"}
+
+$border-color: #{"{{ theme.border }}"}
+
+$button-text-color: #{"{{ theme.button_text_color }}"}
+$button-background-color: #{"{{ theme.button_background_color }}"}
+
+$badge-text-color: #{"{{ theme.badge_text_color }}"}
+$badge-background-color: #{"{{ theme.badge_background_color }}"}
+
+$button-hover-text-color: #{"{{ theme.button_hover_text_color }}"}
+$button-hover-background-color: #{"{{ theme.button_hover_background_color }}"}
+
+$error-text-color: #{"{{ theme.error_text_color }}"}
+$error-background-color: #{"{{ theme.error_background_color }}"}
+
+$announcement-text-color: #{"{{ theme.announcement_text_color }}"}
+$announcement-background-color: #{"{{ theme.announcement_background_color }}"}
 
 $primary-font: #{"{{ theme.primary_font | font_family }}"}
 
 $base-padding: 8px
-$luna-font-base-px: 16px
 $border-radius: 4px
 
 $break-extra-large: 1500px
 $break-large: 1200px
 $break-medium: 1023px
+$break-product-details: 968px
 $break-small: 767px
 $break-extra-small: 640px
 
-$border-style: #{"{{ theme.border_style }}"}
+$product-detail-alignment: #{"{% if theme.show_overlay contains 'left' %} left {% else %} center {% endif %}"}
 
 $large-border: 8px solid $border-color
 $medium-border: 4px solid $border-color
 $small-border: 2px solid $border-color
+
+@mixin all-transitions
+  +transition(.2s ease-in-out)
+
+@mixin vertical-align
+  +transform(translateY(-50%))
+  position: relative
+  top: 50%
+
+@mixin keyframes($animation)
+  @-webkit-keyframes #{$animation}
+    @content
+
+  @keyframes #{$animation}
+    @content
+
+@mixin animation($str...)
+  -webkit-animation: $str
+  animation: $str
+
+@mixin transform($str...)
+  -webkit-transform: $str
+  transform: $str
+
+@mixin transition($transition...)
+  -webkit-transition: $transition
+  transition: $transition
+
+@mixin appearance($str...)
+  -webkit-appearance: $str
+  -moz-appearance: $str
+  appearance: $str
+
+$min_width: 320px
+$max_width: 1200px
+$min_font: 16px
+$max_font: 24px
+
+@function strip-unit($value)
+  @return $value / ($value * 0 + 1)
+
+@mixin fluid-type($min-font-size, $max-font-size)
+  $min-vw: 320px
+  $max-vw: 1200px
+  $u1: unit($min-vw)
+  $u2: unit($max-vw)
+  $u3: unit($min-font-size)
+  $u4: unit($max-font-size)
+
+  @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4
+    &
+      font-size: $min-font-size
+      @media screen and (min-width: $min-vw)
+        font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}))
+
+      @media screen and (min-width: $max-vw)
+        font-size: $max-font-size

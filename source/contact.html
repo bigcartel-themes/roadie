@@ -1,26 +1,52 @@
-<div class="page-heading">
-  <h1 class="page-title">{{ page.name }}</h1>
+<div class="contact-page">
+  <div class="page-heading">
+    <h1 class="page-title">{{ page.name }}</h1>
+  </div>
+  {% if contact.sent %}
+    <div class="alert-message">
+      <div class="alert-message-header">Your message has been sent!</div>
+      <div class="alert-message-text">We'll get back to you soon.</div>
+      <a href="/products" class="button alert-message-button">Continue shopping</a>
+    </div>
+  {% else %}
+    <div class="page-content">
+      {% if errors != blank %}
+        <ul class="errors {{ page.permalink }}-errors">
+          {% for error in errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+      <form method="post" action="/contact" class="contact-form">
+        <div class="form-group contact-form-group">
+          <label class="form-label contact-form-label contact-name" for="name">Name</label>
+          {{ contact | contact_input: 'name' }}
+        </div>
+        <div class="form-group contact-form-group">
+          <label class="form-label contact-form-label contact-email" for="email">Email</label>
+          {{ contact | contact_input: 'email' }}
+        </div>
+        <div class="form-group contact-form-group">
+          <label class="form-label contact-form-label contact-subject" for="subject">Subject</label>
+          {{ contact | contact_input: 'subject' }}
+        </div>
+        <div class="form-group contact-form-group contact-textarea-group">
+          <label class="form-label contact-form-label contact-message" for="message">Message</label>
+          {{ contact | contact_input: 'message' }}
+        </div>
+        <div class="form-group contact-form-group contact-captcha-group">
+          <label class="form-label contact-form-label contact-captcha" for="captcha">Spam check</label>
+          {{ contact | contact_input: 'captcha' }} {{ contact.captcha }}
+        </div>
+        <div class="captcha-instructions">Enter the characters from the image</div>
+
+        <div class="contact-form-group contact-send">
+          <button class="button send-message-button has-right-icon" type="submit" name="submit" title="Send Message" tabindex="6">
+            Send Message
+            <svg aria-hidden="true" class="button-icon-right-arrow" width="21" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.445798 0l9.9966372 9.99663714-.0035344.00381736.0035344.0029084L10.445798 20l-1.87436943-1.8743695L15.1964286 11.5H0v-3h15.1964286L8.57142857 1.87436946z" fill-rule="evenodd"/></svg>
+          </button>
+        </div>
+      </form>
+    </div>
+  {% endif %}
 </div>
-{% if contact.sent %}
-  Your message has been sent and we'll get back to you soon!
-{% else %}
-  <form method="post" action="/contact" class="contact-form">
-      <label for="name">Name</label>
-      {{ contact | contact_input: 'name' }}
-
-      <label for="email">Email</label>
-      {{ contact | contact_input: 'email' }}
-
-      <label for="subject">Subject</label>
-      {{ contact | contact_input: 'subject' }}
-
-      <label for="message">Message</label>
-      {{ contact | contact_input: 'message' }}
-
-      <label for="captcha">Spam check</label>
-      {{ contact | contact_input: 'captcha' }} {{ contact.captcha }}
-      Enter the characters from the image
-
-      <button type="submit" name="submit" tabindex="6">Send message</button>
-  </form>
-{% endif %}

@@ -1,1 +1,293 @@
 @import 'variables'
+
+.cart-alert-message
+  display: none
+
+  .empty-cart &
+    display: block
+
+.cart-items
+  border-bottom: $small-border
+  list-style: none
+  margin: 0
+  padding: 0
+  width: 100%
+
+  .mobile-cart &
+    border-bottom: $medium-border
+
+.cart-item
+  +flexbox
+  +align-items(center)
+  +flex-wrap(nowrap)
+  +justify-content(flex-start)
+  border-bottom: $small-border
+  padding: $base-padding * 2 0
+  position: relative
+
+  .mobile-cart &
+    border-bottom: $medium-border
+    padding: $base-padding 0
+
+  &:last-child
+    border-bottom: none
+
+.cart-item-name-info
+  +flexbox
+  +flex-basis(100%)
+
+  .mobile-cart &
+    +flex-direction(column)
+
+.button.cart-item-remove
+  margin-right: $base-padding * 2
+  padding: 0
+  height: 24px
+  width: 24px
+
+  .mobile-cart &
+    margin-right: 0
+    position: absolute
+    right: 0
+    top: $base-padding
+
+  svg
+    display: block
+    fill: $primary-text-color
+    height: 20px
+    width: 20px
+
+    .mobile-cart &
+      height: 24px
+      width: 24px
+
+.cart-item-image
+  +flex-shrink(0)
+  height: 112px
+  overflow: hidden
+  width: 112px
+
+  @media screen and (max-width: $break-medium)
+    height: 96px
+    width: 96px
+
+  .mobile-cart &
+    +align-self(flex-start)
+    height: 80px
+    width: 80px
+
+  img
+    display: block
+    height: 100%
+    object-fit: cover
+    width: 100%
+
+.cart-item-details
+  +flex(1 1 40%)
+  color: $primary-text-color
+  margin-left: $base-padding * 2
+  padding-right: $base-padding * 4
+  text-decoration: none
+
+  .mobile-cart &
+    border-bottom: $small-border
+    margin-bottom: $base-padding
+    margin-left: $base-padding
+    padding-bottom: $base-padding
+    padding-right: $base-padding * 5
+
+.cart-item-details-name
+  font-size: 20px
+  font-weight: 600
+
+  @media screen and (max-width: $break-medium)
+    font-size: 16px
+
+.cart-item-details-option
+  font-size: 16px
+  line-height: 1.5em
+  margin-top: $base-padding
+
+  @media screen and (max-width: $break-medium)
+    font-size: 14px
+    margin-top: $base-padding / 2
+
+.cart-item-information
+  +flexbox
+  +flex(1 1 auto)
+  +align-items(center)
+  +justify-content(flex-end)
+  margin-left: auto
+
+  .full-width &
+    @media screen and (min-width: $break-extra-large)
+      +flex(0 1 20%)
+
+  .mobile-cart &
+    +flex-basis(auto)
+    margin-left: $base-padding
+
+.cart-item-details-unit-price
+  +flex-shrink(0)
+  font-size: 20px
+  padding-right: $base-padding * 5
+  text-align: right
+
+  .sidebar-visible.full-width &
+    @media screen and (max-width: $break-large)
+      display: none
+
+  .full-width &
+    @media screen and (max-width: $break-medium)
+      display: none
+
+  .fixed-width &, .mobile-cart &
+    display: none
+
+.cart-item-details-unit-price-inline
+  display: none
+  font-weight: bold
+  margin-top: $base-padding
+
+  .sidebar-visible.full-width &
+    @media screen and (max-width: $break-large)
+      display: block
+
+  .full-width &
+    @media screen and (max-width: $break-medium)
+      display: block
+
+  .fixed-width &
+    display: block
+
+  .mobile-cart &
+    display: block
+    font-size: 14px
+    margin-top: 0
+
+.cart-item-quantity-holder
+  +flexbox
+  +align-items(center)
+  +justify-content(center)
+
+.option-quantity
+  +appearance(none)
+  background: none
+  border: none
+  border-bottom: $small-border
+  border-radius: 0
+  font-family: $primary-font
+  font-size: 20px
+  font-weight: 600
+  height: 100%
+  margin: 0 $base-padding
+  text-align: center
+  width: $base-padding * 6
+
+  .mobile-cart &
+    border-bottom: 0
+    width: $base-padding * 4
+
+.button.qty-button
+  height: 20px
+  line-height: 1em
+  padding: 0
+  width: 20px
+
+  .mobile-cart &
+    height: 24px
+    width: 24px
+
+  svg
+    display: block
+    fill: $primary-text-color
+    height: 20px
+    width: 20px
+
+    .mobile-cart &
+      height: 24px
+      width: 24px
+
+.cart-item-details-price
+  +flex-shrink(0)
+  font-size: 20px
+  font-weight: 600
+  margin-left: auto
+  min-width: 220px
+  padding-left: $base-padding * 5
+  text-align: right
+
+  .fixed-width &
+    min-width: 160px
+
+  .fixed-width.sidebar-visible &
+    min-width: 160px
+    padding-left: $base-padding * 2
+
+  .mobile-cart &
+    font-size: 16px
+    min-width: 0
+    padding-left: $base-padding * 2
+
+.cart-footer
+  padding-bottom: $base-padding * 2
+  text-align: right
+
+.cart-sub-footer
+  +flexbox
+  +align-items(center)
+  border-bottom: $medium-border
+  margin-bottom: $base-padding * 2
+  padding: $base-padding 0
+
+  @media screen and (max-width: $break-small)
+    border-bottom: 0
+    margin-bottom: 0
+    padding: $base-padding * 2 0
+
+.cart-subtotal
+  +flexbox
+  +align-items(center)
+  font-size: 16px
+  margin-left: auto
+
+  @media screen and (max-width: $break-small)
+    font-weight: bold
+    margin-left: 0
+    width: 100%
+
+.cart-subtotal-amount
+  font-size: 24px
+  font-weight: bold
+  margin-left: $base-padding * 2
+
+  @media screen and (max-width: $break-small)
+    margin-left: auto
+
+.checkout-button
+  font-size: 20px
+  font-weight: bold
+  height: 64px
+  line-height: 64px
+  margin-left: auto
+  max-width: 256px
+  padding: 0 $base-padding * 2
+  width: 100%
+
+  @media screen and (max-width: $break-small)
+    margin-left: 0
+    max-width: 100%
+
+.page-heading .continue-shopping-link
+  display: none
+
+@media screen and (max-width: $break-small)
+  .cart-sub-footer .continue-shopping-link
+    display: none
+
+  .page-heading .continue-shopping-link
+    display: block
+    margin-left: auto
+
+  .empty-cart-heading .continue-shopping-link
+    display: none
