@@ -376,7 +376,6 @@
     <div role="dialog" class="qs-modal">
       <div class="qs-modal-background"></div>
       <div class="qs-modal-content">
-
         <div class="qs-modal-controls">
           <div class="qs-modal-controls-close">
             <button class="button qs-modal-button qs-close" title="Close quick view window">
@@ -394,12 +393,10 @@
             </button>
           </div>
         </div>
-
         <div class="qs-product-container" role="document">
           <div class="qs-product-details">
           </div>
         </div>
-
       </div>
     </div>
     <script>
@@ -477,7 +474,7 @@
       if ($('body').hasClass('has-sidebar')) {
         {% if theme.theme_layout == 'sidebar_header show_toggle' %}
           if (window.innerWidth > 767 || inPreview) {
-            if (!localStorage.getItem('sidebar')) {
+            if (!window.localStorage.getItem('sidebar')) {
               populateStorage();
             } else {
               setStyles();
@@ -488,11 +485,11 @@
         {% endif %}
       }
       function populateStorage() {
-        localStorage.setItem('sidebar','hidden');
+        window.localStorage.setItem('sidebar','hidden');
         setStyles();
       }
       function setStyles() {
-        var sidebarState = localStorage.getItem('sidebar');
+        var sidebarState = window.localStorage.getItem('sidebar');
 
         if (sidebarState == 'hidden') {
           $('.has-sidebar .sidebar').addClass('hidden');
@@ -503,22 +500,20 @@
           $('body').addClass('sidebar-visible');
         }
       }
-    </script>
-    <script src="{{ theme | theme_js_url }}"></script>
-    <script>
-      if (!localStorage.getItem('show-sidebar-categories')) {
-        localStorage.setItem('show-sidebar-categories','visible');
+      if (!window.localStorage.getItem('show-sidebar-categories')) {
+        window.localStorage.setItem('show-sidebar-categories','visible');
       }
-      if (!localStorage.getItem('show-sidebar-artists')) {
-        localStorage.setItem('show-sidebar-artists','visible');
+      if (!window.localStorage.getItem('show-sidebar-artists')) {
+        window.localStorage.setItem('show-sidebar-artists','visible');
       }
-      if (localStorage.getItem('show-sidebar-categories') == 'hidden') {
+      if (window.localStorage.getItem('show-sidebar-categories') == 'hidden') {
         $('.nav-section-categories').addClass('hidden-nav');
       }
-      if (localStorage.getItem('show-sidebar-artists') == 'hidden') {
+      if (window.localStorage.getItem('show-sidebar-artists') == 'hidden') {
         $('.nav-section-artists').addClass('hidden-nav');
       }
     </script>
+    <script src="{{ theme | theme_js_url }}"></script>
     {% if page.full_url contains '/product/' %}
       <script>
         Product.find('{{ product.permalink }}', processProduct)
