@@ -347,9 +347,10 @@ header
   .header-left-align &
     text-align: left
 
-  .sidebar-no-header &
-    +fluid-type(24px, 40px)
-    text-align: left
+  @media screen and (min-width: $break-small + 1)
+    .sidebar-no-header &
+      +fluid-type(24px, 40px)
+      text-align: left
 
   @media screen and (min-width: $break-small +1)
     .above-header &
@@ -363,6 +364,10 @@ header
   height: 100%
   max-width: 100%
   object-fit: contain
+
+  @media screen and (max-width: $break-small)
+    .header-center-align &
+      margin: 0 auto
 
 .header-cart
   +flexbox
