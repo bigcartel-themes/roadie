@@ -272,6 +272,7 @@ header
     display: block !important
 
 .header-branding
+  line-height: 0
   max-width: 70%
   text-align: center
   width: 100%
@@ -512,11 +513,23 @@ _:-ms-fullscreen, :root .content-wrapper
     border-bottom: $medium-border
     position: relative
 
+    .toggle-collapse-icon
+      display: block
+
+    .toggle-expand-icon
+      display: none
+
     &.hidden-nav
       border-bottom: none
 
       .sidebar-nav-links
         display: none
+
+      .toggle-collapse-icon
+        display: none
+
+      .toggle-expand-icon
+        display: block
 
   .nav-section-cart
 
@@ -540,7 +553,7 @@ _:-ms-fullscreen, :root .content-wrapper
         margin-right: $base-padding
 
       &:hover, &:focus
-        .header-cart-count
+        .sidebar-cart-count
           border-right-color: $link-hover-color
 
   .nav-section-social
@@ -641,13 +654,11 @@ _:-ms-fullscreen, :root .content-wrapper
     svg
       +transform(translateY(-50%))
       fill: $primary-text-color
+      height: 14px
       position: absolute
       right: 0
       top: 50%
-
-      @media screen and (max-width: $break-small)
-        height: 12px
-        width: 12px
+      width: 14px
 
       .under-header &
         right: 0
