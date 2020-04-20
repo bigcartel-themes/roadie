@@ -64,7 +64,6 @@ function openQuickShop() {
   $('.qs-modal').addClass('opened');
 }
 
-
 var loadingTimer;
 $(document)
   .ajaxStart(function () {

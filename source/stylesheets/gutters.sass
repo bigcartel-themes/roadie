@@ -50,6 +50,10 @@ $break-gutters: 1024px
       padding-left: $base-padding * 2
       padding-right: $base-padding * 2
 
+    .home-promo-image
+      padding-left: #{"{% if theme.show_product_grid_gutters %}16px{% else %}0px{% endif %}"}
+      padding-right: #{"{% if theme.show_product_grid_gutters %}16px{% else %}0px{% endif %}"}
+
     header
       padding-left: $base-padding * 2
       padding-right: $base-padding * 2
@@ -211,6 +215,11 @@ $break-gutters: 1024px
       .social-links, .badge
         padding-left: $base-padding
         padding-right: $base-padding
+
+    .home-promo-image
+      padding-left: #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"}
+      padding-right: #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"}
+      padding-top: 0
 
     header
       padding-left: $base-padding

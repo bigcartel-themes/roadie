@@ -1,8 +1,8 @@
 @import 'variables'
 
 .home-promo-image
-  margin-top: #{" {{ theme.grid_gutters }} "}
-  padding-top: #{" {{ theme.grid_gutters }} "}
+  margin-top: #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"}
+  padding-top: #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"}
 
 .promo-image
   display: block

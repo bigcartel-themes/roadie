@@ -22,7 +22,7 @@
   {% endif %}
 
 {% endcapture %}
-
+{% assign hide_nav_after_num_items = 10 %}
 <!DOCTYPE html>
 <html class="{{ theme.background_image_layout }}-background">
   <head>
@@ -251,8 +251,12 @@
 
             <div class="nav-section nav-section-categories" data-type="categories">
               <div class="nav-section-title{% if categories.active.size == 0 %} no-bottom-border{% endif %}">
-                {% if categories.active.size > 10 %}
-                  <button class="button min-btn toggle-nav" aria-label="Toggle category list">{{ pages.products.name }} <svg aria-hidden="true" width="10" height="8" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></button>
+                {% if categories.active.size > hide_nav_after_num_items %}
+                  <button class="button min-btn toggle-nav" aria-label="Toggle category list">
+                    {{ pages.products.name }}
+                    <svg aria-hidden="true" class="toggle-expand-icon" width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M7 0v5h5v2H7v5H5V7H0V5h5V0z" fill-rule="evenodd"/></svg>
+                    <svg aria-hidden="true" class="toggle-collapse-icon" width="12" height="2" viewBox="0 0 12 2" xmlns="http://www.w3.org/2000/svg"><path d="M12 0v2H0V0z" fill-rule="evenodd"/></svg>
+                  </button>
                 {% else %}
                   <div class="nav-section-title-text">
                     {% if categories.active.size == 0 %}
@@ -276,8 +280,12 @@
             {% if artists.active != blank %}
               <div class="nav-section nav-section-artists" data-type="artists">
                 <div class="nav-section-title">
-                  {% if artists.active.size > 10 %}
-                    <button class="button min-btn toggle-nav" aria-label="Toggle artist list">Artists <svg aria-hidden="true" width="10" height="8" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></button>
+                  {% if artists.active.size > hide_nav_after_num_items %}
+                    <button class="button min-btn toggle-nav" aria-label="Toggle artist list">
+                      Artists
+                      <svg aria-hidden="true" class="toggle-expand-icon" width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M7 0v5h5v2H7v5H5V7H0V5h5V0z" fill-rule="evenodd"/></svg>
+                      <svg aria-hidden="true" class="toggle-collapse-icon" width="12" height="2" viewBox="0 0 12 2" xmlns="http://www.w3.org/2000/svg"><path d="M12 0v2H0V0z" fill-rule="evenodd"/></svg>
+                    </button>
                   {% else %}
                     <div class="nav-section-title-text">Artists</div>
                   {% endif %}
@@ -376,7 +384,6 @@
     <div role="dialog" class="qs-modal">
       <div class="qs-modal-background"></div>
       <div class="qs-modal-content">
-
         <div class="qs-modal-controls">
           <div class="qs-modal-controls-close">
             <button class="button qs-modal-button qs-close" title="Close quick view window">
@@ -394,12 +401,10 @@
             </button>
           </div>
         </div>
-
         <div class="qs-product-container" role="document">
           <div class="qs-product-details">
           </div>
         </div>
-
       </div>
     </div>
     <script>
@@ -408,6 +413,7 @@
         hasAnnouncement: {% if theme.announcement_message_text %}true{%else %}false{%endif %},
         showSoldOutOptions: {{ theme.show_sold_out_product_options }}
       }
+      var inPreview = (/\/admin\/design/.test(top.location.pathname));
       function setCookie(name,value,days) {
         var expires = "";
         if (days) {
@@ -458,11 +464,64 @@
           }
         }
       }
+
+      if (document.body.classList.contains('has-sidebar')) {
+        {% if theme.theme_layout == 'sidebar_header show_toggle' %}
+          if (window.innerWidth > 767 || inPreview) {
+            if (!window.localStorage.getItem('sidebar')) {
+              populateStorage();
+            } else {
+              setStyles();
+            }
+          }
+        {% else %}
+          document.body.classList.add('sidebar-visible');
+        {% endif %}
+      }
+      function populateStorage() {
+        window.localStorage.setItem('sidebar','hidden');
+        setStyles();
+      }
+      function setStyles() {
+        var sidebarState = window.localStorage.getItem('sidebar');
+
+        if (sidebarState == 'hidden') {
+          document.querySelector('.has-sidebar .sidebar').classList.add('hidden');
+          document.body.classList.remove('sidebar-visible');
+        }
+        else {
+          document.body.classList.remove('sidebar-hidden');
+          document.body.classList.add('sidebar-visible');
+        }
+      }
+
+      {% if categories.active.size > hide_nav_after_num_items || artists.active.size > hide_nav_after_num_items %}
+        if (!window.localStorage.getItem('show-sidebar-categories')) {
+          {% if categories.active.size > hide_nav_after_num_items %}
+            window.localStorage.setItem('show-sidebar-categories','hidden');
+          {% else %}
+            window.localStorage.setItem('show-sidebar-categories','visible');
+          {% endif %}
+        }
+        if (!window.localStorage.getItem('show-sidebar-artists')) {
+          {% if artists.active.size > hide_nav_after_num_items %}
+            window.localStorage.setItem('show-sidebar-artists','hidden');
+          {% else %}
+            window.localStorage.setItem('show-sidebar-artists','visible');
+          {% endif %}
+        }
+        if (window.localStorage.getItem('show-sidebar-categories') == 'hidden') {
+          document.querySelector('.nav-section-categories').classList.add('hidden-nav');
+        }
+        if (window.localStorage.getItem('show-sidebar-artists') == 'hidden') {
+          document.querySelector('.nav-section-artists').classList.add('hidden-nav');
+        }
+      {% endif %}
     </script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="{{ 'api' | theme_js_url }}"></script>
     <script type="text/javascript">
-      var inPreview = (/\/admin\/design/.test(top.location.pathname));
+
       var formatMoney = Format.money;
       Format.money = function(number) {
         {% case theme.money_format %}
@@ -474,51 +533,8 @@
           return formatMoney(number, true, true, true);
         {% endcase %}
       };
-      if ($('body').hasClass('has-sidebar')) {
-        {% if theme.theme_layout == 'sidebar_header show_toggle' %}
-          if (window.innerWidth > 767 || inPreview) {
-            if (!localStorage.getItem('sidebar')) {
-              populateStorage();
-            } else {
-              setStyles();
-            }
-          }
-        {% else %}
-          $('body').addClass('sidebar-visible');
-        {% endif %}
-      }
-      function populateStorage() {
-        localStorage.setItem('sidebar','hidden');
-        setStyles();
-      }
-      function setStyles() {
-        var sidebarState = localStorage.getItem('sidebar');
-
-        if (sidebarState == 'hidden') {
-          $('.has-sidebar .sidebar').addClass('hidden');
-          $('body').removeClass('sidebar-visible');
-        }
-        else {
-          $('body').removeClass('sidebar-hidden');
-          $('body').addClass('sidebar-visible');
-        }
-      }
     </script>
     <script src="{{ theme | theme_js_url }}"></script>
-    <script>
-      if (!localStorage.getItem('show-sidebar-categories')) {
-        localStorage.setItem('show-sidebar-categories','visible');
-      }
-      if (!localStorage.getItem('show-sidebar-artists')) {
-        localStorage.setItem('show-sidebar-artists','visible');
-      }
-      if (localStorage.getItem('show-sidebar-categories') == 'hidden') {
-        $('.nav-section-categories').addClass('hidden-nav');
-      }
-      if (localStorage.getItem('show-sidebar-artists') == 'hidden') {
-        $('.nav-section-artists').addClass('hidden-nav');
-      }
-    </script>
     {% if page.full_url contains '/product/' %}
       <script>
         Product.find('{{ product.permalink }}', processProduct)

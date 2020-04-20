@@ -184,6 +184,10 @@ header
   padding: 0 $base-padding * 2
   width: 100%
 
+  .sidebar-visible-mobile &
+    @media screen and (max-width: $break-small)
+      background-color: $background-color
+
   &.full-width
     @media screen and (min-width: $break-small + 1)
       padding: 0 $base-padding * 4
@@ -272,6 +276,7 @@ header
     display: block !important
 
 .header-branding
+  line-height: 0
   max-width: 70%
   text-align: center
   width: 100%
@@ -347,9 +352,10 @@ header
   .header-left-align &
     text-align: left
 
-  .sidebar-no-header &
-    +fluid-type(24px, 40px)
-    text-align: left
+  @media screen and (min-width: $break-small + 1)
+    .sidebar-no-header &
+      +fluid-type(24px, 40px)
+      text-align: left
 
   @media screen and (min-width: $break-small +1)
     .above-header &
@@ -363,6 +369,10 @@ header
   height: 100%
   max-width: 100%
   object-fit: contain
+
+  @media screen and (max-width: $break-small)
+    .header-center-align &
+      margin: 0 auto
 
 .header-cart
   +flexbox
@@ -507,11 +517,23 @@ _:-ms-fullscreen, :root .content-wrapper
     border-bottom: $medium-border
     position: relative
 
+    .toggle-collapse-icon
+      display: block
+
+    .toggle-expand-icon
+      display: none
+
     &.hidden-nav
       border-bottom: none
 
       .sidebar-nav-links
         display: none
+
+      .toggle-collapse-icon
+        display: none
+
+      .toggle-expand-icon
+        display: block
 
   .nav-section-cart
 
@@ -535,7 +557,7 @@ _:-ms-fullscreen, :root .content-wrapper
         margin-right: $base-padding
 
       &:hover, &:focus
-        .header-cart-count
+        .sidebar-cart-count
           border-right-color: $link-hover-color
 
   .nav-section-social
@@ -636,13 +658,11 @@ _:-ms-fullscreen, :root .content-wrapper
     svg
       +transform(translateY(-50%))
       fill: $primary-text-color
+      height: 14px
       position: absolute
       right: 0
       top: 50%
-
-      @media screen and (max-width: $break-small)
-        height: 12px
-        width: 12px
+      width: 14px
 
       .under-header &
         right: 0
@@ -708,18 +728,17 @@ _:-ms-fullscreen, :root .content-wrapper
 
 .social-links
   +flexbox
-  +justify-content(space-between)
-
-  @media screen and (max-width: $break-small)
-    +justify-content(flex-start)
+  +justify-content(flex-start)
 
   a
     +flexbox
     +align-items(center)
     +justify-content(center)
+    +flex-shrink(0)
     background: $button-background-color
     border-radius: 50%
     height: 40px
+    margin-right: $base-padding
     text-align: center
     width: 40px
 

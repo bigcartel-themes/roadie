@@ -1,5 +1,3 @@
-var inPreview = (/\/admin\/design/.test(top.location.pathname));
-
 $('.announcement-message-close').click(function(e) {
   $('.announcement-message').slideUp('fast', function() {
     $('.announcement-message').removeClass('visible');
@@ -16,12 +14,6 @@ $('body').on('change', ".shrink-label", function(){
 $('.contact-form input[type="text"], .contact-form textarea').focus(function(){
   $(this).parents('.form-group').addClass('focused');
 });
-
-if (!inPreview) {
-  $('.product-sort-options-select').change(function() {
-    window.location = $(this).find(":selected").data('url');
-  })
-}
 
 $('body').on('blur', ".shrink-label", function(){
   inValue = $(this).val();
@@ -51,7 +43,6 @@ document.addEventListener('input', function (event) {
   autoExpand(event.target);
 }, false);
 
-
 $('.sidebar-nav .toggle-nav').click(function(e) {
   e.preventDefault();
   var sidebar_link = $(this).parent().parent().find('.sidebar-nav-links');
@@ -59,50 +50,32 @@ $('.sidebar-nav .toggle-nav').click(function(e) {
   var nav_container = sidebar_link.parent();
   var nav_type = nav_container.data('type');
   if (display == 'block') {
-    sidebar_link.slideUp('fast', function() {
-      nav_container.addClass('hidden-nav');
-    });
-    localStorage.setItem('show-sidebar-'+nav_type,'hidden');
+    sidebar_link.hide();
+    nav_container.addClass('hidden-nav');
+    window.localStorage.setItem('show-sidebar-'+nav_type,'hidden');
   }
   else {
-    sidebar_link.slideDown('fast', function() {
-      nav_container.removeClass('hidden-nav');
-    });
-    localStorage.setItem('show-sidebar-'+nav_type,'visible');
+    sidebar_link.show();
+    nav_container.removeClass('hidden-nav');
+    window.localStorage.setItem('show-sidebar-'+nav_type,'visible');
   }
 })
-
-function setStyles() {
-  var sidebarState = localStorage.getItem('sidebar');
-
-  if (sidebarState == 'hidden') {
-    $('.has-sidebar .sidebar').addClass('hidden');
-    $('body').removeClass('sidebar-visible');
-  }
-  else {
-    $('body').addClass('sidebar-visible');
-  }
-}
-function populateStorage() {
-  localStorage.setItem('sidebar','visible');
-  setStyles();
-}
 
 $('.open-menu').click(function(e) {
   e.preventDefault();
   win_width = window.innerWidth;
   if (win_width > 767) {
-    if (localStorage.getItem('sidebar') == 'visible') {
+    if (window.localStorage.getItem('sidebar') == 'visible') {
       $('.has-sidebar .sidebar').addClass('hidden');
       $('body').removeClass('sidebar-visible');
       $('body').addClass('sidebar-hidden');
-      localStorage.setItem('sidebar','hidden');
+      window.localStorage.setItem('sidebar','hidden');
     }
     else {
       $('.has-sidebar .sidebar').removeClass('hidden');
       $('body').addClass('sidebar-visible');
       $('body').removeClass('sidebar-hidden');
-      localStorage.setItem('sidebar','visible');
+      window.localStorage.setItem('sidebar','visible');
     }
     $(window).trigger('resize')
   }
@@ -115,22 +88,14 @@ $('.open-menu').click(function(e) {
 
 /* Gradients */
 if ($('.background-image-overlay-gradient_overlay').length) {
-  (function( $ ) {
-    $.fn.drawGradient = function() {
-      return this.each(function() {
-        var element = $(this);
-        var primaryGradient = themeOptions.primaryGradientColor;
-        element.css(
-          {
-          "background-image": "linear-gradient(180deg, "+hexToRGB(primaryGradient,'0')+" 0%,"+ primaryGradient +" 100%)",
-          "background-color": hexToRGB(primaryGradient,".7")
-        });
-      });
-    };
-  }( jQuery ));
-  $('.background-image-overlay-gradient_overlay').drawGradient();
+  var element = $('.background-image-overlay-gradient_overlay')
+  var primaryGradient = themeOptions.primaryGradientColor;
+  element.css(
+    {
+    "background-image": "linear-gradient(180deg, "+hexToRGB(primaryGradient,'0')+" 0%,"+ primaryGradient +" 100%)",
+    "background-color": hexToRGB(primaryGradient,".7")
+  });
 }
-
 
 function hexToRGB(hex,opacity) {
   let r = 0, g = 0, b = 0;
@@ -188,7 +153,6 @@ function toggleMobileCart(win_width) {
     }
   }
 }
-
 
 function setCartClass(type) {
   if (type == 'enable') {
