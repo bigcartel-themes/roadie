@@ -728,18 +728,17 @@ _:-ms-fullscreen, :root .content-wrapper
 
 .social-links
   +flexbox
-  +justify-content(space-between)
-
-  @media screen and (max-width: $break-small)
-    +justify-content(flex-start)
+  +justify-content(flex-start)
 
   a
     +flexbox
     +align-items(center)
     +justify-content(center)
+    +flex-shrink(0)
     background: $button-background-color
     border-radius: 50%
     height: 40px
+    margin-right: $base-padding
     text-align: center
     width: 40px
 
