@@ -345,9 +345,12 @@ $break-gutters: 1024px
           .prod-thumb
             padding-left: #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"}
             padding-right: #{"{% if theme.show_product_grid_gutters %}0px{% else %}8px{% endif %}"}
+            padding-top: #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"}
+            padding-bottom: #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"}
 
           .prod-thumb-info
-            padding-right: $base-padding
+            padding-right: #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"}
+            padding-top: #{"{% if theme.show_product_grid_gutters %}0px{% else %}8px{% endif %}"}
 
     .prod-thumb-info
       padding-left: #{"{% if theme.show_product_grid_gutters %}0px{% else %}8px{% endif %}"}
