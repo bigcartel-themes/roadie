@@ -36,13 +36,25 @@ $('body')
       processUpdate('', item_id, '', cart);
     });
   })
-  .on( 'blur','.option-quantity', function(e) {
+  .on('change','.option-quantity', function(e) {
     var item_id = $(this).parent().data("item-id");
     var new_val = $(this).val();
     var input = $(this);
     Cart.updateItem(item_id, new_val, function(cart) {
       processUpdate(input, item_id, new_val, cart);
     });
+  })
+  .on('keydown','.option-quantity', function(e) {
+    if (e.keyCode == 13) {
+      item_id = $(this).closest('.cart-item').data("item-id");
+      new_val = $(this).val();
+      input = $(this);
+      Cart.updateItem(item_id, new_val, function(cart) {
+        processUpdate(input, item_id, new_val, cart);
+      });
+      e.preventDefault();
+      return false;
+    }
   })
 
 var updateCart = function(cart) {
