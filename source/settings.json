@@ -1,6 +1,6 @@
 {
   "name": "Roadie",
-  "version": "1.0.10",
+  "version": "1.1.0",
   "images": [
     {
       "variable": "logo",
@@ -224,8 +224,8 @@
       "type": "select",
       "options": [
         ["Default", "default"],
-        ["Fit to square", "fit-to-square"],
-        ["Crop to square", "crop-to-square"]
+        ["Fit to square", "contain"],
+        ["Crop to square", "cover"]
       ],
       "default": "crop-to-square",
       "description": "Sets the display of thumbnail images"
