@@ -227,7 +227,7 @@
         ["Fit to square", "contain"],
         ["Crop to square", "cover"]
       ],
-      "default": "crop-to-square",
+      "default": "cover",
       "description": "Sets the display of thumbnail images"
     },
     {
