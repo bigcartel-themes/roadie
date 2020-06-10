@@ -138,10 +138,12 @@ $('body').on('click', ".secondary-product-image-link--thumbs", function(e) {
 
   e.preventDefault();
 
-  var large_image_url = $(this).data('url');
+  var data_url = $(this).data('url');
+  var data_srcset = $(this).data('srcset');
   var image_zoom_url = $(this).data("zoom");
 
-  $('.primary-product-image').attr('src',large_image_url);
+  $('.primary-product-image').attr('src',data_url);
+  $('.primary-product-image').attr('data-srcset',data_srcset);
   $('.primary-product-image').attr('data-zoom',image_zoom_url);
 
   var image_container_offset = $('.primary-product-image-container').offset().top;

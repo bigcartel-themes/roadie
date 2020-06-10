@@ -928,3 +928,10 @@ h1
 
 .currency_code
   font-weight: normal
+
+.blur-up
+  +transition(filter .2s)
+  filter: blur(5px)
+
+  &.lazyloaded
+    filter: blur(0)

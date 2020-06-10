@@ -321,14 +321,18 @@ ul.sort-by-nav-links
       height: 100%
 
 .product-list-image-container
-  font-size: 0
-  margin: 0
   overflow: hidden
-  padding-bottom: 100%
-  width: 100%
+  position: relative
 
-  .default &
-    padding-bottom: 0
+  &.product-list-image-container-default:before
+    display: none
+
+  &:before
+    display: block
+    width: 100%
+    content: ""
+    padding-bottom: 100%
+    height: 0
 
 .product-list-quickview-container
   +flexbox
@@ -390,49 +394,27 @@ ul.sort-by-nav-links
     margin-left: auto
 
 .product-list-image
-  -webkit-transform: translate3d(0, 0, 0)
+  transform: translate3d(0, 0, 0)
+  position: absolute
   display: block
-  overflow: hidden
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
 
-  &.lazy
-    filter: blur(5px)
+  &.grid-default
+    position: relative
 
-  .default &
-    width: 100%
-
-  .crop-to-square &
-    height: 100%
+  &.grid-cover
     object-fit: cover
-    position: absolute
-    width: 100%
 
-  .fit-to-square &
-    +transform(translate3d(-50%,-50%,0))
-    cursor: pointer
-    left: 50%
-    position: absolute
-    top: 50%
-    max-width: 100%
-    height: 100%
-    width: 100%
-
-    &.image-tall
-      height: 100%
-      width: auto
-
-    &.image-wide
-      height: auto
-      width: 100%
-
-    &.image-square
-      height: 100%
-      width: 100%
+  &.grid-contain
+    object-fit: contain
 
 .prod-thumb-info
   padding: $base-padding 0
   padding-left: 0
   padding-right: #{"{% if theme.show_product_grid_gutters %}0px{% else %}8px{% endif %}"}
-
 
 .prod-thumb-info-headers
   +fluid-type(16px, 16px)

@@ -27,12 +27,37 @@
 <div class="product-page-columns">
   <div class="product-images product-image-zooming product-images-{{ theme.secondary_product_images }}">
     <div class="primary-product-image-container">
-      <img class="product-image primary-product-image product-image-zoom" src="{{ product.image | product_image_url | constrain: 1000 }}" data-zoom="{{ product.image | product_image_url | constrain: 1500 }}" alt="{{ product.name | escape }}">
+      <img
+        alt="{{ product.name | escape }}"
+        class="product-image primary-product-image product-image-zoom blur-up lazyload"
+        src="{{ product.image | product_image_url | constrain: 100 }}"
+        data-srcset="
+          {{ product.image | product_image_url | constrain: 400 }} 400w,
+          {{ product.image | product_image_url | constrain: 550 }} 550w,
+          {{ product.image | product_image_url | constrain: 800 }} 800w,
+          {{ product.image | product_image_url | constrain: 1050 }} 1050w,
+          {{ product.image | product_image_url | constrain: 1300 }} 1300w,
+          {{ product.image | product_image_url | constrain: 1700 }} 1700w,
+          {{ product.image | product_image_url | constrain: 1900 }} 1900w,
+          {{ product.image | product_image_url | constrain: 2100 }} 2100w,
+        "
+        data-sizes="auto"
+        data-zoom="{{ product.image | product_image_url | constrain: 1500 }}"
+      >
     </div>
     {% if product.images.size > 1 %}
       <div class="secondary-product-image-container secondary-product-image-container--thumbs {% if theme.secondary_product_images == 'full' %}has-full{% endif %}">
         {% for image in product.images %}
-          <div class="product-image-link secondary-product-image-link secondary-product-image-link--thumbs{% if forloop.index == 1 %} active{% endif %}" data-url="{{ image | product_image_url | constrain: 1000 }}" data-zoom="{{ image | product_image_url | constrain: 1500 }}">
+          <div class="product-image-link secondary-product-image-link secondary-product-image-link--thumbs{% if forloop.index == 1 %} active{% endif %}" data-url="{{ image | product_image_url | constrain: 1000 }}" data-srcset="
+                  {{ image | product_image_url | constrain: 400 }} 400w,
+                  {{ image | product_image_url | constrain: 550 }} 550w,
+                  {{ image | product_image_url | constrain: 800 }} 800w,
+                  {{ image | product_image_url | constrain: 1050 }} 1050w,
+                  {{ image | product_image_url | constrain: 1300 }} 1300w,
+                  {{ image | product_image_url | constrain: 1700 }} 1700w,
+                  {{ image | product_image_url | constrain: 1900 }} 1900w,
+                  {{ image | product_image_url | constrain: 2100 }} 2100w,
+                " data-zoom="{{ image | product_image_url | constrain: 1500 }}">
             <img class="product-image secondary-product-image" src="{{ image | product_image_url | constrain: 1000 }}" data-zoom="{{ image | product_image_url | constrain: 1500 }}" alt="{{ product.name | escape }}">
           </div>
         {% endfor %}
@@ -40,8 +65,33 @@
       {% if theme.secondary_product_images == 'full' %}
         <div class="secondary-product-image-container secondary-product-image-container--full">
           {% for image in product.images offset: 1 %}
-            <div class="product-image-link secondary-product-image-link" data-url="{{ image | product_image_url | constrain: 1000 }}" data-zoom="{{ image | product_image_url | constrain: 1500 }}">
-              <img class="product-image secondary-product-image product-image-zoom" src="{{ image | product_image_url | constrain: 1000 }}" data-zoom="{{ image | product_image_url | constrain: 1500 }}" alt="{{ product.name | escape }}">
+            <div class="product-image-link secondary-product-image-link"                 data-srcset="
+                  {{ image | product_image_url | constrain: 400 }} 400w,
+                  {{ image | product_image_url | constrain: 550 }} 550w,
+                  {{ image | product_image_url | constrain: 800 }} 800w,
+                  {{ image | product_image_url | constrain: 1050 }} 1050w,
+                  {{ image | product_image_url | constrain: 1300 }} 1300w,
+                  {{ image | product_image_url | constrain: 1700 }} 1700w,
+                  {{ image | product_image_url | constrain: 1900 }} 1900w,
+                  {{ image | product_image_url | constrain: 2100 }} 2100w,
+                " data-zoom="{{ image | product_image_url | constrain: 1500 }}">
+              <img
+                alt="{{ product.name | escape }}"
+                class="product-image secondary-product-image product-image-zoom blur-up lazyload"
+                src="{{ image | product_image_url | constrain: 100 }}"
+                data-srcset="
+                  {{ image | product_image_url | constrain: 400 }} 400w,
+                  {{ image | product_image_url | constrain: 550 }} 550w,
+                  {{ image | product_image_url | constrain: 800 }} 800w,
+                  {{ image | product_image_url | constrain: 1050 }} 1050w,
+                  {{ image | product_image_url | constrain: 1300 }} 1300w,
+                  {{ image | product_image_url | constrain: 1700 }} 1700w,
+                  {{ image | product_image_url | constrain: 1900 }} 1900w,
+                  {{ image | product_image_url | constrain: 2100 }} 2100w,
+                "
+                data-sizes="auto"
+                data-zoom="{{ product.image | product_image_url | constrain: 1500 }}"
+              >
             </div>
           {% endfor %}
         </div>
@@ -157,61 +207,87 @@
 {% assign current_id = product.id %}
 {% if page.full_url contains '/product/' %}
   {% if theme.number_related_products > 0 %}
-    {% if theme.product_grid_image_size == 'small' %}
-      {% assign product_image_constrain = 350 %}
-      {% assign product_image_constrain_large = product_image_constrain | times: 2 %}
-    {% elsif theme.product_grid_image_size == 'medium' %}
-      {% assign product_image_constrain = 500 %}
-      {% assign product_image_constrain_large = product_image_constrain | times: 2 %}
-    {% elsif theme.product_grid_image_size == 'large %}
-      {% assign product_image_constrain = 650 %}
-      {% assign product_image_constrain_large = product_image_constrain | times: 2 %}
-    {% endif %}
     {% if product.categories != blank %}
       {% for category in product.categories %}
         {% capture product_divs %}
-          {% for category_product in category.products %}
-            {% if category_product.id != current_id %}
+          {% for product in category.products %}
+            {% if product.id != current_id %}
+              {% assign image_width = product.image.width | times: 1.0 %}
+              {% assign image_height = product.image.height | times: 1.0 %}
+              {% assign aspect_ratio = image_width | divided_by: image_height %}
               {% assign product_status = '' %}
-              {% case category_product.status %}
+              {% case product.status %}
                 {% when 'active' %}
-                  {% if category_product.on_sale %}{% assign product_status = 'On sale' %}{% endif %}
+                  {% if product.on_sale %}{% assign product_status = 'On sale' %}{% endif %}
                 {% when 'sold-out' %}
                   {% assign product_status = 'Sold out' %}
                 {% when 'coming-soon' %}
                   {% assign product_status = 'Coming soon' %}
               {% endcase %}
               {% capture image_class %}
-                {% if category_product.image.height > category_product.image.width %}
+                {% if product.image.height > product.image.width %}
                   image-tall
-                {% elsif category_product.image.height < category_product.image.width %}
+                {% elsif product.image.height < product.image.width %}
                   image-wide
                 {% else %}
                   image-square
                 {% endif %}
               {% endcapture %}
-              <a class="prod-thumb product-image-{{ theme.product_grid_image_size }} {{ theme.show_overlay }} {{ theme.grid_image_style }} {% if theme.show_quickview %}show-quickview{% endif %}" href="{{ category_product.url }}" title="View {{ category_product.name | escape }}">
-                <div class="prod-thumb-container">
-                  <figure class="product-list-image-container">
-                    <img alt="" class="lazy product-list-image {{ image_class }}" src="{{ category_product.image | product_image_url | constrain: 50 }}" data-src="{{ category_product.image | product_image_url | constrain: product_image_constrain }}" data-srcset="{{ category_product.image | product_image_url | constrain: product_image_constrain_large }} 2x, {{ category_product.image | product_image_url | constrain: product_image_constrain }} 1x">
-                    {% if product_status != blank and theme.product_badge_style != 'inline' %}<div class="prod-thumb-status {{ theme.product_badge_style }}">{{ product_status }}</div>{% endif %}
-                  </figure>
-                </div>
-                <div class="prod-thumb-info">
-                  <div class="prod-thumb-background"></div>
-                  <div class="prod-thumb-info-headers">
-                    <div class="prod-thumb-name">{{ category_product.name }}</div>
-                    <div class="prod-thumb-price">
-                      {% if category_product.variable_pricing %}
-                        {{ category_product.min_price | money: theme.money_format }} - {{ category_product.max_price | money: theme.money_format }}
-                      {% else %}
-                        {{ category_product.default_price | money: theme.money_format }}
-                      {% endif %}
+            <a class="prod-thumb product-image-{{ theme.product_grid_image_size }} {{ theme.show_overlay }} {{ theme.grid_image_style }} {% if theme.show_quickview %}show-quickview{% endif %}" href="{{ product.url }}" title="View {{ product.name | escape }}">
+              <div class="prod-thumb-container">
+                <div class="product-list-image-container product-list-image-container-{{ theme.grid_image_style }}">
+                  <img
+                    alt=""
+                    class="blur-up product-list-image lazyload grid-{{ theme.grid_image_style }}"
+                    src="{{ product.image | product_image_url | constrain: 20 }}"
+                    {% unless theme.grid_image_style == 'default' %}data-aspectratio="{{ aspect_ratio }}"{% endunless %}
+                    data-srcset="
+                      {{ product.image | product_image_url | constrain: 200 }} 200w,
+                      {{ product.image | product_image_url | constrain: 280 }} 280w,
+                      {{ product.image | product_image_url | constrain: 350 }} 350w,
+                      {{ product.image | product_image_url | constrain: 400 }} 400w,
+                      {{ product.image | product_image_url | constrain: 500 }} 500w,
+                      {{ product.image | product_image_url | constrain: 650 }} 650w,
+                      {{ product.image | product_image_url | constrain: 800 }} 800w,
+                      {{ product.image | product_image_url | constrain: 1000 }} 1000w,
+                      {{ product.image | product_image_url | constrain: 1200 }} 1200w,
+                      {{ product.image | product_image_url | constrain: 1300 }} 1300w
+                    "
+                    data-sizes="auto"
+                  >
+                  {% if product_status != blank and theme.product_badge_style != 'inline' %}<div class="prod-thumb-status {{ theme.product_badge_style }}">{{ product_status }}</div>{% endif %}
+                  {% if theme.show_quickview %}
+                    <div class="product-list-quickview-container">
+                      <div class="product-list-quickview-container-background"></div>
+                      <button class="button open-quickview" data-permalink="{{ product.permalink }}" data-has-default="{{ product.has_default_option }}" title="Quick view {{ product.name | escape }}" tabindex="-1">
+                        <span class="open-quickview-text">Quick View</span>
+                        <svg aria-hidden="true" class="open-quickview-icon" width="19" height="12" viewBox="0 0 19 12" xmlns="http://www.w3.org/2000/svg"><path d="M9.16664521 12c3.84154359 0 7.19749259-2.23873368 8.89121419-5.54405416.0600279-.1187131.1087338-.32305832.1087338-.45608412 0-.13302581-.0487059-.33737102-.1087338-.45608412C16.3631918 2.23720589 13.0081888.00002861 9.16664521.00002861c-3.84154358 0-7.19749261 2.23873368-8.89121415 5.54405416-.06002794.1187131-.10873388.32305832-.10873388.45608412 0 .13302581.04870594.33737102.10873388.45608412C1.97009865 9.76282272 5.32510163 12 9.1666452 12zm.00219726-1.4999964h-.00219726c-2.48400287 0-4.49998927-2.01598643-4.49998927-4.49998929 0-2.48400287 2.0159864-4.49998928 4.49998927-4.49998928 2.48400289 0 4.49998929 2.01598641 4.49998929 4.49998928v.00219726c0 2.48278216-2.0150099 4.49779203-4.49779203 4.49779203zm.00485228-1.51375984c1.65218725 0 2.99312645-1.34090867 2.99312645-2.99312641 0-1.65218722-1.3409392-2.99309589-2.99312645-2.99309589h-.00704954c-.22271676.00311278-.57705551.05618273-.79092219.11843844.16058312.21823068.29092338.61529394.29092338.88625887 0 .82540697-.66988976 1.49530269-1.49529673 1.49530269-.27096493 0-.66802819-.13034623-.88625887-.29092934-.0577086.21255442-.10452246.56378039-.10452246.78402523 0 1.65221774 1.34090867 2.99312641 2.99312641 2.99312641z" fill-rule="nonzero"/></svg>
+                      </button>
                     </div>
-                    {% if product_status != blank and theme.product_badge_style == 'inline' %}<div class="prod-thumb-status {{ theme.product_badge_style }}">{{ product_status }}</div>{% endif %}
-                  </div>
+                  {% endif %}
                 </div>
-              </a>
+              </div>
+              <div class="prod-thumb-info">
+                <div class="prod-thumb-background"></div>
+                <div class="prod-thumb-info-headers">
+                  <div class="prod-thumb-name">{{ product.name }}</div>
+                  <div class="prod-thumb-price">
+                    {% if product.variable_pricing %}
+                      {{ product.min_price | money: theme.money_format }} - {{ product.max_price | money: theme.money_format }}
+                    {% else %}
+                      {{ product.default_price | money: theme.money_format }}
+                    {% endif %}
+                  </div>
+                  {% if product_status != blank and theme.product_badge_style == 'inline' %}<div class="prod-thumb-status {{ theme.product_badge_style }}">{{ product_status }}</div>{% endif %}
+                  {% if theme.show_quickview and theme.mobile_product_grid_style == 'horizontal' %}
+                    <div role="button" class="button open-quickview mobile-stacked-quickview" data-permalink="{{ product.permalink }}" data-has-default="{{ product.has_default_option }}" title="Quick view {{ product.name | escape }}">
+                      <span class="open-quickview-text">Quick View</span>
+                      <svg aria-hidden="true" class="open-quickview-icon" width="19" height="12" viewBox="0 0 19 12" xmlns="http://www.w3.org/2000/svg"><path d="M9.16664521 12c3.84154359 0 7.19749259-2.23873368 8.89121419-5.54405416.0600279-.1187131.1087338-.32305832.1087338-.45608412 0-.13302581-.0487059-.33737102-.1087338-.45608412C16.3631918 2.23720589 13.0081888.00002861 9.16664521.00002861c-3.84154358 0-7.19749261 2.23873368-8.89121415 5.54405416-.06002794.1187131-.10873388.32305832-.10873388.45608412 0 .13302581.04870594.33737102.10873388.45608412C1.97009865 9.76282272 5.32510163 12 9.1666452 12zm.00219726-1.4999964h-.00219726c-2.48400287 0-4.49998927-2.01598643-4.49998927-4.49998929 0-2.48400287 2.0159864-4.49998928 4.49998927-4.49998928 2.48400289 0 4.49998929 2.01598641 4.49998929 4.49998928v.00219726c0 2.48278216-2.0150099 4.49779203-4.49779203 4.49779203zm.00485228-1.51375984c1.65218725 0 2.99312645-1.34090867 2.99312645-2.99312641 0-1.65218722-1.3409392-2.99309589-2.99312645-2.99309589h-.00704954c-.22271676.00311278-.57705551.05618273-.79092219.11843844.16058312.21823068.29092338.61529394.29092338.88625887 0 .82540697-.66988976 1.49530269-1.49529673 1.49530269-.27096493 0-.66802819-.13034623-.88625887-.29092934-.0577086.21255442-.10452246.56378039-.10452246.78402523 0 1.65221774 1.34090867 2.99312641 2.99312641 2.99312641z" fill-rule="nonzero"/></svg>
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            </a>
             {% endif %}
           {% endfor %}
         {% endcapture %}

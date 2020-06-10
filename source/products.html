@@ -29,16 +29,6 @@
   {% assign sort_order = '' %}
   {% assign sort_order_name = 'Featured' %}
 {% endif %}
-{% if theme.product_grid_image_size == 'small' %}
-  {% assign product_image_constrain = 350 %}
-  {% assign product_image_constrain_large = product_image_constrain | times: 2 %}
-{% elsif theme.product_grid_image_size == 'medium' %}
-  {% assign product_image_constrain = 500 %}
-  {% assign product_image_constrain_large = product_image_constrain | times: 2 %}
-{% elsif theme.product_grid_image_size == 'large %}
-  {% assign product_image_constrain = 650 %}
-  {% assign product_image_constrain_large = product_image_constrain | times: 2 %}
-{% endif %}
 <div class="page-heading has-sorting">
   <h1 class="page-title">{% if page.full_url contains 'search=' %}Product Search{% else %}{% if page.name == 'Products' %}All Products{% else %}{{ page.name }}{% endif %}{% endif %}</h1>
   <div class="product-sort">
@@ -69,6 +59,9 @@
     <div class="product-list-container">
       <div class="product-list {{ theme.product_list_layout }} mobile-{{ theme.mobile_product_grid_style }} grid-{{ theme.layout_style }}">
         {% for product in products %}
+          {% assign image_width = product.image.width | times: 1.0 %}
+          {% assign image_height = product.image.height | times: 1.0 %}
+          {% assign aspect_ratio = image_width | divided_by: image_height %}
           {% assign product_status = '' %}
           {% case product.status %}
             {% when 'active' %}
@@ -87,10 +80,28 @@
               image-square
             {% endif %}
           {% endcapture %}
-         <a class="prod-thumb product-image-{{ theme.product_grid_image_size }} {{ theme.show_overlay }} {{ theme.grid_image_style }} {% if theme.show_quickview %}show-quickview{% endif %}" href="{{ product.url }}" title="View {{ product.name | escape }}">
+          <a class="prod-thumb product-image-{{ theme.product_grid_image_size }} {{ theme.show_overlay }} {{ theme.grid_image_style }} {% if theme.show_quickview %}show-quickview{% endif %}" href="{{ product.url }}" title="View {{ product.name | escape }}">
             <div class="prod-thumb-container">
-              <figure class="product-list-image-container">
-                <img alt="" class="lazy product-list-image {{ image_class }}" src="{{ product.image | product_image_url | constrain: 50 }}" data-src="{{ product.image | product_image_url | constrain: product_image_constrain }}" data-srcset="{{ product.image | product_image_url | constrain: product_image_constrain_large }} 2x, {{ product.image | product_image_url | constrain: product_image_constrain }} 1x">
+              <div class="product-list-image-container product-list-image-container-{{ theme.grid_image_style }}">
+                <img
+                  alt=""
+                  class="blur-up product-list-image lazyload grid-{{ theme.grid_image_style }}"
+                  src="{{ product.image | product_image_url | constrain: 20 }}"
+                  {% unless theme.grid_image_style == 'default' %}data-aspectratio="{{ aspect_ratio }}"{% endunless %}
+                  data-srcset="
+                    {{ product.image | product_image_url | constrain: 200 }} 200w,
+                    {{ product.image | product_image_url | constrain: 280 }} 280w,
+                    {{ product.image | product_image_url | constrain: 350 }} 350w,
+                    {{ product.image | product_image_url | constrain: 400 }} 400w,
+                    {{ product.image | product_image_url | constrain: 500 }} 500w,
+                    {{ product.image | product_image_url | constrain: 650 }} 650w,
+                    {{ product.image | product_image_url | constrain: 800 }} 800w,
+                    {{ product.image | product_image_url | constrain: 1000 }} 1000w,
+                    {{ product.image | product_image_url | constrain: 1200 }} 1200w,
+                    {{ product.image | product_image_url | constrain: 1300 }} 1300w
+                  "
+                  data-sizes="auto"
+                >
                 {% if product_status != blank and theme.product_badge_style != 'inline' %}<div class="prod-thumb-status {{ theme.product_badge_style }}">{{ product_status }}</div>{% endif %}
                 {% if theme.show_quickview %}
                   <div class="product-list-quickview-container">
@@ -101,7 +112,7 @@
                     </button>
                   </div>
                 {% endif %}
-              </figure>
+              </div>
             </div>
             <div class="prod-thumb-info">
               <div class="prod-thumb-background"></div>

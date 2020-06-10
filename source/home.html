@@ -1,13 +1,4 @@
-{% if theme.product_grid_image_size == 'small' %}
-  {% assign product_image_constrain = 350 %}
-  {% assign product_image_constrain_large = product_image_constrain | times: 2 %}
-{% elsif theme.product_grid_image_size == 'medium' %}
-  {% assign product_image_constrain = 500 %}
-  {% assign product_image_constrain_large = product_image_constrain | times: 2 %}
-{% elsif theme.product_grid_image_size == 'large %}
-  {% assign product_image_constrain = 650 %}
-  {% assign product_image_constrain_large = product_image_constrain | times: 2 %}
-{% endif %}
+
 {% if errors != blank %}
   <ul class="errors {{ page.permalink }}-errors">
     {% for error in errors %}
@@ -18,7 +9,23 @@
 
 {% if theme.promo_image != blank %}
   <section class="home-promo-image">
-    <img class="promo-image" alt="Promo image" srcset="{{ theme.promo_image.url | constrain: 900 }} 1x, {{ theme.promo_image.url | constrain: 1800 }} 2x" src="{{ theme.promo_image.url | constrain: 900 }}">
+    <img
+      alt="Promo image"
+      class="promo-image lazyload blur-up"
+      src="{{ theme.promo_image.url | constrain: 900 }}"
+      data-srcset="
+        {{ theme.promo_image.url | constrain: 450 }} 450w,
+        {{ theme.promo_image.url | constrain: 600 }} 600w,
+        {{ theme.promo_image.url | constrain: 900 }} 900w,
+        {{ theme.promo_image.url | constrain: 1200 }} 1200w,
+        {{ theme.promo_image.url | constrain: 1500 }} 1500w,
+        {{ theme.promo_image.url | constrain: 1900 }} 1800w,
+        {{ theme.promo_image.url | constrain: 1900 }} 2100w,
+        {{ theme.promo_image.url | constrain: 1900 }} 2400w,
+        {{ theme.promo_image.url | constrain: 1900 }} 2700w
+      "
+      data-sizes="auto"
+    >
   </section>
 {% endif %}
 
@@ -30,6 +37,9 @@
       <div class="product-list-container">
         <div class="product-list {{ theme.product_list_layout }} mobile-{{ theme.mobile_product_grid_style }} grid-{{ theme.layout_style }}">
           {% for product in products %}
+            {% assign image_width = product.image.width | times: 1.0 %}
+            {% assign image_height = product.image.height | times: 1.0 %}
+            {% assign aspect_ratio = image_width | divided_by: image_height %}
             {% assign product_status = '' %}
             {% case product.status %}
               {% when 'active' %}
@@ -50,8 +60,26 @@
             {% endcapture %}
             <a class="prod-thumb product-image-{{ theme.product_grid_image_size }} {{ theme.show_overlay }} {{ theme.grid_image_style }} {% if theme.show_quickview %}show-quickview{% endif %}" href="{{ product.url }}" title="View {{ product.name | escape }}">
               <div class="prod-thumb-container">
-                <figure class="product-list-image-container">
-                  <img alt="" class="lazy product-list-image {{ image_class }}" src="{{ product.image | product_image_url | constrain: 50 }}" data-src="{{ product.image | product_image_url | constrain: product_image_constrain }}" data-srcset="{{ product.image | product_image_url | constrain: product_image_constrain_large }} 2x, {{ product.image | product_image_url | constrain: product_image_constrain }} 1x">
+                <div class="product-list-image-container product-list-image-container-{{ theme.grid_image_style }}">
+                  <img
+                    alt=""
+                    class="blur-up product-list-image lazyload grid-{{ theme.grid_image_style }}"
+                    src="{{ product.image | product_image_url | constrain: 20 }}"
+                    {% unless theme.grid_image_style == 'default' %}data-aspectratio="{{ aspect_ratio }}"{% endunless %}
+                    data-srcset="
+                      {{ product.image | product_image_url | constrain: 200 }} 200w,
+                      {{ product.image | product_image_url | constrain: 280 }} 280w,
+                      {{ product.image | product_image_url | constrain: 350 }} 350w,
+                      {{ product.image | product_image_url | constrain: 400 }} 400w,
+                      {{ product.image | product_image_url | constrain: 500 }} 500w,
+                      {{ product.image | product_image_url | constrain: 650 }} 650w,
+                      {{ product.image | product_image_url | constrain: 800 }} 800w,
+                      {{ product.image | product_image_url | constrain: 1000 }} 1000w,
+                      {{ product.image | product_image_url | constrain: 1200 }} 1200w,
+                      {{ product.image | product_image_url | constrain: 1300 }} 1300w
+                    "
+                    data-sizes="auto"
+                  >
                   {% if product_status != blank and theme.product_badge_style != 'inline' %}<div class="prod-thumb-status {{ theme.product_badge_style }}">{{ product_status }}</div>{% endif %}
                   {% if theme.show_quickview %}
                     <div class="product-list-quickview-container">
@@ -62,7 +90,7 @@
                       </button>
                     </div>
                   {% endif %}
-                </figure>
+                </div>
               </div>
               <div class="prod-thumb-info">
                 <div class="prod-thumb-background"></div>
