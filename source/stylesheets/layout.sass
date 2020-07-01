@@ -567,6 +567,38 @@ _:-ms-fullscreen, :root .content-wrapper
     border-bottom: none
     padding-top: $base-padding
 
+    .social-links
+      +justify-content(space-between)
+      +flex-wrap(wrap)
+
+      a
+        +flex-basis(calc(20% - 3%))
+        height: auto
+        margin-bottom: $base-padding
+        margin-right: 3%
+        position: relative
+
+        @media screen and (max-width: $break-small)
+          max-width: 40px
+
+        @media screen and (min-width: $break-small + 1)
+          &:nth-child(5)
+            margin-right: 0 !important
+
+        &:last-child
+          margin-right: auto
+
+        &:nth-child(7)
+          margin-right: auto
+
+        &:after
+          content: ""
+          display: block
+          padding-bottom: 100%
+
+  .badge a
+    margin-top: $base-padding
+
 .search-form
   +flexbox
 

@@ -1,6 +1,6 @@
 {
   "name": "Roadie",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "images": [
     {
       "variable": "logo",
@@ -351,22 +351,16 @@
       "description": "Sets the display of prices in your shop"
     },
     {
-      "variable": "twitter_url",
-      "label": "Twitter URL",
+      "variable": "bandcamp_url",
+      "label": "Bandcamp URL",
       "type": "text",
-      "description": "Ex: http://twitter.com/bigcartel"
+      "description": "Ex: http://bigcartel.bandcamp.com"
     },
     {
       "variable": "facebook_url",
       "label": "Facebook URL",
       "type": "text",
       "description": "Ex: http://facebook.com/bigcartel"
-    },
-    {
-      "variable": "tumblr_url",
-      "label": "Tumblr URL",
-      "type": "text",
-      "description": "Ex: http://bigcartel.tumblr.com"
     },
     {
       "variable": "instagram_url",
@@ -379,6 +373,24 @@
       "label": "Pinterest URL",
       "type": "text",
       "description": "Ex: http://pinterest.com/bigcartel"
+    },
+    {
+      "variable": "tumblr_url",
+      "label": "Tumblr URL",
+      "type": "text",
+      "description": "Ex: http://bigcartel.tumblr.com"
+    },
+    {
+      "variable": "twitter_url",
+      "label": "Twitter URL",
+      "type": "text",
+      "description": "Ex: http://twitter.com/bigcartel"
+    },
+    {
+      "variable": "youtube_url",
+      "label": "YouTube URL",
+      "type": "text",
+      "description": "Ex: https://www.youtube.com/channel/bigcartel"
     }
   ],
  "checkout": {
