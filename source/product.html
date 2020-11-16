@@ -90,7 +90,7 @@
                   {{ image | product_image_url | constrain: 2100 }} 2100w,
                 "
                 data-sizes="auto"
-                data-zoom="{{ product.image | product_image_url | constrain: 1500 }}"
+                data-zoom="{{ image | product_image_url | constrain: 1500 }}"
               >
             </div>
           {% endfor %}
