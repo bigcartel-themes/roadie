@@ -208,9 +208,9 @@
 {% if page.full_url contains '/product/' %}
   {% if theme.number_related_products > 0 %}
     {% if product.categories != blank %}
-      {% for category in product.categories %}
+      {% for category in product.categories limit: 2 %}
         {% capture product_divs %}
-          {% for product in category.products %}
+          {% for product in category.products limit: 10 %}
             {% if product.id != current_id %}
               {% assign image_width = product.image.width | times: 1.0 %}
               {% assign image_height = product.image.height | times: 1.0 %}
