@@ -28,8 +28,8 @@ function enableAddButton(active_form,updated_price) {
   addButtonTextElement.html(addButtonTitle);
 }
 
-function disableAddButton(type) {
-  var addButton = $('.add-to-cart-button');
+function disableAddButton(active_form,type) {
+  var addButton = active_form.find('.add-to-cart-button');
   var addButtonTextElement = addButton.find('.button-add-text');
   var addButtonPriceTextElement = addButton.find('.button-add-price');
   var addButtonTitle = addButton.attr('data-add-title');
@@ -39,8 +39,8 @@ function disableAddButton(type) {
   if (!addButton.is(":disabled")) {
     addButton.attr("disabled","disabled");
   }
-  $('.product-quantity').attr("disabled","disabled")
-  $('.product-form-quantity').addClass('disabled')
+  active_form.find('.product-quantity').attr("disabled","disabled")
+  active_form.find('.product-form-quantity').addClass('disabled')
   addButtonTextElement.html(addButtonTitle);
   addButtonPriceTextElement.removeClass('visible');
 }

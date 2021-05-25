@@ -57,6 +57,7 @@ function closeQuickShop() {
   clearTimeout(loadingTimer);
   $('.qs-modal').removeClass('opened');
   $('body').removeClass('no-scroll');
+  $('.qs-product-details .main-product').remove();
   $('.qs-product-details').html('');
 }
 function openQuickShop() {
