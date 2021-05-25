@@ -1,18 +1,19 @@
 $('body').on('change', ".product-option-select", function(){
+  active_form = $(this).closest('form');
   var option_price = $(this).find("option:selected").attr("data-price");
-  enableAddButton(option_price);
+  enableAddButton(active_form,option_price);
 });
 
-function enableAddButton(updated_price) {
-  var addButton = $('.add-to-cart-button');
+function enableAddButton(active_form,updated_price) {
+  var addButton = active_form.find('.add-to-cart-button');
   var addButtonTextElement = addButton.find('.button-add-text');
   var addButtonPriceTextElement = addButton.find('.button-add-price');
   var addButtonTitle = addButton.attr('data-add-title');
   addButton.attr("disabled",false);
-  $('.product-form-quantity').removeClass('disabled')
-  $('.product-quantity').attr("disabled",false)
+  active_form.find('.product-form-quantity').removeClass('disabled')
+  active_form.find('.product-quantity').attr("disabled",false)
   if (updated_price) {
-    quantity = parseInt($('#quantity').val());
+    quantity = parseInt(active_form.find('#quantity').val());
     if (quantity > 0) {
       updated_total_price = quantity * updated_price;
     }
@@ -27,8 +28,8 @@ function enableAddButton(updated_price) {
   addButtonTextElement.html(addButtonTitle);
 }
 
-function disableAddButton(type) {
-  var addButton = $('.add-to-cart-button');
+function disableAddButton(active_form,type) {
+  var addButton = active_form.find('.add-to-cart-button');
   var addButtonTextElement = addButton.find('.button-add-text');
   var addButtonPriceTextElement = addButton.find('.button-add-price');
   var addButtonTitle = addButton.attr('data-add-title');
@@ -38,17 +39,18 @@ function disableAddButton(type) {
   if (!addButton.is(":disabled")) {
     addButton.attr("disabled","disabled");
   }
-  $('.product-quantity').attr("disabled","disabled")
-  $('.product-form-quantity').addClass('disabled')
+  active_form.find('.product-quantity').attr("disabled","disabled")
+  active_form.find('.product-form-quantity').addClass('disabled')
   addButtonTextElement.html(addButtonTitle);
   addButtonPriceTextElement.removeClass('visible');
 }
 
-$('body').on('keyup', "#quantity", function(){
+$('body').on('keyup', "#quantity", function() {
+  active_form = $(this).closest('form');
   var $quantityInput = $(this)
-    , $priceDisplay = $(".button-add-price")
+    , $priceDisplay = active_form.find($(".button-add-price"))
     , quantity = parseInt($quantityInput.val())
-    , price = $(".add-to-cart-button").attr("data-selected-price")
+    , price = active_form.find(".add-to-cart-button").attr("data-selected-price")
   if (quantity > 0 && price) {
     $priceDisplay.html(Format.money(quantity * price, true, true));
   }
@@ -174,11 +176,15 @@ $('body').on('click', ".secondary-product-image-link--thumbs", function(e) {
 
 $('body').on('submit', ".product-form", function(e){
   e.preventDefault();
-  var quantity = $("#quantity").val()
-  , itemID = $("#option").val()
-  , addButton = $('.add-to-cart-button')
+  var form = $(this);
+  var quantity = form.find("#quantity").val()
+  , itemID = form.find("#option").val()
+  , addButton = form.find('.add-to-cart-button')
+  , plusIcon = form.find('.plus-icon')
+  , checkIcon = form.find('.check-icon')
+  , cartLinkContainer = form.find('.product-form-cart-link-container')
   if (addButton.length) {
-    var updateElement = $('.button-add-text');
+    var updateElement = form.find('.button-add-text');
     var addText = updateElement.html();
   }
   var addedText = addButton.data('added-text')
@@ -188,21 +194,21 @@ $('body').on('submit', ".product-form", function(e){
       addButton.addClass('adding');
       addButton.addClass('spinner');
       addButton.blur();
-      $('.plus-icon').hide();
+      plusIcon.hide();
       Cart.addItem(itemID, quantity, function(cart) {
         setTimeout(function() {
           updateElement.html(addingText);
           setTimeout(function() {
             updateElement.html(addedText);
-            $('.product-form-cart-link-container').slideDown('fast');
+            cartLinkContainer.slideDown('fast');
             updateCart(cart);
             addButton.removeClass('adding');
             addButton.removeClass('spinner');
-            $('.check-icon').fadeIn('fast');
+            checkIcon.fadeIn('fast');
             setTimeout(function() {
               updateElement.html(addText);
-              $('.check-icon').hide();
-              $('.plus-icon').show();
+              checkIcon.hide();
+              plusIcon.show();
             }, 1500)
           }, 600);
         }, 300);
