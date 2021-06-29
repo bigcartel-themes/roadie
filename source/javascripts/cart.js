@@ -63,6 +63,10 @@ var updateCart = function(cart) {
   $('.header-cart-total').html(sub_total);
   $('.cart-subtotal-amount').html(sub_total);
   $('.header-cart-count').html(item_count);
+  if ($('.sidebar-cart-count').length) {
+    $('.sidebar-cart-count').html(item_count);
+    $('.sidebar-cart-total').html(sub_total);
+  }
 }
 
 var processUpdate = function(input, item_id, new_val, cart) {
@@ -72,6 +76,10 @@ var processUpdate = function(input, item_id, new_val, cart) {
   $('.header-cart-total').html(sub_total);
   $('.cart-subtotal-amount').html(sub_total);
   $('.header-cart-count').html(item_count);
+  if ($('.sidebar-cart-count').length) {
+    $('.sidebar-cart-count').html(item_count);
+    $('.sidebar-cart-total').html(sub_total);
+  }
   if (item_count == 0) {
     $('.cart-form').slideUp('fast',function() {
       $('.cart-container').addClass('empty-cart');
