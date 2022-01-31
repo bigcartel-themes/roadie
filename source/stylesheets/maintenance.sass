@@ -25,21 +25,21 @@
 
 .maintenance-store-name
   +fluid-type(40px, 80px)
-  border-bottom: $large-border
   font-weight: bold
   line-height: 1em
-  padding-bottom: $base-padding
   word-break: break-word
 
+.maintenance-store-name + *
+  border-top: $large-border
+  padding-top: $base-padding
+
   @media screen and (max-width: $break-small)
-    border-bottom: $medium-border
+    border-top: $medium-border
 
-h1.maintenance-title
+.maintenance-message
   +fluid-type(18px, 24px)
-  margin: 0
-
-p.maintenance-caption
-  margin: 0
+  line-height: 1.25em
+  margin-top: $base-padding
 
 .maintenance-social-links
   border-top: $small-border
