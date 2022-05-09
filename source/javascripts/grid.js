@@ -1,16 +1,14 @@
 
-var isActive;
+let isActive;
 $(window).on("load resize", function() {
-  var product_grid = $('.product-list');
+  let product_grid = $('.product-list');
+  let window_width = $(window).width();
   if (product_grid.hasClass('masonry')) {
-    window_width = $(window).width();
-
-    var $grid = $('.masonry').masonry({
-      itemSelector: '.prod-thumb',
-      percentPosition: true
-    });
-
     if (window_width > 768) {
+      let $grid = $('.masonry').masonry({
+        itemSelector: '.prod-thumb',
+        percentPosition: true
+      });
       if (!isActive) {
         $grid.on( 'load', function() {
           $grid.masonry('layout');
@@ -20,8 +18,10 @@ $(window).on("load resize", function() {
     }
     else {
       if (product_grid.hasClass('mobile-horizontal')) {
-        $grid.masonry('destroy')
-        isActive = !isActive;
+        if (isActive) {
+          $grid.masonry('destroy')
+          isActive = !isActive;
+        }
       }
     }
   }
