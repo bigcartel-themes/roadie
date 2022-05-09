@@ -7,21 +7,15 @@ $(document).keyup(function(e) {
 
 $('body').on('click', ".open-quickview", function(e){
   e.preventDefault();
-
-  if (inPreview) {
-    alert('Sorry, quick view is unavailable in the Customize Design area');
-  }
-  else {
-    var permalink = $(this).data('permalink');
-    clearTimeout(loadingTimer);
-    loadingTimer = setTimeout(showLoading, 400)
-    this_product = $(this).closest('.prod-thumb')
-    openQuickShop();
-    Product.find(permalink, function(product) {
-      processProduct(product);
-      loadProductContent(product, this_product);
-    });
-  }
+  var permalink = $(this).data('permalink');
+  clearTimeout(loadingTimer);
+  loadingTimer = setTimeout(showLoading, 400)
+  this_product = $(this).closest('.prod-thumb')
+  openQuickShop();
+  Product.find(permalink, function(product) {
+    processProduct(product);
+    loadProductContent(product, this_product);
+  });
 });
 
 $('body').on('click', ".qs-nav", function(e){
