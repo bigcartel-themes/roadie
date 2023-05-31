@@ -9,8 +9,8 @@ function processProduct(product) {
   }
   $('body').on('click', ".reset-selection-button", function(e){
     active_form = $(this).closest('form');
-    disableAddButton(active_form,"add-to-cart");
     active_form.find('#option').val(0);
+    enableAddButton(active_form);
     $(this).hide();
     $(".product-option-group option").each(function(index,element) {
       if (element.value > 0) {
@@ -43,7 +43,6 @@ function setInitialProductOptionStatuses(product) {
     $('body').on('change', pog_select_element, function(e) {
       active_form = $(this).closest('form');
       active_form.find('#option').val(0);
-      disableAddButton(active_form,"add-to-cart");
       processAvailableDropdownOptions(product, $(this));
     });
     for (ogvIndex = 0; ogvIndex < product.option_groups[ogIndex].values.length; ogvIndex++) {

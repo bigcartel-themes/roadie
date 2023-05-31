@@ -112,8 +112,8 @@
                 {% for option_group in product.option_groups %}
                   <div class="select product-option-select-container form-group">
                     <label class="form-label product-option-label" for="option_group_{{ option_group.id }}">{{ option_group.name }}</label>
-                    <select data-unavailable-text="(Unavailable)" data-sold-text="(Sold out)" id="option_group_{{ option_group.id }}" data-group-id="{{ option_group.id }}" data-group-name="{{ option_group.name | escape }}" class="product-option-group shrink-label shrink-option-label" name="option_group[{{ option_group.id }}]" aria-label="Select {{ option_group.name | escape }}">
-                      <option value="0" disabled="disabled" selected>Select {{ option_group.name }}</option>
+                    <select data-unavailable-text="(Unavailable)" data-sold-text="(Sold out)" id="option_group_{{ option_group.id }}" data-group-id="{{ option_group.id }}" data-group-name="{{ option_group.name | escape }}" class="product-option-group shrink-label shrink-option-label" name="option_group[{{ option_group.id }}]" title="Select {{ option_group.name | escape }}" required>
+                      <option value="" disabled="disabled" selected>Select {{ option_group.name }}</option>
                       {% for value in option_group.values %}
                         <option value="{{ value.id }}" data-name="{{ value.name | escape }}">{{ value.name }}</option>
                       {% endfor %}
@@ -124,9 +124,9 @@
               </div>
             {% else %}
               <div class="select product-option-select-container form-group">
-                <label class="form-label product-option-label" for="option">Option</label>
-                <select class="product-option-select shrink-label shrink-option-label" id="option" name="cart[add][id]" aria-label="Select option">
-                  <option value="0" disabled="disabled" selected>Select option</option>
+                <label class="form-label product-option-label" for="option">Variant</label>
+                <select class="product-option-select shrink-label shrink-option-label" id="option" name="cart[add][id]" title="Select variant" required>
+                  <option value="" disabled="disabled" selected>Select variant</option>
                   {% for option in product.options %}
                     <option value="{{ option.id }}" data-price="{{ option.price }}"{% if option.sold_out %} disabled="disabled" disabled-type="sold-out"{% endif %}>{{ option.name }} {% if option.sold_out %} (Sold out){% endif %}</option>
                   {% endfor %}
@@ -138,11 +138,11 @@
         {% endif %}
         <div class="product-form-controls">
           <div class="product-form-quantity-button">
-            <label class="product-form-quantity {% unless product.has_default_option %}disabled{% endunless %}">
+            <label class="product-form-quantity">
               <span class="product-quantity-label">Qty</span>
-              <input autocomplete="off" type="number" class="product-quantity" id="quantity" name="cart[add][quantity]" type="text" min="1" value="1" {% unless product.has_default_option %}disabled="disabled"{% endunless %}>
+              <input autocomplete="off" type="number" class="product-quantity" id="quantity" name="cart[add][quantity]" type="text" min="1" value="1">
             </label>
-            <button class="button add-to-cart-button" name="submit" type="submit" title="Add to Cart" data-adding-text="Adding..." data-added-text="Added!" data-add-title="Add to Cart" data-sold-title="Sold out"{% unless product.has_default_option %}disabled="disabled"{% else %}data-selected-price="{{ product.default_price }}"{% endunless %}>
+            <button class="button add-to-cart-button" name="submit" type="submit" title="Add to Cart" data-adding-text="Adding..." data-added-text="Added!" data-add-title="Add to Cart" data-sold-title="Sold out"{% unless product.has_default_option %}{% else %}data-selected-price="{{ product.default_price }}"{% endunless %}>
               <span class="button-add-price {% if product.has_default_option %} visible{% endif %}">{{ product.default_price | money: theme.money_format }}</span>
               <span class="button-add-text">Add to Cart</span>
               <span class="button-add-icon">
