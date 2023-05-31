@@ -594,8 +594,8 @@ _:-ms-fullscreen, :root .content-wrapper
           display: block
           padding-bottom: 100%
 
-  .badge a
-    margin-top: $base-padding
+  .bigcartel-credit
+    margin-top: $base-padding * 2
 
 .search-form
   +flexbox
@@ -796,15 +796,26 @@ _:-ms-fullscreen, :root .content-wrapper
 .nav-section-credit
   border: none !important
 
-.badge a
-  display: block
+.bigcartel-credit
   font-size: 14px
+  line-height: 1em
+  display: flex
   font-weight: bold
-  margin-top: $base-padding * 2
+  align-items: center
+  gap: 8px
+  outline-offset: 4px
+  padding: 2px 0
+  margin-top: 0
   text-decoration: none
 
-  &:hover, &:focus
-    text-decoration: underline
+  &__text
+    position: relative
+
+  &__lockup
+    display: block
+    height: 18px
+    fill: currentColor
+    padding-top: 1px
 
 .main
   +flexbox
@@ -840,7 +851,7 @@ footer
     +align-items(center)
     +justify-content(center)
     border-top: $medium-border
-    padding: $base-padding * 2 0
+    padding: $base-padding * 4 0
     width: 100%
 
     .has-sidebar &
@@ -848,9 +859,6 @@ footer
 
   .nav-section-social + .nav-section-credit
     margin-top: $base-padding * 2
-
-  .badge a
-    margin: 0
 
 h1
   font-size: 2em
