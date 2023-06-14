@@ -25,7 +25,7 @@
   {% endif %}
 </div>
 <div class="product-page-columns">
-  <div class="product-images product-image-zooming product-images-{{ theme.secondary_product_images }}">
+  <div class="product-images {% if theme.enable_product_zoom %}product-image-zooming{% endif %} product-images-{{ theme.secondary_product_images }}">
     <div class="primary-product-image-container">
       <img
         alt="{{ product.name | escape }}"
