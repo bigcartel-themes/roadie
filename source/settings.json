@@ -1,6 +1,6 @@
 {
   "name": "Roadie",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "images": [
     {
       "variable": "logo",
@@ -272,6 +272,13 @@
       ],
       "default": "small",
       "description": "Sets the mobile product grid style"
+    },
+    {
+      "variable": "enable_product_zoom",
+      "label": "Enable product image zoom on hover",
+      "type": "boolean",
+      "default": false,
+      "description": "Allow zooming of product detail images on hover"
     },
     {
       "variable": "secondary_product_images",
