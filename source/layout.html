@@ -103,7 +103,7 @@
 
           <div class="secondary-above-header-nav">
             {% if theme.show_search %}
-              <form class="search-form" name="search" action="/products" method="get" accept-charset="utf8">
+              <form class="search-form" name="search" action="/products" method="get" accept-charset="utf8" role="search">
                 <input type="hidden" name="utf8" value='✓'>
                 <label for="secondary-search-input" class="visually-hidden">Search products</label>
                 <input id="secondary-search-input" class="search-input" name="search" placeholder="Search" type="text" autocomplete="off" />
@@ -205,7 +205,7 @@
 
               {% if theme.show_search %}
                 <section class="nav-section nav-section-search">
-                  <form class="search-form" name="search" action="/products" method="get" accept-charset="utf8">
+                  <form class="search-form" name="search" action="/products" method="get" accept-charset="utf8" role="search">
                     <input type="hidden" name="utf8" value='✓'>
                     <label for="below-header-search-input" class="visually-hidden">Search products</label>
                     <input id="below-header-search-input" class="search-input" name="search" placeholder="Search" type="text" autocomplete="off" />
@@ -240,7 +240,7 @@
             </div>
             {% if theme.show_search %}
               <div class="nav-section nav-section-search">
-                <form class="search-form" name="search" action="/products" method="get" accept-charset="utf8">
+                <form class="search-form" name="search" action="/products" method="get" accept-charset="utf8" role="search">
                   <input type="hidden" name="utf8" value='✓'>
                   <label for="sidebar-search-input" class="visually-hidden">Search products</label>
                   <input id="sidebar-search-input" class="search-input" name="search" placeholder="Search" type="text" autocomplete="off" />
