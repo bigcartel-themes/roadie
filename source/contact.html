@@ -34,14 +34,12 @@
           <label class="form-label contact-form-label contact-message" for="message">Message</label>
           {{ contact | contact_input: 'message' }}
         </div>
-
         <div class="contact-form-group contact-send">
-          <button class="button send-message-button has-right-icon" type="submit" name="submit" title="Send Message" tabindex="6">
+          <button class="button send-message-button has-right-icon" type="submit" name="submit">
             Send Message
             <svg aria-hidden="true" class="button-icon-right-arrow" width="21" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.445798 0l9.9966372 9.99663714-.0035344.00381736.0035344.0029084L10.445798 20l-1.87436943-1.8743695L15.1964286 11.5H0v-3h15.1964286L8.57142857 1.87436946z" fill-rule="evenodd"/></svg>
           </button>
         </div>
-
         <div class="recaptcha-note">{{ contact.recaptcha }}</div>
       </form>
     </div>
