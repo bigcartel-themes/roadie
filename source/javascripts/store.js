@@ -5,7 +5,7 @@ $('.announcement-message-close').click(function(e) {
   });
 })
 
-$('.contact-form input[type="text"], .contact-form textarea').addClass('shrink-label');
+$('.contact-form input[type="text"], .contact-form textarea').addClass('shrink-label').removeAttr('tabindex');
 
 $('body').on('change', ".shrink-label", function(){
   $(this).parents('.form-group').addClass('focused');
