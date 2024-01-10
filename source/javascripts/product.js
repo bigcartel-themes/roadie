@@ -115,7 +115,7 @@ if (!is_touch_device()) {
       inlineOffsetY: 0,
       inlineContainer: document.body,
       sourceAttribute: 'data-zoom',
-      zoomFactor: 3,
+      zoomFactor: 2,
       paneContainer: document.body,
       inlinePane: true,
       handleTouch: true,
