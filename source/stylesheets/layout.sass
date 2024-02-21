@@ -566,33 +566,10 @@ _:-ms-fullscreen, :root .content-wrapper
     padding-top: $base-padding
 
     .social-links
-      +justify-content(space-between)
+      grid-template-columns: repeat(5, 1fr)
+      gap: 8px
+      +justify-content(flex-start)
       +flex-wrap(wrap)
-
-      a
-        +flex-basis(calc(20% - 3%))
-        height: auto
-        margin-bottom: $base-padding
-        margin-right: 3%
-        position: relative
-
-        @media screen and (max-width: $break-small)
-          max-width: 40px
-
-        @media screen and (min-width: $break-small + 1)
-          &:nth-child(5)
-            margin-right: 0 !important
-
-        &:last-child
-          margin-right: auto
-
-        &:nth-child(7)
-          margin-right: auto
-
-        &:after
-          content: ""
-          display: block
-          padding-bottom: 100%
 
   .bigcartel-credit
     margin-top: $base-padding * 2
@@ -770,13 +747,10 @@ _:-ms-fullscreen, :root .content-wrapper
     +flex-shrink(0)
     background: $button-background-color
     border-radius: 50%
+    color: $button-text-color
     height: 40px
-    margin-right: $base-padding
     text-align: center
     width: 40px
-
-    @media screen and (max-width: $break-small)
-      margin-right: $base-padding * 2
 
     &:hover, &:focus
       background: $button-hover-background-color
@@ -784,14 +758,11 @@ _:-ms-fullscreen, :root .content-wrapper
       svg
         fill: $button-hover-text-color
 
-    .footer-nav &
-      margin: 0 $base-padding / 2
-
     svg
       display: block
       fill: $button-text-color
-      height: 20px
-      width: 20px
+      height: 18px
+      width: 18px
 
 .nav-section-credit
   border: none !important
@@ -843,7 +814,8 @@ footer
     display: none
 
   .social-links
-    +justify-content(space-around)
+    gap: 8px
+    +justify-content(center)
 
   .footer-nav
     +flexbox
