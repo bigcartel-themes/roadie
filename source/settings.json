@@ -18,6 +18,211 @@
       "description": "Adds an image to the Home page"
     }
   ],
+  "preset_styles": {
+    "preview": {
+      "title_font": "primary_font",
+      "body_font": "primary_font",
+      "text_color": "text_color",
+      "background_color": "background_color"
+    },
+    "presets": [
+      {
+        "group_name": "Classic",
+        "styles": [
+          {
+            "style_name": "Classic #1",
+            "fonts": {
+              "primary_font": "Poppins"
+            },
+            "colors": {
+              "background_color": "#FFFFFF",
+              "text_color": "#000000",
+              "link_hover_color": "#056FFA",
+              "border_color": "#000000",
+              "button_text_color": "#FFFFFF",
+              "button_background_color": "#000000",
+              "button_hover_text_color": "#FFFFFF",
+              "button_hover_background_color": "#056FFA",
+              "badge_text_color": "#000000",
+              "badge_background_color": "#9AFF00",
+              "announcement_text_color": "#FFFFFF",
+              "announcement_background_color": "#000000"
+            }
+          },
+          {
+            "style_name": "Classic #2",
+            "fonts": {
+              "primary_font": "DM Sans"
+            },
+            "colors": {
+              "background_color": "#141415",
+              "text_color": "#F8F8F8",
+              "link_hover_color": "#AEAEAE",
+              "border_color": "#4D4D4D",
+              "button_text_color": "#141415",
+              "button_background_color": "#F8F8F8",
+              "button_hover_text_color": "#F8F8F8",
+              "button_hover_background_color": "#4D4D4D",
+              "badge_text_color": "#F8F8F8",
+              "badge_background_color": "#141415",
+              "announcement_text_color": "#F8F8F8",
+              "announcement_background_color": "#4D4D4D"
+            }
+          },
+          {
+            "style_name": "Classic #3",
+            "fonts": {
+              "primary_font": "DM Sans"
+            },
+            "colors": {
+              "background_color": "#F8F8FA",
+              "text_color": "#2A2A2C",
+              "link_hover_color": "#203BE1",
+              "border_color": "#E3E4EA",
+              "button_text_color": "#F8F8FA",
+              "button_background_color": "#203BE1",
+              "button_hover_text_color": "#F8F8F8",
+              "button_hover_background_color": "#2A2A2C",
+              "badge_text_color": "#F8F8FA",
+              "badge_background_color": "#203BE1",
+              "announcement_text_color": "#0C143B",
+              "announcement_background_color": "#E3E4EA"
+            }
+          }
+        ]
+      },
+      {
+        "group_name": "Natural",
+        "styles": [
+          {
+            "style_name": "Natural #1",
+            "fonts": {
+              "primary_font": "Lato"
+            },
+            "colors": {
+              "background_color": "#F5F4EE",
+              "text_color": "#262522",
+              "link_hover_color": "#8A4942",
+              "border_color": "#E1DECC",
+              "button_text_color": "#F5F4EE",
+              "button_background_color": "#8A4942",
+              "button_hover_text_color": "#F5F4EE",
+              "button_hover_background_color": "#262522",
+              "badge_text_color": "#F5F4EE",
+              "badge_background_color": "#898952",
+              "announcement_text_color": "#262522",
+              "announcement_background_color": "#F1DBCE"
+            }
+          },
+          {
+            "style_name": "Natural #2",
+            "fonts": {
+              "primary_font": "Cutive Mono"
+            },
+            "colors": {
+              "background_color": "#FEF5EF",
+              "text_color": "#584B53",
+              "link_hover_color": "#1F161B",
+              "border_color": "#FADBC6",
+              "button_text_color": "#FEF5EF",
+              "button_background_color": "#584B53",
+              "button_hover_text_color": "#FEF5EF",
+              "button_hover_background_color": "#1F161B",
+              "badge_text_color": "#1F161B",
+              "badge_background_color": "#D6E3F8",
+              "announcement_text_color": "#1F161B",
+              "announcement_background_color": "#D6E3F8"
+            }
+          }
+        ]
+      },
+      {
+        "group_name": "Playful",
+        "styles": [
+          {
+            "style_name": "Playful #1",
+            "fonts": {
+              "primary_font": "Syne"
+            },
+            "colors": {
+              "background_color": "#CEFF66",
+              "text_color": "#000000",
+              "link_hover_color": "#0000FF",
+              "border_color": "#000000",
+              "button_text_color": "#FFFFFF",
+              "button_background_color": "#0000FF",
+              "button_hover_text_color": "#FFFFFF",
+              "button_hover_background_color": "#000000",
+              "badge_text_color": "#FFFFFF",
+              "badge_background_color": "#0000FF",
+              "announcement_text_color": "#FFFFFF",
+              "announcement_background_color": "#000000"
+            }
+          },
+          {
+            "style_name": "Playful #2",
+            "fonts": {
+              "primary_font": "Concert One"
+            },
+            "colors": {
+              "background_color": "#FFFFFF",
+              "text_color": "#0B0423",
+              "link_hover_color": "#F90081",
+              "border_color": "#EDEFEF",
+              "button_text_color": "#FFFFFF",
+              "button_background_color": "#F90081",
+              "button_hover_text_color": "#FFFFFF",
+              "button_hover_background_color": "#D1006C",
+              "badge_text_color": "#0B0423",
+              "badge_background_color": "#22FFF8",
+              "announcement_text_color": "#0B0423",
+              "announcement_background_color": "#F6FF20"
+            }
+          },
+          {
+            "style_name": "Playful #3",
+            "fonts": {
+              "primary_font": "Syne"
+            },
+            "colors": {
+              "background_color": "#FFFFFF",
+              "text_color": "#000000",
+              "link_hover_color": "#056FFA",
+              "border_color": "#000000",
+              "button_text_color": "#FFFFFF",
+              "button_background_color": "#000000",
+              "button_hover_text_color": "#FFFFFF",
+              "button_hover_background_color": "#056FFA",
+              "badge_text_color": "#000000",
+              "badge_background_color": "#9AFF00",
+              "announcement_text_color": "#FFFFFF",
+              "announcement_background_color": "#000000"
+            }
+          },
+          {
+            "style_name": "Playful #4",
+            "fonts": {
+              "primary_font": "Quicksand"
+            },
+            "colors": {
+              "background_color": "#FFE9F4",
+              "text_color": "#243588",
+              "link_hover_color": "#0C143B",
+              "border_color": "#FACAE2",
+              "button_text_color": "#FFE9F4",
+              "button_background_color": "#243588",
+              "button_hover_text_color": "#243588",
+              "button_hover_background_color": "#FFFA8D",
+              "badge_text_color": "#0C143B",
+              "badge_background_color": "#FFFA8D",
+              "announcement_text_color": "#0C143B",
+              "announcement_background_color": "#FFFA8D"
+            }
+          }
+        ]
+      }
+    ]
+  },
   "fonts": [
     {
       "variable": "primary_font",
@@ -37,12 +242,12 @@
       "default": "#000000"
     },
     {
-      "variable": "link_hover",
+      "variable": "link_hover_color",
       "label": "Link hover color",
       "default": "#056FFA"
     },
     {
-      "variable": "border",
+      "variable": "border_color",
       "label": "Border Color",
       "default": "#000000"
     },
@@ -85,16 +290,6 @@
       "variable": "announcement_background_color",
       "label": "Announcement Message Background",
       "default": "#000000"
-    },
-    {
-      "variable": "error_text_color",
-      "label": "Error Text Color",
-      "default": "#FFFFFF"
-    },
-    {
-      "variable": "error_background_color",
-      "label": "Error Background Color",
-      "default": "#EB0000"
     }
   ],
   "options": [
@@ -456,7 +651,7 @@
     "content_color": "{{ text_color }}",
     "link_font_size": "14px",
     "link_color": "{{ text_color }}",
-    "link_hover_color": "{{ link_hover }}",
+    "link_hover_color": "{{ link_hover_color }}",
     "error_border_width": "0",
     "error_font_size": "16px",
     "error_background_color": "#ea4859",
@@ -499,11 +694,11 @@
     "button_position": "center",
     "button_hover_background_color": "{{ button_hover_background_color }}",
     "step_inactive_header_color": "opacify({{ text_color }}, .25)",
-    "step_border_color": "{{ border }}",
+    "step_border_color": "{{ border_color }}",
     "step_border_width": "4px",
     "step_header_text_transform": "uppercase",
     "step_background_color": "{{ background_color }}",
-    "step_inactive_border_color": "opacify({{ border }}, .25)",
+    "step_inactive_border_color": "opacify({{ border_color }}, .25)",
     "step_primary_font_weight": "normal",
     "step_header_color": "{{ text_color }}",
     "step_header_position": "center",
@@ -512,19 +707,19 @@
     "step_primary_font_size": "24px",
     "step_border_style": "solid",
     "step_primary_font": "{{ primary_font }}",
-    "summary_inactive_item_border_color": "opacify({{ border }}, .25)",
+    "summary_inactive_item_border_color": "opacify({{ border_color }}, .25)",
     "summary_font_size": "14px",
     "summary_submit_background_color": "{{ background_color }}",
     "summary_inactive_color": "opacify({{ text_color }}, .25)",
-    "summary_submit_border_color": "opacify({{ border }}, .25)",
+    "summary_submit_border_color": "opacify({{ border_color }}, .25)",
     "summary_item_border_width": "1px",
-    "summary_item_border_color": "{{ border }}",
+    "summary_item_border_color": "{{ border_color }}",
     "summary_secondary_color": "{{ text_color }}",
     "summary_submit_border_width": "2px",
-    "summary_item_list_border_color": "{{ border }}",
+    "summary_item_list_border_color": "{{ border_color }}",
     "summary_inactive_secondary_color": "opacify({{ text_color }}, .25)",
     "summary_item_list_border_width": "2px",
     "summary_color": "{{ text_color }}",
-    "summary_inactive_item_list_border_color": "opacify({{ border }}, .25)"
+    "summary_inactive_item_list_border_color": "opacify({{ border_color }}, .25)"
   }
 }
