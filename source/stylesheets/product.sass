@@ -95,7 +95,9 @@
 
 .secondary-product-image-container--thumbs
   +flex-direction(row)
-  margin-top: 0
+  flex-wrap: wrap
+  margin-top: 8px
+  gap: 8px
 
   &.has-full
     display: none
@@ -107,10 +109,11 @@
     cursor: pointer
     height: 100%
     position: relative
-    width: 20%
+    width: calc((100% / 5) - 8px + (8px / 5))
+    aspect-ratio: 1 / 1
 
     &:after
-      border: 4px solid transparent
+      border: 2px solid transparent
       bottom: 0
       content: " "
       left: 0
@@ -128,8 +131,14 @@
 
   .secondary-product-image
     position: relative
+    object-fit: cover
+    width: 100%
+    height: 100%
 
 .secondary-product-image-container--full
+  gap: 8px
+  margin-top: $base-padding
+
   @media screen and (max-width: $break-product-details)
     display: none
 
