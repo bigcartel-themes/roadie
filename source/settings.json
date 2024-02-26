@@ -1,6 +1,6 @@
 {
   "name": "Roadie",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "images": [
     {
       "variable": "logo",
@@ -465,26 +465,39 @@
         ["2 products across", "small"],
         ["Stacked (no grid)", "horizontal"]
       ],
-      "default": "small",
+      "default": "horizontal",
       "description": "Sets the mobile product grid style"
     },
     {
-      "variable": "enable_product_zoom",
-      "label": "Enable product image zoom on hover",
+      "variable": "product_image_zoom",
+      "label": "Enable product image zoom",
       "type": "boolean",
-      "default": false,
-      "description": "Allow zooming of product detail images on hover"
+      "default": true,
+      "description": "Click to open a larger version of the Product page image"
     },
     {
-      "variable": "secondary_product_images",
-      "label": "Secondary product images",
+      "variable": "desktop_product_page_images",
+      "label": "Desktop product page images",
       "type": "select",
       "options": [
-        ["Thumbnails", "thumbs"],
-        ["Full width", "full"]
+        ["Thumbnails", "thumbnails"],
+        ["Carousel", "carousel"],
+        ["Stacked 2 column", "two-column"],
+        ["Stacked full width", "stacked"]
       ],
-      "default": "thumbs",
-      "description": "Display secondary product images full-width or as thumbnails on the Product page"
+      "default": "carousel",
+      "description": "Sets the display of the Product page gallery"
+    },
+    {
+      "variable": "mobile_product_page_images",
+      "label": "Mobile product page image carousel",
+      "type": "select",
+      "options": [
+        ["Show thumbnails", "show-thumbnails"],
+        ["Hide thumbnails", "hide-thumbnails"]
+      ],
+      "default": "show-thumbnails",
+      "description": "Choose to hide or show thumbnails on the mobile Product page carousel"
     },
     {
       "variable": "featured_items",
@@ -654,16 +667,16 @@
     "link_hover_color": "{{ link_hover_color }}",
     "error_border_width": "0",
     "error_font_size": "16px",
-    "error_background_color": "#ea4859",
+    "error_background_color": "#9D0B1C",
     "error_color": "#ffffff",
     "error_border_radius": "0",
-    "error_border_color": "#ea4859",
+    "error_border_color": "#9D0B1C",
     "custom_inputs": true,
     "input_focus_color": "#000000",
     "input_focus_background_color": "#ffffff",
     "input_border_radius": "0",
     "input_focus_border_color": "#000000",
-    "input_error_border_color": "#ea4859",
+    "input_error_border_color": "#9D0B1C",
     "input_color": "#000000",
     "input_error_color": "#000000",
     "input_border_color": "#8e8e8e",

@@ -85,6 +85,8 @@ function loadProductContent(product) {
   $.get("/product/" + product.permalink + "?" + $.now(), function(response, status, xhr) {
 
     $container.html($(response).find(".main"));
+    initCarousel('quickshop');
+    initLightbox();
     $('.qs-product-container').removeClass('spinner');
     $('.qs-product-container').animate({
       scrollTop: 0

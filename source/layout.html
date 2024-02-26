@@ -31,9 +31,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{{ theme | theme_css_url }}" media="screen" rel="stylesheet" type="text/css">
     {{ head_content }}
+    <style>.preloader * { opacity: 0; }.transition-preloader * { transition: none !important }</style>
   </head>
-
-  <body id="{{ page.permalink }}_page" class="{{ body_class }} {{ page.category }} {% if theme.show_layout_gutters %}show-gutters{% else %}no-gutters{% endif %}">
+  <body id="{{ page.permalink }}_page" class="{{ body_class }} {{ page.category }} {% if theme.show_layout_gutters %}show-gutters{% else %}no-gutters{% endif %} preloader transition-preloader">
     <a class="skip-link" href="#main">Skip to main content</a>
     {% if theme.images.background_image != blank and theme.background_image_style != 'plain_image' %}<div class="background-image-overlay background-image-overlay-{{ theme.background_image_style }}"></div>{% endif %}
     {% if theme.announcement_message_text != blank %}
@@ -467,7 +467,10 @@
       var themeOptions = {
         primaryGradientColor: '{{ theme.background_color }}',
         hasAnnouncement: {% if theme.announcement_message_text %}true{%else %}false{%endif %},
-        showSoldOutOptions: {{ theme.show_sold_out_product_options }}
+        showSoldOutOptions: {{ theme.show_sold_out_product_options }},
+        desktopProductPageImages: '{{ theme.desktop_product_page_images }}',
+        mobileProductPageImages: '{{ theme.mobile_product_page_images }}',
+        productImageZoom: {{ theme.product_image_zoom }}
       }
       var inPreview = (/http(s?):\/\/draft-+\w+\.bigcartel\.(test|biz|com)/.test(window.origin)||(/\/admin\/design/.test(top.location.pathname)));
       function setCookie(name,value,days) {
@@ -578,7 +581,7 @@
       window.lazySizesConfig = window.lazySizesConfig || {};
       window.lazySizesConfig.loadMode = 1;
     </script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="{{ 'api' | theme_js_url }}"></script>
     <script type="text/javascript">
 
