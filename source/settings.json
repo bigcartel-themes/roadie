@@ -1,6 +1,6 @@
 {
   "name": "Roadie",
-  "version": "1.5.3",
+  "version": "1.6.0",
   "images": [
     {
       "variable": "logo",
@@ -465,7 +465,7 @@
         ["2 products across", "small"],
         ["Stacked (no grid)", "horizontal"]
       ],
-      "default": "horizontal",
+      "default": "small",
       "description": "Sets the mobile product grid style"
     },
     {
