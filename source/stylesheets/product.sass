@@ -1,4 +1,3 @@
-@import 'variables'
 
 .product-heading
   border-bottom: $medium-border
@@ -205,7 +204,6 @@
     margin-top: $base-padding
 
 .product-option-select-container
-  border: $small-border
   height: 58px
   padding: 0
   position: relative
@@ -218,13 +216,13 @@
       fill: $link-hover-color
 
   select
-    background: none
+    border: $small-border
     color: $primary-text-color
     display: block
     font-size: 20px
     font-weight: bold
     height: 100%
-    padding-left: $base-padding * 1.5
+    padding-left: $base-padding * 1.5 - 2
     padding-right: 32px
     position: relative
     width: 100%
@@ -390,21 +388,29 @@
 
 .product-description
 
-  p:first-child
-    margin-top: 0
-
   *
     text-transform: none
 
-  a
-    font-weight: bold
-    text-decoration: underline
+  p
+    margin: revert
+
+  &>:first-child
+    margin-top: 0
+
+  &>:last-child
+    margin-bottom: 0
 
   ol, ul
-    padding-left: 1em
+    margin: 1em
 
-  img, iframe
-    max-width: 100%
+  ul
+    list-style: disc
+
+  ol
+    list-style: decimal
+
+  a
+    text-decoration: underline
 
 .right-sidebar
   .product-images
@@ -521,3 +527,6 @@ input[type=number]
 _:-ms-fullscreen, :root .product-page-columns
   flex: 1 0 auto
   height: auto
+
+.related-products-container
+  margin-top: 48px
