@@ -794,7 +794,7 @@ _:-ms-fullscreen, :root .content-wrapper
   padding-bottom: 60px
 
   @media screen and (max-width: $break-small)
-    display: block
+    display: flex
 
   @media screen and (max-width: $break-small)
     .sidebar-visible-mobile &
@@ -828,6 +828,10 @@ footer
 
       @media screen and (max-width: $break-small)
         +flexbox
+
+  .sidebar-visible-mobile &
+    display: none
+
 h1
   font-size: 2em
   font-weight: bold
