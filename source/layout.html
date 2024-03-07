@@ -33,7 +33,7 @@
     {{ head_content }}
     <style>.preloader * { opacity: 0; }.transition-preloader * { transition: none !important }</style>
   </head>
-  <body id="{{ page.permalink }}_page" class="{{ body_class }} {{ page.category }} {% if theme.show_layout_gutters %}show-gutters{% else %}no-gutters{% endif %} preloader transition-preloader">
+  <body id="{{ page.permalink }}" class="{{ body_class }} {{ page.category }} {% if theme.show_layout_gutters %}show-gutters{% else %}no-gutters{% endif %} preloader transition-preloader">
     <a class="skip-link" href="#main">Skip to main content</a>
     {% if theme.images.background_image != blank and theme.background_image_style != 'plain_image' %}<div class="background-image-overlay background-image-overlay-{{ theme.background_image_style }}"></div>{% endif %}
     {% if theme.announcement_message_text != blank %}
