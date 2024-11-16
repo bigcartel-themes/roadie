@@ -58,6 +58,7 @@
                 image-square
               {% endif %}
             {% endcapture %}
+            {% capture status_classes %}{{ theme.product_badge_style }} {% if product.status == 'active' and product.on_sale %}status-primary{% else %}status-secondary{% endif %}{% endcapture %}
             <a class="prod-thumb product-image-{{ theme.product_grid_image_size }} {{ theme.show_overlay }} {{ theme.grid_image_style }} {% if theme.show_quickview %}show-quickview{% endif %}" href="{{ product.url }}" title="View {{ product.name | escape }}">
               <div class="prod-thumb-container">
                 <div class="product-list-image-container product-list-image-container-{{ theme.grid_image_style }}">
@@ -80,7 +81,7 @@
                     "
                     data-sizes="auto"
                   >
-                  {% if product_status != blank and theme.product_badge_style != 'inline' %}<div class="prod-thumb-status {{ theme.product_badge_style }}">{{ product_status }}</div>{% endif %}
+                  {% if product_status != blank and theme.product_badge_style != 'inline' %}<div class="prod-thumb-status {{ status_classes }}">{{ product_status }}</div>{% endif %}
                   {% if theme.show_quickview %}
                     <div class="product-list-quickview-container">
                       <div class="product-list-quickview-container-background"></div>
@@ -103,7 +104,7 @@
                       {{ product.default_price | money: theme.money_format }}
                     {% endif %}
                   </div>
-                  {% if product_status != blank and theme.product_badge_style == 'inline' %}<div class="prod-thumb-status {{ theme.product_badge_style }}">{{ product_status }}</div>{% endif %}
+                  {% if product_status != blank and theme.product_badge_style == 'inline' %}<div class="prod-thumb-status {{ status_classes }}">{{ product_status }}</div>{% endif %}
                   {% if theme.show_quickview and theme.mobile_product_grid_style == 'horizontal' %}
                     <div role="button" class="button open-quickview mobile-stacked-quickview" data-permalink="{{ product.permalink }}" data-has-default="{{ product.has_default_option }}" title="Quick view {{ product.name | escape }}">
                       <span class="open-quickview-text">Quick View</span>
