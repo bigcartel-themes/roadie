@@ -33,7 +33,7 @@
     {{ head_content }}
     <style>.preloader * { opacity: 0; }.transition-preloader * { transition: none !important }</style>
   </head>
-  <body id="{{ page.permalink }}" class="{{ body_class }} {{ page.category }} {% if theme.show_layout_gutters %}show-gutters{% else %}no-gutters{% endif %} preloader transition-preloader">
+  <body id="{{ page.permalink }}" class="{{ body_class }} {{ page.category }} {% if theme.show_layout_gutters %}show-gutters{% else %}no-gutters{% endif %} preloader transition-preloader"  data-bc-page-type="{% if page.category == 'custom' %}custom{% else %}{{ page.permalink }}{% endif %}">
     <a class="skip-link" href="#main">Skip to main content</a>
     {% if theme.images.background_image != blank and theme.background_image_style != 'plain_image' %}<div class="background-image-overlay background-image-overlay-{{ theme.background_image_style }}"></div>{% endif %}
     {% if theme.announcement_message_text != blank %}
@@ -121,7 +121,7 @@
         </aside>
       {% endif %}
 
-      <header class="header">
+      <header class="header" data-bc-hook="header">
         <div class="wrapper header-wrapper{% if theme.header_position == 'left' %} header-left-align{% else %} header-center-align{% endif %} {% unless theme.theme_layout contains 'show_toggle' %}hide-toggle{% endunless %}">
           <button class="open-menu hamburger hamburger--squeeze" type="button" title="Open menu">
             <span class="hamburger-box">
@@ -388,7 +388,7 @@
         </main>
       </div>
 
-      <footer class="footer {% if body_class contains 'has-sidebar' %}hide-desktop{% endif %}" role="contentinfo">
+      <footer class="footer {% if body_class contains 'has-sidebar' %}hide-desktop{% endif %}" role="contentinfo" data-bc-hook="footer">
         <nav class="footer-nav" id="footer" role="navigation" aria-label="Footer">
           {% if theme.instagram_url != blank
             or theme.tiktok_url != blank
