@@ -7,6 +7,7 @@
   {% when 'coming-soon' %}
     {% assign product_status = 'Coming soon' %}
 {% endcase %}
+{% capture status_classes %}{{ theme.product_badge_style }} {% if product.status == 'active' and product.on_sale %}status-primary{% else %}status-secondary{% endif %}{% endcapture %}
 <div class="page-heading product-heading">
   <h1 class="page-title">{{ page.name }}</h1>
 </div>
@@ -284,7 +285,7 @@
                     "
                     data-sizes="auto"
                   >
-                  {% if product_status != blank and theme.product_badge_style != 'inline' %}<div class="prod-thumb-status {{ theme.product_badge_style }}">{{ product_status }}</div>{% endif %}
+                  {% if product_status != blank and theme.product_badge_style != 'inline' %}<div class="prod-thumb-status {{ status_classes }}">{{ product_status }}</div>{% endif %}
                   {% if theme.show_quickview %}
                     <div class="product-list-quickview-container">
                       <div class="product-list-quickview-container-background"></div>
@@ -307,7 +308,7 @@
                       {{ product.default_price | money: theme.money_format }}
                     {% endif %}
                   </div>
-                  {% if product_status != blank and theme.product_badge_style == 'inline' %}<div class="prod-thumb-status {{ theme.product_badge_style }}">{{ product_status }}</div>{% endif %}
+                  {% if product_status != blank and theme.product_badge_style == 'inline' %}<div class="prod-thumb-status {{ status_classes }}">{{ product_status }}</div>{% endif %}
                   {% if theme.show_quickview and theme.mobile_product_grid_style == 'horizontal' %}
                     <div role="button" class="button open-quickview mobile-stacked-quickview" data-permalink="{{ product.permalink }}" data-has-default="{{ product.has_default_option }}" title="Quick view {{ product.name | escape }}">
                       <span class="open-quickview-text">Quick View</span>

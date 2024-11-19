@@ -432,9 +432,9 @@ ul.sort-by-nav-links
     +flexbox
     +align-items(center)
     +justify-content(center)
-    background: $badge-background-color
+    background: $badge-background-color-primary
     border-radius: 50%
-    color: $badge-text-color
+    color: $badge-text-color-primary
     font-size: 12px
     line-height: 1.25em
     height: 64px
@@ -444,6 +444,14 @@ ul.sort-by-nav-links
     text-align: center
     top: $base-padding
     width: 64px
+
+    &.status-primary
+      background: $badge-background-color-primary
+      color: $badge-text-color-primary
+
+    &.status-secondary
+      background: $badge-background-color-secondary
+      color: $badge-text-color-secondary
 
     @media screen and (max-width: $break-small)
       font-size: 10px
@@ -457,8 +465,8 @@ ul.sort-by-nav-links
         top: $base-padding
 
   &.bar
-    background: $badge-background-color
-    color: $badge-text-color
+    background: $badge-background-color-primary
+    color: $badge-text-color-primary
     font-size: 13px
     line-height: 1em
     position: absolute
