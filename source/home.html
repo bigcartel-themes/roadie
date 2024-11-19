@@ -58,8 +58,8 @@
                 image-square
               {% endif %}
             {% endcapture %}
-            <a class="prod-thumb product-image-{{ theme.product_grid_image_size }} {{ theme.show_overlay }} {{ theme.grid_image_style }} {% if theme.show_quickview %}show-quickview{% endif %}" href="{{ product.url }}" title="View {{ product.name | escape }}">
-              <div class="prod-thumb-container">
+            <a class="prod-thumb product-image-{{ theme.product_grid_image_size }} {{ theme.show_overlay }} {{ theme.grid_image_style }} {% if theme.show_quickview %}show-quickview{% endif %}" href="{{ product.url }}" title="View {{ product.name | escape }}" data-bc-hook="product-entry" data-bc-product-id="{{ product.id }}">
+              <div class="prod-thumb-container" data-bc-hook="product-thumbnail">
                 <div class="product-list-image-container product-list-image-container-{{ theme.grid_image_style }}">
                   <img
                     alt=""
@@ -94,9 +94,9 @@
               </div>
               <div class="prod-thumb-info">
                 <div class="prod-thumb-background"></div>
-                <div class="prod-thumb-info-headers">
-                  <div class="prod-thumb-name">{{ product.name }}</div>
-                  <div class="prod-thumb-price">
+                <div class="prod-thumb-info-headers" data-bc-hook="product-header">
+                  <div class="prod-thumb-name" data-bc-hook="product-title">{{ product.name }}</div>
+                  <div class="prod-thumb-price" data-bc-hook="product-price">
                     {% if product.variable_pricing %}
                       {{ product.min_price | money: theme.money_format }} - {{ product.max_price | money: theme.money_format }}
                     {% else %}

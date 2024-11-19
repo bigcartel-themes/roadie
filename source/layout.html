@@ -121,7 +121,7 @@
         </aside>
       {% endif %}
 
-      <header class="header">
+      <header class="header" data-bc-hook="header">
         <div class="wrapper header-wrapper{% if theme.header_position == 'left' %} header-left-align{% else %} header-center-align{% endif %} {% unless theme.theme_layout contains 'show_toggle' %}hide-toggle{% endunless %}">
           <button class="open-menu hamburger hamburger--squeeze" type="button" title="Open menu">
             <span class="hamburger-box">
@@ -364,7 +364,7 @@
           </nav>
         </aside>
 
-        <main class="main main-{{ page.permalink }}" id="main">
+        <main class="main main-{{ page.permalink }}" id="main" data-bc-hook="main">
           {% if page.category == 'custom' %}
             <div class="custom-page">
               <div class="page-heading">
@@ -378,7 +378,7 @@
         </main>
       </div>
 
-      <footer class="footer {% if body_class contains 'has-sidebar' %}hide-desktop{% endif %}" role="contentinfo">
+      <footer class="footer {% if body_class contains 'has-sidebar' %}hide-desktop{% endif %}" role="contentinfo" data-bc-hook="footer">
         <nav class="footer-nav" id="footer" role="navigation" aria-label="Footer">
           {% if theme.instagram_url != blank
             or theme.tiktok_url != blank
