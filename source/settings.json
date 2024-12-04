@@ -1,6 +1,6 @@
 {
   "name": "Roadie",
-  "version": "1.7.1",
+  "version": "1.8.0",
   "images": [
     {
       "variable": "logo",
@@ -22,7 +22,7 @@
     "preview": {
       "title_font": "primary_font",
       "body_font": "primary_font",
-      "text_color": "text_color",
+      "text_color": "primary_text_color",
       "background_color": "background_color"
     },
     "presets": [
@@ -36,7 +36,7 @@
             },
             "colors": {
               "background_color": "#FFFFFF",
-              "text_color": "#000000",
+              "primary_text_color": "#000000",
               "link_hover_color": "#056FFA",
               "border_color": "#000000",
               "button_text_color": "#FFFFFF",
@@ -58,7 +58,7 @@
             },
             "colors": {
               "background_color": "#141415",
-              "text_color": "#F8F8F8",
+              "primary_text_color": "#F8F8F8",
               "link_hover_color": "#AEAEAE",
               "border_color": "#4D4D4D",
               "button_text_color": "#141415",
@@ -80,7 +80,7 @@
             },
             "colors": {
               "background_color": "#F8F8FA",
-              "text_color": "#2A2A2C",
+              "primary_text_color": "#2A2A2C",
               "link_hover_color": "#203BE1",
               "border_color": "#E3E4EA",
               "button_text_color": "#F8F8FA",
@@ -107,7 +107,7 @@
             },
             "colors": {
               "background_color": "#F5F4EE",
-              "text_color": "#262522",
+              "primary_text_color": "#262522",
               "link_hover_color": "#8A4942",
               "border_color": "#E1DECC",
               "button_text_color": "#F5F4EE",
@@ -129,7 +129,7 @@
             },
             "colors": {
               "background_color": "#FEF5EF",
-              "text_color": "#584B53",
+              "primary_text_color": "#584B53",
               "link_hover_color": "#1F161B",
               "border_color": "#FADBC6",
               "button_text_color": "#FEF5EF",
@@ -156,7 +156,7 @@
             },
             "colors": {
               "background_color": "#CEFF66",
-              "text_color": "#000000",
+              "primary_text_color": "#000000",
               "link_hover_color": "#0000FF",
               "border_color": "#000000",
               "button_text_color": "#FFFFFF",
@@ -178,7 +178,7 @@
             },
             "colors": {
               "background_color": "#FFFFFF",
-              "text_color": "#0B0423",
+              "primary_text_color": "#0B0423",
               "link_hover_color": "#F90081",
               "border_color": "#EDEFEF",
               "button_text_color": "#FFFFFF",
@@ -200,7 +200,7 @@
             },
             "colors": {
               "background_color": "#FFFFFF",
-              "text_color": "#000000",
+              "primary_text_color": "#000000",
               "link_hover_color": "#056FFA",
               "border_color": "#000000",
               "button_text_color": "#FFFFFF",
@@ -222,7 +222,7 @@
             },
             "colors": {
               "background_color": "#FFE9F4",
-              "text_color": "#243588",
+              "primary_text_color": "#243588",
               "link_hover_color": "#0C143B",
               "border_color": "#FACAE2",
               "button_text_color": "#FFE9F4",
@@ -255,7 +255,7 @@
       "default": "#FFFFFF"
     },
     {
-      "variable": "text_color",
+      "variable": "primary_text_color",
       "label": "Text",
       "default": "#000000"
     },
