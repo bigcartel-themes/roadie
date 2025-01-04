@@ -242,6 +242,11 @@
     margin-bottom: 0
     padding: $base-padding * 2 0
 
+.cart-actions
+  gap: 15px
+  display: flex
+  flex-direction: column
+
 .cart-subtotal
   +flexbox
   +align-items(center)
@@ -275,16 +280,11 @@
     margin-left: 0
     max-width: 100%
 
-.page-heading .continue-shopping-link
-  display: none
+.page-heading .copy-cart-link
+  display: block
+  margin-left: auto
+  text-decoration: none
 
-@media screen and (max-width: $break-small)
-  .cart-sub-footer .continue-shopping-link
-    display: none
-
-  .page-heading .continue-shopping-link
-    display: block
-    margin-left: auto
-
-  .empty-cart-heading .continue-shopping-link
-    display: none
+  &:hover
+    text-decoration: underline
+    
