@@ -1,9 +1,10 @@
 <div class="page-heading{% if cart.item_count == 0 %} empty-cart-heading{% endif %}">
   <h1 class="page-title">{{ page.name }}</h1>
-  <a class="icon-link icon-left-link continue-shopping-link" href="/products">
-    <svg width="16" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.996638 20L8e-7 10.00336286l.0035344-.00381736L8e-7 9.9966371 9.996638 0l1.87436943 1.8743695L5.2460074 8.5H20.442436v3H5.2460074l6.62500003 6.62563054z" fill-rule="evenodd"/></svg>
-    Continue shopping
+  {% if cart.shareable_link %}
+  <a class="copy-cart-link" href="{{ cart.shareable_link }}" data-clipboard-text="{{ cart.shareable_link }}">
+    Share this cart
   </a>
+  {% endif %}
 </div>
 {% if errors != blank %}
   <ul class="errors {{ page.permalink }}-errors">
@@ -52,21 +53,22 @@
 
       <div class="cart-footer">
         <div class="cart-sub-footer">
-          <a class="icon-link icon-left-link continue-shopping-link" href="/products">
-            <svg width="16" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.996638 20L8e-7 10.00336286l.0035344-.00381736L8e-7 9.9966371 9.996638 0l1.87436943 1.8743695L5.2460074 8.5H20.442436v3H5.2460074l6.62500003 6.62563054z" fill-rule="evenodd"/></svg>
-          Continue shopping
-          </a>
           <div class="cart-subtotal">
             <span class="cart-subtotal-label">Subtotal</span>
             <span class="cart-subtotal-amount">{{ cart.subtotal | money: theme.money_format }}</span></div>
         </div>
-        <button type="submit" name="checkout" class="button checkout-button has-right-icon">Checkout <svg aria-hidden="true" class="button-icon-right-arrow" width="21" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.445798 0l9.9966372 9.99663714-.0035344.00381736.0035344.0029084L10.445798 20l-1.87436943-1.8743695L15.1964286 11.5H0v-3h15.1964286L8.57142857 1.87436946z" fill-rule="evenodd"/></svg></button>
+        <div class="cart-actions">
+          <button type="submit" name="checkout" class="button checkout-button has-right-icon">Checkout <svg aria-hidden="true" class="button-icon-right-arrow" width="21" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.445798 0l9.9966372 9.99663714-.0035344.00381736.0035344.0029084L10.445798 20l-1.87436943-1.8743695L15.1964286 11.5H0v-3h15.1964286L8.57142857 1.87436946z" fill-rule="evenodd"/></svg></button>
+          <a class="icon-link icon-left-link continue-shopping-link" href="/products">
+            Continue shopping
+          </a>
+        </div>
       </div>
     </form>
   {% endif %}
   <div class="alert-message cart-alert-message">
-    <div class="alert-message-header">Your cart is empty!</div>
-    <div class="alert-message-text">Sounds like a good time to start shopping.</div>
+    <div class="alert-message-header">Your cart is empty</div>
+    <div class="alert-message-text"></div>
     <a href="/products" class="button alert-message-button">Start shopping</a>
   </div>
 </div>
