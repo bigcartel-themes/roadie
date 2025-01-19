@@ -677,6 +677,12 @@
       "description": "Ex: https://linkedin.com/in/bigcartel"
     },
     {
+      "variable": "twitch_url",
+      "label": "Twitch URL",
+      "type": "text",
+      "description": "Ex: https://twitch.tv/username"
+    },
+    {
       "variable": "tumblr_url",
       "label": "Tumblr URL",
       "type": "text",
