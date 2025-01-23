@@ -293,8 +293,8 @@
     {% endcomment %}
     {% assign final_permalinks_array = final_product_permalinks | split: ',' %}
     {% if final_permalinks_array.size > 0 %}
-      <aside class="related-products-container" data-num-products="{{ related_products_limit }}" role="complementary" aria-label="Related products">
-        <h2 class="related-products-title">{{ theme.related_products_header }}</h2>
+      <aside class="related-products-container" data-num-products="{{ related_products_limit }}" role="complementary" aria-label="{{ theme.related_products_header | default: 'You might also like' }}">
+        <h2 class="related-products-title">{{ theme.related_products_header | default: 'You might also like' }}</h2>
         <div class="product-list-container">
           <div class="related-product-list product-list {{ theme.product_list_layout }} mobile-{{ theme.mobile_product_grid_style }} grid-{{ theme.layout_style }}">
             {% for product_permalink in final_permalinks_array %}
