@@ -554,12 +554,44 @@
       "description": "The number of products shown per page"
     },
     {
+      "variable": "show_related_products",
+      "label": "Show related products",
+      "type": "boolean",
+      "default": true,
+      "description": "Display recommended products on Product pages starting with same category"
+    },
+    {
       "variable": "number_related_products",
       "label": "Number of related products",
       "type": "select",
-      "options": "0..6",
+      "options": "1..8",
       "default": 3,
-      "description": "The number of related products to show on the Product page"
+      "description": "The number of related products to show on the Product page",
+      "requires": [
+        "show_related_products eq true"
+      ]
+    },
+    {
+      "variable": "related_products_header",
+      "label": "Related products header",
+      "type": "text",
+      "max_length": 75,
+      "description": "Displays above related products on Products pages",
+      "default": "You might also like",
+      "requires": [
+        "show_related_products eq true"
+      ]
+    },
+    {
+      "variable": "related_products_order",
+      "label": "Related products order",
+      "type": "select",
+      "options": "product_orders",
+      "default": "sales",
+      "description": "The order of related products on the Product pages",
+      "requires": [
+        "show_related_products eq true"
+      ]
     },
     {
       "variable": "show_quickview",
