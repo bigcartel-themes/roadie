@@ -597,7 +597,7 @@
       "variable": "show_quickview",
       "label": "Show quick view",
       "type": "boolean",
-      "default": true,
+      "default": false,
       "description": "Enables quick view & buttons on product thumbnails"
     },
     {
