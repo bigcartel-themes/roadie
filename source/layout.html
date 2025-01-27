@@ -402,6 +402,9 @@
 
       <footer class="footer {% if body_class contains 'has-sidebar' %}hide-desktop{% endif %}" role="contentinfo" data-bc-hook="footer">
         <nav class="footer-nav" id="footer" role="navigation" aria-label="Footer">
+          {% if theme.footer_text != blank %}
+            <div class="footer-custom-content">{{ theme.footer_text }} </div>
+          {% endif %}
           {% if theme.instagram_url != blank
             or theme.tiktok_url != blank
             or theme.bluesky_url != blank
