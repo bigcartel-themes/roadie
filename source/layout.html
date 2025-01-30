@@ -517,11 +517,12 @@
         primaryGradientColor: '{{ theme.background_color }}',
         hasAnnouncement: {% if theme.announcement_message_text %}true{%else %}false{%endif %},
         showSoldOutOptions: {{ theme.show_sold_out_product_options }},
+        showLowInventoryMessages: {{ theme.show_low_inventory_messages }},
+        lowInventoryMessage: '{{ theme.low_inventory_message }}',
+        almostSoldOutMessage: '{{ theme.almost_sold_out_message }}',
         desktopProductPageImages: '{{ theme.desktop_product_page_images }}',
         mobileProductPageImages: '{{ theme.mobile_product_page_images }}',
         productImageZoom: {{ theme.product_image_zoom }},
-        show
-        lowInventoryThreshold: {{ theme.low_inventory_threshold }}
       }
       var inPreview = (/http(s?):\/\/draft-+\w+\.bigcartel\.(test|biz|com)/.test(window.origin)||(/\/admin\/design/.test(top.location.pathname)));
       function setCookie(name,value,days) {

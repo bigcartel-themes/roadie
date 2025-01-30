@@ -47,6 +47,7 @@
               "badge_background_color_primary": "#9AFF00",
               "badge_text_color_secondary": "#000000",
               "badge_background_color_secondary": "#E0E0E0",
+              "inventory_status_text_color": "#056FFA",
               "announcement_text_color": "#FFFFFF",
               "announcement_background_color": "#000000"
             }
@@ -69,6 +70,7 @@
               "badge_background_color_primary": "#141415",
               "badge_text_color_secondary": "#141415",
               "badge_background_color_secondary": "#D8D8D8",
+              "inventory_status_text_color": "#F8F8F8",
               "announcement_text_color": "#F8F8F8",
               "announcement_background_color": "#4D4D4D"
             }
@@ -91,6 +93,7 @@
               "badge_background_color_primary": "#203BE1",
               "badge_text_color_secondary": "#141415",
               "badge_background_color_secondary": "#D8D8D8",
+              "inventory_status_text_color": "#203BE1",
               "announcement_text_color": "#0C143B",
               "announcement_background_color": "#E3E4EA"
             }
@@ -118,6 +121,7 @@
               "badge_background_color_primary": "#898952",
               "badge_text_color_secondary": "#141415",
               "badge_background_color_secondary": "#D8D8D8",
+              "inventory_status_text_color": "#8A4942",
               "announcement_text_color": "#262522",
               "announcement_background_color": "#F1DBCE"
             }
@@ -140,6 +144,7 @@
               "badge_background_color_primary": "#78A9F9",
               "badge_text_color_secondary": "#141415",
               "badge_background_color_secondary": "#D8D8D8",
+              "inventory_status_text_color": "#E86054",
               "announcement_text_color": "#1F161B",
               "announcement_background_color": "#D6E3F8"
             }
@@ -167,6 +172,7 @@
               "badge_background_color_primary": "#0000FF",
               "badge_text_color_secondary": "#141415",
               "badge_background_color_secondary": "#D8D8D8",
+              "inventory_status_text_color": "#0000FF",
               "announcement_text_color": "#FFFFFF",
               "announcement_background_color": "#000000"
             }
@@ -189,6 +195,7 @@
               "badge_background_color_primary": "#22FFF8",
               "badge_text_color_secondary": "#141415",
               "badge_background_color_secondary": "#D8D8D8",
+              "inventory_status_text_color": "#F90081",
               "announcement_text_color": "#0B0423",
               "announcement_background_color": "#F6FF20"
             }
@@ -211,6 +218,7 @@
               "badge_background_color_primary": "#9AFF00",
               "badge_text_color_secondary": "#141415",
               "badge_background_color_secondary": "#D8D8D8",
+              "inventory_status_text_color": "#056FFA",
               "announcement_text_color": "#FFFFFF",
               "announcement_background_color": "#000000"
             }
@@ -233,6 +241,7 @@
               "badge_background_color_primary": "#FFFA8D",
               "badge_text_color_secondary": "#141415",
               "badge_background_color_secondary": "#D8D8D8",
+              "inventory_status_text_color": "#243588",
               "announcement_text_color": "#0C143B",
               "announcement_background_color": "#FFFA8D"
             }
@@ -308,6 +317,11 @@
       "variable": "badge_background_color_secondary",
       "label": "Badge background (secondary)",
       "default": "#E0E0E0"
+    },
+    {
+      "variable": "inventory_status_text_color",
+      "label": "Low Inventory messages",
+      "default": "#056FFA"
     },
     {
       "variable": "announcement_text_color",
@@ -633,6 +647,57 @@
       "default": false,
       "description": "Shows a product's inventory amounts (when using inventory tracking)",
       "requires": ["inventory"]
+    },
+    {
+      "variable": "show_low_inventory_messages",
+      "label": "Show product stock alerts",
+      "type": "boolean",
+      "default": true,
+      "description": "Show shoppers alerts on Product pages when it's running low on stock",
+      "requires": [
+        "inventory",
+        "show_inventory_bars eq false"
+      ]
+    },
+    {
+      "variable": "low_inventory_threshold",
+      "label": "Low stock alert",
+      "options": "1..100",
+      "type": "select",
+      "default": "10",
+      "description": "When stock drops below this number, shoppers will see low stock message. 'Almost sold out' message shows at half this amount",
+      "requires": [
+        "inventory",
+        "show_inventory_bars eq false",
+        "show_low_inventory_messages eq true"
+      ]
+    },
+    {
+      "variable": "low_inventory_message",
+      "label": "Low stock message",
+      "type": "text",
+      "max_length": 50,
+      "description": "Message shown when stock drops below your alert level",
+      "default": "Limited quantities available",
+      "requires": [
+        "inventory",
+        "show_inventory_bars eq false",
+        "show_low_inventory_messages eq true"
+      ]
+    },
+    {
+      "variable": "almost_sold_out_message",
+      "label": "Almost sold out message",
+      "type": "text",
+      "max_length": 50,
+      "description": "Message shown when stock drops below half your alert level",
+      "default": "Only a few left!",
+      "requires": [
+        "inventory",
+        "show_inventory_bars eq false",
+        "show_low_inventory_messages eq true",
+        "low_inventory_threshold gt 1"
+      ]
     },
     {
       "variable": "footer_text",
