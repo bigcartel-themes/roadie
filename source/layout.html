@@ -92,7 +92,7 @@
                 {% for page in pages.all %}
                   <li class="sidebar-nav-link">{{ page | link_to }}</li>
                 {% endfor %}
-                <li class="sidebar-nav-link"><a href="/contact">Contact</a></li>
+                <li class="sidebar-nav-link"><a href="/contact">{{ pages.contact.name }}</a></li>
               </ul>
               <div class="scroll-more"></div>
             </section>
@@ -188,14 +188,14 @@
                       {% for page in pages.all %}
                         <li class="horizontal-nav-link" role="menuitem"><a href="{{ page.url }}" tabindex="-1">{{ page.name }}</a></li></li>
                       {% endfor %}
-                      <li class="horizontal-nav-link" role="menuitem"><a href="/contact" tabindex="-1">Contact</a></li>
+                      <li class="horizontal-nav-link" role="menuitem"><a href="/contact" tabindex="-1">{{ pages.contact.name }}</a></li>
                       {% if store.website != blank %}
                         <li class="horizontal-nav-link" role="menuitem"><a href="{{ store.website }}" tabindex="-1">Back to site</a></li>
                       {% endif %}
                     </ul>
                   </li>
                 {% else %}
-                  <li class="nav-menu-item" role="menuitem" aria-haspopup="false"><a href="/contact"><span class="hover-underline no-underline">Contact</span></a></li>
+                  <li class="nav-menu-item" role="menuitem" aria-haspopup="false"><a href="/contact"><span class="hover-underline no-underline">{{ pages.contact.name }}</span></a></li>
                 {% endif %}
 
               </ul>
@@ -300,7 +300,7 @@
                 {% for page in pages.all %}
                   <li class="sidebar-nav-link medium-border">{{ page | link_to }}</li>
                 {% endfor %}
-                <li class="sidebar-nav-link medium-border"><a href="/contact">Contact</a></li>
+                <li class="sidebar-nav-link medium-border"><a href="/contact">{{ pages.contact.name }}</a></li>
                 {% if store.website != blank %}
                   <li class="sidebar-nav-link medium-border"><a href="{{ store.website }}">Back to site</a></li>
                 {% endif %}
