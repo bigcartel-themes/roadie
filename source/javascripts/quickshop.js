@@ -73,7 +73,7 @@ function showLoading(){
   $('.qs-product-container').addClass('spinner');
 }
 
-function loadProductContent(product) {
+async function loadProductContent(product) {
   var $container = $('.qs-product-details');
 
   var this_product = $(".open-quickview[data-permalink='" + product.permalink + "']").closest('.prod-thumb');
@@ -82,11 +82,23 @@ function loadProductContent(product) {
 
   openQuickShop();
 
+  if (!window.location.hostname.includes('127.0.0.1')) {
+    $.getJSON(`/product/${product.permalink}.json`)
+      .done(productData => {
+        window.bigcartel.product = productData;
+      })
+      .fail(() => {
+        window.bigcartel.product = product;
+      });
+  } else {
+    window.bigcartel.product = product;
+  }
+  
   $.get("/product/" + product.permalink + "?" + $.now(), function(response, status, xhr) {
-
     $container.html($(response).find(".main"));
     initCarousel('quickshop');
     initLightbox();
+    updateInventoryMessage();
     $('.qs-product-container').removeClass('spinner');
     $('.qs-product-container').animate({
       scrollTop: 0

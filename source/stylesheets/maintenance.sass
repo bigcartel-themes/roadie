@@ -38,12 +38,19 @@
 .maintenance-message
   +fluid-type(18px, 24px)
   line-height: 1.25em
-  margin-top: $base-padding
+  margin-top: $base-padding * 2
+  padding-top: $base-padding * 4
+
+  h1, h2
+    padding: $base-padding 0
 
 .maintenance-social-links
   border-top: $small-border
-  margin-top: $base-padding
-  padding-top: $base-padding
+  margin-top: $base-padding * 4
+  padding-top: $base-padding * 3
+
+  @media screen and (max-width: $break-small)
+    padding-top: $base-padding * 2
 
   .social-links
     +justify-content(flex-start)

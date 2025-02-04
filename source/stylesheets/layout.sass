@@ -103,7 +103,7 @@ body
 
   &.background-image-overlay-transparent_color_overlay
     background-color: $background-color
-    opacity: .9
+    opacity: 0.9
 
 .header-above
   border-bottom: $large-border
@@ -763,6 +763,7 @@ _:-ms-fullscreen, :root .content-wrapper
 
 .nav-section-credit
   border: none !important
+  padding-top: 30px
 
 .bigcartel-credit
   font-size: 14px
@@ -809,9 +810,22 @@ footer
   +flexbox
   +flex-shrink(0)
 
+  .footer-custom-content
+    padding: 20px 0
+
   .social-links
+    display: flex
+    flex-wrap: wrap
     gap: 10px
     +justify-content(center)
+    width: 100%
+    padding: 0 $base-padding
+
+    a
+      display: flex
+      align-items: center
+      justify-content: center
+
 
   .footer-nav
     +flexbox
@@ -822,6 +836,9 @@ footer
     border-top: $medium-border
     padding: $base-padding * 5 0
     width: 100%
+
+    .nav-section-credit
+      padding-top: 20px
 
     .has-sidebar &
       display: none
