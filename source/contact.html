@@ -10,6 +10,9 @@
     </div>
   {% else %}
     <div class="page-content">
+      {% if theme.contact_text %}
+        <div class="message-banner message-banner--contact">{{ theme.contact_text }}</div>
+      {% endif %}
       {% if errors != blank %}
         <ul class="errors {{ page.permalink }}-errors">
           {% for error in errors %}
