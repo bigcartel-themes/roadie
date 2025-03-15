@@ -513,6 +513,21 @@
       "description": "Displays a message within your contact page"
     },
     {
+      "variable": "store_name_heading_base_size",
+      "label": "Shop name heading size",
+      "type": "select",
+      "options": [
+        ["Smallest", "40"],
+        ["Smaller", "48"],
+        ["Default", "56"],
+        ["Large", "64"],
+        ["Larger", "72"],
+        ["Very large", "80"]
+      ],
+      "default": "64",
+      "description": "Sets the largest shop name size in the header for desktop, auto-adjusted for smaller screens."
+    },
+    {
       "variable": "theme_layout",
       "label": "Desktop layout",
       "type": "select",
