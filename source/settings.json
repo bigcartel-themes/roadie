@@ -1,6 +1,6 @@
 {
   "name": "Roadie",
-  "version": "1.11.0",
+  "version": "1.12.0",
   "images": [
     {
       "variable": "logo",
@@ -16,6 +16,13 @@
       "variable": "promo_image",
       "label": "Promo Image",
       "description": "Adds an image to the Home page"
+    }
+  ],
+  "image_sets": [
+    {
+      "variable": "slideshow",
+      "label": "Slideshow",
+      "description": "Adds a slideshow to your Home page. 900 x 500 images recommended. Overrides promo image if both are set."
     }
   ],
   "preset_styles": {
@@ -180,23 +187,23 @@
           {
             "style_name": "Playful #1",
             "fonts": {
-              "primary_font": "Fredoka One"
+              "primary_font": "Parkinsans"
             },
             "colors": {
               "background_color": "#FF647C",
               "primary_text_color": "#FFFFFF",
               "link_hover_color": "#00E6C3",
-              "border_color": "#FF89AC",
-              "button_text_color": "#FF647C",
+              "border_color": "#F8F8F8",
+              "button_text_color": "#1A3C4A",
               "button_background_color": "#00E6C3",
               "button_hover_text_color": "#FF647C",
               "button_hover_background_color": "#33FFDA",
-              "badge_text_color_primary": "#FF647C",
+              "badge_text_color_primary": "#1A3C4A",
               "badge_background_color_primary": "#00E6C3",
-              "badge_text_color_secondary": "#FFFFFF",
-              "badge_background_color_secondary": "#FF89AC",
-              "inventory_status_text_color": "#00E6C3",
-              "announcement_text_color": "#FF647C",
+              "badge_text_color_secondary": "#FAFAFA",
+              "badge_background_color_secondary": "#BABABA",
+              "inventory_status_text_color": "#006666",
+              "announcement_text_color": "#1A3C4A",
               "announcement_background_color": "#00E6C3"
             }
           },
@@ -231,18 +238,18 @@
             "colors": {
               "background_color": "#00B066",
               "primary_text_color": "#FFFFFF",
-              "link_hover_color": "#FFB8FF",
+              "link_hover_color": "#2D0C52",
               "border_color": "#00D87D",
-              "button_text_color": "#00B066",
+              "button_text_color": "#2D0C52",
               "button_background_color": "#FFB8FF",
-              "button_hover_text_color": "#00B066",
+              "button_hover_text_color": "#2D0C52",
               "button_hover_background_color": "#FFA1FF",
-              "badge_text_color_primary": "#00B066",
+              "badge_text_color_primary": "#2D0C52",
               "badge_background_color_primary": "#FFB8FF",
               "badge_text_color_secondary": "#FFFFFF",
               "badge_background_color_secondary": "#00D87D",
-              "inventory_status_text_color": "#FFB8FF",
-              "announcement_text_color": "#00B066",
+              "inventory_status_text_color": "#2D0C52",
+              "announcement_text_color": "#2D0C52",
               "announcement_background_color": "#FFB8FF"
             }
           }
@@ -351,7 +358,7 @@
           {
             "style_name": "Dreamy #2",
             "fonts": {
-              "primary_font": "Spectral"
+              "primary_font": "Coiny"
             },
             "colors": {
               "background_color": "#F6EFF5",
@@ -506,6 +513,21 @@
       "description": "Displays a message within your contact page"
     },
     {
+      "variable": "store_name_heading_base_size",
+      "label": "Shop name heading size",
+      "type": "select",
+      "options": [
+        ["Smallest", "40"],
+        ["Smaller", "48"],
+        ["Default", "56"],
+        ["Large", "64"],
+        ["Larger", "72"],
+        ["Very large", "80"]
+      ],
+      "default": "56",
+      "description": "Sets the largest shop name size in the header for desktop, auto-adjusted for smaller screens."
+    },
+    {
       "variable": "theme_layout",
       "label": "Desktop layout",
       "type": "select",
@@ -558,6 +580,30 @@
       ],
       "default": "left",
       "description": "Sets the position of your logo or store name"
+    },
+    {
+      "variable": "homepage_slideshow_autoplay",
+      "label": "Auto-play homepage slideshow",
+      "type": "boolean",
+      "default": true,
+      "description": "Automatically advances slides in the homepage slideshow"
+    },
+    {
+      "variable": "homepage_slideshow_speed",
+      "label": "Slideshow speed",
+      "type": "select",
+      "options": [
+        ["Slowest", 6000],
+        ["Slower", 5000],
+        ["Normal", 4000],
+        ["Faster", 3500],
+        ["Fastest", 3000]
+      ],
+      "default": 4000,
+      "description": "Controls how quickly slides advance in the auto-playing slideshow",
+      "requires": [
+        "homepage_slideshow_autoplay eq true"
+      ]
     },
     {
       "variable": "uppercase_text",
@@ -860,6 +906,13 @@
       "type": "text",
       "max_length": 2048,
       "description": "Show a custom message to your shop's footer"
+    },
+    {
+      "variable": "show_bnpl_messaging",
+      "label": "Buy Now, Pay Later Messaging",
+      "type": "boolean",
+      "default": true,
+      "description": "Show payment options prior to checkout on product and cart pages. Requires paid plan."
     },
     {
       "variable": "money_format",

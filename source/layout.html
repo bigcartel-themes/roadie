@@ -513,17 +513,35 @@
       </div>
     </div>
     <script>
+      {% comment %}
+        Manual array construction needed for Liquid 3.0.6 since standard JSON filters 
+        (json, jsonify) don't work properly. This ensures proper JavaScript array 
+        formatting with quoted elements and commas.
+      {% endcomment %}
+      const themeFeatures = {
+        optIns: [{% if theme.features.opt_ins %}{% for opt in theme.features.opt_ins %}"{{ opt }}"{% unless forloop.last %}, {% endunless %}{% endfor %}{% endif %}],
+        optOuts: [{% if theme.features.opt_outs %}{% for opt in theme.features.opt_outs %}"{{ opt }}"{% unless forloop.last %}, {% endunless %}{% endfor %}{% endif %}],
+      };
+      const themeColors = {
+        backgroundColor: '{{ theme.background_color }}',
+        primaryTextColor: '{{ theme.primary_text_color }}',
+      };
       var themeOptions = {
         primaryGradientColor: '{{ theme.background_color }}',
         hasAnnouncement: {% if theme.announcement_message_text %}true{%else %}false{%endif %},
+        showInventoryBars: {{ theme.show_inventory_bars }},
         showSoldOutOptions: {{ theme.show_sold_out_product_options }},
         showLowInventoryMessages: {{ theme.show_low_inventory_messages }},
         lowInventoryMessage: "{{ theme.low_inventory_message | replace: '"', '\"' | replace: "'", "\\'" }}",
         almostSoldOutMessage: "{{ theme.almost_sold_out_message | replace: '"', '\"' | replace: "'", "\\'" }}",
+        showInventoryBars: {{ theme.show_inventory_bars }},
         desktopProductPageImages: '{{ theme.desktop_product_page_images }}',
         mobileProductPageImages: '{{ theme.mobile_product_page_images }}',
         productImageZoom: {{ theme.product_image_zoom }},
-      }
+        homepageSlideshowAutoplay: {{ theme.homepage_slideshow_autoplay }},
+        homepageSlideshowSpeed: {{ theme.homepage_slideshow_speed }},
+        showBnplMessaging: {{ theme.show_bnpl_messaging }} && !themeFeatures.optOuts.includes("theme_bnpl_messaging"),
+      };
       var inPreview = (/http(s?):\/\/draft-+\w+\.bigcartel\.(test|biz|com)/.test(window.origin)||(/\/admin\/design/.test(top.location.pathname)));
       function setCookie(name,value,days) {
         var expires = "";

@@ -59,9 +59,18 @@
         </div>
         <div class="cart-actions">
           <button type="submit" name="checkout" class="button checkout-button has-right-icon">Checkout <svg aria-hidden="true" class="button-icon-right-arrow" width="21" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.445798 0l9.9966372 9.99663714-.0035344.00381736.0035344.0029084L10.445798 20l-1.87436943-1.8743695L15.1964286 11.5H0v-3h15.1964286L8.57142857 1.87436946z" fill-rule="evenodd"/></svg></button>
-          <a class="icon-link icon-left-link continue-shopping-link" href="/products">
-            Continue shopping
-          </a>
+          {% if theme.show_bnpl_messaging and cart.items != blank %}
+            {% unless theme.features.opt_outs contains "theme_bnpl_messaging" %}
+              <div id="payment-processor-messaging">
+                <div id="paypal-messaging-container" style="height: 0; overflow: hidden;">
+                  <div id="paypal-messaging-element"></div>
+                </div>
+                <div id="stripe-messaging-container" style="height: 0; overflow: hidden;">
+                  <div id="payment-method-messaging-element"></div>
+                </div>
+              </div>
+            {% endunless %}
+          {% endif %}
         </div>
       </div>
     </form>

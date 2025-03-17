@@ -76,3 +76,21 @@
 
       @media screen and (min-width: $max-vw)
         font-size: $max-font-size
+
+@mixin fluid-type-variable($min-font-size, $max-variable)
+  $min-vw: 320px
+  $max-vw: 1200px
+  $min-size-val: strip-unit($min-font-size)
+  $vw-diff: strip-unit($max-vw - $min-vw)
+  
+  &
+    font-size: $min-font-size
+    
+    // CSS custom property for the calculation
+    --font-size-calc: calc((#{$max-variable} - #{$min-size-val}) * ((100vw - #{$min-vw}) / #{$vw-diff}))
+    
+    @media screen and (min-width: $min-vw)
+      font-size: calc(#{$min-font-size} + var(--font-size-calc))
+    
+    @media screen and (min-width: $max-vw)
+      font-size: calc(#{$max-variable}px)

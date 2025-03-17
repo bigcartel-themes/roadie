@@ -414,6 +414,12 @@
   a
     text-decoration: underline
 
+  img
+    display: inline-block
+    margin: 0 auto
+    max-width: 100%
+    padding-bottom: $base-padding
+
 .right-sidebar
   .product-images
     order: 2
@@ -544,3 +550,39 @@ _:-ms-fullscreen, :root .product-page-columns
   margin: 10px 0 auto
   padding: 8px 0
   font-weight: 500
+
+#payment-processor-messaging
+  margin: 20px 0 0
+  width: 100%
+  display: block
+  
+  body[data-bc-page-type="product"] &
+    margin-bottom: 60px
+
+  body[data-bc-page-type="cart"] &
+    margin-bottom: 20px
+
+  &.display-flex
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+    &.dual-messaging
+      gap: 15px
+
+  &.display-grid
+    display: grid
+  
+  &.hidden
+    position: absolute
+    left: -9999px
+    top: -9999px
+
+  > div
+    margin-bottom: 0
+  
+  // Only apply the margin for non-flex layouts when dual messaging is present
+  &:not(.display-flex)
+    &.dual-messaging > div.visible:first-of-type
+      margin-bottom: 15px

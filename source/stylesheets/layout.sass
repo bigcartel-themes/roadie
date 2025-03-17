@@ -309,7 +309,7 @@ header
         text-align: left
 
 .header-home-link
-  +fluid-type(24px, 64px)
+  +fluid-type-variable(22px, $store-name-heading-size-numeric)
   color: $primary-text-color
   display: inline-block
   font-weight: bold
@@ -811,7 +811,15 @@ footer
   +flex-shrink(0)
 
   .footer-custom-content
-    padding: 20px 0
+    display: grid
+    grid-template-columns: 1fr
+    justify-content: center
+    text-align: center
+    padding: 20px
+    gap: 20px
+
+    > *
+      justify-self: center
 
   .social-links
     display: flex

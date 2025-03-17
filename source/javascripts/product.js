@@ -98,7 +98,7 @@ function updateInventoryMessage(optionId = null) {
   }
 }
 
-function enableAddButton(active_form,updated_price) {
+function enableAddButton(active_form, updated_price) {
   var addButton = active_form.find('.add-to-cart-button');
   var addButtonTextElement = addButton.find('.button-add-text');
   var addButtonPriceTextElement = addButton.find('.button-add-price');
@@ -121,6 +121,7 @@ function enableAddButton(active_form,updated_price) {
   }
   addButtonTextElement.html(addButtonTitle);
   updateInventoryMessage($('#option').val());
+  showBnplMessaging(updated_price, { alignment: 'center', displayMode: 'flex', pageType: 'product' });
 }
 
 function disableAddButton(active_form,type) {
@@ -241,5 +242,11 @@ $('body').on('click', ".description-inventory-tab", function(e){
 })
 
 document.addEventListener('DOMContentLoaded', () => {
-  updateInventoryMessage();
+  const isProductPage = document.body.getAttribute('data-bc-page-type') === 'product';
+  if (isProductPage) {
+    updateInventoryMessage();
+    
+    const price = window.bigcartel?.product?.default_price || null;    
+    showBnplMessaging(price, { alignment: 'center', displayMode: 'flex', pageType: 'product' });
+  }
 });
