@@ -135,6 +135,7 @@ var updateCart = function(cart) {
     $('.sidebar-cart-count').html(item_count);
     $('.sidebar-cart-total').html(sub_total);
   }
+  showBnplMessaging(cart.total, { alignment: 'right', displayMode: 'grid', pageType: 'cart' });
 }
 
 var processUpdate = function(input, item_id, new_val, cart) {
@@ -178,3 +179,14 @@ var processUpdate = function(input, item_id, new_val, cart) {
   }
   return false;
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const isCartPage = document.body.getAttribute('data-bc-page-type') === 'cart';
+  if (isCartPage) {
+    Cart.refresh((cart) => {
+      if (cart?.total) {
+        showBnplMessaging(cart.total, { alignment: 'right', displayMode: 'grid', pageType: 'cart' });
+      }
+    });
+  }
+});
