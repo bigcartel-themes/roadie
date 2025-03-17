@@ -524,7 +524,7 @@
         ["Larger", "72"],
         ["Very large", "80"]
       ],
-      "default": "64",
+      "default": "56",
       "description": "Sets the largest shop name size in the header for desktop, auto-adjusted for smaller screens."
     },
     {
