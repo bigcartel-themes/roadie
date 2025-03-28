@@ -528,6 +528,20 @@
       "description": "Sets the largest shop name size in the header for desktop, auto-adjusted for smaller screens."
     },
     {
+      "variable": "logo_image_height",
+      "label": "Logo image size",
+      "type": "select",
+      "options": [
+        ["Small", "48"],
+        ["Medium", "64"],
+        ["Large", "96"],
+        ["Extra Large", "128"],
+        ["XX Large", "160"]
+      ],
+      "default": "64",
+      "description": "Sets the height of your logo in the shop header"
+    },
+    {
       "variable": "theme_layout",
       "label": "Desktop layout",
       "type": "select",
