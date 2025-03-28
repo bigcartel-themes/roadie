@@ -43,9 +43,10 @@ function updateInventoryMessage(optionId = null) {
   const messageElement = document.querySelector('[data-inventory-message]') ||
   document.querySelector('.qs-modal [data-inventory-message]');
 
+  // Unlike other themes, we don't check for inventory bars as the UX in Roadie is different 
+  // allowing both low inventory messaging and inventory bars to be shown at the same time.
   if (
     !themeOptions?.showLowInventoryMessages ||
-    themeOptions.showInventoryBars ||
     !messageElement
   ) {
     return;

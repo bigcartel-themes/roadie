@@ -856,8 +856,7 @@
       "default": true,
       "description": "Show shoppers alerts on Product pages when it's running low on stock",
       "requires": [
-        "inventory",
-        "show_inventory_bars eq false"
+        "inventory"
       ]
     },
     {
@@ -869,7 +868,6 @@
       "description": "When stock drops below this number, shoppers will see low stock message. 'Almost sold out' message shows at half this amount",
       "requires": [
         "inventory",
-        "show_inventory_bars eq false",
         "show_low_inventory_messages eq true"
       ]
     },
@@ -882,7 +880,6 @@
       "default": "Limited quantities available",
       "requires": [
         "inventory",
-        "show_inventory_bars eq false",
         "show_low_inventory_messages eq true"
       ]
     },
@@ -895,7 +892,6 @@
       "default": "Only a few left!",
       "requires": [
         "inventory",
-        "show_inventory_bars eq false",
         "show_low_inventory_messages eq true",
         "low_inventory_threshold gt 1"
       ]
