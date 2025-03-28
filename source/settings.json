@@ -762,7 +762,7 @@
       "variable": "featured_items",
       "label": "Featured products",
       "type": "select",
-      "options": "0..100",
+      "options": "0..48",
       "default": 12,
       "description": "The number of products featured on the Home page"
     },
@@ -854,6 +854,13 @@
       "default": true,
       "description": "Show the price of sold out products on product grids and product pages",
       "requires": ["inventory"]
+    },
+    {
+      "variable": "show_coming_soon_product_prices",
+      "label": "Show prices for coming soon products",
+      "type": "boolean",
+      "default": true,
+      "description": "Show the price of coming soon products on product grids and product pages"
     },
     {
       "variable": "show_inventory_bars",
