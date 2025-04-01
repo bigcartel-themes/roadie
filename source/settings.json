@@ -495,29 +495,19 @@
   ],
   "options": [
     {
-      "variable": "announcement_message_text",
-      "label": "Announcement text",
-      "section": "messaging",
-      "type": "text",
-      "max_length": 500,
-      "description": "Displays an announcement message on the top of every page"
-    },
-    {
-      "variable": "maintenance_message",
-      "label": "Maintenance mode message",
-      "section": "messaging",
-      "type": "text",
-      "max_length": 2048,
-      "description": "A message visitors see when your shop is in Maintenance Mode",
-      "default": "We're working on our shop right now.<br /><br />Please check back soon."
-    },
-    {
-      "variable": "contact_text",
-      "label": "Contact page text",
-      "section": "messaging",
-      "type": "text",
-      "max_length": 1024,
-      "description": "Displays a message within your contact page"
+      "variable": "logo_image_height",
+      "label": "Logo image size",
+      "section": "global_navigation",
+      "type": "select",
+      "options": [
+        ["Small", "48"],
+        ["Medium", "64"],
+        ["Large", "96"],
+        ["Extra Large", "128"],
+        ["XX Large", "160"]
+      ],
+      "default": "64",
+      "description": "Sets the height of your logo in the shop header"
     },
     {
       "variable": "store_name_heading_base_size",
@@ -536,21 +526,6 @@
       "description": "Sets the largest shop name size in the header for desktop, auto-adjusted for smaller screens."
     },
     {
-      "variable": "logo_image_height",
-      "label": "Logo image size",
-      "section": "global_navigation",
-      "type": "select",
-      "options": [
-        ["Small", "48"],
-        ["Medium", "64"],
-        ["Large", "96"],
-        ["Extra Large", "128"],
-        ["XX Large", "160"]
-      ],
-      "default": "64",
-      "description": "Sets the height of your logo in the shop header"
-    },
-    {
       "variable": "theme_layout",
       "label": "Desktop layout",
       "section": "global_navigation",
@@ -564,6 +539,14 @@
       ],
       "default": "below_header",
       "description": "Sets the overall theme layout on desktops and large screens"
+    },
+    {
+      "variable": "show_search",
+      "label": "Show search",
+      "section": "global_navigation",
+      "type": "boolean",
+      "default": true,
+      "description": "Displays a search field in the layout"
     },
     {
       "variable": "layout_style",
@@ -610,63 +593,12 @@
       "description": "Sets the position of your logo or store name"
     },
     {
-      "variable": "homepage_slideshow_autoplay",
-      "label": "Auto-play homepage slideshow",
-      "section": "homepage",
-      "type": "boolean",
-      "default": true,
-      "description": "Automatically advances slides in the homepage slideshow"
-    },
-    {
-      "variable": "homepage_slideshow_speed",
-      "label": "Slideshow speed",
-      "section": "homepage",
-      "type": "select",
-      "options": [
-        ["Slowest", 6000],
-        ["Slower", 5000],
-        ["Normal", 4000],
-        ["Faster", 3500],
-        ["Fastest", 3000]
-      ],
-      "default": 4000,
-      "description": "Controls how quickly slides advance in the auto-playing slideshow",
-      "requires": [
-        "homepage_slideshow_autoplay eq true"
-      ]
-    },
-    {
       "variable": "uppercase_text",
       "label": "Uppercase text layout",
       "section": "global_navigation",
       "type": "boolean",
       "default": false,
       "description": "Shows all text in uppercase"
-    },
-    {
-      "variable": "background_image_layout",
-      "label": "Background image layout",
-      "section": "general",
-      "type": "select",
-      "options": [
-        ["Repeating", "repeating"],
-        ["Fixed", "fixed"]
-      ],
-      "default": "fixed",
-      "description": "Sets the display of the uploaded background image"
-    },
-    {
-      "variable": "background_image_style",
-      "label": "Background image style",
-      "section": "general",
-      "type": "select",
-      "options": [
-        ["Plain image", "plain_image"],
-        ["Color overlay", "transparent_color_overlay"],
-        ["Gradient overlay", "gradient_overlay"]
-      ],
-      "default": "transparent_color_overlay",
-      "description": "Sets the overlay style when a background image is used"
     },
     {
       "variable": "show_product_grid_gutters",
@@ -728,6 +660,14 @@
       "description": "The display of your product status on the Home and Products pages"
     },
     {
+      "variable": "show_quickview",
+      "label": "Show quick view",
+      "section": "global_navigation",
+      "type": "boolean",
+      "default": false,
+      "description": "Enables quick view & buttons on product thumbnails"
+    },
+    {
       "variable": "show_overlay",
       "label": "Product grid info",
       "section": "global_navigation",
@@ -752,6 +692,70 @@
       ],
       "default": "small",
       "description": "Sets the mobile product grid style"
+    },
+    {
+      "variable": "products_per_page",
+      "label": "Products per page",
+      "section": "global_navigation",
+      "type": "select",
+      "options": "1..100",
+      "default": 48,
+      "description": "The number of products shown per page"
+    },
+    {
+      "variable": "footer_text",
+      "label": "Footer text",
+      "section": "global_navigation",
+      "type": "text",
+      "max_length": 2048,
+      "description": "Show a custom message to your shop's footer"
+    },
+    {
+      "variable": "homepage_slideshow_autoplay",
+      "label": "Auto-play homepage slideshow",
+      "section": "homepage",
+      "type": "boolean",
+      "default": true,
+      "description": "Automatically advances slides in the homepage slideshow"
+    },
+    {
+      "variable": "homepage_slideshow_speed",
+      "label": "Slideshow speed",
+      "section": "homepage",
+      "type": "select",
+      "options": [
+        ["Slowest", 6000],
+        ["Slower", 5000],
+        ["Normal", 4000],
+        ["Faster", 3500],
+        ["Fastest", 3000]
+      ],
+      "default": 4000,
+      "description": "Controls how quickly slides advance in the auto-playing slideshow",
+      "requires": [
+        "homepage_slideshow_autoplay eq true"
+      ]
+    },
+    {
+      "variable": "featured_items",
+      "label": "Featured products",
+      "section": "homepage",
+      "type": "select",
+      "options": "0..48",
+      "default": 12,
+      "description": "The number of products featured on the Home page"
+    },
+    {
+      "variable": "featured_order",
+      "label": "Featured products order",
+      "section": "homepage",
+      "type": "select",
+      "options": "product_orders",
+      "default": "position",
+      "description": "The order of products on the Home page",
+      "requires": [
+        "featured_items gt 0"
+      ]
     },
     {
       "variable": "product_image_zoom",
@@ -786,36 +790,6 @@
       ],
       "default": "show-thumbnails",
       "description": "Choose to hide or show thumbnails on the mobile Product page carousel"
-    },
-    {
-      "variable": "featured_items",
-      "label": "Featured products",
-      "section": "homepage",
-      "type": "select",
-      "options": "0..48",
-      "default": 12,
-      "description": "The number of products featured on the Home page"
-    },
-    {
-      "variable": "featured_order",
-      "label": "Featured products order",
-      "section": "homepage",
-      "type": "select",
-      "options": "product_orders",
-      "default": "position",
-      "description": "The order of products on the Home page",
-      "requires": [
-        "featured_items gt 0"
-      ]
-    },
-    {
-      "variable": "products_per_page",
-      "label": "Products per page",
-      "section": "global_navigation",
-      "type": "select",
-      "options": "1..100",
-      "default": 48,
-      "description": "The number of products shown per page"
     },
     {
       "variable": "show_related_products",
@@ -862,22 +836,6 @@
       ]
     },
     {
-      "variable": "show_quickview",
-      "label": "Show quick view",
-      "section": "global_navigation",
-      "type": "boolean",
-      "default": false,
-      "description": "Enables quick view & buttons on product thumbnails"
-    },
-    {
-      "variable": "show_search",
-      "label": "Show search",
-      "section": "global_navigation",
-      "type": "boolean",
-      "default": true,
-      "description": "Displays a search field in the layout"
-    },
-    {
       "variable": "show_sold_out_product_options",
       "label": "Show sold out product variants",
       "section": "product_page",
@@ -885,23 +843,6 @@
       "default": true,
       "description": "Shows sold out product variants in the Product page dropdowns",
       "requires": ["inventory"]
-    },
-    {
-      "variable": "show_sold_out_product_prices",
-      "label": "Show prices for sold out products",
-      "section": "general",
-      "type": "boolean",
-      "default": true,
-      "description": "Show the price of sold out products on product grids and product pages",
-      "requires": ["inventory"]
-    },
-    {
-      "variable": "show_coming_soon_product_prices",
-      "label": "Show prices for coming soon products",
-      "section": "general",
-      "type": "boolean",
-      "default": true,
-      "description": "Show the price of coming soon products on product grids and product pages"
     },
     {
       "variable": "show_inventory_bars",
@@ -964,14 +905,6 @@
       ]
     },
     {
-      "variable": "footer_text",
-      "label": "Footer text",
-      "section": "global_navigation",
-      "type": "text",
-      "max_length": 2048,
-      "description": "Show a custom message to your shop's footer"
-    },
-    {
       "variable": "show_bnpl_messaging",
       "label": "Buy Now, Pay Later Messaging",
       "section": "product_page",
@@ -981,6 +914,48 @@
       "requires": [
         "feature:theme_bnpl_messaging neq opted_out"
       ]
+    },
+    {
+      "variable": "background_image_layout",
+      "label": "Background image layout",
+      "section": "general",
+      "type": "select",
+      "options": [
+        ["Repeating", "repeating"],
+        ["Fixed", "fixed"]
+      ],
+      "default": "fixed",
+      "description": "Sets the display of the uploaded background image"
+    },
+    {
+      "variable": "background_image_style",
+      "label": "Background image style",
+      "section": "general",
+      "type": "select",
+      "options": [
+        ["Plain image", "plain_image"],
+        ["Color overlay", "transparent_color_overlay"],
+        ["Gradient overlay", "gradient_overlay"]
+      ],
+      "default": "transparent_color_overlay",
+      "description": "Sets the overlay style when a background image is used"
+    },
+    {
+      "variable": "show_sold_out_product_prices",
+      "label": "Show prices for sold out products",
+      "section": "general",
+      "type": "boolean",
+      "default": true,
+      "description": "Show the price of sold out products on product grids and product pages",
+      "requires": ["inventory"]
+    },
+    {
+      "variable": "show_coming_soon_product_prices",
+      "label": "Show prices for coming soon products",
+      "section": "general",
+      "type": "boolean",
+      "default": true,
+      "description": "Show the price of coming soon products on product grids and product pages"
     },
     {
       "variable": "money_format",
@@ -993,6 +968,31 @@
       ],
       "default": "sign",
       "description": "Sets the display of prices in your shop"
+    },
+    {
+      "variable": "announcement_message_text",
+      "label": "Announcement text",
+      "section": "messaging",
+      "type": "text",
+      "max_length": 500,
+      "description": "Displays an announcement message on the top of every page"
+    },
+    {
+      "variable": "maintenance_message",
+      "label": "Maintenance mode message",
+      "section": "messaging",
+      "type": "text",
+      "max_length": 2048,
+      "description": "A message visitors see when your shop is in Maintenance Mode",
+      "default": "We're working on our shop right now.<br /><br />Please check back soon."
+    },
+    {
+      "variable": "contact_text",
+      "label": "Contact page text",
+      "section": "messaging",
+      "type": "text",
+      "max_length": 1024,
+      "description": "Displays a message within your contact page"
     },
     {
       "variable": "instagram_url",
