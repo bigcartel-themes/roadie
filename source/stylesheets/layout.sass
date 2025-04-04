@@ -322,8 +322,7 @@ header
     max-width: 100%
 
     @media screen and (min-width: $break-small + 1)
-      height: 64px
-
+      height: calc(#{$logo-max-height-numeric} * 1px)
       .above-header &
         height: 180px
         width: 100%
@@ -342,10 +341,9 @@ header
         .store-logo
           height: 100%
           width: 100%
-
+      
     @media screen and (max-width: $break-small)
-      height: auto
-      max-height: 50px
+      height: clamp(50px, calc((#{$logo-max-height-numeric} * 0.75) * 1px), 96px)
 
   .header-left-align &
     text-align: left
