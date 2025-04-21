@@ -659,7 +659,8 @@
       "label": "Uppercase text layout",
       "section": "global_navigation",
       "type": "boolean",
-      "default": false,
+      "default": true,
+      "upgrade_default": false,
       "description": "Shows all text in uppercase"
     },
     {
