@@ -1,6 +1,6 @@
 {
   "name": "Roadie",
-  "version": "1.13.0",
+  "version": "1.14.0",
   "images": [
     {
       "variable": "logo",
@@ -541,6 +541,68 @@
       "description": "Sets the overall theme layout on desktops and large screens"
     },
     {
+      "variable": "nav_page_display",
+      "label": "Pages to show in navigation",
+      "section": "global_navigation",
+      "type": "select",
+      "options": [
+        ["All pages", "all"],
+        ["Custom pages only", "pages_only"],
+        ["Contact page only", "contact_only"],
+        ["None", "none"]
+      ],
+      "default": "all",
+      "description": "Controls which types of pages appear in your navigation"
+    },
+    {
+      "variable": "below_header_pages_menu_style",
+      "label": "Pages menu style (desktop)",
+      "section": "global_navigation",
+      "type": "select",
+      "options": [
+        ["Dropdown", "dropdown"],
+        ["Inline", "inline"]
+      ],
+      "default": "dropdown",
+      "description": "Controls how custom pages are shown in desktop navigation",
+      "requires": [
+        "theme_layout eq below_header",
+        "nav_page_display neq none",
+        "nav_page_display neq contact_only"
+      ]
+    },
+    {
+      "variable": "pages_nav_text",
+      "label": "Pages menu label",
+      "section": "global_navigation",
+      "type": "text",
+      "default": "Info",
+      "max_length": 25,
+      "description": "Label for your menu containing custom pages and contact",
+      "requires": [
+        "theme_layout neq 'sidebar_header show_toggle'",
+        "theme_layout neq sidebar_header",
+        "theme_layout neq sidebar_no_header",
+        "below_header_pages_menu_style eq dropdown",
+        "nav_page_display neq none"
+      ]
+    },
+    {
+      "variable": "inline_nav_pages",
+      "label": "Number of pages in header",
+      "section": "global_navigation",
+      "type": "select",
+      "options": "0..3",
+      "default": 1,
+      "description": "Controls the number of pages shown in your desktop navigation when using inline menu style ",
+      "requires": [
+        "theme_layout eq below_header",
+        "below_header_pages_menu_style eq inline",
+        "nav_page_display neq contact_only",
+        "nav_page_display neq none"
+      ]
+    },
+    {
       "variable": "show_search",
       "label": "Show search",
       "section": "global_navigation",
@@ -597,7 +659,8 @@
       "label": "Uppercase text layout",
       "section": "global_navigation",
       "type": "boolean",
-      "default": false,
+      "default": true,
+      "upgrade_default": false,
       "description": "Shows all text in uppercase"
     },
     {
@@ -910,11 +973,15 @@
       "section": "product_page",
       "type": "boolean",
       "default": true,
-      "description": "Show payment options prior to checkout on product and cart pages. Requires paid plan.",
+      "description": "Show payment options prior to checkout on product and cart pages. <a href='https://www.bigcartel.com/resources/help/article/boost-sales-and-conversions-with-buy-now-pay-later-payments' target='_blank'>Learn more</a>",
       "requires": [
         "feature:theme_bnpl_messaging eq visible"
       ],
-      "plan_type": "paid"
+      "requires_upsell": {
+        "unless": "feature:buy_now_pay_later",
+        "default": false,
+        "analytics_label": "BNPL"
+      }
     },
     {
       "variable": "background_image_layout",
@@ -974,7 +1041,7 @@
       "variable": "announcement_message_text",
       "label": "Announcement text",
       "section": "messaging",
-      "type": "text",
+      "type": "textarea",
       "max_length": 500,
       "description": "Displays an announcement message on the top of every page"
     },
@@ -982,7 +1049,7 @@
       "variable": "maintenance_message",
       "label": "Maintenance mode message",
       "section": "messaging",
-      "type": "text",
+      "type": "textarea",
       "max_length": 2048,
       "description": "A message visitors see when your shop is in Maintenance Mode",
       "default": "We're working on our shop right now.<br /><br />Please check back soon."
@@ -991,9 +1058,9 @@
       "variable": "contact_text",
       "label": "Contact page text",
       "section": "messaging",
-      "type": "text",
+      "type": "textarea",
       "max_length": 1024,
-      "description": "Displays a message within your contact page"
+      "description": "Displays a custom message at the top of your contact page"
     },
     {
       "variable": "instagram_url",
