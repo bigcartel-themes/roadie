@@ -86,16 +86,22 @@
                 <div class="scroll-more"></div>
               </section>
             {% endif %}
-            <section class="above-nav-section overflow-scroll">
-              <div class="above-nav-section-title">Info</div>
-              <ul class="sidebar-nav-links">
-                {% for page in pages.all %}
-                  <li class="sidebar-nav-link">{{ page | link_to }}</li>
-                {% endfor %}
-                <li class="sidebar-nav-link"><a href="/contact">{{ pages.contact.name }}</a></li>
-              </ul>
-              <div class="scroll-more"></div>
-            </section>
+            {% if theme.nav_page_display != "none" %}
+              <section class="above-nav-section overflow-scroll">
+                <div class="above-nav-section-title">{{ theme.pages_nav_text }}</div>
+                <ul class="sidebar-nav-links">
+                  {% if theme.nav_page_display == 'all' or theme.nav_page_display == 'pages_only' %}
+                    {% for page in pages.all %}
+                      <li class="sidebar-nav-link">{{ page | link_to }}</li>
+                    {% endfor %}
+                  {% endif %}
+                  {% if theme.nav_page_display == 'all' or theme.nav_page_display == 'contact_only' %}
+                    <li class="sidebar-nav-link"><a href="/contact">{{ pages.contact.name }}</a></li>
+                  {% endif %}
+                </ul>
+                <div class="scroll-more"></div>
+              </section>
+            {% endif %}
           </nav>
 
           <div class="secondary-above-header-nav">
@@ -181,21 +187,36 @@
                   </li>
                 {% endif %}
 
-                {% if pages.all.size > 0 or store.website != blank %}
-                  <li class="nav-menu-item" role="menuitem" aria-haspopup="true">
-                    <a href="#"><span class="hover-underline">Info <svg aria-hidden="true" width="16" height="10" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></span></a>
-                    <ul aria-hidden="true" role="menu" class="horizontal-nav-links">
-                      {% for page in pages.all %}
-                        <li class="horizontal-nav-link" role="menuitem"><a href="{{ page.url }}" tabindex="-1">{{ page.name }}</a></li></li>
+                {% if theme.nav_page_display != "none" %}
+                  {% if theme.below_header_pages_menu_style == "inline" or theme.nav_page_display == "contact_only" %}
+                    {% if theme.nav_page_display == 'all' or theme.nav_page_display == 'pages_only' %}
+                      {% for page in pages.all limit: theme.inline_nav_pages %}
+                        <li class="nav-menu-item" role="menuitem" aria-haspopup="false">
+                          <a href="{{ page.url }}"><span class="hover-underline no-underline">{{ page.name }}</span></a>
+                        </li>
                       {% endfor %}
-                      <li class="horizontal-nav-link" role="menuitem"><a href="/contact" tabindex="-1">{{ pages.contact.name }}</a></li>
-                      {% if store.website != blank %}
-                        <li class="horizontal-nav-link" role="menuitem"><a href="{{ store.website }}" tabindex="-1">Back to site</a></li>
-                      {% endif %}
-                    </ul>
-                  </li>
-                {% else %}
-                  <li class="nav-menu-item" role="menuitem" aria-haspopup="false"><a href="/contact"><span class="hover-underline no-underline">{{ pages.contact.name }}</span></a></li>
+                    {% endif %}
+                    {% if theme.nav_page_display == 'all' or theme.nav_page_display == 'contact_only' %}
+                      <li class="nav-menu-item" role="menuitem" aria-haspopup="false"><a href="/contact"><span class="hover-underline no-underline">{{ pages.contact.name }}</span></a></li>
+                    {% endif %}
+                  {% else %}
+                    <li class="nav-menu-item" role="menuitem" aria-haspopup="true">
+                      <a href="#"><span class="hover-underline">{{ theme.pages_nav_text }} <svg aria-hidden="true" width="16" height="10" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></span></a>
+                      <ul aria-hidden="true" role="menu" class="horizontal-nav-links">
+                        {% if theme.nav_page_display == 'all' or theme.nav_page_display == 'pages_only' %}
+                          {% for page in pages.all %}
+                            <li class="horizontal-nav-link" role="menuitem"><a href="{{ page.url }}" tabindex="-1">{{ page.name }}</a></li></li>
+                          {% endfor %}
+                        {% endif %}
+                        {% if theme.nav_page_display == 'all' or theme.nav_page_display == 'contact_only' %}
+                          <li class="horizontal-nav-link" role="menuitem"><a href="/contact" tabindex="-1">{{ pages.contact.name }}</a></li>
+                        {% endif %}
+                        {% if store.website != blank %}
+                          <li class="horizontal-nav-link" role="menuitem"><a href="{{ store.website }}" tabindex="-1">Back to site</a></li>
+                        {% endif %}
+                      </ul>
+                    </li>
+                  {% endif %}
                 {% endif %}
 
               </ul>
@@ -295,17 +316,23 @@
               </div>
             {% endif %}
 
-            <div class="nav-section nav-section-info">
-              <ul class="sidebar-nav-links compact-nav-links">
-                {% for page in pages.all %}
-                  <li class="sidebar-nav-link medium-border">{{ page | link_to }}</li>
-                {% endfor %}
-                <li class="sidebar-nav-link medium-border"><a href="/contact">{{ pages.contact.name }}</a></li>
-                {% if store.website != blank %}
-                  <li class="sidebar-nav-link medium-border"><a href="{{ store.website }}">Back to site</a></li>
-                {% endif %}
-              </ul>
-            </div>
+            {% if theme.nav_page_display != "none" %}
+              <div class="nav-section nav-section-info">
+                <ul class="sidebar-nav-links compact-nav-links">
+                  {% if theme.nav_page_display == 'all' or theme.nav_page_display == 'pages_only' %}
+                    {% for page in pages.all %}
+                      <li class="sidebar-nav-link medium-border">{{ page | link_to }}</li>
+                    {% endfor %}
+                  {% endif %}
+                  {% if theme.nav_page_display == 'all' or theme.nav_page_display == 'contact_only' %}
+                    <li class="sidebar-nav-link medium-border"><a href="/contact">{{ pages.contact.name }}</a></li>
+                  {% endif %}
+                  {% if store.website != blank %}
+                    <li class="sidebar-nav-link medium-border"><a href="{{ store.website }}">Back to site</a></li>
+                  {% endif %}
+                </ul>
+              </div>
+            {% endif %}
             {% if theme.instagram_url != blank
               or theme.tiktok_url != blank
               or theme.bluesky_url != blank
