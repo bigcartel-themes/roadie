@@ -15,6 +15,9 @@
 {% endif %}
 <div class="cart-container{% if cart.item_count == 0 %} empty-cart{% endif %}">
   {% if cart.items != blank %}
+    {% if theme.cart_text != blank %}
+      <div class="message-banner message-banner--cart">{{ theme.cart_text }}</div>
+    {% endif %}
     <form class="cart-form" method="post" action="/cart">
       <ul class="cart-items">
         {% for item in cart.items %}
