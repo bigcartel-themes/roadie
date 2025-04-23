@@ -408,7 +408,9 @@
               </div>
             {% endif %}
             <div class="nav-section nav-section-credit" data-bc-hook="credit">
-              <div class="badge">{{ big_cartel_credit_logo }}</div>
+              {% unless theme.hide_big_cartel_credit %}
+                <div class="badge">{{ big_cartel_credit_logo }}</div>
+              {% endunless %}
             </div>
           </nav>
         </aside>
@@ -507,7 +509,11 @@
             </section>
           {% endif %}
           <section class="footer-nav-section nav-section-credit">
-            <div class="badge">{{ big_cartel_credit_logo }}</div>
+            <div class="badge">
+              {% unless theme.hide_big_cartel_credit %}
+                {{ big_cartel_credit_logo }}
+              {% endunless %}
+            </div>
           </section>
         </nav>
       </footer>
