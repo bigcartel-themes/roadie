@@ -1,6 +1,14 @@
+{% comment %}
+  Use page name from Custo if it's been customized, otherwise use the localized default.
+{% endcomment %}
+{% assign page_title = t['navigation.contact'] %}
+{% if page.name != 'Contact' %}
+  {% assign page_title = page.name %}
+{% endif %}
+
 <div class="contact-page">
   <div class="page-heading">
-    <h1 class="page-title">{{ page.name }}</h1>
+    <h1 class="page-title">{{ page_title }}</h1>
   </div>
   {% if contact.sent %}
     <div class="alert-message">
