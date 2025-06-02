@@ -68,7 +68,7 @@
           <nav class="upper-nav" aria-label="Main navigation">
             <section class="above-nav-section">
               <div class="header-branding">
-                <a class="header-home-link{% if theme.images.logo != blank %} has-logo{% endif %}" href="/" title="Home">
+                <a class="header-home-link{% if theme.images.logo != blank %} has-logo{% endif %}" href="/" title="{{ t['navigation.home'] }}">
                   {% if theme.images.logo != blank %}
                     {% if theme.layout_style == 'fixed-width' %}
                       <img alt="{{ store.name }} Home" class="store-logo" src="{{ theme.images.logo.url | constrain: 800 }}"/>
@@ -82,9 +82,9 @@
               </div>
             </section>
             <section class="above-nav-section overflow-scroll">
-              <div class="above-nav-section-title">{{ pages.products.name }}</div>
+              <div class="above-nav-section-title">{{ t['navigation.products'] }}</div>
               <ul class="sidebar-nav-links">
-                <li class="sidebar-nav-link{% if page.full_url contains '/products' %} active-link{% endif %}"><a href="/products">All</a></li>
+                <li class="sidebar-nav-link{% if page.full_url contains '/products' %} active-link{% endif %}"><a href="/products">{{ t['navigation.all_products'] }}</a></li>
                 {% for category in categories.active %}
                   <li class="sidebar-nav-link{% if page.full_url contains category.url && page.name == category.name %} active-link{% endif %}">{{ category | link_to }}</li>
                 {% endfor %}
@@ -93,7 +93,7 @@
             </section>
             {% if artists.active != blank %}
               <section class="above-nav-section overflow-scroll">
-                <div class="above-nav-section-title">Artists</div>
+              <div class="above-nav-section-title">Artists</div>
                 <ul class="sidebar-nav-links">
                   {% for artist in artists.active %}
                     <li class="sidebar-nav-link{% if page.full_url contains artist.url && page.name == artist.name %} active-link{% endif %}">{{ artist | link_to }}</li>
@@ -104,7 +104,7 @@
             {% endif %}
             {% if theme.nav_page_display != "none" %}
               <section class="above-nav-section overflow-scroll">
-                <div class="above-nav-section-title">{{ theme.pages_nav_text }}</div>
+                <div class="above-nav-section-title">{{ t['navigation.more'] }}</div>
                 <ul class="sidebar-nav-links">
                   {% if theme.nav_page_display == 'all' or theme.nav_page_display == 'pages_only' %}
                     {% for page in pages.all %}
@@ -112,7 +112,7 @@
                     {% endfor %}
                   {% endif %}
                   {% if theme.nav_page_display == 'all' or theme.nav_page_display == 'contact_only' %}
-                    <li class="sidebar-nav-link"><a href="/contact">{{ pages.contact.name }}</a></li>
+                    <li class="sidebar-nav-link"><a href="/contact">{{ t['navigation.contact'] }}</a></li>
                   {% endif %}
                 </ul>
                 <div class="scroll-more"></div>
@@ -124,13 +124,13 @@
             {% if theme.show_search %}
               <form class="search-form" name="search" action="/products" method="get" accept-charset="utf8" role="search">
                 <input type="hidden" name="utf8" value='✓'>
-                <label for="secondary-search-input" class="visually-hidden">Search products</label>
-                <input id="secondary-search-input" class="search-input" name="search" placeholder="Search" type="text" autocomplete="off" />
+                <label for="secondary-search-input" class="visually-hidden">{{ t['navigation.search'] }}</label>
+                <input id="secondary-search-input" class="search-input" name="search" placeholder="{{ t['navigation.contact'] }}" type="text" autocomplete="off" />
                 <button class="button min-btn search-button" type="submit"><svg width="20" height="20" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M6.31895387 0c3.48986186 0 6.31895383 2.82909201 6.31895383 6.31895387 0 1.36478192-.4326703 2.62850826-1.1683262 3.66149429L16 14.5106083 14.5106083 16l-4.53016014-4.5304185c-1.03298603.7356559-2.29671237 1.1683262-3.66149429 1.1683262C2.82909201 12.6379077 0 9.80881573 0 6.31895387S2.82909201 0 6.31895387 0zm0 2.10631796c-2.32657457 0-4.21263591 1.88606134-4.21263591 4.21263591 0 2.32657458 1.88606134 4.21263593 4.21263591 4.21263593 2.32657458 0 4.21263593-1.88606135 4.21263593-4.21263593 0-2.32657457-1.88606135-4.21263591-4.21263593-4.21263591z" fill-rule="evenodd"/></svg></button>
               </form>
             {% endif %}
             <div class="secondary-above-header-nav-cart">
-              <a href="/cart" class="header-cart upper-nav-cart" title="View cart" aria-label="View cart">
+              <a href="/cart" class="header-cart upper-nav-cart" title="{{ t['navigation.view'] }} {{ t['navigation.cart'] }}" aria-label="{{ t['navigation.view'] }} {{ t['navigation.cart'] }}">
                 <span class="header-cart-icon"><svg width="30" height="26" viewBox="0 0 32 28" xmlns="http://www.w3.org/2000/svg"><path d="M25.3749929 27.9999278c1.9329635 0 3.4999917-1.5670227 3.4999917-3.4999862 0-.991796-.4131994-1.8865006-1.0760168-2.5233628.1341029-.1041601.2011543-.1766346.2011543-.2174235V20.124952H11.1430856l-.5134952-2.6249937h17.0846227c.6174225 0 1.1513721-.4303426 1.2824829-1.0337195C30.9224827 7.82207961 31.885376 3.5 31.885376 3.5H7.89030864L7.40576172 0H.65624844v2.62499374h4.38812735L8.85027492 22.0773552c-.60364389.6289048-.9752937 1.4820598-.9752937 2.4225864 0 1.9329635 1.56702813 3.4999862 3.49999168 3.4999862 1.9329635 0 3.4999916-1.5670227 3.4999916-3.4999862 0-.5205981-.2102579-1.3028839-.4693821-1.7499958h7.938801c-.2591242.4471119-.4693821 1.2293977-.4693821 1.7461506 0 1.9368087 1.5670281 3.5038314 3.4999916 3.5038314zm1.2817352-13.1249633H10.1160953L8.40380382 6.1249854H28.5587164l-1.9019883 8.7499791zm-15.2817552 10.937474c-.7237532 0-1.3124969-.5887438-1.3124969-1.3124969 0-.7237532.5887437-1.3124969 1.3124969-1.3124969.7237531 0 1.3124969.5887437 1.3124969 1.3124969 0 .7237531-.5887438 1.3124969-1.3124969 1.3124969zm13.9999666 0c-.7237532 0-1.3124969-.5887438-1.3124969-1.3124969 0-.7237532.5887437-1.3124969 1.3124969-1.3124969s1.3124969.5887437 1.3124969 1.3124969c0 .7237531-.5887437 1.3124969-1.3124969 1.3124969z" fill-rule="nonzero"/></svg></span>
                 <span class="header-cart-count">{{ cart.item_count }}</span>
                 <span class="header-cart-total">{{ cart.total | money: theme.money_format }}</span>
@@ -149,7 +149,7 @@
           </button>
 
           <div class="header-branding">
-            <a class="header-home-link{% if theme.images.logo != blank %} has-logo{% endif %}" href="/" title="Home">
+            <a class="header-home-link{% if theme.images.logo != blank %} has-logo{% endif %}" href="/" title="{{ t['navigation.home'] }}">
               {% if theme.images.logo != blank %}
                 <img alt="{{ store.name }} Home" class="store-logo" src="{{ theme.images.logo.url | constrain: 1800,300 }}"/>
               {% else %}
@@ -158,7 +158,7 @@
             </a>
           </div>
 
-          <a href="/cart" class="header-cart" title="View cart" aria-label="View cart">
+          <a href="/cart" class="header-cart" title="{{ t['cart.view_cart'] }}" aria-label="{{ t['cart.view_cart'] }}">
             <span class="header-cart-icon"><svg aria-hidden="true" width="28" height="24" viewBox="0 0 32 28" xmlns="http://www.w3.org/2000/svg"><path d="M25.3749929 27.9999278c1.9329635 0 3.4999917-1.5670227 3.4999917-3.4999862 0-.991796-.4131994-1.8865006-1.0760168-2.5233628.1341029-.1041601.2011543-.1766346.2011543-.2174235V20.124952H11.1430856l-.5134952-2.6249937h17.0846227c.6174225 0 1.1513721-.4303426 1.2824829-1.0337195C30.9224827 7.82207961 31.885376 3.5 31.885376 3.5H7.89030864L7.40576172 0H.65624844v2.62499374h4.38812735L8.85027492 22.0773552c-.60364389.6289048-.9752937 1.4820598-.9752937 2.4225864 0 1.9329635 1.56702813 3.4999862 3.49999168 3.4999862 1.9329635 0 3.4999916-1.5670227 3.4999916-3.4999862 0-.5205981-.2102579-1.3028839-.4693821-1.7499958h7.938801c-.2591242.4471119-.4693821 1.2293977-.4693821 1.7461506 0 1.9368087 1.5670281 3.5038314 3.4999916 3.5038314zm1.2817352-13.1249633H10.1160953L8.40380382 6.1249854H28.5587164l-1.9019883 8.7499791zm-15.2817552 10.937474c-.7237532 0-1.3124969-.5887438-1.3124969-1.3124969 0-.7237532.5887437-1.3124969 1.3124969-1.3124969.7237531 0 1.3124969.5887437 1.3124969 1.3124969 0 .7237531-.5887438 1.3124969-1.3124969 1.3124969zm13.9999666 0c-.7237532 0-1.3124969-.5887438-1.3124969-1.3124969 0-.7237532.5887437-1.3124969 1.3124969-1.3124969s1.3124969.5887437 1.3124969 1.3124969c0 .7237531-.5887437 1.3124969-1.3124969 1.3124969z" fill-rule="nonzero"/></svg></span>
             <span class="header-cart-count">{{ cart.item_count }}</span>
             <span class="header-cart-total">{{ cart.total | money: theme.money_format }}</span>
@@ -177,9 +177,9 @@
                 <li class="nav-menu-item" role="menuitem" aria-haspopup="{% if categories.active == blank %}false{% else%}true{% endif %}">
 
                   {% if categories.active != blank %}
-                    <a href="#"><span class="hover-underline">{{ pages.products.name }} <svg aria-hidden="true" width="16" height="10" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></span></a>
+                    <a href="#"><span class="hover-underline">{{ t['navigation.products'] }} <svg aria-hidden="true" width="16" height="10" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></span></a>
                     <ul aria-hidden="true" role="menu" class="horizontal-nav-links">
-                      <li class="horizontal-nav-link {% if page.full_url contains '/products' %} active-link{% endif %}" role="menuitem"><a href="/products" tabindex="-1">All</a></li>
+                      <li class="horizontal-nav-link {% if page.full_url contains '/products' %} active-link{% endif %}" role="menuitem"><a href="/products" tabindex="-1">{{ t['navigation.all_products'] }}</a></li>
 
                       {% if categories.active != blank %}
                         {% for category in categories.active %}
@@ -188,7 +188,7 @@
                       {% endif %}
                     </ul>
                   {% else %}
-                    <a href="/products"><span class="hover-underline no-underline">{{ pages.products.name }}</span></a>
+                    <a href="/products"><span class="hover-underline no-underline">{{ t['navigation.products'] }}</span></a>
                   {% endif %}
                 </li>
 
@@ -213,11 +213,11 @@
                       {% endfor %}
                     {% endif %}
                     {% if theme.nav_page_display == 'all' or theme.nav_page_display == 'contact_only' %}
-                      <li class="nav-menu-item" role="menuitem" aria-haspopup="false"><a href="/contact"><span class="hover-underline no-underline">{{ pages.contact.name }}</span></a></li>
+                      <li class="nav-menu-item" role="menuitem" aria-haspopup="false"><a href="/contact"><span class="hover-underline no-underline">{{ t['navigation.contact'] }}}</span></a></li>
                     {% endif %}
                   {% else %}
                     <li class="nav-menu-item" role="menuitem" aria-haspopup="true">
-                      <a href="#"><span class="hover-underline">{{ theme.pages_nav_text }} <svg aria-hidden="true" width="16" height="10" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></span></a>
+                      <a href="#"><span class="hover-underline">{{ t['navigation.more'] }} <svg aria-hidden="true" width="16" height="10" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></span></a>
                       <ul aria-hidden="true" role="menu" class="horizontal-nav-links">
                         {% if theme.nav_page_display == 'all' or theme.nav_page_display == 'pages_only' %}
                           {% for page in pages.all %}
@@ -225,10 +225,10 @@
                           {% endfor %}
                         {% endif %}
                         {% if theme.nav_page_display == 'all' or theme.nav_page_display == 'contact_only' %}
-                          <li class="horizontal-nav-link" role="menuitem"><a href="/contact" tabindex="-1">{{ pages.contact.name }}</a></li>
+                          <li class="horizontal-nav-link" role="menuitem"><a href="/contact" tabindex="-1">{{ t['navigation.contact'] }}</a></li>
                         {% endif %}
                         {% if store.website != blank %}
-                          <li class="horizontal-nav-link" role="menuitem"><a href="{{ store.website }}" tabindex="-1">Back to site</a></li>
+                          <li class="horizontal-nav-link" role="menuitem"><a href="{{ store.website }}" tabindex="-1">{{ t['navigation.back_to_site'] }}</a></li>
                         {% endif %}
                       </ul>
                     </li>
@@ -241,9 +241,9 @@
                 <section class="nav-section nav-section-search">
                   <form class="search-form" name="search" action="/products" method="get" accept-charset="utf8" role="search">
                     <input type="hidden" name="utf8" value='✓'>
-                    <label for="below-header-search-input" class="visually-hidden">Search products</label>
-                    <input id="below-header-search-input" class="search-input" name="search" placeholder="Search" type="text" autocomplete="off" />
-                    <button class="button min-btn search-button" type="submit" title="Search"><svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M6.31895387 0c3.48986186 0 6.31895383 2.82909201 6.31895383 6.31895387 0 1.36478192-.4326703 2.62850826-1.1683262 3.66149429L16 14.5106083 14.5106083 16l-4.53016014-4.5304185c-1.03298603.7356559-2.29671237 1.1683262-3.66149429 1.1683262C2.82909201 12.6379077 0 9.80881573 0 6.31895387S2.82909201 0 6.31895387 0zm0 2.10631796c-2.32657457 0-4.21263591 1.88606134-4.21263591 4.21263591 0 2.32657458 1.88606134 4.21263593 4.21263591 4.21263593 2.32657458 0 4.21263593-1.88606135 4.21263593-4.21263593 0-2.32657457-1.88606135-4.21263591-4.21263593-4.21263591z" fill-rule="evenodd"/></svg></button>
+                    <label for="below-header-search-input" class="visually-hidden">{{ t['navigation.search'] }}</label>
+                    <input id="below-header-search-input" class="search-input" name="search" placeholder="{{ t['navigation.search'] }}" type="text" autocomplete="off" />
+                    <button class="button min-btn search-button" type="submit" title="{{ t['navigation.search'] }}"><svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M6.31895387 0c3.48986186 0 6.31895383 2.82909201 6.31895383 6.31895387 0 1.36478192-.4326703 2.62850826-1.1683262 3.66149429L16 14.5106083 14.5106083 16l-4.53016014-4.5304185c-1.03298603.7356559-2.29671237 1.1683262-3.66149429 1.1683262C2.82909201 12.6379077 0 9.80881573 0 6.31895387S2.82909201 0 6.31895387 0zm0 2.10631796c-2.32657457 0-4.21263591 1.88606134-4.21263591 4.21263591 0 2.32657458 1.88606134 4.21263593 4.21263591 4.21263593 2.32657458 0 4.21263593-1.88606135 4.21263593-4.21263593 0-2.32657457-1.88606135-4.21263591-4.21263593-4.21263591z" fill-rule="evenodd"/></svg></button>
                   </form>
                 </section>
               {% endif %}
@@ -255,7 +255,7 @@
         <aside class="sidebar {{ theme.sidebar_position }}-sidebar">
           {% if theme.theme_layout == 'sidebar_no_header' %}
             <div class="header-branding">
-              <a class="header-home-link{% if theme.images.logo != blank %} has-logo{% endif %}" href="/" title="Home">
+              <a class="header-home-link{% if theme.images.logo != blank %} has-logo{% endif %}" href="/" title="{{ t['navigation.home'] }}">
                 {% if theme.images.logo != blank %}
                   <img alt="{{ store.name }} Home" class="store-logo" src="{{ theme.images.logo.url | constrain: 800 }}"/>
                 {% else %}
@@ -266,8 +266,8 @@
           {% endif %}
           <nav class="sidebar-nav" aria-label="Main navigation">
             <div class="nav-section nav-section-cart">
-              <a href="/cart" class="nav-cart-link" title="View cart" aria-label="View cart">
-                <span class="sidebar-cart-title">Cart</span>
+              <a href="/cart" class="nav-cart-link" title="{{ t['navigation.view'] }} {{ t['navigation.cart'] }}" aria-label="{{ t['navigation.view'] }} {{ t['navigation.cart'] }}">
+                <span class="sidebar-cart-title">{{ t['navigation.cart'] }}</span>
                 <span class="sidebar-cart-count">{{ cart.item_count }}</span>
                 <span class="sidebar-cart-total">{{ cart.total | money: theme.money_format }}</span>
               </a>
@@ -276,9 +276,9 @@
               <div class="nav-section nav-section-search">
                 <form class="search-form" name="search" action="/products" method="get" accept-charset="utf8" role="search">
                   <input type="hidden" name="utf8" value='✓'>
-                  <label for="sidebar-search-input" class="visually-hidden">Search products</label>
-                  <input id="sidebar-search-input" class="search-input" name="search" placeholder="Search" type="text" autocomplete="off" />
-                  <button class="button min-btn search-button" type="submit" title="Search"><svg width="18" height="18" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M6.31895387 0c3.48986186 0 6.31895383 2.82909201 6.31895383 6.31895387 0 1.36478192-.4326703 2.62850826-1.1683262 3.66149429L16 14.5106083 14.5106083 16l-4.53016014-4.5304185c-1.03298603.7356559-2.29671237 1.1683262-3.66149429 1.1683262C2.82909201 12.6379077 0 9.80881573 0 6.31895387S2.82909201 0 6.31895387 0zm0 2.10631796c-2.32657457 0-4.21263591 1.88606134-4.21263591 4.21263591 0 2.32657458 1.88606134 4.21263593 4.21263591 4.21263593 2.32657458 0 4.21263593-1.88606135 4.21263593-4.21263593 0-2.32657457-1.88606135-4.21263591-4.21263593-4.21263591z" fill-rule="evenodd"/></svg></button>
+                  <label for="sidebar-search-input" class="visually-hidden">{{ t['navigation.search'] }}</label>
+                  <input id="sidebar-search-input" class="search-input" name="search" placeholder="{{ t['navigation.search'] }}" type="text" autocomplete="off" />
+                  <button class="button min-btn search-button" type="submit" title="{{ t['navigation.search'] }}"><svg width="18" height="18" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M6.31895387 0c3.48986186 0 6.31895383 2.82909201 6.31895383 6.31895387 0 1.36478192-.4326703 2.62850826-1.1683262 3.66149429L16 14.5106083 14.5106083 16l-4.53016014-4.5304185c-1.03298603.7356559-2.29671237 1.1683262-3.66149429 1.1683262C2.82909201 12.6379077 0 9.80881573 0 6.31895387S2.82909201 0 6.31895387 0zm0 2.10631796c-2.32657457 0-4.21263591 1.88606134-4.21263591 4.21263591 0 2.32657458 1.88606134 4.21263593 4.21263591 4.21263593 2.32657458 0 4.21263593-1.88606135 4.21263593-4.21263593 0-2.32657457-1.88606135-4.21263591-4.21263593-4.21263591z" fill-rule="evenodd"/></svg></button>
                 </form>
               </div>
             {% endif %}
@@ -287,23 +287,23 @@
               <div class="nav-section-title{% if categories.active.size == 0 %} no-bottom-border{% endif %}">
                 {% if categories.active.size > hide_nav_after_num_items %}
                   <button class="button min-btn toggle-nav" aria-label="Toggle category list">
-                    {{ pages.products.name }}
+                    {{ t['navigation.products'] }}
                     <svg aria-hidden="true" class="toggle-expand-icon" width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><path d="M7 0v5h5v2H7v5H5V7H0V5h5V0z" fill-rule="evenodd"/></svg>
                     <svg aria-hidden="true" class="toggle-collapse-icon" width="12" height="2" viewBox="0 0 12 2" xmlns="http://www.w3.org/2000/svg"><path d="M12 0v2H0V0z" fill-rule="evenodd"/></svg>
                   </button>
                 {% else %}
                   <div class="nav-section-title-text">
                     {% if categories.active.size == 0 %}
-                      <a href="/products">{{ pages.products.name }}</a>
+                      <a href="/products">{{ t['navigation.products'] }}</a>
                     {% else %}
-                      {{ pages.products.name }}
+                      {{ t['navigation.all_products'] }}
                     {% endif %}
                   </div>
                 {% endif %}
               </div>
               {% if categories.active != blank %}
                 <ul class="sidebar-nav-links sidebar-category-links">
-                  <li class="sidebar-nav-link{% if page.full_url contains '/products' %} active-link{% endif %}"><a href="/products">All</a></li>
+                  <li class="sidebar-nav-link{% if page.full_url contains '/products' %} active-link{% endif %}"><a href="/products">{{ t['navigation.all_products'] }}</a></li>
                   {% for category in categories.active %}
                     <li class="sidebar-nav-link{% if page.full_url contains category.url && page.name == category.name %} active-link{% endif %}">{{ category | link_to }}</li>
                   {% endfor %}
@@ -341,10 +341,10 @@
                     {% endfor %}
                   {% endif %}
                   {% if theme.nav_page_display == 'all' or theme.nav_page_display == 'contact_only' %}
-                    <li class="sidebar-nav-link medium-border"><a href="/contact">{{ pages.contact.name }}</a></li>
+                    <li class="sidebar-nav-link medium-border"><a href="/contact">{{ t['navigation.contact'] }}</a></li>
                   {% endif %}
                   {% if store.website != blank %}
-                    <li class="sidebar-nav-link medium-border"><a href="{{ store.website }}">Back to site</a></li>
+                    <li class="sidebar-nav-link medium-border"><a href="{{ store.website }}">{{ t['navigation.back_to_site'] }}</a></li>
                   {% endif %}
                 </ul>
               </div>
@@ -543,14 +543,14 @@
             <button class="button qs-modal-button qs-close" title="Close quick view window">
               <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.7777778 0L20 2.22222222 12.222 10 20 17.7777778 17.7777778 20 10 12.222 2.22222222 20 0 17.7777778 7.778 10 0 2.22222222 2.22222222 0 10 7.778z" fill-rule="evenodd"/></svg>
             </button>
-            <span class="qs-modal-title">{% if page.full_url contains '/product/' %}Related products{% else %}{{ page.name }}{% endif %}</span>
+            <span class="qs-modal-title">{% if page.full_url contains '/product/' %}{{ t['products.related_products'] }}{% else %}{{ page.name }}{% endif %}</span>
           </div>
           <div class="qs-modal-controls-arrows">
-            <button class="button qs-modal-button qs-nav qs-nav-previous" title="View previous product">
+            <button class="button qs-modal-button qs-nav qs-nav-previous" title="{{ t['navigation.previous'] }}">
               <svg aria-hidden="true" width="12" height="20" viewBox="0 0 12 20" xmlns="http://www.w3.org/2000/svg"><path d="M0 9.99663714L9.99663714 0l1.87436946 1.87436946-8.12548453 8.12608504 8.12548453 8.125176L9.99663714 20 0 10.0033629l.00353434-.0029084z" fill-rule="evenodd"/></svg>
             </button>
 
-            <button class="button qs-modal-button qs-nav qs-nav-next" title="View next product">
+            <button class="button qs-modal-button qs-nav qs-nav-next" title="{{ t['navigation.next'] }}">
               <svg aria-hidden="true" width="12" height="20" viewBox="0 0 12 20" xmlns="http://www.w3.org/2000/svg"><path d="M11.871006 9.99663714L1.87436886 0-6e-7 1.87436946l8.12548453 8.12608504L-6e-7 18.1256305 1.87436886 20l9.99663714-9.9966371-.00353434-.0029084z" fill-rule="evenodd"/></svg>
             </button>
           </div>
@@ -590,6 +590,11 @@
         homepageSlideshowAutoplay: {{ theme.homepage_slideshow_autoplay }},
         homepageSlideshowSpeed: {{ theme.homepage_slideshow_speed }},
         showBnplMessaging: {{ theme.show_bnpl_messaging }} && !themeFeatures.optOuts.includes("theme_bnpl_messaging"),
+      };
+      const themeTranslations = {
+        cart: {
+          shareThisCartLinkCopySuccess: "{{ t['cart.share_this_cart_link_copy_success'] | replace: '"', '\"' | replace: "'", "\\'" }}"
+        }
       };
       var inPreview = (/http(s?):\/\/draft-+\w+\.bigcartel\.(test|biz|com)/.test(window.origin)||(/\/admin\/design/.test(top.location.pathname)));
       function setCookie(name,value,days) {
