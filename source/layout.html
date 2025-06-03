@@ -283,6 +283,14 @@
               </div>
             {% endif %}
 
+            <div class="nav-section nav-section-home">
+              <div class="nav-section-title-text">
+                <a href="/" class="nav-home-link" title="{{ t['navigation.home'] }}" aria-label="{{ t['navigation.home'] }}">
+                  <span class="nav-home-text">{{ t['navigation.home'] }}</span>
+                </a>
+              </div>
+            </div>
+
             <div class="nav-section nav-section-categories" data-type="categories">
               <div class="nav-section-title{% if categories.active.size == 0 %} no-bottom-border{% endif %}">
                 {% if categories.active.size > hide_nav_after_num_items %}
