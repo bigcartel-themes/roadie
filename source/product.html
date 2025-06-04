@@ -271,12 +271,12 @@
             {% case related_product.status %} 
               {% when 'active' %} 
                 {% if related_product.on_sale %}
-                  {% assign related_product_status = '{{ t['products.on_sale'] }}' %}
+                  {% assign related_product_status = t['products.on_sale'] %}
                 {% endif %} 
               {% when 'sold-out' %} 
-                {% assign related_product_status = '{{ t['products.sold_out'] }}' %} 
+                {% assign related_product_status = t['products.sold_out'] %}
               {% when 'coming-soon' %} 
-                {% assign related_product_status = '{{ t['products.coming_soon'] }}' %} 
+                {% assign related_product_status = t['products.coming_soon'] %}
             {% endcase %}
             {% capture related_product_status_classes %}{{ theme.product_badge_style }} {% if related_product.status == 'active' and related_product.on_sale %}status-primary{% else %}status-secondary{% endif %}{% endcapture %}
             {% assign image_width = related_product.image.width | times: 1.0 %}
