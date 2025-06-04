@@ -46,7 +46,7 @@
   </section>
 {% endif %}
 
-<h1 class="visually-hidden">{{ t['home.featured_products'] }}</h1>
+<h1 class="visually-hidden">{{ t['home.featured'] }}</h1>
 
 {% if theme.featured_items > 0 %}
   {% paginate products from products.all by theme.featured_items order:theme.featured_order %}
