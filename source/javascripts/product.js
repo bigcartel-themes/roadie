@@ -112,7 +112,7 @@ function enableAddButton(active_form, updated_price) {
     if (quantity > 0) {
       updated_total_price = quantity * updated_price;
     }
-    addButtonPriceTextElement.html(Format.money(updated_total_price, true, true));
+    addButtonPriceTextElement.html(formatMoney(updated_total_price, true, true));
     addButton.attr('data-selected-price',updated_price);
     addButtonPriceTextElement.addClass('visible');
   }
@@ -149,7 +149,7 @@ $('body').on('keyup', "#quantity", function() {
     , quantity = parseInt($quantityInput.val())
     , price = active_form.find(".add-to-cart-button").attr("data-selected-price")
   if (quantity > 0 && price) {
-    $priceDisplay.html(Format.money(quantity * price, true, true));
+    $priceDisplay.html(formatMoney(quantity * price, true, true));
   }
 });
 
