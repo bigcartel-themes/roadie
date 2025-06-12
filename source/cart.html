@@ -1,8 +1,16 @@
+{% comment %}
+  Use page name from Custo if it's been customized, otherwise use the localized default.
+{% endcomment %}
+{% assign page_title = t['navigation.cart'] %}
+{% if page.name != 'Cart' %}
+  {% assign page_title = page.name %}
+{% endif %}
+
 <div class="page-heading{% if cart.item_count == 0 %} empty-cart-heading{% endif %}">
-  <h1 class="page-title">{{ page.name }}</h1>
+  <h1 class="page-title">{{ page_title }}</h1>
   {% if cart.shareable_link %}
   <a class="copy-cart-link" href="{{ cart.shareable_link }}" data-clipboard-text="{{ cart.shareable_link }}">
-    Share this cart
+    {{ t['cart.share_this_cart'] }}
   </a>
   {% endif %}
 </div>
@@ -15,18 +23,21 @@
 {% endif %}
 <div class="cart-container{% if cart.item_count == 0 %} empty-cart{% endif %}">
   {% if cart.items != blank %}
+    {% if theme.cart_text != blank %}
+      <div class="message-banner message-banner--cart">{{ theme.cart_text }}</div>
+    {% endif %}
     <form class="cart-form" method="post" action="/cart">
       <ul class="cart-items">
         {% for item in cart.items %}
           <li class="cart-item" data-item-id="{{ item.id }}">
-            <button title="Remove item: {{ item.product.name }}" class="cart-item-remove button min-btn" aria-label="Remove item: {{ item.product.name }}" type="button">
+            <button title="{{ t['cart.remove']}}: {{ item.product.name }}" class="cart-item-remove button min-btn" aria-label="{{ t['cart.remove']}}: {{ item.product.name }}" type="button">
               <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c6.6290323 0 12 5.37096774 12 12 0 6.6290323-5.3709677 12-12 12-6.62903226 0-12-5.3709677-12-12C0 5.37096774 5.37096774 0 12 0zm0 1.5483871C6.1983682 1.5483871 1.5483871 6.25644216 1.5483871 12c0 5.8016318 4.70805506 10.4516129 10.4516129 10.4516129 5.8016318 0 10.4516129-4.7080551 10.4516129-10.4516129 0-5.8016318-4.7080551-10.4516129-10.4516129-10.4516129zM15.5 7.5l1 1-3.5001 3.5L16.5 15.5l-1 1-3.5-3.5001L8.5 16.5l-1-1 3.5001-3.5L7.5 8.5l1-1 3.5 3.5001L15.5 7.5z" fill-rule="evenodd"/></svg>
             </button>
             <a class="cart-item-image" href="{{ item.product.url }}">
-              <img src="{{ item.product.image | product_image_url | constrain: 240, 240 }}" alt="View {{ item.product.name | escape }}" />
+              <img src="{{ item.product.image | product_image_url | constrain: 240, 240 }}" alt="{{ item.product.name | escape }}" />
             </a>
             <div class="cart-item-name-info">
-              <a class="cart-item-details" href="{{ item.product.url }}" title="View {{ item.product.name | escape }}">
+              <a class="cart-item-details" href="{{ item.product.url }}" title="{{ item.product.name | escape }}">
                 <div class="cart-item-details-name">{{ item.product.name }}</div>
                 {% unless item.product.has_default_option %}
                   <div class="cart-item-details-option">{{ item.option.name }}</div>
@@ -37,12 +48,12 @@
                 <div class="cart-item-details-unit-price">{{ item.unit_price | money: theme.money_format }}</div>
 
                 <div class="cart-item-quantity-holder" data-item-id="{{ item.id }}">
-                  <button title="Decrease quantity" class="decrease-qty-button qty-button button min-btn" data-func="minus" type="button"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c6.6290323 0 12 5.37096774 12 12 0 6.6290323-5.3709677 12-12 12-6.62903226 0-12-5.3709677-12-12C0 5.37096774 5.37096774 0 12 0zm0 1.5483871C6.1983682 1.5483871 1.5483871 6.25644216 1.5483871 12c0 5.8016318 4.70805506 10.4516129 10.4516129 10.4516129 5.8016318 0 10.4516129-4.7080551 10.4516129-10.4516129 0-5.8016318-4.7080551-10.4516129-10.4516129-10.4516129zM18 11.25v1.5H6v-1.5h12z" fill-rule="evenodd"/></svg></button>
+                  <button title="-1" class="decrease-qty-button qty-button button min-btn" data-func="minus" type="button"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c6.6290323 0 12 5.37096774 12 12 0 6.6290323-5.3709677 12-12 12-6.62903226 0-12-5.3709677-12-12C0 5.37096774 5.37096774 0 12 0zm0 1.5483871C6.1983682 1.5483871 1.5483871 6.25644216 1.5483871 12c0 5.8016318 4.70805506 10.4516129 10.4516129 10.4516129 5.8016318 0 10.4516129-4.7080551 10.4516129-10.4516129 0-5.8016318-4.7080551-10.4516129-10.4516129-10.4516129zM18 11.25v1.5H6v-1.5h12z" fill-rule="evenodd"/></svg></button>
 
-                  <label class="visually-hidden" for="item_{{item.id}}_qty">Quantity</label>
+                  <label class="visually-hidden" for="item_{{item.id}}_qty">{{ t['cart.quantity']}}</label>
                   {{ item | item_quantity_input, nil, 'option-quantity' }}
 
-                  <button title="Increase quantity" class="increase-qty-button qty-button button min-btn" data-func="plus" type="button"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c6.6290323 0 12 5.37096774 12 12 0 6.6290323-5.3709677 12-12 12-6.62903226 0-12-5.3709677-12-12C0 5.37096774 5.37096774 0 12 0zm0 1.5483871C6.1983682 1.5483871 1.5483871 6.25644216 1.5483871 12c0 5.8016318 4.70805506 10.4516129 10.4516129 10.4516129 5.8016318 0 10.4516129-4.7080551 10.4516129-10.4516129 0-5.8016318-4.7080551-10.4516129-10.4516129-10.4516129zM12.75 6v5.25H18v1.5h-5.25V18h-1.5v-5.25075L6 12.75v-1.5l5.25-.00075V6h1.5z" fill-rule="evenodd"/></svg></button>
+                  <button title="+1" class="increase-qty-button qty-button button min-btn" data-func="plus" type="button"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c6.6290323 0 12 5.37096774 12 12 0 6.6290323-5.3709677 12-12 12-6.62903226 0-12-5.3709677-12-12C0 5.37096774 5.37096774 0 12 0zm0 1.5483871C6.1983682 1.5483871 1.5483871 6.25644216 1.5483871 12c0 5.8016318 4.70805506 10.4516129 10.4516129 10.4516129 5.8016318 0 10.4516129-4.7080551 10.4516129-10.4516129 0-5.8016318-4.7080551-10.4516129-10.4516129-10.4516129zM12.75 6v5.25H18v1.5h-5.25V18h-1.5v-5.25075L6 12.75v-1.5l5.25-.00075V6h1.5z" fill-rule="evenodd"/></svg></button>
                 </div>
                 <div class="cart-item-details-price">{{ item.price | money: theme.money_format }}</div>
               </div>
@@ -54,11 +65,11 @@
       <div class="cart-footer">
         <div class="cart-sub-footer">
           <div class="cart-subtotal">
-            <span class="cart-subtotal-label">Subtotal</span>
+            <span class="cart-subtotal-label">{{ t['cart.subtotal']}}</span>
             <span class="cart-subtotal-amount">{{ cart.subtotal | money: theme.money_format }}</span></div>
         </div>
         <div class="cart-actions">
-          <button type="submit" name="checkout" class="button checkout-button has-right-icon">Checkout <svg aria-hidden="true" class="button-icon-right-arrow" width="21" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.445798 0l9.9966372 9.99663714-.0035344.00381736.0035344.0029084L10.445798 20l-1.87436943-1.8743695L15.1964286 11.5H0v-3h15.1964286L8.57142857 1.87436946z" fill-rule="evenodd"/></svg></button>
+          <button type="submit" name="checkout" class="button checkout-button has-right-icon">{{ t['cart.checkout']}} <svg aria-hidden="true" class="button-icon-right-arrow" width="21" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.445798 0l9.9966372 9.99663714-.0035344.00381736.0035344.0029084L10.445798 20l-1.87436943-1.8743695L15.1964286 11.5H0v-3h15.1964286L8.57142857 1.87436946z" fill-rule="evenodd"/></svg></button>
           {% if theme.show_bnpl_messaging and cart.items != blank %}
             <div id="payment-processor-messaging">
               <div id="paypal-messaging-container" style="height: 0; overflow: hidden;">
@@ -70,15 +81,15 @@
             </div>
           {% endif %}
           <a class="icon-link icon-left-link continue-shopping-link" href="/products">
-            Continue shopping
+            {{ t['cart.continue_shopping'] }}
           </a>
         </div>
       </div>
     </form>
   {% endif %}
   <div class="alert-message cart-alert-message">
-    <div class="alert-message-header">Your cart is empty</div>
+    <div class="alert-message-header">{{ t['cart.empty_cart'] }}</div>
     <div class="alert-message-text"></div>
-    <a href="/products" class="button alert-message-button">Start shopping</a>
+    <a href="/products" class="button alert-message-button">{{ t['cart.continue_shopping'] }}</a>
   </div>
 </div>

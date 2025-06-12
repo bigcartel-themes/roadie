@@ -1,52 +1,62 @@
+{% comment %}
+  Use page name from Custo if it's been customized, otherwise use the localized default.
+{% endcomment %}
+{% assign page_title = t['navigation.products'] %}
+{% if page.full_url contains "search=" %}
+  {% assign page_title = t['products.search_results'] %}
+{% elsif page.name != 'Products' %}
+  {% assign page_title = page.name %}
+{% endif %}
+
 {% assign pageQuerystring = page.full_url | split:'sort=' | last %}
 {% assign pageURL = page.full_url | split:'?' | first %}
 
 {% if pageQuerystring contains 'on_sale' %}
   {% assign sort_order = 'on_sale' %}
-  {% assign sort_order_name = 'On sale' %}
+  {% assign sort_order_name = t['navigation.sort_by_on_sale'] %}
 {% elsif pageQuerystring contains 'sales' %}
   {% assign sort_order = 'sales' %}
-  {% assign sort_order_name = 'Top selling' %}
+  {% assign sort_order_name = t['navigation.sort_by_top_selling'] %}
 {% elsif pageQuerystring contains 'name_a_to_z' %}
   {% assign sort_order = 'name_a_to_z' %}
-  {% assign sort_order_name = 'Alphabetically (A to Z)' %}
+  {% assign sort_order_name = t['navigation.sort_by_alphabetically_a_to_z'] %}
 {% elsif pageQuerystring contains 'name_z_to_a' %}
   {% assign sort_order = 'name_z_to_a' %}
-  {% assign sort_order_name = 'Alphabetically (Z to A)' %}
+  {% assign sort_order_name = t['navigation.sort_by_alphabetically_z_to_a'] %}
 {% elsif pageQuerystring contains 'date_new_to_old' %}
   {% assign sort_order = 'date_new_to_old' %}
-  {% assign sort_order_name = 'Date (new to old)' %}
+  {% assign sort_order_name = t['navigation.sort_by_date_new_to_old'] %}
 {% elsif pageQuerystring contains 'date_old_to_new' %}
   {% assign sort_order = 'date_old_to_new' %}
-  {% assign sort_order_name = 'Date (old to new)' %}
+  {% assign sort_order_name = t['navigation.sort_by_date_old_to_new'] %}
 {% elsif pageQuerystring contains 'price_low_to_high' %}
   {% assign sort_order = 'price_low_to_high' %}
-  {% assign sort_order_name = 'Price (low to high)' %}
+  {% assign sort_order_name = t['navigation.sort_by_price_low_to_high'] %}
 {% elsif pageQuerystring contains 'price_high_to_low' %}
   {% assign sort_order = 'price_high_to_low' %}
-  {% assign sort_order_name = 'Price (high to low)' %}
+  {% assign sort_order_name = t['navigation.sort_by_price_high_to_low'] %}
 {% else %}
   {% assign sort_order = '' %}
-  {% assign sort_order_name = 'Featured' %}
+  {% assign sort_order_name = t['navigation.sort_by_featured'] %}
 {% endif %}
 <div class="page-heading has-sorting">
-  <h1 class="page-title">{% if page.full_url contains 'search=' %}Product Search{% else %}{% if page.name == 'Products' %}All Products{% else %}{{ page.name }}{% endif %}{% endif %}</h1>
+  <h1 class="page-title">{{ page_title }}</h1>
   <div class="product-sort">
     <nav class="main-nav header-nav-container product-sort-options" aria-label="Sort products">
       <ul class="nav" role="menubar" aria-hidden="false">
         <li class="nav-menu-item" role="menuitem" aria-haspopup="true" style="width:auto;margin-right:0;">
-          <span class="product-sort-caption">Sort by</span> <a href="#" style="display: inline-block"> <span class="hover-underline">{{ sort_order_name }} <svg aria-hidden="true" width="16" height="10" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></span></a>
+          <span class="product-sort-caption">{{ t['navigation.sort_by'] }}</span> <a href="#" style="display: inline-block"> <span class="hover-underline">{{ sort_order_name }} <svg aria-hidden="true" width="16" height="10" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></span></a>
 
           <ul aria-hidden="true" role="menu" class="horizontal-nav-links sort-by-nav-links">
-            <li class="horizontal-nav-link" role="menuitem"><a href="{{ pageURL }}" tabindex="-1">Featured</a></li>
-            <li class="horizontal-nav-link" role="menuitem"><a title="Sort products by on sale status" href="{{ pageURL }}?sort=on_sale" tabindex="-1">On sale</a></li>
-            <li class="horizontal-nav-link" role="menuitem"><a title="Sort products by top selling" href="{{ pageURL }}?sort=sales" tabindex="-1">Top selling</a></li>
-            <li class="horizontal-nav-link" role="menuitem"><a title="Sort products alphabetically (A to Z)" href="{{ pageURL }}?sort=name_a_to_z" tabindex="-1">Alphabetically (A to Z)</a></li>
-            <li class="horizontal-nav-link" role="menuitem"><a title="Sort products alphabetically (Z to A)" href="{{ pageURL }}?sort=name_z_to_a" tabindex="-1">Alphabetically (Z to A)</a></li>
-            <li class="horizontal-nav-link" role="menuitem"><a title="Sort products by date (new to old)" href="{{ pageURL }}?sort=date_new_to_old" tabindex="-1">Date (new to old)</a></li>
-            <li class="horizontal-nav-link" role="menuitem"><a title="Sort products by date (old to new)" href="{{ pageURL }}?sort=date_old_to_new" tabindex="-1">Date (old to new)</a></li>
-            <li class="horizontal-nav-link" role="menuitem"><a title="Sort products by price price (low to high)" href="{{ pageURL }}?sort=price_low_to_high" tabindex="-1">Price (low to high)</a></li>
-            <li class="horizontal-nav-link" role="menuitem"><a title="Sort products by price (high to low)" href="{{ pageURL }}?sort=price_high_to_low" tabindex="-1">Price (high to low)</a></li>
+            <li class="horizontal-nav-link" role="menuitem"><a href="{{ pageURL }}" tabindex="-1">{{ t['navigation.sort_by_featured'] }}</a></li>
+            <li class="horizontal-nav-link" role="menuitem"><a title="{{ t['navigation.sort_by'] }} {{ t['navigation.sort_by_on_sale'] }}" href="{{ pageURL }}?sort=on_sale" tabindex="-1">{{ t['navigation.sort_by_on_sale'] }}</a></li>
+            <li class="horizontal-nav-link" role="menuitem"><a title="{{ t['navigation.sort_by'] }} {{ t['navigation.sort_by_top_selling'] }}" href="{{ pageURL }}?sort=sales" tabindex="-1">{{ t['navigation.sort_by_top_selling'] }}</a></li>
+            <li class="horizontal-nav-link" role="menuitem"><a title="{{ t['navigation.sort_by'] }} {{ t['navigation.sort_by_alphabetically_a_to_z'] }}" href="{{ pageURL }}?sort=name_a_to_z" tabindex="-1">{{ t['navigation.sort_by_alphabetically_a_to_z'] }}</a></li>
+            <li class="horizontal-nav-link" role="menuitem"><a title="{{ t['navigation.sort_by'] }} {{ t['navigation.sort_by_alphabetically_z_to_a'] }}" href="{{ pageURL }}?sort=name_z_to_a" tabindex="-1">{{ t['navigation.sort_by_alphabetically_z_to_a'] }}</a></li>
+            <li class="horizontal-nav-link" role="menuitem"><a title="{{ t['navigation.sort_by'] }} {{ t['navigation.sort_by_date_new_to_old'] }}" href="{{ pageURL }}?sort=date_new_to_old" tabindex="-1">{{ t['navigation.sort_by_date_new_to_old'] }}</a></li>
+            <li class="horizontal-nav-link" role="menuitem"><a title="{{ t['navigation.sort_by'] }} {{ t['navigation.sort_by_date_old_to_new'] }}" href="{{ pageURL }}?sort=date_old_to_new" tabindex="-1">{{ t['navigation.sort_by_date_old_to_new'] }}</a></li>
+            <li class="horizontal-nav-link" role="menuitem"><a title="{{ t['navigation.sort_by'] }} {{ t['navigation.sort_by_price_low_to_high'] }}" href="{{ pageURL }}?sort=price_low_to_high" tabindex="-1">{{ t['navigation.sort_by_price_low_to_high'] }}</a></li>
+            <li class="horizontal-nav-link" role="menuitem"><a title="{{ t['navigation.sort_by'] }} {{ t['navigation.sort_by_price_high_to_low'] }}" href="{{ pageURL }}?sort=price_high_to_low" tabindex="-1">{{ t['navigation.sort_by_price_high_to_low'] }}</a></li>
           </ul>
         </li>
       </ul>
@@ -65,11 +75,13 @@
           {% assign product_status = '' %}
           {% case product.status %}
             {% when 'active' %}
-              {% if product.on_sale %}{% assign product_status = 'On sale' %}{% endif %}
+              {% if product.on_sale %}
+                {% assign product_status = t['products.on_sale'] %}
+              {% endif %}
             {% when 'sold-out' %}
-              {% assign product_status = 'Sold out' %}
+              {% assign product_status = t['products.sold_out'] %}
             {% when 'coming-soon' %}
-              {% assign product_status = 'Coming soon' %}
+              {% assign product_status = t['products.coming_soon'] %}
           {% endcase %}
           {% capture image_class %}
             {% if product.image.height > product.image.width %}
@@ -81,7 +93,7 @@
             {% endif %}
           {% endcapture %}
           {% capture status_classes %}{{ theme.product_badge_style }} {% if product.status == 'active' and product.on_sale %}status-primary{% else %}status-secondary{% endif %}{% endcapture %}
-          <a class="prod-thumb product-image-{{ theme.product_grid_image_size }} {{ theme.show_overlay }} {{ theme.grid_image_style }} {% if theme.show_quickview %}show-quickview{% endif %}" href="{{ product.url }}" title="View {{ product.name | escape }}">
+          <a class="prod-thumb product-image-{{ theme.product_grid_image_size }} {{ theme.show_overlay }} {{ theme.grid_image_style }} {% if theme.show_quickview %}show-quickview{% endif %}" href="{{ product.url }}" title="{{ t['navigation.view'] }} {{ product.name | escape }}">
             <div class="prod-thumb-container">
               <div class="product-list-image-container product-list-image-container-{{ theme.grid_image_style }}">
                 <img
@@ -107,8 +119,8 @@
                 {% if theme.show_quickview %}
                   <div class="product-list-quickview-container">
                     <div class="product-list-quickview-container-background"></div>
-                    <button class="button open-quickview" data-permalink="{{ product.permalink }}" data-has-default="{{ product.has_default_option }}" title="Quick view {{ product.name | escape }}" tabindex="-1">
-                      <span class="open-quickview-text">Quick View</span>
+                    <button class="button open-quickview" data-permalink="{{ product.permalink }}" data-has-default="{{ product.has_default_option }}" title="{{ t['navigation.quick_view'] }} {{ product.name | escape }}" tabindex="-1">
+                      <span class="open-quickview-text">{{ t['navigation.quick_view'] }}</span>
                       <svg aria-hidden="true" class="open-quickview-icon" width="19" height="12" viewBox="0 0 19 12" xmlns="http://www.w3.org/2000/svg"><path d="M9.16664521 12c3.84154359 0 7.19749259-2.23873368 8.89121419-5.54405416.0600279-.1187131.1087338-.32305832.1087338-.45608412 0-.13302581-.0487059-.33737102-.1087338-.45608412C16.3631918 2.23720589 13.0081888.00002861 9.16664521.00002861c-3.84154358 0-7.19749261 2.23873368-8.89121415 5.54405416-.06002794.1187131-.10873388.32305832-.10873388.45608412 0 .13302581.04870594.33737102.10873388.45608412C1.97009865 9.76282272 5.32510163 12 9.1666452 12zm.00219726-1.4999964h-.00219726c-2.48400287 0-4.49998927-2.01598643-4.49998927-4.49998929 0-2.48400287 2.0159864-4.49998928 4.49998927-4.49998928 2.48400289 0 4.49998929 2.01598641 4.49998929 4.49998928v.00219726c0 2.48278216-2.0150099 4.49779203-4.49779203 4.49779203zm.00485228-1.51375984c1.65218725 0 2.99312645-1.34090867 2.99312645-2.99312641 0-1.65218722-1.3409392-2.99309589-2.99312645-2.99309589h-.00704954c-.22271676.00311278-.57705551.05618273-.79092219.11843844.16058312.21823068.29092338.61529394.29092338.88625887 0 .82540697-.66988976 1.49530269-1.49529673 1.49530269-.27096493 0-.66802819-.13034623-.88625887-.29092934-.0577086.21255442-.10452246.56378039-.10452246.78402523 0 1.65221774 1.34090867 2.99312641 2.99312641 2.99312641z" fill-rule="nonzero"/></svg>
                     </button>
                   </div>
@@ -138,8 +150,8 @@
                 </div>
                 {% if product_status != blank and theme.product_badge_style == 'inline' %}<div class="prod-thumb-status {{ status_classes }}">{{ product_status }}</div>{% endif %}
                 {% if theme.show_quickview and theme.mobile_product_grid_style == 'horizontal' %}
-                  <div role="button" class="button open-quickview mobile-stacked-quickview" data-permalink="{{ product.permalink }}" data-has-default="{{ product.has_default_option }}" title="Quick view {{ product.name | escape }}">
-                    <span class="open-quickview-text">Quick View</span>
+                  <div role="button" class="button open-quickview mobile-stacked-quickview" data-permalink="{{ product.permalink }}" data-has-default="{{ product.has_default_option }}" title="{{ t['navigation.quick_view'] }} {{ product.name | escape }}">
+                    <span class="open-quickview-text">{{ t['navigation.quick_view'] }}</span>
                     <svg aria-hidden="true" class="open-quickview-icon" width="19" height="12" viewBox="0 0 19 12" xmlns="http://www.w3.org/2000/svg"><path d="M9.16664521 12c3.84154359 0 7.19749259-2.23873368 8.89121419-5.54405416.0600279-.1187131.1087338-.32305832.1087338-.45608412 0-.13302581-.0487059-.33737102-.1087338-.45608412C16.3631918 2.23720589 13.0081888.00002861 9.16664521.00002861c-3.84154358 0-7.19749261 2.23873368-8.89121415 5.54405416-.06002794.1187131-.10873388.32305832-.10873388.45608412 0 .13302581.04870594.33737102.10873388.45608412C1.97009865 9.76282272 5.32510163 12 9.1666452 12zm.00219726-1.4999964h-.00219726c-2.48400287 0-4.49998927-2.01598643-4.49998927-4.49998929 0-2.48400287 2.0159864-4.49998928 4.49998927-4.49998928 2.48400289 0 4.49998929 2.01598641 4.49998929 4.49998928v.00219726c0 2.48278216-2.0150099 4.49779203-4.49779203 4.49779203zm.00485228-1.51375984c1.65218725 0 2.99312645-1.34090867 2.99312645-2.99312641 0-1.65218722-1.3409392-2.99309589-2.99312645-2.99309589h-.00704954c-.22271676.00311278-.57705551.05618273-.79092219.11843844.16058312.21823068.29092338.61529394.29092338.88625887 0 .82540697-.66988976 1.49530269-1.49529673 1.49530269-.27096493 0-.66802819-.13034623-.88625887-.29092934-.0577086.21255442-.10452246.56378039-.10452246.78402523 0 1.65221774 1.34090867 2.99312641 2.99312641 2.99312641z" fill-rule="nonzero"/></svg>
                   </div>
                 {% endif %}
@@ -155,15 +167,15 @@
 
         <div class="page-arrows">
           {% if paginate.previous.is_link %}
-            <a aria-label="Go to previous page" class="page-link previous-page-link" href="{{ paginate.previous.url }}"><svg width="16" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.996638 20L8e-7 10.00336286l.0035344-.00381736L8e-7 9.9966371 9.996638 0l1.87436943 1.8743695L5.2460074 8.5H20.442436v3H5.2460074l6.62500003 6.62563054z" fill-rule="evenodd"/></svg><span>Previous</span></a>
+            <a aria-label="Go to previous page" class="page-link previous-page-link" href="{{ paginate.previous.url }}"><svg width="16" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.996638 20L8e-7 10.00336286l.0035344-.00381736L8e-7 9.9966371 9.996638 0l1.87436943 1.8743695L5.2460074 8.5H20.442436v3H5.2460074l6.62500003 6.62563054z" fill-rule="evenodd"/></svg><span>{{ t['navigation.previous'] }}</span></a>
           {% else %}
-            <span class="page-link previous-page-link disabled"><svg width="16" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.996638 20L8e-7 10.00336286l.0035344-.00381736L8e-7 9.9966371 9.996638 0l1.87436943 1.8743695L5.2460074 8.5H20.442436v3H5.2460074l6.62500003 6.62563054z" fill-rule="evenodd"/></svg><span>Previous</span></span>
+            <span class="page-link previous-page-link disabled"><svg width="16" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.996638 20L8e-7 10.00336286l.0035344-.00381736L8e-7 9.9966371 9.996638 0l1.87436943 1.8743695L5.2460074 8.5H20.442436v3H5.2460074l6.62500003 6.62563054z" fill-rule="evenodd"/></svg><span>{{ t['navigation.previous'] }}</span></span>
           {% endif %}
 
           {% if paginate.next.is_link %}
-            <a aria-label="Go to next page" class="page-link next-page-link" href="{{ paginate.next.url }}"><span>Next</span><svg aria-hidden="true" width="16" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.445798 0l9.9966372 9.99663714-.0035344.00381736.0035344.0029084L10.445798 20l-1.87436943-1.8743695L15.1964286 11.5H0v-3h15.1964286L8.57142857 1.87436946z" fill-rule="evenodd"/></svg></a>
+            <a aria-label="Go to next page" class="page-link next-page-link" href="{{ paginate.next.url }}"><span>{{ t['navigation.next'] }}</span><svg aria-hidden="true" width="16" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.445798 0l9.9966372 9.99663714-.0035344.00381736.0035344.0029084L10.445798 20l-1.87436943-1.8743695L15.1964286 11.5H0v-3h15.1964286L8.57142857 1.87436946z" fill-rule="evenodd"/></svg></a>
           {% else %}
-            <span class="page-link next-page-link disabled"><span>Next</span><svg aria-hidden="true" width="16" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.445798 0l9.9966372 9.99663714-.0035344.00381736.0035344.0029084L10.445798 20l-1.87436943-1.8743695L15.1964286 11.5H0v-3h15.1964286L8.57142857 1.87436946z" fill-rule="evenodd"/></svg></span>
+            <span class="page-link next-page-link disabled"><span>{{ t['navigation.next'] }}</span><svg aria-hidden="true" width="16" height="20" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.445798 0l9.9966372 9.99663714-.0035344.00381736.0035344.0029084L10.445798 20l-1.87436943-1.8743695L15.1964286 11.5H0v-3h15.1964286L8.57142857 1.87436946z" fill-rule="evenodd"/></svg></span>
           {% endif %}
         </div>
       </div>
@@ -171,7 +183,7 @@
     {% endif %}
   {% else %}
     <div class="alert-message">
-      <div class="alert-message-header">No products found</div>
+      <div class="alert-message-header">{{ t['products.no_products'] }}</div>
     </div>
   {% endif %}
 {% endpaginate %}
