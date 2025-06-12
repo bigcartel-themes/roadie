@@ -46,6 +46,12 @@
   </section>
 {% endif %}
 
+{% if theme.home_featured_video_url %}
+  <div class="home-featured-video-section">
+    <div id="featured-video"></div>
+  </div>
+{% endif %}
+
 <h1 class="visually-hidden">{{ t['home.featured'] }}</h1>
 
 {% if theme.featured_items > 0 %}
