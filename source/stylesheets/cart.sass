@@ -267,7 +267,7 @@
     margin-left: auto
 
 .checkout-button
-  font-size: 20px
+  font-size: 18px
   font-weight: bold
   height: 64px
   line-height: 64px
@@ -290,10 +290,20 @@
     
 .message-banner
   &--cart
-    font-size: 18px
-    margin: 25px 0
-    background-color: $announcement-background-color
-    color: $announcement-text-color
+    font-size: 16px
+    max-width: 75%
+    min-width: 400px
+    margin: 25px auto
+    border-radius: $border-radius
+    border: 1px solid $primary-text-color
+    color: $primary-text-color
     padding: $base-padding * 2 $base-padding * 6
     position: relative
     text-align: center
+
+    @media screen and (max-width: $break-medium)
+      min-width: 100%
+
+    a, a:visited
+      text-deocration: underline
+      text-underline-offset: 3px
