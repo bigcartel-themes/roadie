@@ -938,7 +938,7 @@
       "label": "Number of related products",
       "section": "product_page",
       "type": "select",
-      "options": "1..8",
+      "options": "1..12",
       "default": 3,
       "description": "The number of related products to show on the Product page",
       "requires": [
