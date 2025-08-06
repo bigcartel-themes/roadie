@@ -139,20 +139,11 @@ var updateCart = function(cart) {
 }
 
 var processUpdate = function(input, item_id, new_val, cart) {
-  var sub_total = formatMoney(cart.total, true, true);
-  var item_count = cart.item_count;
-
-  $('.header-cart-total').html(sub_total);
-  $('.cart-subtotal-amount').html(sub_total);
-  $('.header-cart-count').html(item_count);
-  if ($('.sidebar-cart-count').length) {
-    $('.sidebar-cart-count').html(item_count);
-    $('.sidebar-cart-total').html(sub_total);
-  }
+  updateCart(cart);
 
   updateShareableLink();
 
-  if (item_count == 0) {
+  if (cart.item_count == 0) {
     $('.cart-form').slideUp('fast',function() {
       $('.cart-container').addClass('empty-cart');
       $("html, body").animate({ scrollTop: 0 }, "fast");
