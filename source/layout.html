@@ -102,17 +102,23 @@
                 <div class="scroll-more"></div>
               </section>
             {% endif %}
-            {% if theme.nav_page_display != "none" %}
+            {% if theme.nav_page_display != "none" or pages.subscribe_page != blank or store.website != blank %}
               <section class="above-nav-section overflow-scroll">
                 <div class="above-nav-section-title">{{ t['navigation.more'] }}</div>
                 <ul class="sidebar-nav-links">
                   {% if theme.nav_page_display == 'all' or theme.nav_page_display == 'pages_only' %}
-                    {% for page in pages.all %}
-                      <li class="sidebar-nav-link">{{ page | link_to }}</li>
+                    {% for custom_page in pages.custom_pages limit: theme.nav_items %}
+                      <li class="sidebar-nav-link">{{ custom_page | link_to }}</li>
                     {% endfor %}
+                  {% endif %}
+                  {% if pages.subscribe_page %}
+                    <li class="sidebar-nav-link"><a href="{{ pages.subscribe_page.url }}">{{ pages.subscribe_page.name }}</a></li>
                   {% endif %}
                   {% if theme.nav_page_display == 'all' or theme.nav_page_display == 'contact_only' %}
                     <li class="sidebar-nav-link"><a href="/contact">{{ t['navigation.contact'] }}</a></li>
+                  {% endif %}
+                  {% if store.website != blank %}
+                    <li class="sidebar-nav-link"><a href="{{ store.website }}">{{ store.name }}</a></li>
                   {% endif %}
                 </ul>
                 <div class="scroll-more"></div>
@@ -203,25 +209,28 @@
                   </li>
                 {% endif %}
 
-                {% if theme.nav_page_display != "none" %}
+                {% if theme.nav_page_display != "none" or pages.subscribe_page or store.website != blank %}
                   {% if theme.below_header_pages_menu_style == "inline" or theme.nav_page_display == "contact_only" %}
                     {% if theme.nav_page_display == 'all' or theme.nav_page_display == 'pages_only' %}
-                      {% for page in pages.all limit: theme.inline_nav_pages %}
+                      {% for custom_page in pages.custom_pages limit: theme.nav_items %}
                         <li class="nav-menu-item" role="menuitem" aria-haspopup="false">
-                          <a href="{{ page.url }}"><span class="hover-underline no-underline">{{ page.name }}</span></a>
+                          <a href="{{ custom_page.url }}"><span class="hover-underline no-underline">{{ custom_page.name }}</span></a>
                         </li>
                       {% endfor %}
                     {% endif %}
                     {% if theme.nav_page_display == 'all' or theme.nav_page_display == 'contact_only' %}
                       <li class="nav-menu-item" role="menuitem" aria-haspopup="false"><a href="/contact"><span class="hover-underline no-underline">{{ t['navigation.contact'] }}</span></a></li>
                     {% endif %}
+                    {% if store.website != blank %}
+                      <li class="nav-menu-item" role="menuitem"><a href="{{ store.website }}" tabindex="-1"><span class="hover-underline no-underline">{{ t['navigation.back_to_site'] }}</span></a></li>
+                    {% endif %}
                   {% else %}
                     <li class="nav-menu-item" role="menuitem" aria-haspopup="true">
                       <a href="#"><span class="hover-underline">{{ t['navigation.more'] }} <svg aria-hidden="true" width="16" height="10" viewBox="0 0 10 8" xmlns="http://www.w3.org/2000/svg"><path d="M5.52498072 7.00937603l4.24998987-4.24998987c.29376151-.2906182.29376151-.76562318 0-1.05935416L9.06873448.99376537c-.2906182-.29373099-.76562317-.29373099-1.05938468 0L4.99687529 4.00627039 1.98437027.99376537c-.2906182-.29373099-.76562318-.29373099-1.05938468 0L.21874948 1.700032c-.2937615.2906182-.2937615.76562317 0 1.05935416l4.24998987 4.24998987c.2937615.2937615.76873596.2937615 1.05624137 0z" fill-rule="nonzero"/></svg></span></a>
                       <ul aria-hidden="true" role="menu" class="horizontal-nav-links">
                         {% if theme.nav_page_display == 'all' or theme.nav_page_display == 'pages_only' %}
-                          {% for page in pages.all %}
-                            <li class="horizontal-nav-link" role="menuitem"><a href="{{ page.url }}" tabindex="-1">{{ page.name }}</a></li></li>
+                          {% for custom_page in pages.custom_pages limit: theme.nav_items %}
+                            <li class="horizontal-nav-link" role="menuitem"><a href="{{ custom_page.url }}" tabindex="-1">{{ custom_page.name }}</a></li>
                           {% endfor %}
                         {% endif %}
                         {% if theme.nav_page_display == 'all' or theme.nav_page_display == 'contact_only' %}
@@ -340,13 +349,16 @@
               </div>
             {% endif %}
 
-            {% if theme.nav_page_display != "none" %}
+            {% if theme.nav_page_display != "none" or pages.subscribe_page or store.website != blank %}
               <div class="nav-section nav-section-info">
                 <ul class="sidebar-nav-links compact-nav-links">
                   {% if theme.nav_page_display == 'all' or theme.nav_page_display == 'pages_only' %}
-                    {% for page in pages.all %}
-                      <li class="sidebar-nav-link medium-border">{{ page | link_to }}</li>
+                    {% for custom_page in pages.custom_pages limit: theme.nav_items %}
+                      <li class="sidebar-nav-link medium-border">{{ custom_page | link_to }}</li>
                     {% endfor %}
+                  {% endif %}
+                  {% if pages.subscribe_page %}
+                    <li class="sidebar-nav-link medium-border"><a href="{{ pages.subscribe_page.url }}">{{ pages.subscribe_page.name }}</a></li>
                   {% endif %}
                   {% if theme.nav_page_display == 'all' or theme.nav_page_display == 'contact_only' %}
                     <li class="sidebar-nav-link medium-border"><a href="/contact">{{ t['navigation.contact'] }}</a></li>
@@ -426,7 +438,7 @@
                   {% endif %}
 
                   {% if theme.telegram_url != blank %}
-                    <a href="{{ theme.telegram_url }}" title="Telegram"><svg class="telegram-icon" height="36" width="36" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path fill="currentColor" d="M25 2c12.703 0 23 10.297 23 23S37.703 48 25 48 2 37.703 2 25 12.297 2 25 2zm7.934 32.375c.423-1.298 2.405-14.234 2.65-16.783.074-.772-.17-1.285-.648-1.514-.578-.278-1.434-.139-2.427.219-1.362.491-18.774 7.884-19.78 8.312-.954.405-1.856.847-1.856 1.487 0 .45.267.703 1.003.966.766.273 2.695.858 3.834 1.172 1.097.303 2.346.04 3.046-.395.742-.461 9.305-6.191 9.92-6.693.614-.502 1.104.141.602.644-.502.502-6.38 6.207-7.155 6.997-.941.959-.273 1.953.358 2.351.721.454 5.906 3.932 6.687 4.49.781.558 1.573.811 2.298.811.725 0 1.107-.955 1.468-2.064z"/></svg>.468-2.064z"/></svg></a>
+                    <a href="{{ theme.telegram_url }}" title="Telegram"><svg class="telegram-icon" height="36" width="36" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path fill="currentColor" d="M25 2c12.703 0 23 10.297 23 23S37.703 48 25 48 2 37.703 2 25 12.297 2 25 2zm7.934 32.375c.423-1.298 2.405-14.234 2.65-16.783.074-.772-.17-1.285-.648-1.514-.578-.278-1.434-.139-2.427.219-1.362.491-18.774 7.884-19.78 8.312-.954.405-1.856.847-1.856 1.487 0 .45.267.703 1.003.966.766.273 2.695.858 3.834 1.172 1.097.303 2.346.04 3.046-.395.742-.461 9.305-6.191 9.92-6.693.614-.502 1.104.141.602.644-.502.502-6.38 6.207-7.155 6.997-.941.959-.273 1.953.358 2.351.721.454 5.906 3.932 6.687 4.49.781.558 1.573.811 2.298.811.725 0 1.107-.955 1.468-2.064z"/></svg></a>
                   {% endif %}
 
                   {% if theme.discord_url != blank %}
@@ -478,6 +490,7 @@
           {% if theme.footer_text != blank %}
             <div class="footer-custom-content">{{ theme.footer_text }} </div>
           {% endif %}
+
           {% if theme.instagram_url != blank
             or theme.tiktok_url != blank
             or theme.bluesky_url != blank
@@ -547,7 +560,7 @@
                 {% endif %}
 
                 {% if theme.telegram_url != blank %}
-                  <a href="{{ theme.telegram_url }}" title="Telegram"><svg class="telegram-icon" height="36" width="36" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path fill="currentColor" d="M25 2c12.703 0 23 10.297 23 23S37.703 48 25 48 2 37.703 2 25 12.297 2 25 2zm7.934 32.375c.423-1.298 2.405-14.234 2.65-16.783.074-.772-.17-1.285-.648-1.514-.578-.278-1.434-.139-2.427.219-1.362.491-18.774 7.884-19.78 8.312-.954.405-1.856.847-1.856 1.487 0 .45.267.703 1.003.966.766.273 2.695.858 3.834 1.172 1.097.303 2.346.04 3.046-.395.742-.461 9.305-6.191 9.92-6.693.614-.502 1.104.141.602.644-.502.502-6.38 6.207-7.155 6.997-.941.959-.273 1.953.358 2.351.721.454 5.906 3.932 6.687 4.49.781.558 1.573.811 2.298.811.725 0 1.107-.955 1.468-2.064z"/></svg>.468-2.064z"/></svg></a>
+                  <a href="{{ theme.telegram_url }}" title="Telegram"><svg class="telegram-icon" height="36" width="36" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path fill="currentColor" d="M25 2c12.703 0 23 10.297 23 23S37.703 48 25 48 2 37.703 2 25 12.297 2 25 2zm7.934 32.375c.423-1.298 2.405-14.234 2.65-16.783.074-.772-.17-1.285-.648-1.514-.578-.278-1.434-.139-2.427.219-1.362.491-18.774 7.884-19.78 8.312-.954.405-1.856.847-1.856 1.487 0 .45.267.703 1.003.966.766.273 2.695.858 3.834 1.172 1.097.303 2.346.04 3.046-.395.742-.461 9.305-6.191 9.92-6.693.614-.502 1.104.141.602.644-.502.502-6.38 6.207-7.155 6.997-.941.959-.273 1.953.358 2.351.721.454 5.906 3.932 6.687 4.49.781.558 1.573.811 2.298.811.725 0 1.107-.955 1.468-2.064z"/></svg></a>
                 {% endif %}
 
                 {% if theme.discord_url != blank %}
@@ -572,6 +585,18 @@
               </div>
             </section>
           {% endif %}
+
+
+          {% if pages.required_pages.size > 0 %}
+            <section class="footer-nav-section nav-section-pages">
+              <ul class="pages">
+                {% for required_page in pages.required_pages %}
+                  <li class="footer-page-link">{{ required_page | link_to }}</li>
+                {% endfor %}
+              </ul>
+            </section>
+          {% endif %}
+
           {% unless theme.hide_big_cartel_credit %}
             <section class="footer-nav-section nav-section-credit">
               <div class="badge">

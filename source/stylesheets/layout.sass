@@ -558,7 +558,6 @@ _:-ms-fullscreen, :root .content-wrapper
 
   .nav-section-social
     border-bottom: none
-    padding-top: $base-padding * 4
 
     .social-links
       grid-template-columns: repeat(5, 1fr)
@@ -862,6 +861,34 @@ footer
 
       @media screen and (max-width: $break-small)
         +flexbox
+
+    .nav-section-social
+      padding-bottom: 20px
+
+    .nav-section-pages
+      +flexbox
+      +flex-direction(column)
+      +align-items(center)
+      list-style: none
+      margin: 0
+      padding: 10px 0
+
+      ul
+        +flexbox
+        +justify-content(center)
+        +flex-wrap(wrap)
+        list-style: none
+        gap: 10px 20px
+        margin: 0
+        padding: 0
+
+        li.footer-page-link
+          a
+            text-decoration: none
+
+            &:hover, &:focus
+              text-decoration: none
+
 
   .sidebar-visible-mobile &
     display: none

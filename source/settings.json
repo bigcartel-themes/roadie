@@ -572,16 +572,14 @@
       ]
     },
     {
-      "variable": "inline_nav_pages",
-      "label": "Number of pages in header",
+      "variable": "nav_items",
+      "label": "Custom page limit in header",
       "section": "global_navigation",
       "type": "select",
-      "options": "0..3",
-      "default": 1,
-      "description": "Controls the number of pages shown in your desktop navigation when using inline menu style ",
+      "options": "0..100",
+      "default": 5,
+      "description": "Maximum number of custom pages shown in your header",
       "requires": [
-        "theme_layout eq below_header",
-        "below_header_pages_menu_style eq inline",
         "nav_page_display neq contact_only",
         "nav_page_display neq none"
       ]
