@@ -2,7 +2,7 @@ function initSplide() {
   const homeSlideshowContainer = document.querySelector('.splide.home-slideshow');
   if (homeSlideshowContainer) {
     var splide = new Splide( '.splide.home-slideshow', {
-      arrows: false,
+      arrows: true,
       type: 'slide',
       autoplay: themeOptions.homepageSlideshowAutoplay,
       interval: themeOptions.homepageSlideshowSpeed,
