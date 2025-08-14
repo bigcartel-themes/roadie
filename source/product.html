@@ -30,6 +30,15 @@
         {% else %}
           {{ product.default_price | money: theme.money_format }}
         {% endif %}
+        
+        {% if product.price_suffix != blank %}
+          {% if product.variable_pricing %}
+            {% assign formatted_suffix = '(' | append: product.price_suffix | append: ')' %}
+          {% else %}
+            {% assign formatted_suffix = product.price_suffix %}
+          {% endif %}
+          <span class="price-suffix">{{ formatted_suffix }}</span>
+        {% endif %}
       {% endunless %}
     </div>
     {% if product_status != blank %}
@@ -340,14 +349,23 @@
                       {% else %}
                         {{ related_product.default_price | money: theme.money_format }}
                       {% endif %}
+                      
+                      {% if related_product.price_suffix != blank %}
+                        {% if related_product.variable_pricing %}
+                          {% assign formatted_suffix = '(' | append: related_product.price_suffix | append: ')' %}
+                        {% else %}
+                          {% assign formatted_suffix = related_product.price_suffix %}
+                        {% endif %}
+                        <span class="price-suffix">{{ formatted_suffix }}</span>
+                      {% endif %}
                     {% endunless %}
                   </div>
                   {% if related_product_status != blank and theme.product_badge_style == 'inline' %}
                     <div class="prod-thumb-status {{ related_product_status_classes }}">{{ related_product_status }}</div>
                   {% endif %}
                   {% if theme.show_quickview and theme.mobile_product_grid_style == 'horizontal' %}
-                    <div role="button" class="button open-quickview mobile-stacked-quickview" data-permalink="{{ related_product.permalink }}" data-has-default="{{ related_product.has_default_option }}" title="{{ t['products.quick_view'] }} {{ related_product.name | escape }}">
-                      <span class="open-quickview-text">{{ t['products.quick_view'] }}</span>
+                    <div role="button" class="button open-quickview mobile-stacked-quickview" data-permalink="{{ related_product.permalink }}" data-has-default="{{ related_product.has_default_option }}" title="{{ t['navigation.quick_view'] }} {{ related_product.name | escape }}">
+                      <span class="open-quickview-text">{{ t['navigation.quick_view'] }}</span>
                       <svg aria-hidden="true" class="open-quickview-icon" width="19" height="12" viewBox="0 0 19 12" xmlns="http://www.w3.org/2000/svg"><path d="M9.16664521 12c3.84154359 0 7.19749259-2.23873368 8.89121419-5.54405416.0600279-.1187131.1087338-.32305832.1087338-.45608412 0-.13302581-.0487059-.33737102-.1087338-.45608412C16.3631918 2.23720589 13.0081888.00002861 9.16664521.00002861c-3.84154358 0-7.19749261 2.23873368-8.89121415 5.54405416-.06002794.1187131-.10873388.32305832-.10873388.45608412 0 .13302581.04870594.33737102.10873388.45608412C1.97009865 9.76282272 5.32510163 12 9.1666452 12zm.00219726-1.4999964h-.00219726c-2.48400287 0-4.49998927-2.01598643-4.49998927-4.49998929 0-2.48400287 2.0159864-4.49998928 4.49998927-4.49998928 2.48400289 0 4.49998929 2.01598641 4.49998929 4.49998928v.00219726c0 2.48278216-2.0150099 4.49779203-4.49779203 4.49779203zm.00485228-1.51375984c1.65218725 0 2.99312645-1.34090867 2.99312645-2.99312641 0-1.65218722-1.3409392-2.99309589-2.99312645-2.99309589h-.00704954c-.22271676.00311278-.57705551.05618273-.79092219.11843844.16058312.21823068.29092338.61529394.29092338.88625887 0 .82540697-.66988976 1.49530269-1.49529673 1.49530269-.27096493 0-.66802819-.13034623-.88625887-.29092934-.0577086.21255442-.10452246.56378039-.10452246.78402523 0 1.65221774 1.34090867 2.99312641 2.99312641 2.99312641z" fill-rule="nonzero"/></svg>
                     </div>
                   {% endif %}

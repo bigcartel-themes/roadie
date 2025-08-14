@@ -160,7 +160,7 @@ var processUpdate = function(input, item_id, new_val, cart) {
       if (cart.items[itemIndex].id == item_id) {
         item_price = cart.items[itemIndex].price;
         formatted_item_price = formatMoney(item_price, true, true);
-        $('.cart-item[data-item-id="'+item_id+'"]').find('.cart-item-details-price').html(formatted_item_price)
+        $('.cart-item[data-item-id="'+item_id+'"]').find('.cart-item-details-price__update').html(formatted_item_price)
       }
     }
 
