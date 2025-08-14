@@ -97,6 +97,24 @@ function getRandomIndex(elements) {
 }
 
 /**
+ * Check if a URL is external by comparing hostnames
+ * 
+ * @param {string} url - The URL to check
+ * @returns {boolean} True if external, false if internal or relative
+ */
+function isExternalLink(url) {
+  if (!url) return false;
+  
+  try {
+    const linkUrl = new URL(url, window.location.origin);
+    return linkUrl.hostname !== window.location.hostname;
+  } catch (e) {
+    // Invalid URL, treat as internal
+    return false;
+  }
+}
+
+/**
  * Format a number as currency based on the shop's settings
  * 
  * @param {number} amount - The amount to format

@@ -768,6 +768,16 @@
       "description": "Show a custom message in your shop's footer. Supports HTML for advanced customization."
     },
     {
+      "variable": "hero_link",
+      "label": "Promo Image / Slideshow link",
+      "section": "homepage",
+      "type": "text",
+      "description": "Adds a click destination to the promo image or slideshow on the Home page",
+      "requires": [
+        {"any": ["promo_image present", "slideshow present"]}
+      ]
+    },
+    {
       "variable": "homepage_slideshow_transition",
       "label": "Slideshow type",
       "section": "homepage",
@@ -777,7 +787,10 @@
         ["Fade", "fade"]
       ],
       "default": "slide",
-      "description": "Controls how homepage slideshow transitions between images"
+      "description": "Controls how homepage slideshow transitions between images",
+      "requires": [
+        "slideshow present"
+      ]
     },
     {
       "variable": "homepage_slideshow_autoplay",
@@ -785,7 +798,10 @@
       "section": "homepage",
       "type": "boolean",
       "default": true,
-      "description": "Automatically advances slides in the homepage slideshow"
+      "description": "Automatically advances slides in the homepage slideshow",
+      "requires": [
+        "slideshow present"
+      ]
     },
     {
       "variable": "homepage_slideshow_speed",
@@ -802,6 +818,7 @@
       "default": 4000,
       "description": "Controls how quickly slides advance in the auto-playing slideshow",
       "requires": [
+        "slideshow present",
         "homepage_slideshow_autoplay eq true"
       ]
     },
