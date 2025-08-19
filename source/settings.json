@@ -702,7 +702,7 @@
           ["Inline", "inline"]
       ],
       "default": "circle",
-      "description": "The display of your product status on the Home and Products pages"
+      "description": "The display of your product status in product grids"
     },
     {
       "variable": "show_quickview",
@@ -930,6 +930,14 @@
       ],
       "default": "default",
       "description": "Choose how to display prices in your product grid when a product's variants have different prices. Individual product pages will always show the full range."
+    },
+    {
+      "variable": "show_product_variant_count_in_grid",
+      "label": "Show product variant count in product grids",
+      "section": "product_page",
+      "type": "boolean",
+      "default": false,
+      "description": "For products with multiple variants, show the variant count in product grids."
     },
     {
       "variable": "product_image_zoom",

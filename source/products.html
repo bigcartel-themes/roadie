@@ -153,6 +153,14 @@
                     {% endif %}
                   {% endunless %}
                 </div>
+                {% unless hide_price %}
+                  {% if product.options.size > 1 and theme.show_product_variant_count_in_grid %}
+                    <div class="product-list-thumb-options-description">
+                      {{ product.options.size }} {{ t['products.variants'] }}
+                    </div>
+                  {% endif %}
+                {% endunless %}
+
                 {% if product_status != blank and theme.product_badge_style == 'inline' %}<div class="prod-thumb-status {{ status_classes }}">{{ product_status }}</div>{% endif %}
                 {% if theme.show_quickview and theme.mobile_product_grid_style == 'horizontal' %}
                   <div role="button" class="button open-quickview mobile-stacked-quickview" data-permalink="{{ product.permalink }}" data-has-default="{{ product.has_default_option }}" title="{{ t['navigation.quick_view'] }} {{ product.name | escape }}">
