@@ -20,14 +20,15 @@
       {% if theme.contact_text != blank %}
         <div class="message-banner message-banner--contact">{{ theme.contact_text }}</div>
       {% endif %}
-      {% if errors != blank %}
-        <ul class="errors {{ page.permalink }}-errors">
-          {% for error in errors %}
-            <li>{{ error }}</li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-      <form method="post" action="/contact" class="contact-form">
+      {% if theme.show_contact_form != false %}
+        {% if errors != blank %}
+          <ul class="errors {{ page.permalink }}-errors">
+            {% for error in errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        <form method="post" action="/contact" class="contact-form">
         <div class="form-group contact-form-group">
           <label class="form-label contact-form-label contact-name" for="name">{{ t['contact.name'] }}</label>
           {{ contact | contact_input: 'name' }}
@@ -53,7 +54,8 @@
         </div>
 
         <div class="recaptcha-note">{{ contact.recaptcha }}</div>
-      </form>
+        </form>
+      {% endif %}
     </div>
   {% endif %}
 </div>

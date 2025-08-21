@@ -558,13 +558,14 @@ _:-ms-fullscreen, :root .content-wrapper
 
   .nav-section-social
     border-bottom: none
-    padding-top: $base-padding * 4
+    margin-top: 20px
 
     .social-links
       grid-template-columns: repeat(5, 1fr)
       gap: 8px
       +justify-content(flex-start)
       +flex-wrap(wrap)
+      margin-left: -10px
 
   .bigcartel-credit
     margin-top: $base-padding * 2
@@ -751,28 +752,31 @@ _:-ms-fullscreen, :root .content-wrapper
     +align-items(center)
     +justify-content(center)
     +flex-shrink(0)
-    background: $button-background-color
+    //background: $button-background-color
+    background: transparent
+    border: 0px solid $primary-text-color
     border-radius: 50%
-    color: $button-text-color
-    height: 40px
+    color: $primary-text-color
+    height: 42px
     text-align: center
-    width: 40px
+    width: 42px
 
     &:hover, &:focus
-      background: $button-hover-background-color
+      background: $link-hover-color
 
       svg
-        fill: $button-hover-text-color
+        fill: $primary-text-color
 
     svg
       display: block
-      fill: $button-text-color
-      height: 18px
-      width: 18px
+      fill: $primary-text-color
+      height: 24px
+      width: 24px
 
-.nav-section-credit
-  border: none !important
-  padding-top: 30px
+      &.reddit-icon,
+      &.discord-icon
+        width: 26px
+        height: 26px
 
 .bigcartel-credit
   font-size: 14px
@@ -820,15 +824,16 @@ footer
   +flex-shrink(0)
 
   .footer-custom-content
-    display: grid
-    grid-template-columns: 1fr
-    justify-content: center
+    display: block
     text-align: center
     padding: 20px
-    gap: 20px
 
-    > *
-      justify-self: center
+    img
+      display: block
+      margin: 20px auto
+
+    a
+      text-decoration: underline
 
   .social-links
     display: flex
@@ -862,6 +867,34 @@ footer
 
       @media screen and (max-width: $break-small)
         +flexbox
+
+    .nav-section-social
+      padding: 0 20px 20px 20px
+
+    .nav-section-pages
+      +flexbox
+      +flex-direction(column)
+      +align-items(center)
+      list-style: none
+      margin: 0
+      padding: 10px 0
+
+      ul
+        +flexbox
+        +justify-content(center)
+        +flex-wrap(wrap)
+        list-style: none
+        gap: 10px 20px
+        margin: 0
+        padding: 0
+
+        li.footer-page-link
+          a
+            text-decoration: none
+
+            &:hover, &:focus
+              text-decoration: none
+
 
   .sidebar-visible-mobile &
     display: none

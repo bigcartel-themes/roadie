@@ -200,3 +200,55 @@ $(document).ready(function() {
   toggleMobileCart(win_width);
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+  const isHomePage = document.body.getAttribute('data-bc-page-type') === 'home';
+  const heroLink = themeOptions.heroLink && themeOptions.heroLink.trim() !== '' ? themeOptions.heroLink : null;
+  
+  if (isHomePage && heroLink) {
+    const slideshow = document.querySelector(".home-slideshow");
+    const promoImage = document.querySelector(".home-promo-image .promo-image");
+    
+    if (slideshow) {
+      // For slideshow, only make the slides clickable, not the entire slideshow area
+      // This prevents interfering with splide navigation controls
+      const slides = slideshow.querySelectorAll('.splide__slide');
+      slides.forEach(slide => {
+        slide.classList.add("hero-clickable");
+        slide.setAttribute("role", "button");
+        slide.setAttribute("aria-label", "Navigate to " + heroLink);
+      });
+      
+      // Use event delegation for better performance - single listener on slideshow container
+      slideshow.addEventListener("click", function(event) {
+        // Don't interfere with splide controls - only handle clicks on slide content
+        if (!event.target.closest('.splide__arrow, .splide__pagination')) {
+          const clickedSlide = event.target.closest('.splide__slide');
+          if (clickedSlide) {
+            event.preventDefault();
+            event.stopPropagation();
+            if (isExternalLink(heroLink)) {
+              window.open(heroLink, '_blank', 'noopener,noreferrer');
+            } else {
+              window.location.href = heroLink;
+            }
+          }
+        }
+      });
+    } else if (promoImage) {
+      // For single promo image, make the whole area clickable
+      promoImage.classList.add("hero-clickable");
+      promoImage.setAttribute("role", "button");
+      promoImage.setAttribute("aria-label", "Navigate to " + heroLink);
+      promoImage.addEventListener("click", function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        if (isExternalLink(heroLink)) {
+          window.open(heroLink, '_blank', 'noopener,noreferrer');
+        } else {
+          window.location.href = heroLink;
+        }
+      });
+    }
+  }
+});
+

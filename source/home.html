@@ -8,11 +8,11 @@
 {% endif %}
 
 {% if theme.image_sets.slideshow.size > 0 %}
-  <div class="{% if theme.image_sets.slideshow.size > 1 %}splide{% endif %} home-slideshow">
+  <div class="splide home-slideshow" data-autoplay="{{ theme.homepage_slideshow_autoplay }}">
     <div class="splide__track">
       <div class="splide__list">
         {% for image in theme.image_sets.slideshow %}
-          <div class="splide__slide">
+          <div class="splide__slide"{% if theme.hero_link != blank %} title="{{ theme.hero_link }}"{% endif %}>
             <img
               alt="Slideshow image {{ forloop.index }}"
               {% if forloop.index == 1 %}fetchpriority="high"{% else %}loading="lazy"{% endif %}
@@ -41,7 +41,7 @@
         {{ theme.promo_image.url | constrain: 2400 }} 2400w,
         {{ theme.promo_image.url | constrain: 2700 }} 2700w
       "
-      data-sizes="auto"
+      data-sizes="auto"{% if theme.hero_link != blank %} title="{{ theme.hero_link }}"{% endif %}
     >
   </section>
 {% endif %}
@@ -138,13 +138,30 @@
                     {% endif %}
 
                     {% unless hide_price %}
-                      {% if product.variable_pricing %}
-                        {{ product.min_price | money: theme.money_format }} - {{ product.max_price | money: theme.money_format }}
-                      {% else %}
-                        {{ product.default_price | money: theme.money_format }}
+                      {{ product | product_price: theme.money_format, theme.product_variable_pricing_display_format }}
+
+                      {% if product.price_suffix != blank %}
+                        {% assign variable_price_shown = true %}
+                        {% if theme.product_variable_pricing_display_format == "min_only" or theme.product_variable_pricing_display_format == "max_only" %}
+                          {% assign variable_price_shown = false %}
+                        {% endif %}
+
+                        {% if product.variable_pricing and variable_price_shown %}
+                          {% assign formatted_suffix = '(' | append: product.price_suffix | append: ')' %}
+                        {% else %}
+                          {% assign formatted_suffix = product.price_suffix %}
+                        {% endif %}
+                        <span class="price-suffix">{{ formatted_suffix }}</span>
                       {% endif %}
                     {% endunless %}
                   </div>
+                  {% unless hide_price %}
+                    {% if product.options.size > 1 and theme.show_product_variant_count_in_grid %}
+                      <div class="product-list-thumb-options-description">
+                        {{ product.options.size }} {{ t['products.variants'] }}
+                      </div>
+                    {% endif %}
+                  {% endunless %}
                   {% if product_status != blank and theme.product_badge_style == 'inline' %}<div class="prod-thumb-status {{ status_classes }}">{{ product_status }}</div>{% endif %}
                   {% if theme.show_quickview and theme.mobile_product_grid_style == 'horizontal' %}
                     <div role="button" class="button open-quickview mobile-stacked-quickview" data-permalink="{{ product.permalink }}" data-has-default="{{ product.has_default_option }}" title="{{ t['navigation.quick_view'] }} {{ product.name | escape }}">
