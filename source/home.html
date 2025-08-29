@@ -60,9 +60,14 @@
   {% endif %}
 </div>
 
+{% comment %} Featured Products Section {% endcomment %}
 {% if theme.featured_items > 0 %}
   {% paginate products from products.all by theme.featured_items order:theme.featured_order %}
     {% if products != blank %}
+      {% comment %} Show title only if both sections are visible {% endcomment %}
+      {% if theme.featured_categories > 0 and categories.active.size > 0 %}
+        <h2 class="featured-title">{{ t['home.featured_products'] }}</h2>
+      {% endif %}
       <div class="product-list-container">
         <div class="product-list {{ theme.product_list_layout }} mobile-{{ theme.mobile_product_grid_style }} grid-{{ theme.layout_style }}">
           {% for product in products %}
@@ -175,6 +180,150 @@
           {% endfor %}
         </div>
       </div>
+    {% else %}
+      <div class="alert-message">
+        <div class="alert-message-header">{{ t['products.no_products'] }}</div>
+      </div>
+    {% endif %}
+  {% endpaginate %}
+{% endif %}
+
+{% comment %} Featured Categories Section {% endcomment %}
+{% if theme.featured_categories > 0 and categories.active.size > 0 %}
+  {% assign categories_with_products = blank %}
+  {% for category in categories.active %}
+    {% if category.products.size > 0 %}
+      {% assign categories_with_products = categories_with_products | append: category.id | append: ',' %}
+    {% endif %}
+  {% endfor %}
+  
+  {% if categories_with_products != blank %}
+    {% assign category_collages_enabled = false %}
+    {% if theme.features.has_theme_category_collages %}
+      {% assign category_collages_enabled = true %}
+    {% endif %}
+    <div class="featured-categories" data-category-collages-enabled="{{ category_collages_enabled }}">
+      {% comment %} Show title only if both sections are visible {% endcomment %}
+      {% if theme.featured_items > 0 %}
+        <h2 class="featured-title">{{ t['home.featured_categories'] }}</h2>
+      {% endif %}
+      <div class="product-list-container">
+        <div class="product-list {{ theme.product_list_layout }} category-list category-grid-{{ theme.categories_grid_layout }} mobile-{{ theme.mobile_product_grid_style }} grid-{{ theme.layout_style }}">
+        {% for category in categories.active limit:theme.featured_categories %}
+          {% if category.products.size > 0 %}
+        <a class="prod-thumb product-image-{{ theme.product_grid_image_size }} category-link {{ theme.show_overlay }} {{ theme.grid_image_style }}" href="{{ category.url }}" title="{{ category.name | escape }}">
+            {% comment %}Determine if category collages should be enabled based on feature flag setting{% endcomment %}
+            {% if category_collages_enabled == false %}
+              {% for product in category.products limit:1 %}
+                {% assign image_width = product.image.width | times: 1.0 %}
+                {% assign image_height = product.image.height | times: 1.0 %}
+                {% assign aspect_ratio = image_width | divided_by: image_height %}
+
+                {% capture image_class %}
+                  {% if product.image.height > product.image.width %}
+                    image-tall
+                  {% elsif product.image.height < product.image.width %}
+                    image-wide
+                  {% else %}
+                    image-square
+                  {% endif %}
+                {% endcapture %}
+
+                <div class="product-list-image-container product-list-image-container-cover">
+                  <img
+                    alt=""
+                    class="blur-up product-list-image lazyload grid-cover"
+                    src="{{ product.image | product_image_url | constrain: 20 }}"
+                    {% unless theme.grid_image_style == 'default' %}data-aspectratio="{{ aspect_ratio }}"{% endunless %}
+                    data-srcset="
+                      {{ product.image | product_image_url | constrain: 240 }} 240w,
+                      {{ product.image | product_image_url | constrain: 320 }} 320w,
+                      {{ product.image | product_image_url | constrain: 400 }} 400w,
+                      {{ product.image | product_image_url | constrain: 540 }} 540w,
+                      {{ product.image | product_image_url | constrain: 600 }} 600w,
+                      {{ product.image | product_image_url | constrain: 800 }} 800w,
+                      {{ product.image | product_image_url | constrain: 960 }} 960w
+                    "
+                    data-sizes="auto"
+                  >
+                </div>
+                <div class="product-list-thumb-info">
+                  <div class="prod-thumb-background"></div>
+                  <div class="prod-thumb-info-headers">
+                    <div class="product-list-thumb-name">{{ category.name }}</div>
+                    {% if theme.home_page_categories_product_count_display %}
+                      <div class="prod-thumb-price category-count">{{ category.products.size | pluralize: t['products.product'], t['products.products'] }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endfor %}
+            {% else %}
+              {% if category.products.size > 0 %}
+                {% assign first_product = category.products.first %}
+                {% assign image_width = first_product.image.width | times: 1.0 %}
+                {% assign image_height = first_product.image.height | times: 1.0 %}
+                {% assign aspect_ratio = image_width | divided_by: image_height %}
+                
+                {% comment %}
+                  Determine which image URLs to use based on the image style setting
+                {% endcomment %}
+                {% assign image_urls = "" %}
+    
+                {% if theme.home_page_categories_image_style == "grid" %}
+                  {% capture image_urls %}
+                    [{% for product in category.products limit:6 %}"{{ product.image | product_image_url | constrain: 400 }}"{% unless forloop.last %},{% endunless %}{% endfor %}]
+                  {% endcapture %}
+                {% elsif theme.home_page_categories_image_style == "strip" %}
+                  {% capture image_urls %}
+                    [{% for product in category.products limit:4 %}"{{ product.image | product_image_url | constrain: 400 }}"{% unless forloop.last %},{% endunless %}{% endfor %}]
+                  {% endcapture %}
+                {% elsif theme.home_page_categories_image_style == "featured" %}
+                  {% capture image_urls %}
+                    [{% for product in category.products limit:4 %}"{{ product.image | product_image_url | constrain: 400 }}"{% unless forloop.last %},{% endunless %}{% endfor %}]
+                  {% endcapture %}
+                {% elsif theme.home_page_categories_image_style == "single" %}
+                  {% capture image_urls %}
+                    ["{{ first_product.image | product_image_url | constrain: 800 }}"]
+                  {% endcapture %}
+                {% endif %}
+
+                <div
+                  class="product-list-image-container product-list-image-container-cover" 
+                  id="category-collage-{{ category.id }}"
+                  data-image-urls='{{ image_urls | strip }}'
+                  data-image-style="{{ theme.home_page_categories_image_style }}"
+                >
+                  <!-- Default placeholder while image is being loaded -->
+                  <img
+                    alt=""
+                    class="blur-up product-list-image lazyload grid-cover"
+                    src="{{ first_product.image | product_image_url | constrain: 30 }}"
+                    {% unless theme.grid_image_style == 'default' %}data-aspectratio="{{ aspect_ratio }}"{% endunless %}
+                  >
+                </div>
+                <div class="product-list-thumb-info">
+                  <div class="prod-thumb-background"></div>
+                  <div class="prod-thumb-info-headers">
+                    <div class="product-list-thumb-name">{{ category.name }}</div>
+                    {% if theme.home_page_categories_product_count_display %}
+                      <div class="prod-thumb-price category-count">{{ category.products.size | pluralize: t['products.product'], t['products.products'] }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endif %}
+            {% endif %}
+        </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+{% endif %}
+
+{% comment %} All Products Link - Show when pagination exists or when only categories are displayed {% endcomment %}
+{% if theme.featured_items > 0 %}
+  {% paginate products from products.all by theme.featured_items order:theme.featured_order %}
+    {% if products != blank %}
       {% if paginate.pages > 1 %}
         {% assign all_products_button_text = t['navigation.all_products'] %}
         {% if all_products_button_text != blank %}
@@ -183,10 +332,16 @@
           </div>
         {% endif %}
       {% endif %}
-    {% else %}
-      <div class="alert-message">
-        <div class="alert-message-header">{{ t['products.no_products'] }}</div>
-      </div>
     {% endif %}
   {% endpaginate %}
+{% endif %}
+
+{% comment %} Show all products link when only featured categories are displayed {% endcomment %}
+{% if theme.featured_items == 0 and categories_with_products != blank and products.all.size > 0 %}
+  {% assign all_products_button_text = t['navigation.all_products'] %}
+  {% if all_products_button_text != blank %}
+    <div class="view-all-link-container">
+      <a class="view-all-link icon-link icon-right-link" href="/products" title="{{ t['navigation.view_all'] }}">{{ all_products_button_text }} <svg aria-hidden="true" width="16" height="15" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.445798 0l9.9966372 9.99663714-.0035344.00381736.0035344.0029084L10.445798 20l-1.87436943-1.8743695L15.1964286 11.5H0v-3h15.1964286L8.57142857 1.87436946z" fill-rule="evenodd"/></svg></a>
+    </div>
+  {% endif %}
 {% endif %}

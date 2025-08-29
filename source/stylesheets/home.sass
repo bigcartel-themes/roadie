@@ -86,6 +86,7 @@
 .view-all-link-container
   border-top: $small-border
   text-align: right
+  margin-top: 40px
 
 .icon-link
   font-weight: bold
@@ -127,7 +128,7 @@
     margin: 30px 0 8px 0
 
   .featured-message
-    margin: 30px auto 40px auto
+    margin: 30px auto 20px auto
     padding: 0
 
     ol, ul
@@ -161,6 +162,178 @@
       margin: 0 auto
       max-width: 100%
       margin-bottom: 16px
+
+  // Featured Categories Section
+  .featured-categories
+    // Only add top margin if featured products are also displayed above
+    //margin-top: #{"{% if theme.featured_items > 0 %}{% if theme.show_product_grid_gutters %}40px{% else %}32px{% endif %}{% else %}{% if theme.show_product_grid_gutters %}0px{% else %}0px{% endif %}{% endif %}"}
+    margin-top: #{"{% if theme.featured_items > 0 %}{% if theme.show_product_grid_gutters %}20px{% else %}10px{% endif %}{% endif %}"}
+
+    .featured-title
+      margin: 30px 0 16px 0
+
+    // Category grid inherits from product grid system
+    .category-list
+      // Inherits flexbox from .product-list class in HTML
+      // Ensure flexbox properties are applied
+      +flexbox
+      +flex-wrap(wrap)
+      +justify-content(flex-start)
+      margin: #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"} -#{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"}
+
+      // Category-specific grid layout overrides with responsive behavior
+      &.category-grid-two
+        .prod-thumb
+          width: calc(100% / 2)
+
+          @media screen and (max-width: $break-small)
+            width: calc(100% / 1)
+      
+      &.category-grid-three
+        .prod-thumb
+          width: calc(100% / 3)
+
+          @media screen and (max-width: $break-medium)
+            width: calc(100% / 2)
+
+          @media screen and (max-width: $break-small)
+            width: calc(100% / 1)
+      
+      &.category-grid-four
+        .prod-thumb
+          width: calc(100% / 4)
+
+          @media screen and (max-width: $break-large)
+            width: calc(100% / 3)
+
+          @media screen and (max-width: $break-medium)
+            width: calc(100% / 2)
+
+          @media screen and (max-width: $break-small)
+            width: calc(100% / 1)
+
+      // Category items inherit from product thumbnail system
+      .product-list-thumb.category
+        // Base styles inherited from .prod-thumb
+        color: $primary-text-color
+        display: block
+        font-size: 0
+        padding: #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"}
+        padding-bottom: #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"}
+        position: relative
+        text-decoration: none
+        vertical-align: middle
+        
+        // Width is controlled by product-image-* classes, no need to override
+
+        // Mobile styles that match product grid behavior
+        .mobile-medium &
+          width: calc(100% / 1) !important
+
+        .mobile-small &
+          width: calc(100% / 2) !important
+
+        .mobile-horizontal &
+          width: 100% !important
+
+      // Category link styling
+      .category-link
+        color: $primary-text-color
+        display: block
+        text-decoration: none
+        position: relative
+
+        &:hover, &:focus
+          color: $link-hover-color
+          text-decoration: none
+
+          .product-list-thumb-name
+            color: $link-hover-color
+
+        // Overlay styles (matches main product overlay behavior exactly)
+        &.rollover
+          .product-list-thumb-info
+            @media screen and (min-width: $break-small + 1)
+              +flexbox
+              +align-items(center)
+              +justify-content(center)
+              background: $button-background-color
+              height: calc(100% - #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"} * 2)
+              left: #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"}
+              padding: $base-padding * 2
+              position: absolute
+              top: #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"}
+              width: calc(100% - #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"} * 2)
+              opacity: 0
+
+              *
+                color: $button-text-color
+                text-align: center !important
+
+            @media screen and (max-width: $break-small)
+              .product-list-thumb-info
+                display: none
+
+          &:hover, &:focus
+            .product-list-thumb-info
+              opacity: 1
+
+      // Category-specific image container
+      .product-list-image-container
+        // Inherit from existing image container styles
+        overflow: hidden
+        position: relative
+
+        &:before
+          display: block
+          width: 100%
+          content: ""
+          padding-bottom: 100%
+          height: 0
+
+      // Category info section
+      .product-list-thumb-info
+        padding: $base-padding 0
+        font-size: 16px
+
+        .product-list-thumb-name
+          +fluid-type(16px, 18px)
+          font-weight: bold
+          line-height: 1.25em
+          text-align: left
+          overflow-wrap: break-word
+          position: relative
+
+          @media screen and (max-width: $break-small)
+            font-size: 16px
+
+        // Category count styling (matches prod-thumb-price)
+        .category-count
+          margin-top: 4px
+
+      // Loading state for collage images
+      .collage-image
+        transition: opacity 0.3s ease
+
+        &.loading
+          opacity: 0.6
+
+        &:not(.loading)
+          opacity: 1
+
+      // Mobile responsive adjustments
+      @media screen and (max-width: $break-small)
+        .product-list-thumb.category
+          margin-bottom: $base-padding
+
+        .category-link.rollover
+          .product-list-thumb-info
+            position: relative !important
+            background: none !important
+            opacity: 1 !important
+
+            .product-list-thumb-name
+              color: $primary-text-color !important
 
 // Video player theme-specific override
 .video-embed-container
