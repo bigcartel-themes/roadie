@@ -292,15 +292,15 @@ ul.sort-by-nav-links
   overflow: hidden
   position: relative
 
-  &.product-list-image-container-default:before
-    display: none
-
   &:before
     display: block
     width: 100%
     content: ""
     padding-bottom: 100%
     height: 0
+
+  &-default:before
+    display: none
 
 .product-list-quickview-container
   +flexbox
@@ -377,6 +377,17 @@ ul.sort-by-nav-links
     object-fit: cover
 
   &.grid-contain
+    object-fit: contain
+
+// Featured Categories: force square + contain when grid is default
+.featured-categories
+  // Re-enable square placeholder even if container is '-default'
+  .product-list-image-container-default:before
+    display: block
+
+  // Make default images behave like 'contain' inside a square
+  .product-list-image.grid-default
+    position: absolute
     object-fit: contain
 
 .prod-thumb-info
