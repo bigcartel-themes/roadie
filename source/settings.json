@@ -1,6 +1,6 @@
 {
   "name": "Roadie",
-  "version": "1.18.2",
+  "version": "1.18.3",
   "images": [
     {
       "variable": "logo",
@@ -895,7 +895,7 @@
       "section": "homepage",
       "type": "select",
       "options": "0..48",
-      "default": 6,
+      "default": 0,
       "upgrade_default": 0,
       "description": "The number of categories featured on the Home page"
     },
