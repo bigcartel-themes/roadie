@@ -996,7 +996,7 @@
       "type": "boolean",
       "default": true,
       "upgrade_default": false,
-      "description": "For products with multiple variants, show the variant count in product grids."
+      "description": "For products with multiple variants, show the variant count in product grids"
     },
     {
       "variable": "product_image_zoom",
@@ -1217,7 +1217,7 @@
       "sub_section": "navigation",
       "type": "text",
       "default": "Home",
-      "description": "Text for the 'Home' navigation link.",
+      "description": "Text for the 'Home' navigation link",
       "requires": [ "translation_mode eq manual" ]
     },
     {
@@ -1227,7 +1227,7 @@
       "sub_section": "navigation",
       "type": "text",
       "default": "Search",
-      "description": "Text for the 'Search' navigation link or button.",
+      "description": "Text for the 'Search' navigation link or button",
       "requires": [ "translation_mode eq manual" ]
     },
     {
@@ -1267,7 +1267,7 @@
       "sub_section": "navigation",
       "type": "text",
       "default": "View all",
-      "description": "Text for 'View all' links, often in product collections.",
+      "description": "Text for 'View all' links, often in product collections",
       "requires": [ "translation_mode eq manual" ]
     },
     {
@@ -1277,7 +1277,7 @@
       "sub_section": "navigation",
       "type": "text",
       "default": "View",
-      "description": "General text for 'View' links or buttons.",
+      "description": "General text for 'View' links or buttons",
       "requires": [ "translation_mode eq manual" ]
     },
     {
@@ -1287,7 +1287,7 @@
       "sub_section": "navigation",
       "type": "text",
       "default": "Next",
-      "description": "Text for 'Next' buttons or links in pagination.",
+      "description": "Text for 'Next' buttons or links in pagination",
       "requires": [ "translation_mode eq manual" ]
     },
     {
@@ -1297,7 +1297,7 @@
       "sub_section": "navigation",
       "type": "text",
       "default": "Previous",
-      "description": "Text for 'Previous' buttons or links in pagination.",
+      "description": "Text for 'Previous' buttons or links in pagination",
       "requires": [ "translation_mode eq manual" ]
     },
     {
@@ -1317,7 +1317,7 @@
       "sub_section": "navigation",
       "type": "text",
       "default": "All products",
-      "description": "Text for links pointing to all products.",
+      "description": "Text for links pointing to all products",
       "requires": [ "translation_mode eq manual" ]
     },
     {
@@ -1327,7 +1327,7 @@
       "sub_section": "navigation",
       "type": "text",
       "default": "Products",
-      "description": "Text for 'Products' navigation links.",
+      "description": "Text for 'Products' navigation links",
       "requires": [ "translation_mode eq manual" ]
     },
     {
@@ -1337,7 +1337,7 @@
       "sub_section": "navigation",
       "type": "text",
       "default": "Categories",
-      "description": "Text for 'Categories' navigation links.",
+      "description": "Text for 'Categories' navigation links",
       "requires": [ "translation_mode eq manual" ]
     },
     {
@@ -1347,7 +1347,7 @@
       "sub_section": "navigation",
       "type": "text",
       "default": "Pages",
-      "description": "Text for 'Pages' navigation links.",
+      "description": "Text for 'Pages' navigation links",
       "requires": [ "translation_mode eq manual" ]
     },
     {
@@ -1419,7 +1419,7 @@
       "type": "text",
       "default": "Featured products",
       "allow_blank": true,
-      "description": "Text for the featured products section on the home page.",
+      "description": "Text for the featured products section on the home page",
       "requires": [ "translation_mode eq manual" ]
     },
     {
@@ -1430,7 +1430,7 @@
       "type": "text",
       "default": "Shop by Category",
       "allow_blank": true,
-      "description": "Text for the featured categories section on the home page.",
+      "description": "Text for the featured categories section on the home page",
       "requires": [ "translation_mode eq manual" ]
     },
     {
@@ -1441,7 +1441,7 @@
       "type": "text",
       "default": "",
       "allow_blank": true,
-      "description": "Text for the featured video section on the home page.",
+      "description": "Text for the featured video section on the home page",
       "requires": [ "translation_mode eq manual" ]
     },
     {
@@ -1452,7 +1452,7 @@
       "type": "text",
       "default": "Featured",
       "allow_blank": true,
-      "description": "Generic title for featured content on the home page.",
+      "description": "Generic title for featured content on the home page",
       "requires": [ "translation_mode eq manual" ]
     },
     {
@@ -1462,7 +1462,7 @@
       "sub_section": "homepage",
       "type": "text",
       "default": "All products",
-      "description": "Button caption for the 'All products' button on the home page.",
+      "description": "Button caption for the 'All products' button on the home page",
       "requires": [ "translation_mode eq manual" ]
     },
   
@@ -1686,7 +1686,7 @@
       "sub_section": "cart",
       "type": "text",
       "default": "Subtotal",
-      "description": "Text label for the cart subtotal.",
+      "description": "Text label for the cart subtotal",
       "requires": [ "translation_mode eq manual" ]
     },
     {
@@ -1748,7 +1748,7 @@
       "sub_section": "contact_form",
       "type": "text",
       "default": "Name",
-      "description": "Text for the name field in contact forms.",
+      "description": "Text for the name field in contact forms",
       "requires": [ "translation_mode eq manual" ]
     },
     {
@@ -1758,7 +1758,7 @@
       "sub_section": "contact_form",
       "type": "text",
       "default": "Subject",
-      "description": "Text for the subject field in contact forms.",
+      "description": "Text for the subject field in contact forms",
       "requires": [ "translation_mode eq manual" ]
     },
     {
@@ -1768,7 +1768,7 @@
       "sub_section": "contact_form",
       "type": "text",
       "default": "Email",
-      "description": "Text for the email field in contact forms.",
+      "description": "Text for the email field in contact forms",
       "requires": [ "translation_mode eq manual" ]
     },
     {
@@ -1778,7 +1778,7 @@
       "sub_section": "contact_form",
       "type": "text",
       "default": "Message",
-      "description": "Text for the message field in contact forms.",
+      "description": "Text for the message field in contact forms",
       "requires": [ "translation_mode eq manual" ]
     },
     {
@@ -1788,7 +1788,7 @@
       "sub_section": "contact_form",
       "type": "text",
       "default": "Send message",
-      "description": "Text for the send button in contact forms.",
+      "description": "Text for the send button in contact forms",
       "requires": [ "translation_mode eq manual" ]
     },
     {
