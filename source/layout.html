@@ -233,6 +233,9 @@
                             <li class="horizontal-nav-link" role="menuitem"><a href="{{ custom_page.url }}" tabindex="-1">{{ custom_page.name }}</a></li>
                           {% endfor %}
                         {% endif %}
+                        {% if pages.subscribe_page %}
+                          <li class="horizontal-nav-link" role="menuitem"><a href="{{ pages.subscribe_page.url }}">{{ pages.subscribe_page.name }}</a></li>
+                        {% endif %}
                         {% if theme.nav_page_display == 'all' or theme.nav_page_display == 'contact_only' %}
                           <li class="horizontal-nav-link" role="menuitem"><a href="/contact" tabindex="-1">{{ t['navigation.contact'] }}</a></li>
                         {% endif %}
