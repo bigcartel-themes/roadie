@@ -11,48 +11,83 @@
 .maintenance-container
   border: $medium-border
   line-height: 1.5em
-  max-width: 768px
+  max-width: 600px
   padding: $base-padding * 4
   width: 100%
 
   @media screen and (max-width: $break-small)
+    max-width: 500px
     border-left: none
     border-right: none
     border-top: $large-border
     border-bottom: $small-border
     padding: $base-padding * 2 0
 
-.maintenance-store-name
-  +fluid-type(40px, 80px)
-  font-weight: bold
-  line-height: 1em
-  word-break: break-word
-
-.maintenance-store-name + *
-  border-top: $large-border
-  padding-top: $base-padding
+.maintenance-image
+  display: block
+  height: auto
+  margin: $base-padding * 3 0
+  max-width: 100%
+  max-height: 40vh
+  width: auto
+  object-fit: contain
 
   @media screen and (max-width: $break-small)
-    border-top: $medium-border
+    margin: $base-padding * 2 0
+
+.maintenance-store-name
+  +fluid-type(28px, 48px)
+  font-weight: bold
+  line-height: 1.2
+  margin: 0 0 $base-padding * 2 0
+  word-break: break-word
+  position: relative
+
+  &::after
+    content: ""
+    display: block
+    width: 100%
+    border-top: $small-border
+    margin-top: $base-padding * 2
 
 .maintenance-message
-  +fluid-type(18px, 24px)
-  line-height: 1.25em
-  margin-top: $base-padding * 2
-  padding-top: $base-padding * 4
+  +fluid-type(16px, 20px)
+  line-height: 1.4
+  margin: 0 0 $base-padding * 3 0
+
+  @media screen and (max-width: $break-small)
+    +fluid-type(16px, 22px)
+    margin-bottom: $base-padding * 2
+
+  @media screen and (max-width: $break-extra-small)
+    +fluid-type(15px, 18px)
 
   h1, h2
     padding: $base-padding 0
 
 .maintenance-social-links
   border-top: $small-border
-  margin-top: $base-padding * 4
+  margin-top: $base-padding * 2
   padding-top: $base-padding * 3
 
   @media screen and (max-width: $break-small)
+    margin-top: $base-padding
     padding-top: $base-padding * 2
 
   .social-links
     +justify-content(flex-start)
     flex-wrap: wrap
-    gap: 8px
+    gap: $base-padding
+
+    a
+      svg
+        height: 24px
+        width: 24px
+
+    @media screen and (max-width: $break-small)
+      gap: $base-padding / 3
+
+      a
+        svg
+          height: 20px
+          width: 20px
