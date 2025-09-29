@@ -53,10 +53,19 @@
 {% endif %}
 
 {% assign featured_text = theme.homepage_featured_text %}
+
+{% comment %} Show featured text when no featured items - ensures it's always visible {% endcomment %}
+{% if featured_text != blank and theme.featured_items == 0 %}
+  <div class="featured-message">{{ featured_text }}</div>
+{% endif %}
+
 <div class="featured-container">
-  <h1 class="featured-title visually-hidden">{{ t['home.featured'] }}</h1>
-  {% if featured_text != blank %}
-    <div class="featured-message">{{ featured_text }}</div>
+  {% if theme.featured_items > 0 %}
+    <h1 class="featured-title visually-hidden">{{ t['home.featured'] }}</h1>
+    {% comment %} Show featured text within the container when we have featured items {% endcomment %}
+    {% if featured_text != blank %}
+      <div class="featured-message">{{ featured_text }}</div>
+    {% endif %}
   {% endif %}
 </div>
 
