@@ -28,7 +28,7 @@
     .hover-underline
       border-bottom: $medium-border
       border-color: transparent
-      font-size: 18px
+      font-size: calc(1.125rem * var(--header-scale, 1))
       padding-right: 24px
       padding-bottom: 8px
 
@@ -66,6 +66,7 @@
     +transition(.1s linear all)
     color: $primary-text-color
     display: block
+    font-size: calc(1rem * var(--header-scale, 1))
     font-weight: bold
     padding: $base-padding / 2 $base-padding
     text-decoration: none

@@ -124,8 +124,20 @@
   display: inline-block
 
 #main 
+  .featured-container
+    margin: 0 auto
+    max-width: 1024px
+    font-size: 1rem
+
+    @media screen and (max-width: $break-medium)
+      font-size: 0.95rem
+
   .featured-title
     margin: 30px 0 8px 0
+    font-size: 1.75em
+
+    @media screen and (max-width: $break-small)
+      font-size: 1.5em
 
   .featured-message
     margin: 30px auto 20px auto
@@ -171,6 +183,7 @@
 
     .featured-title
       margin: 30px 0 16px 0
+      font-size: 1.5em
 
     // Category grid inherits from product grid system
     .category-list
@@ -294,17 +307,20 @@
       // Category info section
       .product-list-thumb-info
         padding: $base-padding 0
-        font-size: 16px
+        font-size: calc(1rem * var(--product-grid-scale, 1))
 
         .product-list-thumb-name
-          +fluid-type(16px, 18px)
+          font-size: calc(1rem * var(--product-grid-scale, 1))
           font-weight: bold
           line-height: 1.25em
           overflow-wrap: break-word
           position: relative
 
           @media screen and (max-width: $break-small)
-            font-size: 16px
+            font-size: calc(1rem * var(--product-grid-scale, 1))
+          
+          @media screen and (min-width: $break-small + 1)
+            font-size: calc(1.125rem * var(--product-grid-scale, 1))
 
         // Category count styling (matches prod-thumb-price)
         .category-count
