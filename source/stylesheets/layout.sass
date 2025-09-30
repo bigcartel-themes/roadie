@@ -990,6 +990,37 @@ h1
   &.visible
     display: block
 
+  &--scrolling
+    padding: 0
+    overflow: hidden
+    min-height: 50px
+
+    .announcement-scroll-wrapper
+      width: 100%
+      overflow: hidden
+      white-space: nowrap
+      display: flex
+      align-items: center
+      min-height: 56px
+
+    .announcement-scroll-content
+      display: inline-flex
+      animation: scroll-announcement var(--announcement-scroll-duration, 15s) linear infinite
+
+      &:hover
+        animation-play-state: paused
+
+    .announcement-scroll-text
+      display: inline-block
+      padding: 0 5em
+      white-space: nowrap
+
+@keyframes scroll-announcement
+  from
+    transform: translateX(0)
+  to
+    transform: translateX(-20%)
+
 .button.announcement-message-close
   +transform(translateY(-50%))
   +transition(none)
