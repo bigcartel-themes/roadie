@@ -988,23 +988,28 @@ h1
     color: $announcement-text-color
 
   &.visible
-    display: block
+    display: flex
+
+  .announcement-wrapper
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 100%
 
   &--scrolling
     padding: 0
     overflow: hidden
-    min-height: 50px
+    min-height: fit-content
 
     .announcement-scroll-wrapper
       width: 100%
       overflow: hidden
-      white-space: nowrap
       display: flex
       align-items: center
-      min-height: 56px
 
     .announcement-scroll-content
       display: inline-flex
+      white-space: nowrap
       animation: scroll-announcement var(--announcement-scroll-duration, 15s) linear infinite
 
       &:hover
@@ -1012,8 +1017,7 @@ h1
 
     .announcement-scroll-text
       display: inline-block
-      padding: 0 5em
-      white-space: nowrap
+      padding: $base-padding * 2 $base-padding * 6
 
 @keyframes scroll-announcement
   from
