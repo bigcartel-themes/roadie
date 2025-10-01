@@ -896,6 +896,21 @@
       "description": "Add a message on the homepage above the featured products. Supports HTML for advanced customization."
     },
     {
+      "variable": "homepage_featured_text_position",
+      "label": "Featured message position",
+      "section": "homepage",
+      "type": "select",
+      "options": [
+        ["Above featured content", "above"],
+        ["Within featured content", "within"]
+      ],
+      "default": "within",
+      "description": "Choose where to display the featured message",
+      "requires": [
+        "homepage_featured_text present"
+      ]
+    },
+    {
       "variable": "featured_categories",
       "label": "Featured categories",
       "section": "homepage",

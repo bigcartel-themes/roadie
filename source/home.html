@@ -53,19 +53,32 @@
 {% endif %}
 
 {% assign featured_text = theme.homepage_featured_text %}
+{% assign featured_text_position = theme.homepage_featured_text_position %}
 
-{% comment %} Show featured text when no featured items - ensures it's always visible {% endcomment %}
-{% if featured_text != blank and theme.featured_items == 0 %}
-  <div class="featured-message">{{ featured_text }}</div>
+{% comment %} Determine if categories can be shown - must check both setting and actual data {% endcomment %}
+{% assign can_show_categories = false %}
+{% if theme.featured_categories > 0 and categories.active.size > 0 %}
+  {% assign categories_with_products = blank %}
+  {% for category in categories.active %}
+    {% if category.products.size > 0 %}
+      {% assign categories_with_products = categories_with_products | append: category.id | append: ',' %}
+    {% endif %}
+  {% endfor %}
+  {% if categories_with_products != blank %}
+    {% assign can_show_categories = true %}
+  {% endif %}
+{% endif %}
+
+{% comment %} Show featured text above when position is "above" OR when no featured content exists (automatic fallback) {% endcomment %}
+{% if featured_text != blank %}
+  {% if featured_text_position == "above" or (theme.featured_items == 0 and can_show_categories == false) %}
+    <div class="featured-message">{{ featured_text }}</div>
+  {% endif %}
 {% endif %}
 
 <div class="featured-container">
   {% if theme.featured_items > 0 %}
     <h1 class="featured-title visually-hidden">{{ t['home.featured'] }}</h1>
-    {% comment %} Show featured text within the container when we have featured items {% endcomment %}
-    {% if featured_text != blank %}
-      <div class="featured-message">{{ featured_text }}</div>
-    {% endif %}
   {% endif %}
 </div>
 
@@ -73,6 +86,10 @@
 {% if theme.featured_items > 0 %}
   {% paginate products from products.all by theme.featured_items order:theme.featured_order %}
     {% if products != blank %}
+      {% comment %} Show featured text within products section when position is "within" and products exist {% endcomment %}
+      {% if featured_text != blank and featured_text_position == "within" %}
+        <div class="featured-message">{{ featured_text }}</div>
+      {% endif %}
       {% comment %} Show title only if both sections are visible {% endcomment %}
       {% if theme.featured_categories > 0 and categories.active.size > 0 %}
         <h2 class="featured-title">{{ t['home.featured_products'] }}</h2>
@@ -208,13 +225,17 @@
       {% assign categories_with_products = categories_with_products | append: category.id | append: ',' %}
     {% endif %}
   {% endfor %}
-  
+
   {% if categories_with_products != blank %}
     {% assign category_collages_enabled = false %}
     {% if theme.features.has_theme_category_collages %}
       {% assign category_collages_enabled = true %}
     {% endif %}
     <div class="featured-categories" data-category-collages-enabled="{{ category_collages_enabled }}">
+      {% comment %} Show featured text within categories section when position is "within", no products, and categories exist {% endcomment %}
+      {% if featured_text != blank and featured_text_position == "within" and theme.featured_items == 0 %}
+        <div class="featured-message">{{ featured_text }}</div>
+      {% endif %}
       {% comment %} Show title only if both sections are visible {% endcomment %}
       {% if theme.featured_items > 0 %}
         <h2 class="featured-title">{{ t['home.featured_categories'] }}</h2>
