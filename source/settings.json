@@ -3,8 +3,8 @@
   "version": "1.19.0",
   "images": [
     {
-      "variable": "logo",
-      "label": "Logo",
+      "variable": "logo_image",
+      "label": "Logo image",
       "section": "global_navigation",
       "description": "Adds your logo to the header or sidebar"
     },
@@ -15,8 +15,8 @@
       "description": "Adds a fixed or repeating background image"
     },
     {
-      "variable": "promo_image",
-      "label": "Promo Image",
+      "variable": "welcome_image",
+      "label": "Welcome Image",
       "section": "homepage",
       "description": "Adds an image to the Home page"
     },
@@ -32,7 +32,7 @@
       "variable": "slideshow",
       "label": "Slideshow",
       "section": "homepage",
-      "description": "Adds a slideshow to your Home page. 900 x 500 images recommended. Overrides promo image if both are set."
+      "description": "Adds a slideshow to your Home page. 900 x 500 images recommended. Overrides welcome image if both are set."
     }
   ],
   "preset_styles": {
@@ -775,12 +775,12 @@
     },
     {
       "variable": "hero_link",
-      "label": "Promo Image / Slideshow link",
+      "label": "Welcome Image / Slideshow link",
       "section": "homepage",
       "type": "text",
-      "description": "Adds a click destination to the promo image or slideshow on the Home page",
+      "description": "Adds a click destination to the welcome image or slideshow on the Home page",
       "requires": [
-        {"any": ["promo_image present", "slideshow present"]}
+        {"any": ["welcome_image present", "slideshow present"]}
       ]
     },
     {
@@ -2157,7 +2157,7 @@
     "header_image_max_width": "400px",
     "header_image_max_height": "200px",
     "antialias_text": "antialiased",
-    "header_image": "{{ logo }}",
+    "header_image": "{{ logo_image }}",
     "background_color": "{{ background_color }}",
     "gutter_width": "28px",
     "body_font": "{{ primary_font }}",

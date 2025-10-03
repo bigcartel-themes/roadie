@@ -83,12 +83,12 @@
           <nav class="upper-nav" aria-label="Main navigation">
             <section class="above-nav-section">
               <div class="header-branding">
-                <a class="header-home-link{% if theme.images.logo != blank %} has-logo{% endif %}" href="/" title="{{ t['navigation.home'] }}">
-                  {% if theme.images.logo != blank %}
+                <a class="header-home-link{% if theme.images.logo_image != blank %} has-logo{% endif %}" href="/" title="{{ t['navigation.home'] }}">
+                  {% if theme.images.logo_image != blank %}
                     {% if theme.layout_style == 'fixed-width' %}
-                      <img alt="{{ store.name }} Home" class="store-logo" src="{{ theme.images.logo.url | constrain: 800 }}"/>
+                      <img alt="{{ store.name }} Home" class="store-logo" src="{{ theme.images.logo_image.url | constrain: 800 }}"/>
                     {% else %}
-                      <img alt="{{ store.name }} Home" class="store-logo" src="{{ theme.images.logo.url | constrain: 1400 }}"/>
+                      <img alt="{{ store.name }} Home" class="store-logo" src="{{ theme.images.logo_image.url | constrain: 1400 }}"/>
                     {% endif %}
                   {% else %}
                     {{ store.name }}
@@ -170,8 +170,8 @@
           </button>
 
           <div class="header-branding">
-            <a class="header-home-link{% if theme.images.logo != blank %} has-logo{% endif %}" href="/" title="{{ t['navigation.home'] }}">
-              {% if theme.images.logo != blank %}
+            <a class="header-home-link{% if theme.images.logo_image != blank %} has-logo{% endif %}" href="/" title="{{ t['navigation.home'] }}">
+              {% if theme.images.logo_image != blank %}
                 <img alt="{{ store.name }} Home" class="store-logo" src="{{ theme.images.logo.url | constrain: 1800,300 }}"/>
               {% else %}
                 {{ store.name }}
@@ -282,9 +282,9 @@
         <aside class="sidebar {{ theme.sidebar_position }}-sidebar">
           {% if theme.theme_layout == 'sidebar_no_header' %}
             <div class="header-branding">
-              <a class="header-home-link{% if theme.images.logo != blank %} has-logo{% endif %}" href="/" title="{{ t['navigation.home'] }}">
-                {% if theme.images.logo != blank %}
-                  <img alt="{{ store.name }} Home" class="store-logo" src="{{ theme.images.logo.url | constrain: 800 }}"/>
+              <a class="header-home-link{% if theme.images.logo_image != blank %} has-logo{% endif %}" href="/" title="{{ t['navigation.home'] }}">
+                {% if theme.images.logo_image != blank %}
+                  <img alt="{{ store.name }} Home" class="store-logo" src="{{ theme.images.logo_image.url | constrain: 800 }}"/>
                 {% else %}
                   {{ store.name }}
                 {% endif %}
