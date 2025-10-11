@@ -56,7 +56,7 @@
   <body id="{{ page.permalink }}" class="{{ body_class }} {{ page.category }} {% if theme.show_layout_gutters %}show-gutters{% else %}no-gutters{% endif %} preloader transition-preloader"  data-bc-page-type="{% if page.category == 'custom' %}custom{% else %}{{ page.permalink }}{% endif %}">
     {% if theme.images.background_image != blank and theme.background_image_style != 'plain_image' %}<div class="background-image-overlay background-image-overlay-{{ theme.background_image_style }}"></div>{% endif %}
     {% if theme.announcement_message_text != blank %}
-      <aside role="complementary" aria-label="Announcement message" class="announcement-message{% if theme.announcement_message_scroll %} announcement-message--scrolling{% endif %}" id="announce-message">
+      <aside role="{% if theme.announcement_message_scroll %}button{% else %}complementary{% endif %}" aria-label="{% if theme.announcement_message_scroll %}Scrolling announcement. Tap or focus to pause.{% else %}Announcement message{% endif %}" class="announcement-message{% if theme.announcement_message_scroll %} announcement-message--scrolling{% endif %}" id="announce-message"{% if theme.announcement_message_scroll %} tabindex="0" onclick=""{% endif %}>
         {% if theme.announcement_message_scroll %}
           <div class="announcement-scroll-wrapper">
             <div class="announcement-scroll-content">

@@ -997,6 +997,7 @@ h1
   position: relative
   text-align: center
   font-size: calc(1rem * var(--header-scale, 1))
+  z-index: 500
 
   a
     color: $announcement-text-color
@@ -1011,6 +1012,7 @@ h1
     width: 100%
 
   &--scrolling
+    cursor: pointer
     padding: 0
     overflow: hidden
     min-height: fit-content
@@ -1026,12 +1028,18 @@ h1
       white-space: nowrap
       animation: scroll-announcement var(--announcement-scroll-duration, 15s) linear infinite
 
-      &:hover
-        animation-play-state: paused
+      // Only enable hover/focus pause on devices with hover capability (desktop/mouse)
+      @media (hover: hover)
+        &:hover, &:focus-visible
+          animation-play-state: paused
 
-    .announcement-scroll-text
-      display: inline-block
-      padding: $base-padding * 2 $base-padding * 6
+  // JS-controlled pause state for touch devices
+  &.is-paused .announcement-scroll-content
+    animation-play-state: paused
+
+  .announcement-scroll-text
+    display: inline-block
+    padding: $base-padding * 2 $base-padding * 6
 
 @keyframes scroll-announcement
   from
