@@ -1022,11 +1022,15 @@ h1
       overflow: hidden
       display: flex
       align-items: center
+      // Isolate this container to prevent layout thrashing
+      isolation: isolate
 
     .announcement-scroll-content
       display: inline-flex
       white-space: nowrap
       animation: scroll-announcement var(--announcement-scroll-duration, 15s) linear infinite
+      // Contain the rendering to this element only
+      contain: layout style
 
       // Only enable hover/focus pause on devices with hover capability (desktop/mouse)
       @media (hover: hover)
@@ -1041,11 +1045,13 @@ h1
     display: inline-block
     padding: $base-padding * 2 $base-padding * 6
 
+// Keyframe animation for smooth scrolling
+// Uses exact pixel distance calculated by JavaScript for seamless looping
 @keyframes scroll-announcement
   from
-    transform: translateX(0)
+    transform: translate3d(0, 0, 0)
   to
-    transform: translateX(-20%)
+    transform: translate3d(var(--scroll-distance, -20%), 0, 0)
 
 .button.announcement-message-close
   +transform(translateY(-50%))
