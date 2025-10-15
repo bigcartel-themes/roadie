@@ -1,11 +1,21 @@
 
+.product-password-form-container
+  margin: 80px auto
+  padding: 0 20px
+
+  h1
+    font-size: 1.5rem
+
+  #password
+    margin-bottom: 0 !important
+
 .product-heading
   border-bottom: $medium-border
 
 .page-subheading
   +flexbox
   border-bottom: $small-border
-  font-size: 24px
+  font-size: calc(1.5rem * var(--product-title-scale, 1))
   font-weight: bold
   line-height: 1.25em
   padding: $base-padding 0
@@ -18,7 +28,7 @@
     display: block
 
 .page-subheading-status
-  font-size: 16px
+  font-size: calc(1rem * min(var(--product-title-scale, 1), 1.3))
   font-weight: normal
   margin-left: 0
 
@@ -222,7 +232,7 @@
     border: $small-border
     color: $primary-text-color
     display: block
-    font-size: 16px
+    font-size: 1rem
     font-weight: bold
     height: 100%
     padding-left: $base-padding * 1.5 - 2
@@ -240,13 +250,13 @@
 
   &.focused
     select
-      font-size: 16px
+      font-size: 1rem
       height: 100%
       padding-top: $base-padding * 2.5
 
 .product-option-label
   opacity: 0
-  font-size: 13px
+  font-size: 0.8125rem
   left: $base-padding * 1.5
   line-height: 1em
   position: absolute
@@ -290,12 +300,12 @@
       color: $button-hover-text-color
 
   .product-quantity-label
-    font-size: 12px
+    font-size: 0.75rem
     font-weight: normal
 
   .product-quantity
     color: $button-text-color
-    font-size: 16px
+    font-size: 1rem
     font-weight: bold
     opacity: 1 !important
     text-align: center
@@ -307,7 +317,7 @@
   +flex-direction(column)
   +align-items(flex-start)
   +justify-content(center)
-  font-size: 16px
+  font-size: 1rem
   font-weight: bold
   margin-left: $base-padding
   padding: 0 $base-padding * 2
@@ -327,7 +337,7 @@
 
 .button-add-price
   display: none
-  font-size: 14px
+  font-size: 0.875rem
   font-weight: bold
   margin-bottom: $base-padding / 2
 
@@ -390,6 +400,7 @@
     margin-bottom: $base-padding * 2
 
 .product-description
+  font-size: calc(1rem * var(--product-description-scale, 1))
 
   *
     text-transform: none
@@ -454,7 +465,7 @@
   +flex-basis(50%)
   border: none
   color: $primary-text-color
-  font-size: 14px
+  font-size: calc(0.875rem * var(--product-description-scale, 1))
   font-weight: normal
   height: 48px
   outline: none
@@ -476,13 +487,13 @@
   display: none
 
 .inventory-bars
-  font-size: 14px
+  font-size: calc(0.875rem * var(--product-description-scale, 1))
   list-style: none
   margin: 0
   padding: 0
 
 .inventory-option-name
-  font-size: 16px
+  font-size: calc(1rem * var(--product-description-scale, 1))
 
 .inventory-bar
   font-weight: bold
@@ -504,7 +515,7 @@
 
 .similar-products-title
   border-bottom: $medium-border
-  font-size: 32px
+  font-size: calc(2rem * var(--product-grid-scale, 1))
   margin-bottom: 0
   padding-bottom: $base-padding
 
@@ -558,6 +569,7 @@ _:-ms-fullscreen, :root .product-page-columns
   justify-content: center
   align-items: center
   color: $inventory-status-text-color
+  font-size: calc(0.9rem * min(var(--product-title-scale, 1), 1.3))
   margin: 10px 0 auto
   padding: 8px 0
   font-weight: 500

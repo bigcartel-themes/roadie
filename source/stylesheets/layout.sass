@@ -1,4 +1,18 @@
 
+
+// shop sprinkles overrides
+.emoji
+  font-size: var(--shop-sprinkles-size) !important
+  animation-name: var(--shop-sprinkles-animation) !important
+  animation-duration: var(--shop-sprinkles-style-duration) !important
+  animation-timing-function: var(--shop-sprinkles-style-timing) !important
+
+.emoji .inner
+  animation-duration: var(--shop-sprinkles-fall-duration) !important
+
+.emoji .inner span
+  animation-name: var(--shop-sprinkles-spin-animation) !important
+
 .skip-link
   +transition(all .3s)
   background: $background-color
@@ -70,6 +84,7 @@ html, body
 
 html
   background-color: $background-color
+  font-size: calc(16px * var(--font-scale, 1))
 
   &.fixed-background
     background-image: #{"{% if theme.images.background_image != blank %}url(\'{{ theme.images.background_image.url | constrain: 1200, 1200 }}\') {% else %}none{% endif %}"}
@@ -85,7 +100,7 @@ body
   background-color: #{"{% unless theme.images.background_image != blank %} {{ theme.background_color }} {% endunless %}"}
   color: $primary-text-color
   font-family: $primary-font
-  font-size: 16px
+  font-size: 1rem
   font-weight: normal
   line-height: 1.5em
   position: relative
@@ -148,7 +163,7 @@ body
 
 .above-nav-section-title
   font-weight: bold
-  font-size: 24px
+  font-size: calc(1.5rem * var(--header-scale, 1))
   margin-bottom: $base-padding
 
 .secondary-above-header-nav
@@ -309,6 +324,7 @@ header
         text-align: left
 
 .header-home-link
+  --font-multiplier: calc(var(--shop-name-scale, 1) * var(--header-scale, 1))
   +fluid-type-variable(22px, $store-name-heading-size-numeric)
   color: $primary-text-color
   display: inline-block
@@ -350,15 +366,15 @@ header
 
   @media screen and (min-width: $break-small + 1)
     .sidebar-no-header &
-      +fluid-type(24px, 40px)
+      +fluid-type-variable(24px, 40)
       text-align: left
 
   @media screen and (min-width: $break-small +1)
     .above-header &
-      +fluid-type(24px, 32px)
+      +fluid-type-variable(24px, 32)
 
     .full-width.above-header &
-      +fluid-type(24px, 40px)
+      +fluid-type-variable(24px, 40)
 
 .store-logo
   display: block
@@ -374,7 +390,7 @@ header
   +flexbox
   +align-items(center)
   +justify-content(center)
-  font-size: 1.5em
+  font-size: calc(1.5em * var(--header-scale, 1))
   font-weight: bold
   position: absolute
   right: 0
@@ -541,7 +557,7 @@ _:-ms-fullscreen, :root .content-wrapper
 
     .nav-cart-link
       +flexbox
-      font-size: 20px
+      font-size: calc(1.25rem * var(--header-scale, 1))
       font-weight: bold
       padding: $base-padding 0
       text-decoration: none
@@ -585,7 +601,7 @@ _:-ms-fullscreen, :root .content-wrapper
     padding-right: $base-padding * 2
 
   .search-input
-    font-size: 16px
+    font-size: calc(1rem * var(--header-scale, 1))
     font-weight: bold
     height: 40px
     line-height: 40px
@@ -610,18 +626,18 @@ _:-ms-fullscreen, :root .content-wrapper
       width: calc(100% - 40px) !important
 
     .sidebar-nav &
-      font-size: 20px
+      font-size: calc(1.25rem * var(--header-scale, 1))
       width: calc(100% - 40px)
 
     .secondary-above-header-nav &
-      font-size: 24px
+      font-size: calc(1.5rem * var(--header-scale, 1))
       height: auto
       line-height: 1.25em
       padding-left: $base-padding
       width: 140px
 
     .under-header &
-      font-size: 18px
+      font-size: calc(1.125rem * var(--header-scale, 1))
 
     .below-header &
       height: 80%
@@ -670,7 +686,7 @@ _:-ms-fullscreen, :root .content-wrapper
     width: 100%
 
     @media screen and (max-width: $break-small)
-      font-size: 20px
+      font-size: calc(1.25rem * var(--header-scale, 1))
 
     svg
       +transform(translateY(-50%))
@@ -689,7 +705,7 @@ _:-ms-fullscreen, :root .content-wrapper
   line-height: $base-padding * 5
 
   @media screen and (max-width: $break-small)
-    font-size: 20px
+    font-size: calc(1.25rem * var(--header-scale, 1))
 
   > a
     display: block
@@ -699,13 +715,14 @@ _:-ms-fullscreen, :root .content-wrapper
       text-decoration: underline
 
 .sidebar-nav-links
+  font-size: calc(1rem * var(--header-scale, 1))
   line-height: 1.25em
   list-style: none
   margin: $base-padding 0
   padding: 0
 
   @media screen and (max-width: $break-small)
-    font-size: 18px
+    font-size: calc(1.125rem * var(--header-scale, 1))
 
   &.compact-nav-links
     line-height: 1.5em
@@ -721,12 +738,12 @@ _:-ms-fullscreen, :root .content-wrapper
       border-bottom: $medium-border
 
       a
-        font-size: 14px
+        font-size: calc(0.875rem * var(--header-scale, 1))
         font-weight: bold
         padding: $base-padding 0
 
         @media screen and (max-width: $break-small)
-          font-size: 16px
+          font-size: calc(1rem * var(--header-scale, 1))
 
       &:last-of-type
         border-bottom: none
@@ -765,7 +782,10 @@ _:-ms-fullscreen, :root .content-wrapper
       background: $link-hover-color
 
       svg
-        fill: $primary-text-color
+        fill: $background-color
+
+        path, circle
+          fill: $background-color
 
     svg
       display: block
@@ -779,7 +799,7 @@ _:-ms-fullscreen, :root .content-wrapper
         height: 26px
 
 .bigcartel-credit
-  font-size: 14px
+  font-size: 0.875rem
   line-height: 1em
   display: flex
   font-weight: bold
@@ -825,6 +845,7 @@ footer
 
   .footer-custom-content
     display: block
+    font-size: calc(1rem * var(--footer-scale, 1))
     text-align: center
     padding: 20px
 
@@ -890,6 +911,7 @@ footer
 
         li.footer-page-link
           a
+            font-size: calc(1rem * var(--footer-scale, 1))
             text-decoration: none
 
             &:hover, &:focus
@@ -911,7 +933,7 @@ h1
   color: $button-text-color
   cursor: pointer
   display: block
-  font-size: 16px
+  font-size: 1rem
   height: 55px
   line-height: 1em
   text-align: center
@@ -974,13 +996,62 @@ h1
   padding: $base-padding * 2 $base-padding * 6
   position: relative
   text-align: center
-  font-size: 16px
+  font-size: calc(1rem * var(--header-scale, 1))
+  z-index: 500
 
   a
     color: $announcement-text-color
 
   &.visible
-    display: block
+    display: flex
+
+  .announcement-wrapper
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 100%
+
+  &--scrolling
+    cursor: pointer
+    padding: 0
+    overflow: hidden
+    min-height: fit-content
+
+    .announcement-scroll-wrapper
+      width: 100%
+      overflow: hidden
+      display: flex
+      align-items: center
+      // Isolate this container to prevent layout thrashing
+      isolation: isolate
+
+    .announcement-scroll-content
+      display: inline-flex
+      white-space: nowrap
+      animation: scroll-announcement var(--announcement-scroll-duration, 15s) linear infinite
+      // Contain the rendering to this element only
+      contain: layout style
+
+      // Only enable hover/focus pause on devices with hover capability (desktop/mouse)
+      @media (hover: hover)
+        &:hover, &:focus-visible
+          animation-play-state: paused
+
+  // JS-controlled pause state for touch devices
+  &.is-paused .announcement-scroll-content
+    animation-play-state: paused
+
+  .announcement-scroll-text
+    display: inline-block
+    padding: $base-padding * 2 $base-padding * 6
+
+// Keyframe animation for smooth scrolling
+// Uses exact pixel distance calculated by JavaScript for seamless looping
+@keyframes scroll-announcement
+  from
+    transform: translate3d(0, 0, 0)
+  to
+    transform: translate3d(var(--scroll-distance, -20%), 0, 0)
 
 .button.announcement-message-close
   +transform(translateY(-50%))

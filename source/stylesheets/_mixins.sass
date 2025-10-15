@@ -84,13 +84,16 @@
   $vw-diff: strip-unit($max-vw - $min-vw)
   
   &
-    font-size: $min-font-size
+    --fluid-font-size: #{$min-font-size}
+    font-size: calc(var(--fluid-font-size) * var(--font-scale, 1) * var(--font-multiplier, 1))
     
     // CSS custom property for the calculation
     --font-size-calc: calc((#{$max-variable} - #{$min-size-val}) * ((100vw - #{$min-vw}) / #{$vw-diff}))
     
     @media screen and (min-width: $min-vw)
-      font-size: calc(#{$min-font-size} + var(--font-size-calc))
+      --fluid-font-size: calc(#{$min-font-size} + var(--font-size-calc))
+      font-size: calc(var(--fluid-font-size) * var(--font-scale, 1) * var(--font-multiplier, 1))
     
     @media screen and (min-width: $max-vw)
-      font-size: calc(#{$max-variable}px)
+      --fluid-font-size: calc(#{$max-variable}px)
+      font-size: calc(var(--fluid-font-size) * var(--font-scale, 1) * var(--font-multiplier, 1))

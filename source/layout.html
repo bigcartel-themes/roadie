@@ -48,18 +48,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{{ theme | theme_css_url }}" media="screen" rel="stylesheet" type="text/css">
     {{ head_content }}
-    <style>.preloader * { opacity: 0; }.transition-preloader * { transition: none !important }</style>
+    <style>
+      .preloader * { opacity: 0; }
+      .transition-preloader * { transition: none !important }
+    </style>
   </head>
   <body id="{{ page.permalink }}" class="{{ body_class }} {{ page.category }} {% if theme.show_layout_gutters %}show-gutters{% else %}no-gutters{% endif %} preloader transition-preloader"  data-bc-page-type="{% if page.category == 'custom' %}custom{% else %}{{ page.permalink }}{% endif %}">
     {% if theme.images.background_image != blank and theme.background_image_style != 'plain_image' %}<div class="background-image-overlay background-image-overlay-{{ theme.background_image_style }}"></div>{% endif %}
     {% if theme.announcement_message_text != blank %}
-      <aside role="complementary" aria-label="Announcement message" class="announcement-message" id="announce-message">
-        <div class="announcement-wrapper">
-          <div class="announcement-message-text">{{ theme.announcement_message_text }}</div>
-        </div>
-        <button aria-label="Close announcement" class="button announcement-message-close" title="Close announcement message">
-          <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.7777778 0L20 2.22222222 12.222 10 20 17.7777778 17.7777778 20 10 12.222 2.22222222 20 0 17.7777778 7.778 10 0 2.22222222 2.22222222 0 10 7.778z" fill-rule="evenodd"/></svg>
-        </button>
+      <aside role="{% if theme.announcement_message_scroll %}button{% else %}complementary{% endif %}" aria-label="{% if theme.announcement_message_scroll %}Scrolling announcement. Tap or focus to pause.{% else %}Announcement message{% endif %}" class="announcement-message{% if theme.announcement_message_scroll %} announcement-message--scrolling{% endif %}" id="announce-message"{% if theme.announcement_message_scroll %} tabindex="0" onclick=""{% endif %}>
+        {% if theme.announcement_message_scroll %}
+          <div class="announcement-scroll-wrapper">
+            <div class="announcement-scroll-content">
+              <span class="announcement-scroll-text">{{ theme.announcement_message_text }}</span>
+              <span class="announcement-scroll-text" aria-hidden="true">{{ theme.announcement_message_text }}</span>
+              <span class="announcement-scroll-text" aria-hidden="true">{{ theme.announcement_message_text }}</span>
+              <span class="announcement-scroll-text" aria-hidden="true">{{ theme.announcement_message_text }}</span>
+              <span class="announcement-scroll-text" aria-hidden="true">{{ theme.announcement_message_text }}</span>
+            </div>
+          </div>
+        {% else %}
+          <div class="announcement-wrapper">
+            <div class="announcement-message-text">{{ theme.announcement_message_text }}</div>
+          </div>
+          <button aria-label="Close announcement" class="button announcement-message-close" title="Close announcement message">
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.7777778 0L20 2.22222222 12.222 10 20 17.7777778 17.7777778 20 10 12.222 2.22222222 20 0 17.7777778 7.778 10 0 2.22222222 2.22222222 0 10 7.778z" fill-rule="evenodd"/></svg>
+          </button>
+        {% endif %}
       </aside>
     {% endif %}
     <div class="outer-wrapper {{ theme.layout_style }}">
@@ -68,12 +83,12 @@
           <nav class="upper-nav" aria-label="Main navigation">
             <section class="above-nav-section">
               <div class="header-branding">
-                <a class="header-home-link{% if theme.images.logo != blank %} has-logo{% endif %}" href="/" title="{{ t['navigation.home'] }}">
-                  {% if theme.images.logo != blank %}
+                <a class="header-home-link{% if theme.images.logo_image != blank %} has-logo{% endif %}" href="/" title="{{ t['navigation.home'] }}">
+                  {% if theme.images.logo_image != blank %}
                     {% if theme.layout_style == 'fixed-width' %}
-                      <img alt="{{ store.name }} Home" class="store-logo" src="{{ theme.images.logo.url | constrain: 800 }}"/>
+                      <img alt="{{ store.name }} Home" class="store-logo" src="{{ theme.images.logo_image.url | constrain: 800 }}"/>
                     {% else %}
-                      <img alt="{{ store.name }} Home" class="store-logo" src="{{ theme.images.logo.url | constrain: 1400 }}"/>
+                      <img alt="{{ store.name }} Home" class="store-logo" src="{{ theme.images.logo_image.url | constrain: 1400 }}"/>
                     {% endif %}
                   {% else %}
                     {{ store.name }}
@@ -155,8 +170,8 @@
           </button>
 
           <div class="header-branding">
-            <a class="header-home-link{% if theme.images.logo != blank %} has-logo{% endif %}" href="/" title="{{ t['navigation.home'] }}">
-              {% if theme.images.logo != blank %}
+            <a class="header-home-link{% if theme.images.logo_image != blank %} has-logo{% endif %}" href="/" title="{{ t['navigation.home'] }}">
+              {% if theme.images.logo_image != blank %}
                 <img alt="{{ store.name }} Home" class="store-logo" src="{{ theme.images.logo.url | constrain: 1800,300 }}"/>
               {% else %}
                 {{ store.name }}
@@ -267,9 +282,9 @@
         <aside class="sidebar {{ theme.sidebar_position }}-sidebar">
           {% if theme.theme_layout == 'sidebar_no_header' %}
             <div class="header-branding">
-              <a class="header-home-link{% if theme.images.logo != blank %} has-logo{% endif %}" href="/" title="{{ t['navigation.home'] }}">
-                {% if theme.images.logo != blank %}
-                  <img alt="{{ store.name }} Home" class="store-logo" src="{{ theme.images.logo.url | constrain: 800 }}"/>
+              <a class="header-home-link{% if theme.images.logo_image != blank %} has-logo{% endif %}" href="/" title="{{ t['navigation.home'] }}">
+                {% if theme.images.logo_image != blank %}
+                  <img alt="{{ store.name }} Home" class="store-logo" src="{{ theme.images.logo_image.url | constrain: 800 }}"/>
                 {% else %}
                   {{ store.name }}
                 {% endif %}
@@ -710,16 +725,24 @@
       if (themeOptions.hasAnnouncement) {
         announceDiv = document.getElementById("announce-message");
         if (announceDiv) {
-          announcementMessage=document.querySelector(".announcement-message-text").innerHTML;
-          hashedMessage=announcementMessage.hashCode();
-          cookieValue=getCookie("hide-announcement-message");
-          if (cookieValue) {
-            if (cookieValue != hashedMessage) {
+          var isScrolling = announceDiv.classList.contains('announcement-message--scrolling');
+
+          if (isScrolling) {
+            // For scrolling announcements, always show them (no close button, so always visible)
+            announceDiv.classList.add('visible');
+          } else {
+            // For non-scrolling announcements, check if they've been closed
+            announcementMessage=document.querySelector(".announcement-message-text").innerHTML;
+            hashedMessage=announcementMessage.hashCode();
+            cookieValue=getCookie("hide-announcement-message");
+            if (cookieValue) {
+              if (cookieValue != hashedMessage) {
+                announceDiv.classList.add('visible');
+              }
+            }
+            else {
               announceDiv.classList.add('visible');
             }
-          }
-          else {
-            announceDiv.classList.add('visible');
           }
         }
       }

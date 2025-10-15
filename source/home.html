@@ -24,22 +24,22 @@
       </div>
     </div>
   </div>
-{% elsif theme.promo_image != blank %}
-  <section class="home-promo-image">
+{% elsif theme.welcome_image != blank %}
+  <section class="home-welcome-image">
     <img
-      alt="Promo image"
-      class="promo-image lazyload blur-up"
-      src="{{ theme.promo_image.url | constrain: 900 }}"
+      alt="Welcome image"
+      class="welcome-image lazyload blur-up"
+      src="{{ theme.welcome_image.url | constrain: 900 }}"
       data-srcset="
-        {{ theme.promo_image.url | constrain: 450 }} 450w,
-        {{ theme.promo_image.url | constrain: 600 }} 600w,
-        {{ theme.promo_image.url | constrain: 900 }} 900w,
-        {{ theme.promo_image.url | constrain: 1200 }} 1200w,
-        {{ theme.promo_image.url | constrain: 1500 }} 1500w,
-        {{ theme.promo_image.url | constrain: 1800 }} 1800w,
-        {{ theme.promo_image.url | constrain: 2100 }} 2100w,
-        {{ theme.promo_image.url | constrain: 2400 }} 2400w,
-        {{ theme.promo_image.url | constrain: 2700 }} 2700w
+        {{ theme.welcome_image.url | constrain: 450 }} 450w,
+        {{ theme.welcome_image.url | constrain: 600 }} 600w,
+        {{ theme.welcome_image.url | constrain: 900 }} 900w,
+        {{ theme.welcome_image.url | constrain: 1200 }} 1200w,
+        {{ theme.welcome_image.url | constrain: 1500 }} 1500w,
+        {{ theme.welcome_image.url | constrain: 1800 }} 1800w,
+        {{ theme.welcome_image.url | constrain: 2100 }} 2100w,
+        {{ theme.welcome_image.url | constrain: 2400 }} 2400w,
+        {{ theme.welcome_image.url | constrain: 2700 }} 2700w
       "
       data-sizes="auto"{% if theme.hero_link != blank %} title="{{ theme.hero_link }}"{% endif %}
     >
@@ -53,10 +53,39 @@
 {% endif %}
 
 {% assign featured_text = theme.homepage_featured_text %}
-<div class="featured-container">
-  <h1 class="featured-title visually-hidden">{{ t['home.featured'] }}</h1>
-  {% if featured_text != blank %}
+{% assign featured_text_position = theme.homepage_featured_text_position %}
+
+{% comment %} Determine if categories can be shown - must check both setting and actual data {% endcomment %}
+{% assign can_show_categories = false %}
+{% if theme.featured_categories > 0 and categories.active.size > 0 %}
+  {% assign categories_with_products = blank %}
+  {% for category in categories.active %}
+    {% if category.products.size > 0 %}
+      {% assign categories_with_products = categories_with_products | append: category.id | append: ',' %}
+    {% endif %}
+  {% endfor %}
+  {% if categories_with_products != blank %}
+    {% assign can_show_categories = true %}
+  {% endif %}
+{% endif %}
+
+{% comment %} Show featured text above when position is "above" OR when no featured content exists (automatic fallback) {% endcomment %}
+{% if featured_text != blank %}
+  {% assign show_above = false %}
+  {% if featured_text_position == "above" %}
+    {% assign show_above = true %}
+  {% endif %}
+  {% if theme.featured_items == 0 and can_show_categories == false %}
+    {% assign show_above = true %}
+  {% endif %}
+  {% if show_above %}
     <div class="featured-message">{{ featured_text }}</div>
+  {% endif %}
+{% endif %}
+
+<div class="featured-container">
+  {% if theme.featured_items > 0 %}
+    <h1 class="featured-title visually-hidden">{{ t['home.featured'] }}</h1>
   {% endif %}
 </div>
 
@@ -64,6 +93,10 @@
 {% if theme.featured_items > 0 %}
   {% paginate products from products.all by theme.featured_items order:theme.featured_order %}
     {% if products != blank %}
+      {% comment %} Show featured text within products section when position is "within" and products exist {% endcomment %}
+      {% if featured_text != blank and featured_text_position == "within" %}
+        <div class="featured-message">{{ featured_text }}</div>
+      {% endif %}
       {% comment %} Show title only if both sections are visible {% endcomment %}
       {% if theme.featured_categories > 0 and categories.active.size > 0 %}
         <h2 class="featured-title">{{ t['home.featured_products'] }}</h2>
@@ -141,6 +174,9 @@
                     {% if product.status == 'coming-soon' and theme.show_coming_soon_product_prices == false %}
                       {% assign hide_price = true %}
                     {% endif %}
+                    {% if product.has_password_protection and theme.show_password_protected_product_prices == false %}
+                      {% assign hide_price = true %}
+                    {% endif %}
 
                     {% unless hide_price %}
                       {{ product | product_price: theme.money_format, theme.product_variable_pricing_display_format }}
@@ -196,13 +232,17 @@
       {% assign categories_with_products = categories_with_products | append: category.id | append: ',' %}
     {% endif %}
   {% endfor %}
-  
+
   {% if categories_with_products != blank %}
     {% assign category_collages_enabled = false %}
     {% if theme.features.has_theme_category_collages %}
       {% assign category_collages_enabled = true %}
     {% endif %}
     <div class="featured-categories" data-category-collages-enabled="{{ category_collages_enabled }}">
+      {% comment %} Show featured text within categories section when position is "within", no products, and categories exist {% endcomment %}
+      {% if featured_text != blank and featured_text_position == "within" and theme.featured_items == 0 %}
+        <div class="featured-message">{{ featured_text }}</div>
+      {% endif %}
       {% comment %} Show title only if both sections are visible {% endcomment %}
       {% if theme.featured_items > 0 %}
         <h2 class="featured-title">{{ t['home.featured_categories'] }}</h2>
@@ -325,7 +365,7 @@
 {% if theme.featured_items > 0 %}
   {% paginate products from products.all by theme.featured_items order:theme.featured_order %}
     {% if products != blank %}
-      {% if paginate.pages > 1 %}
+      {% if theme.homepage_show_all_items_link and paginate.pages > 1 %}
         {% assign all_products_button_text = t['navigation.all_products'] %}
         {% if all_products_button_text != blank %}
           <div class="view-all-link-container">
@@ -338,7 +378,7 @@
 {% endif %}
 
 {% comment %} Show all products link when only featured categories are displayed {% endcomment %}
-{% if theme.featured_items == 0 and categories_with_products != blank and products.all.size > 0 %}
+{% if theme.homepage_show_all_items_link and theme.featured_items == 0 and categories_with_products != blank and products.all.size > 0 %}
   {% assign all_products_button_text = t['navigation.all_products'] %}
   {% if all_products_button_text != blank %}
     <div class="view-all-link-container">
