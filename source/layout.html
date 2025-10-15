@@ -172,7 +172,7 @@
           <div class="header-branding">
             <a class="header-home-link{% if theme.images.logo_image != blank %} has-logo{% endif %}" href="/" title="{{ t['navigation.home'] }}">
               {% if theme.images.logo_image != blank %}
-                <img alt="{{ store.name }} Home" class="store-logo" src="{{ theme.images.logo.url | constrain: 1800,300 }}"/>
+                <img alt="{{ store.name }} Home" class="store-logo" src="{{ theme.images.logo_image.url | constrain: 1800,300 }}"/>
               {% else %}
                 {{ store.name }}
               {% endif %}
