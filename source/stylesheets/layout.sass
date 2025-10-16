@@ -1014,16 +1014,23 @@ h1
   &--scrolling
     cursor: pointer
     padding: 0
-    overflow: hidden
-    min-height: fit-content
+    overflow: visible
+    display: flex
+    align-items: center
+    justify-content: center
+    // Safari fix: overflow visible on parent, hidden on wrapper
 
     .announcement-scroll-wrapper
+      padding: 32px 0
       width: 100%
       overflow: hidden
       display: flex
       align-items: center
       // Isolate this container to prevent layout thrashing
       isolation: isolate
+
+      @media screen and (max-width: $break-small)
+        padding: 32px 0
 
     .announcement-scroll-content
       display: inline-flex
