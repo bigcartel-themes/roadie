@@ -24,22 +24,22 @@
       </div>
     </div>
   </div>
-{% elsif theme.welcome_image != blank %}
+{% elsif theme.images.welcome_image != blank %}
   <section class="home-welcome-image">
     <img
       alt="Welcome image"
       class="welcome-image lazyload blur-up"
-      src="{{ theme.welcome_image.url | constrain: 900 }}"
+      src="{{ theme.images.welcome_image.url | constrain: 900 }}"
       data-srcset="
-        {{ theme.welcome_image.url | constrain: 450 }} 450w,
-        {{ theme.welcome_image.url | constrain: 600 }} 600w,
-        {{ theme.welcome_image.url | constrain: 900 }} 900w,
-        {{ theme.welcome_image.url | constrain: 1200 }} 1200w,
-        {{ theme.welcome_image.url | constrain: 1500 }} 1500w,
-        {{ theme.welcome_image.url | constrain: 1800 }} 1800w,
-        {{ theme.welcome_image.url | constrain: 2100 }} 2100w,
-        {{ theme.welcome_image.url | constrain: 2400 }} 2400w,
-        {{ theme.welcome_image.url | constrain: 2700 }} 2700w
+        {{ theme.images.welcome_image.url | constrain: 450 }} 450w,
+        {{ theme.images.welcome_image.url | constrain: 600 }} 600w,
+        {{ theme.images.welcome_image.url | constrain: 900 }} 900w,
+        {{ theme.images.welcome_image.url | constrain: 1200 }} 1200w,
+        {{ theme.images.welcome_image.url | constrain: 1500 }} 1500w,
+        {{ theme.images.welcome_image.url | constrain: 1800 }} 1800w,
+        {{ theme.images.welcome_image.url | constrain: 2100 }} 2100w,
+        {{ theme.images.welcome_image.url | constrain: 2400 }} 2400w,
+        {{ theme.images.welcome_image.url | constrain: 2700 }} 2700w
       "
       data-sizes="auto"{% if theme.hero_link != blank %} title="{{ theme.hero_link }}"{% endif %}
     >
