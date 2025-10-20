@@ -1052,6 +1052,9 @@ h1
   .announcement-scroll-text
     display: inline-block
     padding: $base-padding * 2 $base-padding * 6
+    // Prevent iOS Safari text inflation
+    -webkit-text-size-adjust: 100%
+    text-size-adjust: 100%
 
 // Keyframe animation for smooth scrolling
 // Uses exact pixel distance calculated by JavaScript for seamless looping
