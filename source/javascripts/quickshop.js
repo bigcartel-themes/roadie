@@ -83,6 +83,7 @@ async function loadProductContent(product) {
   openQuickShop();
 
   if (!window.location.hostname.includes('127.0.0.1')) {
+    window.bigcartel = window.bigcartel || {};
     $.getJSON(`/product/${product.permalink}.json`)
       .done(productData => {
         window.bigcartel.product = productData;
@@ -91,6 +92,7 @@ async function loadProductContent(product) {
         window.bigcartel.product = product;
       });
   } else {
+    window.bigcartel = window.bigcartel || {};
     window.bigcartel.product = product;
   }
   
