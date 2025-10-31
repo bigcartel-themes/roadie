@@ -135,7 +135,11 @@ var updateCart = function(cart) {
     $('.sidebar-cart-count').html(item_count);
     $('.sidebar-cart-total').html(sub_total);
   }
-  showBnplMessaging(cart.total, { alignment: 'right', displayMode: 'grid', pageType: 'cart' });
+  // Only update BNPL messaging on cart page - product page manages its own
+  const isCartPage = document.body.getAttribute('data-bc-page-type') === 'cart';
+  if (isCartPage) {
+    showBnplMessaging(cart.total, { alignment: 'right', displayMode: 'grid', pageType: 'cart' });
+  }
 }
 
 var processUpdate = function(input, item_id, new_val, cart) {

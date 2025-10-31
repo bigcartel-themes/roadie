@@ -153,7 +153,7 @@
     </div>
     <div class="product-details product-{{ product.status }}">
       {% if product.status == 'active' %}
-        <form method="post" class="product-form {% if theme.show_sold_out_product_options %}show-sold-out{% else %}hide-sold-out{% endif %}" action="/cart" accept-charset="utf8">
+        <form id="add-to-cart-form" method="post" class="product-form {% if theme.show_sold_out_product_options %}show-sold-out{% else %}hide-sold-out{% endif %}" action="/cart" accept-charset="utf8" data-ajax-cart="true">
           <input type="hidden" name="utf8" value='✓'>
           {% if product.has_default_option %}
             {{ product.option | hidden_option_input }}
@@ -195,7 +195,7 @@
                 <span class="product-quantity-label">{{ t['cart.quantity_abbreviated'] }}</span>
                 <input autocomplete="off" type="number" class="product-quantity" id="quantity" name="cart[add][quantity]" type="text" min="1" value="1">
               </label>
-              <button class="button add-to-cart-button" name="submit" type="submit" title="{{ t['products.add_to_cart'] }}" data-adding-text="{{ t['products.adding'] }}" data-added-text="{{ t['products.added'] }}" data-add-title="{{ t['products.add_to_cart'] }}" data-sold-title="{{ t['products.sold_out'] }}"{% unless product.has_default_option %}{% else %}data-selected-price="{{ product.default_price }}"{% endunless %}>
+              <button id="add-to-cart-button" class="button add-to-cart-button" type="submit" title="{{ t['products.add_to_cart'] }}" data-adding-text="{{ t['products.adding'] }}" data-added-text="{{ t['products.added'] }}" data-add-title="{{ t['products.add_to_cart'] }}" data-sold-title="{{ t['products.sold_out'] }}"{% unless product.has_default_option %}{% else %}data-selected-price="{{ product.default_price }}"{% endunless %}>
                 <span class="button-add-price {% if product.has_default_option %} visible{% endif %}">{{ product.default_price | money: theme.money_format }}</span>
                 <span class="button-add-text">{{ t['products.add_to_cart'] }}</span>
                 <span class="button-add-icon">

@@ -194,6 +194,9 @@ function disableSelectOption(select_option, type) {
   }
 }
 
+// Track the reset timer to prevent conflicts when clicking rapidly
+var addToCartResetTimer = null;
+
 $('body').on('submit', ".product-form", function(e){
   e.preventDefault();
   var form = $(this);
@@ -205,12 +208,18 @@ $('body').on('submit', ".product-form", function(e){
   , cartLinkContainer = form.find('.product-form-cart-link-container')
   if (addButton.length) {
     var updateElement = form.find('.button-add-text');
-    var addText = updateElement.html();
+    var addText = addButton.attr('data-add-title');
   }
   var addedText = addButton.data('added-text')
   , addingText = addButton.data('adding-text')
   if (!addButton.hasClass('adding')) {
     if (quantity > 0 && itemID > 0) {
+      // Clear any pending reset timer from previous click
+      if (addToCartResetTimer) {
+        clearTimeout(addToCartResetTimer);
+        addToCartResetTimer = null;
+      }
+
       addButton.addClass('adding');
       addButton.addClass('spinner');
       addButton.blur();
@@ -225,10 +234,11 @@ $('body').on('submit', ".product-form", function(e){
             addButton.removeClass('adding');
             addButton.removeClass('spinner');
             checkIcon.fadeIn('fast');
-            setTimeout(function() {
+            addToCartResetTimer = setTimeout(function() {
               updateElement.html(addText);
               checkIcon.hide();
               plusIcon.show();
+              addToCartResetTimer = null;
             }, 1500)
           }, 600);
         }, 300);
