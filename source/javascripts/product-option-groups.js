@@ -1,20 +1,86 @@
 function processProduct(product) {
-  // Store product data globally so other functions can access it
   window.bigcartel = window.bigcartel || {};
   window.bigcartel.product = product;
-
   // Update inventory message now that product data is available
-  updateInventoryMessage();
+  if (typeof updateInventoryMessage === 'function') {
+    updateInventoryMessage();
+  }
 
   if (product.has_option_groups) {
     setInitialProductOptionStatuses(product);
+
+    // Check navigation type to determine if polling is needed
+    var navEntry = performance.getEntriesByType('navigation')[0];
+    var isBackForward = navEntry && navEntry.type === 'back_forward';
+
+    // Only poll on back/forward navigation (when browser may restore form values)
+    if (isBackForward) {
+      // Check if dropdowns are already selected (e.g., from browser back/forward cache)
+      // and process them to set the hidden option field and enable the button
+      // Use adaptive polling to handle different browser restoration speeds
+      (function pollForRestoredDropdowns() {
+        var startTime = Date.now();
+        var maxWaitTime = 500;
+        var pollInterval = 50;
+        var attemptCount = 0;
+
+        debugLog('Polling', 'Started at', startTime);
+
+        function checkDropdowns() {
+          attemptCount++;
+
+          // Safety check: abort if dropdowns no longer exist in DOM
+          var dropdowns = $(".product-option-group");
+          if (dropdowns.length === 0) {
+            debugLog('Polling', 'Aborted - dropdowns no longer in DOM');
+            return;
+          }
+
+          var allSelected = true;
+          var firstSelected = null;
+          var hasAnyValue = false;
+
+          dropdowns.each(function() {
+            var currentVal = $(this).val();
+            if (currentVal && currentVal != 0) {
+              hasAnyValue = true;
+              if (!firstSelected) {
+                firstSelected = $(this);
+              }
+            } else {
+              allSelected = false;
+            }
+          });
+
+          var elapsed = Date.now() - startTime;
+          debugLog('Polling', 'Check #' + attemptCount + ' at ' + elapsed + 'ms - allSelected:', allSelected, 'hasAnyValue:', hasAnyValue);
+
+          // Process immediately if all dropdowns are populated
+          if (allSelected && firstSelected) {
+            debugLog('Polling', '[SUCCESS] All dropdowns populated! Processing after ' + elapsed + 'ms (' + attemptCount + ' checks)');
+            processAvailableDropdownOptions(product, firstSelected);
+            return;
+          }
+
+          // Continue polling if we haven't exceeded max wait time
+          if (elapsed < maxWaitTime) {
+            setTimeout(checkDropdowns, pollInterval);
+          } else {
+            debugLog('Polling', '[TIMEOUT] After ' + elapsed + 'ms (' + attemptCount + ' checks) - no values restored');
+          }
+        }
+
+        // Start first check immediately
+        checkDropdowns();
+      })();
+    }
   }
   if ($('.product-option-select').length) {
     if (themeOptions.showSoldOutOptions === false) {
       $('option[disabled-type="sold-out"]').wrap('<span>');
     }
   }
-  $('body').on('click', ".reset-selection-button", function(e){
+  $('body').off('click.productOptions', ".reset-selection-button").on('click.productOptions', ".reset-selection-button", function(e){
     active_form = $(this).closest('form');
     active_form.find('#option').val(0);
     enableAddButton(active_form);
@@ -47,7 +113,7 @@ function setInitialProductOptionStatuses(product) {
   for (ogIndex = 0; ogIndex < product.option_groups.length; ogIndex++) {
     pog_id = product.option_groups[ogIndex].id;
     pog_select_element = "#option_group_" + pog_id
-    $('body').on('change', pog_select_element, function(e) {
+    $('body').off('change.productOptions', pog_select_element).on('change.productOptions', pog_select_element, function(e) {
       active_form = $(this).closest('form');
       active_form.find('#option').val(0);
       processAvailableDropdownOptions(product, $(this));
