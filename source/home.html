@@ -377,8 +377,8 @@
   {% endpaginate %}
 {% endif %}
 
-{% comment %} Show all products link when only featured categories are displayed {% endcomment %}
-{% if theme.homepage_show_all_items_link and theme.featured_items == 0 and categories_with_products != blank and products.all.size > 0 %}
+{% comment %} Show all products link when no featured products are displayed {% endcomment %}
+{% if theme.homepage_show_all_items_link and theme.featured_items == 0 and products.all.size > 0 %}
   {% assign all_products_button_text = t['navigation.all_products'] %}
   {% if all_products_button_text != blank %}
     <div class="view-all-link-container">
