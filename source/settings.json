@@ -1457,6 +1457,14 @@
       "description": "Adjust the density of shop sprinkles"
     },
     {
+      "variable": "custom_page_center_content",
+      "label": "Center custom page content",
+      "section": "general",
+      "type": "boolean",
+      "default": false,
+      "description": "Horizontally center content on custom pages"
+    },
+    {
       "variable": "translation_locale",
       "label": "Language for text in your shop",
       "section": "translations",
