@@ -8,7 +8,15 @@
   {% assign page_title = page.name %}
 {% endif %}
 
-{% assign pageQuerystring = page.full_url | split:'sort=' | last %}
+{% assign hasSort = false %}
+{% if page.full_url contains '?sort=' or page.full_url contains '&sort=' %}
+  {% assign hasSort = true %}
+{% endif %}
+{% if hasSort %}
+  {% assign pageQuerystring = page.full_url | split:'sort=' | last %}
+{% else %}
+  {% assign pageQuerystring = '' %}
+{% endif %}
 {% assign pageURL = page.full_url | split:'?' | first %}
 
 {% if pageQuerystring contains 'on_sale' %}
