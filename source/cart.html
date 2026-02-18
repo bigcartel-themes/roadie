@@ -42,10 +42,14 @@
                 {% unless item.product.has_default_option %}
                   <div class="cart-item-details-option">{{ item.option.name }}</div>
                 {% endunless %}
-                <div class="cart-item-details-unit-price-inline">{{ item.unit_price | money: theme.money_format }}</div>
+                {% assign show_cart_strikethrough = false %}
+                {% if theme.show_strikethrough_pricing and item.original_unit_price > item.unit_price %}
+                  {% assign show_cart_strikethrough = true %}
+                {% endif %}
+                <div class="cart-item-details-unit-price-inline">{% if show_cart_strikethrough %}<s class="price-compare">{{ item.original_unit_price | money: theme.money_format }}</s> <span class="price-sale">{{ item.unit_price | money: theme.money_format }}</span>{% else %}{{ item.unit_price | money: theme.money_format }}{% endif %}</div>
               </a>
               <div class="cart-item-information">
-                <div class="cart-item-details-unit-price">{{ item.unit_price | money: theme.money_format }}</div>
+                <div class="cart-item-details-unit-price">{% if show_cart_strikethrough %}<s class="price-compare">{{ item.original_unit_price | money: theme.money_format }}</s> <span class="price-sale">{{ item.unit_price | money: theme.money_format }}</span>{% else %}{{ item.unit_price | money: theme.money_format }}{% endif %}</div>
 
                 <div class="cart-item-quantity-holder" data-item-id="{{ item.id }}">
                   <button title="-1" class="decrease-qty-button qty-button button min-btn" data-func="minus" type="button"><svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c6.6290323 0 12 5.37096774 12 12 0 6.6290323-5.3709677 12-12 12-6.62903226 0-12-5.3709677-12-12C0 5.37096774 5.37096774 0 12 0zm0 1.5483871C6.1983682 1.5483871 1.5483871 6.25644216 1.5483871 12c0 5.8016318 4.70805506 10.4516129 10.4516129 10.4516129 5.8016318 0 10.4516129-4.7080551 10.4516129-10.4516129 0-5.8016318-4.7080551-10.4516129-10.4516129-10.4516129zM18 11.25v1.5H6v-1.5h12z" fill-rule="evenodd"/></svg></button>
