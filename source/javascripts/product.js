@@ -164,6 +164,7 @@ function enableAddButton(active_form, updated_price, original_price) {
   else {
     priceTitle = '';
     addButtonPriceTextElement.hide();
+    updateProductPrice();
   }
   addButtonTextElement.html(addButtonTitle);
   updateInventoryMessage($('#option').val());
