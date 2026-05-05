@@ -35,7 +35,8 @@ initLightbox();
 $('body').on('change', ".product-option-select", function(){
   active_form = $(this).closest('form');
   var option_price = $(this).find("option:selected").attr("data-price");
-  enableAddButton(active_form,option_price);
+  var original_price = $(this).find("option:selected").attr("data-original-price");
+  enableAddButton(active_form, option_price, original_price);
 });
 
 function updateInventoryMessage(optionId = null) {
@@ -103,7 +104,45 @@ function updateInventoryMessage(optionId = null) {
   }
 }
 
-function enableAddButton(active_form, updated_price) {
+function updateProductPrice(updated_price, original_price) {
+  var priceContainer = $('.page-subheading-price-value');
+  if (!priceContainer.length) return;
+
+  if (!updated_price) {
+    if (priceContainer.data('original-html') !== undefined) {
+      priceContainer.html(priceContainer.data('original-html'));
+    }
+    return;
+  }
+
+  if (priceContainer.data('original-html') === undefined) {
+    priceContainer.data('original-html', priceContainer.html());
+  }
+
+  var updatedNum = parseFloat(updated_price) || 0;
+  var originalNum = parseFloat(original_price) || 0;
+
+  var showStrikethrough = originalNum > updatedNum && themeOptions.showStrikethroughPricing;
+
+  var priceHtml;
+  if (showStrikethrough) {
+    var regularFormatted = formatMoney(original_price, true, true);
+    var saleFormatted = formatMoney(updated_price, true, true);
+    priceHtml = '<s class="price-compare">' + regularFormatted + '</s> <span class="price-sale">' + saleFormatted + '</span>';
+  } else {
+    priceHtml = formatMoney(updated_price, true, true);
+  }
+
+  priceContainer.html(priceHtml);
+}
+
+function updateButtonPrice(priceElement, updated_price, original_price, quantity) {
+  var updatedNum = parseFloat(updated_price) || 0;
+  var totalPrice = quantity * updatedNum;
+  priceElement.html(formatMoney(totalPrice, true, true));
+}
+
+function enableAddButton(active_form, updated_price, original_price) {
   var addButton = active_form.find('.add-to-cart-button');
   var addButtonTextElement = addButton.find('.button-add-text');
   var addButtonPriceTextElement = addButton.find('.button-add-price');
@@ -116,13 +155,16 @@ function enableAddButton(active_form, updated_price) {
     if (quantity > 0) {
       updated_total_price = quantity * updated_price;
     }
-    addButtonPriceTextElement.html(formatMoney(updated_total_price, true, true));
+    updateButtonPrice(addButtonPriceTextElement, updated_price, original_price, quantity);
     addButton.attr('data-selected-price',updated_price);
+    addButton.attr('data-selected-original-price', original_price);
     addButtonPriceTextElement.addClass('visible');
+    updateProductPrice(updated_price, original_price);
   }
   else {
     priceTitle = '';
     addButtonPriceTextElement.hide();
+    updateProductPrice();
   }
   addButtonTextElement.html(addButtonTitle);
   updateInventoryMessage($('#option').val());
@@ -151,9 +193,11 @@ $('body').on('keyup', "#quantity", function() {
   var $quantityInput = $(this)
     , $priceDisplay = active_form.find($(".button-add-price"))
     , quantity = parseInt($quantityInput.val())
-    , price = active_form.find(".add-to-cart-button").attr("data-selected-price")
+    , addButton = active_form.find(".add-to-cart-button")
+    , price = addButton.attr("data-selected-price")
+    , originalPrice = addButton.attr("data-selected-original-price")
   if (quantity > 0 && price) {
-    $priceDisplay.html(formatMoney(quantity * price, true, true));
+    updateButtonPrice($priceDisplay, price, originalPrice, quantity);
   }
 });
 

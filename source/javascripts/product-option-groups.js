@@ -312,7 +312,7 @@ function processAvailableDropdownOptions(product, changed_dropdown) {
     if (product_option) {
       if (!product_option.sold_out && product_option.id > 0) {
         active_form.find('#option').val(product_option.id);
-        enableAddButton(active_form,product_option.price);
+        enableAddButton(active_form, product_option.price, product_option.original_price);
         if (num_option_groups > 1) {
           active_form.find('.reset-selection-button').fadeIn('fast');
         }

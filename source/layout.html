@@ -127,7 +127,7 @@
                     {% endfor %}
                   {% endif %}
                   {% if pages.subscribe_page %}
-                    <li class="sidebar-nav-link"><a href="{{ pages.subscribe_page.url }}">{{ pages.subscribe_page.name }}</a></li>
+                    <li class="sidebar-nav-link"><a href="{{ pages.subscribe_page.url }}">{{ t['navigation.subscribe'] }}</a></li>
                   {% endif %}
                   {% if theme.nav_page_display == 'all' or theme.nav_page_display == 'contact_only' %}
                     <li class="sidebar-nav-link"><a href="/contact">{{ t['navigation.contact'] }}</a></li>
@@ -226,16 +226,21 @@
 
                 {% if theme.nav_page_display != "none" or pages.subscribe_page or store.website != blank %}
                   {% if theme.below_header_pages_menu_style == "inline" or theme.nav_page_display == "contact_only" %}
-                    {% if theme.nav_page_display == 'all' or theme.nav_page_display == 'pages_only' %}
-                      {% for custom_page in pages.custom_pages limit: theme.nav_items %}
-                        <li class="nav-menu-item" role="menuitem" aria-haspopup="false">
-                          <a href="{{ custom_page.url }}"><span class="hover-underline no-underline">{{ custom_page.name }}</span></a>
-                        </li>
-                      {% endfor %}
-                    {% endif %}
-                    {% if theme.nav_page_display == 'all' or theme.nav_page_display == 'contact_only' %}
-                      <li class="nav-menu-item" role="menuitem" aria-haspopup="false"><a href="/contact"><span class="hover-underline no-underline">{{ t['navigation.contact'] }}</span></a></li>
-                    {% endif %}
+                  {% if theme.nav_page_display == 'all' or theme.nav_page_display == 'pages_only' %}
+                    {% for custom_page in pages.custom_pages limit: theme.nav_items %}
+                      <li class="nav-menu-item" role="menuitem" aria-haspopup="false">
+                        <a href="{{ custom_page.url }}"><span class="hover-underline no-underline">{{ custom_page.name }}</span></a>
+                      </li>
+                    {% endfor %}
+                  {% endif %}
+                  {% if pages.subscribe_page %}
+                    <li class="nav-menu-item" role="menuitem" aria-haspopup="false">
+                      <a href="{{ pages.subscribe_page.url }}"><span class="hover-underline no-underline">{{ t['navigation.subscribe'] }}</span></a>
+                    </li>
+                  {% endif %}
+                  {% if theme.nav_page_display == 'all' or theme.nav_page_display == 'contact_only' %}
+                    <li class="nav-menu-item" role="menuitem" aria-haspopup="false"><a href="/contact"><span class="hover-underline no-underline">{{ t['navigation.contact'] }}</span></a></li>
+                  {% endif %}
                     {% if store.website != blank %}
                       <li class="nav-menu-item" role="menuitem"><a href="{{ store.website }}" tabindex="-1"><span class="hover-underline no-underline">{{ t['navigation.back_to_site'] }}</span></a></li>
                     {% endif %}
@@ -249,7 +254,7 @@
                           {% endfor %}
                         {% endif %}
                         {% if pages.subscribe_page %}
-                          <li class="horizontal-nav-link" role="menuitem"><a href="{{ pages.subscribe_page.url }}">{{ pages.subscribe_page.name }}</a></li>
+                          <li class="horizontal-nav-link" role="menuitem"><a href="{{ pages.subscribe_page.url }}">{{ t['navigation.subscribe'] }}</a></li>
                         {% endif %}
                         {% if theme.nav_page_display == 'all' or theme.nav_page_display == 'contact_only' %}
                           <li class="horizontal-nav-link" role="menuitem"><a href="/contact" tabindex="-1">{{ t['navigation.contact'] }}</a></li>
@@ -376,7 +381,7 @@
                     {% endfor %}
                   {% endif %}
                   {% if pages.subscribe_page %}
-                    <li class="sidebar-nav-link medium-border"><a href="{{ pages.subscribe_page.url }}">{{ pages.subscribe_page.name }}</a></li>
+                    <li class="sidebar-nav-link medium-border"><a href="{{ pages.subscribe_page.url }}">{{ t['navigation.subscribe'] }}</a></li>
                   {% endif %}
                   {% if theme.nav_page_display == 'all' or theme.nav_page_display == 'contact_only' %}
                     <li class="sidebar-nav-link medium-border"><a href="/contact">{{ t['navigation.contact'] }}</a></li>
@@ -486,7 +491,7 @@
 
         <main class="main main-{{ page.permalink }}" id="main" data-bc-hook="content">
           {% if page.category == 'custom' %}
-            <div class="custom-page">
+            <div class="custom-page{% if theme.custom_page_center_content %} center-content{% endif %}">
               <div class="page-heading">
                 <h1 class="custom-page-header page-title">{{ page.name }}</h1>
               </div>
@@ -677,6 +682,7 @@
         homepageSlideshowSpeed: {{ theme.homepage_slideshow_speed }},
         homepageSlideshowTransition: "{{ theme.homepage_slideshow_transition }}",
         showBnplMessaging: {{ theme.show_bnpl_messaging }} && !themeFeatures.optOuts.includes("theme_bnpl_messaging"),
+        showStrikethroughPricing: {{ theme.show_strikethrough_pricing }},
         homeFeaturedVideoUrl: "{{ theme.home_featured_video_url }}",
         homeFeaturedVideoSize: "{{ theme.home_featured_video_size }}",
         homeFeaturedVideoBorder: "{{ theme.home_featured_video_border }}",

@@ -171,6 +171,12 @@ $break-gutters: 1024px
     border-right: 0
 
   @media screen and (max-width: $break-gutters)
+    #main .featured-categories .category-list
+      margin: #{"{% if theme.show_product_grid_gutters %}4px{% else %}0px{% endif %}"}
+
+    #main .featured-title,
+    #main .featured-message
+      padding-left: #{"{% if theme.show_product_grid_gutters %}8px{% else %}0px{% endif %}"}
 
     .secondary-product-image-container--thumbs
       padding-left: 8px
