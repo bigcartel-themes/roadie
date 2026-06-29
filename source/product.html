@@ -12,7 +12,7 @@
 {% capture status_classes %}{{ theme.product_badge_style }} {% if product.status == 'active' and product.on_sale %}status-primary{% else %}status-secondary{% endif %}{% endcapture %}
 <div data-bc-hook="product-container">
   <div class="page-heading product-heading">
-    <h1 class="page-title">{{ page.name }}</h1>
+    <h1 class="page-title">{{ product.name }}</h1>
   </div>
   <div class="page-subheading{% if hide_price %} page-subheading--price-hidden{% endif %}">
     <div class="page-subheading-price">
