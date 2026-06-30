@@ -8,7 +8,15 @@
   {% assign page_title = page.name %}
 {% endif %}
 
-{% assign pageQuerystring = page.full_url | split:'sort=' | last %}
+{% assign hasSort = false %}
+{% if page.full_url contains '?sort=' or page.full_url contains '&sort=' %}
+  {% assign hasSort = true %}
+{% endif %}
+{% if hasSort %}
+  {% assign pageQuerystring = page.full_url | split:'sort=' | last %}
+{% else %}
+  {% assign pageQuerystring = '' %}
+{% endif %}
 {% assign pageURL = page.full_url | split:'?' | first %}
 
 {% if pageQuerystring contains 'on_sale' %}
@@ -164,7 +172,7 @@
                 {% unless hide_price %}
                   {% if product.options.size > 1 and theme.show_product_variant_count_in_grid %}
                     <div class="product-list-thumb-options-description">
-                      {{ product.options.size }} {{ t['products.variants'] }}
+                      {{ product.options.size }} {{ t['products.variants'] | downcase }}
                     </div>
                   {% endif %}
                 {% endunless %}

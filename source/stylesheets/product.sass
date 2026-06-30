@@ -188,6 +188,11 @@
 .product-form
   margin-bottom: $base-padding * 2
 
+  select span, select span option
+    display: none
+    opacity: 0
+    visibility: hidden
+
 .product-form-controls
   margin-top: 0
 
@@ -401,6 +406,9 @@
 
 .product-description
   font-size: calc(1rem * var(--product-description-scale, 1))
+
+  &:empty
+    display: none
 
   *
     text-transform: none

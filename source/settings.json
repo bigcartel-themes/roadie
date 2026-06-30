@@ -1,6 +1,6 @@
 {
   "name": "Roadie",
-  "version": "1.19.7",
+  "version": "1.19.8",
   "images": [
     {
       "variable": "logo_image",
@@ -1455,6 +1455,14 @@
       ],
       "default": "14",
       "description": "Adjust the density of shop sprinkles"
+    },
+    {
+      "variable": "custom_page_center_content",
+      "label": "Center custom page content",
+      "section": "general",
+      "type": "boolean",
+      "default": false,
+      "description": "Horizontally center content on custom pages"
     },
     {
       "variable": "translation_locale",
